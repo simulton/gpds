@@ -10,8 +10,8 @@ namespace Gds
     public:
         virtual ~Serialize() = default;
 
-        virtual Container toContainer() const = 0;
-        virtual void fromContainer(const Container& container) = 0;
+        virtual Gds::Container toContainer() const = 0;
+        virtual void fromContainer(const Gds::Container& container) = 0;
     };
 
 }

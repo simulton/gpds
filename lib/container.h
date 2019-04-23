@@ -114,8 +114,26 @@ namespace Gds
 
         bool isList() const
         {
-            for (const auto& it : entries ) {
-                if (it.second.first != ContainerType) {
+            // We need at least two elements
+            if (entries.size() < 2) {
+                return false;
+            }
+
+            // Ensure that all elements are the same
+            std::string_view name;
+            for (auto it = entries.cbegin(); it != entries.cend(); ++it) {
+                // Store the name so we can compare them
+                if (it == entries.begin()) {
+                    name = it->first;
+                }
+
+                // Gotta be a container type
+                if (it->second.first != ContainerType) {
+                    return false;
+                }
+
+                // All elements need to share the same name
+                if (it->first != name) {
                     return false;
                 }
             }

@@ -39,9 +39,7 @@ namespace Gds
             doc.append_node(root);
 
             // Add the Serialize data
-            for (const auto& entry : object.toContainer().entries) {
-                writeEntry(doc, *root, entry);
-            }
+            writeEntry(doc, *root, object.toContainer());
 
             // Add data to stream
             stream << doc;
@@ -78,53 +76,55 @@ namespace Gds
         Settings settings;
 
     private:
-        void writeEntry(rapidxml::xml_document<>& doc, rapidxml::xml_node<>& root, const std::pair<std::string, Container::Entry>& entry) const
+        void writeEntry(rapidxml::xml_document<>& doc, rapidxml::xml_node<>& root, const Container& container) const
         {
-            // Some aliases to make the code easier to read
-            const auto& name = doc.allocate_string( entry.first.c_str() );
-            const Container::Type& type = entry.second.first;
-            const Container::Value& value = entry.second.second;
+            // Iterate through all entries in this container
+            for (const auto& entry : container.entries) {
 
-            // Create a new node in the DOM
-            rapidxml::xml_node<>* child = nullptr;
-            switch (type) {
-                case Container::BoolType:
-                    child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::get<bool>( value ) ? "true" : "false"));
-                    break;
+                // Some aliases to make the code easier to read
+                const auto& name = doc.allocate_string( entry.first.c_str() );
+                const Container::Type& type = entry.second.first;
+                const Container::Value& value = entry.second.second;
 
-                case Container::IntType:
-                    child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::to_string( std::get<int>( value ) ).data() ));
-                    break;
+                // Create a new node in the DOM
+                rapidxml::xml_node<>* child = nullptr;
+                switch (type) {
+                    case Container::BoolType:
+                        child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::get<bool>( value ) ? "true" : "false"));
+                        break;
 
-                case Container::DoubleType:
-                    child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::to_string( std::get<double>( value ) ).data() ));
-                    break;
+                    case Container::IntType:
+                        child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::to_string( std::get<int>( value ) ).data() ));
+                        break;
 
-                case Container::StringType:
-                    child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::get<std::string>( value ).data() ) );
-                    break;
+                    case Container::DoubleType:
+                        child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::to_string( std::get<double>( value ) ).data() ));
+                        break;
 
-                case Container::ContainerType:
-                {
-                    const Container& container = std::get<Container>( value );
-                    child = doc.allocate_node(rapidxml::node_element, name );
+                    case Container::StringType:
+                        child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::get<std::string>( value ).data() ) );
+                        break;
 
-                    // Annotate list if supposed to
-                    if (settings.annotateLists and container.isList()) {
-                        child->append_attribute( doc.allocate_attribute("count", doc.allocate_string( std::to_string( container.entries.size() ).data() ) ) );
+                    case Container::ContainerType:
+                    {
+                        const Container& container = std::get<Container>( value );
+                        child = doc.allocate_node(rapidxml::node_element, name );
+
+                        // Annotate list if supposed to
+                        if (settings.annotateLists and container.isList()) {
+                            child->append_attribute( doc.allocate_attribute("count", doc.allocate_string( std::to_string( container.entries.size() ).data() ) ) );
+                        }
+
+                        // Recursion
+                        writeEntry(doc, *child, container);
+
+                        break;
                     }
-
-                    // Recursion
-                    for (const auto& entry : container.entries) {
-                        writeEntry(doc, *child, entry);
-                    }
-
-                    break;
                 }
-            }
 
-            assert(child);
-            root.append_node(child);
+                assert(child);
+                root.append_node(child);
+            }
         }
 
         void readEntry(rapidxml::xml_node<>& rootNode, Container& container)

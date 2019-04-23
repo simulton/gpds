@@ -78,6 +78,11 @@ namespace Gds
     private:
         void writeEntry(rapidxml::xml_document<>& doc, rapidxml::xml_node<>& root, const Container& container) const
         {
+            // Add all arguments
+            for (const auto& argument : container.arguments) {
+                root.append_attribute( doc.allocate_attribute( argument.first.data(), argument.second.data() ) );
+            }
+
             // Iterate through all entries in this container
             for (const auto& entry : container.entries) {
 

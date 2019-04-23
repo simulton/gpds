@@ -52,7 +52,7 @@ namespace Gds
             return true;
         }
 
-        virtual bool load(std::istream& stream, Serialize& object, const std::string& rootName)
+        virtual bool load(std::istream& stream, Serialize& object, const std::string& rootName) override
         {
             // Create the document
             std::string string(std::istreambuf_iterator<char>(stream), {});

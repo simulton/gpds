@@ -43,6 +43,17 @@ namespace Gds
             }
         }
 
+        static constexpr const char* typeString(Type type)
+        {
+            switch (type) {
+                case BoolType:      return "bool";
+                case IntType:       return "int";
+                case DoubleType:    return "double";
+                case StringType:    return "string";
+                case ContainerType: return "container";
+            }
+        }
+
         Container(const std::string& name = std::string()) :
             name(name)
         {

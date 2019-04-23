@@ -52,6 +52,8 @@ namespace Gds
                 case StringType:    return "string";
                 case ContainerType: return "container";
             }
+
+            return nullptr;
         }
 
         Container(const std::string& name = std::string()) :

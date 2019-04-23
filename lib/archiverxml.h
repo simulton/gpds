@@ -12,12 +12,14 @@ namespace Gds
     {
     public:
         struct Settings {
-            bool annotateLists;
+            bool annotateListCount;
+            bool annotateTypes;
         };
 
         ArchiverXml()
         {
-            settings.annotateLists = true;
+            settings.annotateListCount = true;
+            settings.annotateTypes = false;
         }
 
         virtual ~ArchiverXml() override = default;
@@ -116,8 +118,8 @@ namespace Gds
                         child = doc.allocate_node(rapidxml::node_element, name );
 
                         // Annotate list if supposed to
-                        if (settings.annotateLists and container.isList()) {
-                            child->append_attribute( doc.allocate_attribute("count", doc.allocate_string( std::to_string( container.entries.size() ).data() ) ) );
+                        if (settings.annotateListCount and container.isList()) {
+                            child->append_attribute( doc.allocate_attribute( "gds:count", doc.allocate_string( std::to_string( container.entries.size() ).data() ) ) );
                         }
 
                         // Recursion
@@ -125,6 +127,11 @@ namespace Gds
 
                         break;
                     }
+                }
+
+                // Annotate type if supposed to
+                if (settings.annotateTypes and !container.isList()) {
+                    child->append_attribute( doc.allocate_attribute( "gds:type", Container::typeString(type) ) );
                 }
 
                 assert(child);
@@ -147,7 +154,6 @@ namespace Gds
 
                 // It's a text element
                 if (!value.empty()) {
-
                     // Is it a boolean 'true' value?
                     if ( value == "true" ) {
                         container.addEntry( name , Container::BoolType, true );

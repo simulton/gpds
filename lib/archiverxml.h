@@ -134,6 +134,11 @@ namespace Gds
 
         void readEntry(rapidxml::xml_node<>& rootNode, Container& container)
         {
+            // Arguments
+            for(const rapidxml::xml_attribute<>* attribute = rootNode.first_attribute(); attribute; attribute = attribute->next_attribute()) {
+                container.addArgument( attribute->name(), attribute->value() );
+            }
+
             // Handle all nodes children recursively
             for (rapidxml::xml_node<>* node = rootNode.first_node(); node; node = node->next_sibling()) {
                 // Extract the name & value

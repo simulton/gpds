@@ -24,8 +24,7 @@ namespace Gds
         using Value     = std::variant<bool, int, double, std::string, Container>;
         using Entry     = std::pair< Type, Value >;
         using Entries   = std::multimap< std::string, Entry >;
-        using Argument  = std::pair< std::string, std::string >;
-        using Arguments = std::list< Argument >;
+        using Arguments = std::map< std::string, std::string >;
 
         // Helper function to retrieve the index of the type T in the the VariantType
         template<class VariantType, class T, std::size_t index = 0>
@@ -116,7 +115,18 @@ namespace Gds
 
         void addArgument(const std::string& key, const std::string& value)
         {
-            arguments.emplace_back(key, value);
+            arguments.emplace( key, value );
+        }
+
+        std::string getAttribute(const std::string& key) const
+        {
+            for ( auto it = arguments.cbegin(); it != arguments.cend(); ++it ) {
+                if ( it->first == key ) {
+                    return it->second;
+                }
+            }
+
+            return std::string();
         }
 
         bool isList() const

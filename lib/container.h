@@ -13,7 +13,7 @@ namespace Gds
     class Container
     {
     public:
-        enum Type {
+        enum ValueType {
             BoolType,
             IntType,
             DoubleType,
@@ -22,7 +22,7 @@ namespace Gds
         };
 
         using Value     = std::variant<bool, int, double, std::string, Container>;
-        using Entry     = std::pair< Type, Value >;
+        using Entry     = std::pair< ValueType, Value >;
         using Entries   = std::multimap< std::string, Entry >;
         using Arguments = std::map< std::string, std::string >;
 
@@ -43,7 +43,7 @@ namespace Gds
             }
         }
 
-        static constexpr const char* typeString(Type type)
+        static constexpr const char* typeString(ValueType type)
         {
             switch (type) {
                 case BoolType:      return "bool";
@@ -59,7 +59,7 @@ namespace Gds
         {
         }
 
-        void addEntry(const std::string& name, Type type, const Value& value)
+        void addEntry(const std::string& name, ValueType type, const Value& value)
         {
             entries.emplace(name, std::make_pair(type, value));
         }

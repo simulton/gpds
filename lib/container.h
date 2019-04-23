@@ -83,8 +83,15 @@ namespace Gds
         template<class T>
         T getEntry(const std::string& name) const
         {
-            auto it = entries.find( name )->second.second;
-            const std::size_t& typeIndexVariant = it.index();
+            // Find the first entry
+            auto it = entries.find( name );
+            if (it == entries.end()) {
+                return T();
+            }
+
+            // Extract value & type info
+            const Value& value = it->second.second;
+            const std::size_t& typeIndexVariant = value.index();
             std::size_t typeIndexTemplate = static_cast<std::size_t>( variant_index<Value, T>() );
 
             // Ensure that T and the variant type are the same
@@ -92,7 +99,7 @@ namespace Gds
                 return T();
             }
 
-            return std::get<T>( it );
+            return std::get<T>( value );
         }
 
         template<class T>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="Untitled">
+    <title>Usage</title>
+    <body>
+        <p>This topic explains the usage of the GPDS library. See <xref href="integration.dita"/>
+            for instructions on how to integrate the library into a project.</p>
+        <p></p>
+    </body>
+</topic>

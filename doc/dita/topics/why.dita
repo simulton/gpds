@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="Untitled">
+    <title>Why?</title>
+    <body>
+        <p>There are plenty of different existing serializers that allow producing XML output.
+            However, a lot of them enforce a strong scheme on the generated XML. GPDS allows
+            generating XML files with a generic data format that can also be used efficiently within
+            other XML processing applications.</p>
+        <p>Consider the following class:</p>
+        <p><image href="../../uml/exports/svg/Misc!Examples_2.svg"/></p>
+        <p>Or represented as C++ classes:</p>
+        <codeblock outputclass="language-cpp">class Color {
+public:
+	std::string name;
+	int red;
+	int blue;
+	int green;
+};
+
+class Car {
+public:
+	std::string manufacturer;
+	std::string model;
+	int yearOfConstruction;
+	Color color;
+};</codeblock>
+        <p>Many generic serializers with XML backends would generate the following XML:</p>
+        <codeblock outputclass="language-xml">&lt;value>
+  &lt;value type="string">Jeep&lt;/value>
+  &lt;value type="string">Grand Cherokee&lt;/value>
+  &lt;value type="int">2009&lt;/value>
+  &lt;value>
+    &lt;value type="string">Black&lt;/value>
+    &lt;value type="int">0&lt;/value>
+    &lt;value type="int">0&lt;/value>
+    &lt;value type="int">0&lt;/value>
+  &lt;/value>
+&lt;/value></codeblock>
+        <p>This works fine as long as the produced XML content is only used by the class/software that
+            serialized and deserialized to/from it. However, if the produced XML should also be used
+            outside of that class/software it's very tedious to work with as it's not clear what the
+            values refer to.</p>
+        <p>The goal of GDS is to produce XML that consists of a more generic structure that can also be
+            used by other applications:</p>
+        <codeblock outputclass="language-xml">&lt;car>
+  &lt;manufacturer>Jeep&lt;/manufacturer>
+  &lt;model>Grand Cherokee&lt;/model>
+  &lt;year_of_construction>2009&lt;/year_of_construction>
+  &lt;color name="Black">
+    &lt;red>0&lt;/red>
+    &lt;green>0&lt;/green>
+    &lt;blue>0&lt;/blue>
+  &lt;/color>
+&lt;/car></codeblock>
+        <p>GDS also provides several configuration options to still annotate the element types if
+            desired so:</p>
+        <codeblock outputclass="language-xml">&lt;value>
+  &lt;value type="string">Jeep&lt;/value>
+  &lt;value type="string">Grand Cherokee&lt;/value>
+  &lt;value type="int">2009&lt;/value>
+  &lt;value>
+    &lt;value type="string">Black&lt;/value>
+    &lt;value type="int">0&lt;/value>
+    &lt;value type="int">0&lt;/value>
+    &lt;value type="int">0&lt;/value>
+  &lt;/value>
+&lt;/value></codeblock>
+        <p>This works fine as long as the produced XML content is only used by the class/software that
+            serialized and deserialized to/from it. However, if the produced XML should also be used
+            outside of that class/software it's very tedious to work with as it's not clear what the
+            values refer to.</p>
+        <p>The goal of GPDS is to produce XML that consists of a more generic structure that can
+            also be used by other applications:</p>
+        <codeblock outputclass="language-xml">&lt;car gds:type="container">
+  &lt;manufacturer gds:type="string">Jeep&lt;/manufacturer>
+  &lt;model gds:type="string">Grand Cherokee&lt;/model>
+  &lt;year_of_construction gds:type="int">2009&lt;/year_of_construction>
+  &lt;color name="Black" gds:type="container">
+    &lt;red gds:type="int">0&lt;/red>
+    &lt;green gds:type="int">0&lt;/green>
+    &lt;blue gds:type="int">0&lt;/blue>
+  &lt;/color>
+&lt;/car></codeblock>
+    </body>
+</topic>

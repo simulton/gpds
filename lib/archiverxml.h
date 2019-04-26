@@ -90,7 +90,7 @@ namespace Gds
 
                 // Some aliases to make the code easier to read
                 const auto& name = doc.allocate_string( entry.first.c_str() );
-                const Container::Type& type = entry.second.first;
+                const Container::ValueType& type = entry.second.first;
                 const Container::Value& value = entry.second.second;
 
                 // Create a new node in the DOM

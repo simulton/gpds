@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="Untitled">
+    <title>Integration</title>
+    <shortdesc></shortdesc>
+    <taskbody>
+        <context>
+            <p>Integrating GPDS into a project is extremely simple as it's a header-only C++
+                library.</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Acquire a copy of the GPDS library.</cmd>
+            </step>
+            <step>
+                <cmd>Add the GPDS header directory to the include path of your project.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

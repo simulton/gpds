@@ -7,3 +7,7 @@
 *.pro.*
 *-Debug
 build-*
+
+# Documentation stuff
+doc/dita/out
+doc/dita/temp

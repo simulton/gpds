@@ -3,17 +3,39 @@
 <map>
     <title>GPDS</title>
     
-    <topicref href="../topics/what.dita">
+    <topicref collection-type="sequence" chunk="to-content">
         <topicmeta>
-            <navtitle>"What?</navtitle>
-            <shortdesc>What is GPDS?</shortdesc>
+            <navtitle>Introduction</navtitle>
+            <shortdesc>An introduction to GPDS</shortdesc>
+        </topicmeta>
+    
+        <topicref href="../topics/what.dita">
+            <topicmeta>
+                <navtitle>What?</navtitle>
+                <shortdesc>What is GPDS?</shortdesc>
+            </topicmeta>
+        </topicref>
+        
+        <topicref href="../topics/why.dita">
+            <topicmeta>
+                <navtitle>Why?</navtitle>
+                <shortdesc>What makes GPDS different from existing serializers?</shortdesc>
+            </topicmeta>
+        </topicref>
+    </topicref>
+    
+    <topicref href="../topics/integration.dita">
+        <topicmeta>
+            <navtitle>Integration</navtitle>
+            <shortdesc>A guide on how to integrate GPDS into a project</shortdesc>
         </topicmeta>
     </topicref>
     
-    <topicref href="../topics/why.dita">
+    <topicref href="../topics/usage.dita">
         <topicmeta>
-            <navtitle>"Why?</navtitle>
-            <shortdesc>What makes GPDS different from existing serializers?</shortdesc>
+            <navtitle>Usage</navtitle>
+            <shortdesc>How to use GPDS</shortdesc>
         </topicmeta>
     </topicref>
+    
 </map>

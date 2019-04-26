@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>GPDS</title>
+    
+    <topicref href="../topics/what.dita">
+        <topicmeta>
+            <navtitle>"What?</navtitle>
+            <shortdesc>What is GPDS?</shortdesc>
+        </topicmeta>
+    </topicref>
+    
+    <topicref href="../topics/why.dita">
+        <topicmeta>
+            <navtitle>"Why?</navtitle>
+            <shortdesc>What makes GPDS different from existing serializers?</shortdesc>
+        </topicmeta>
+    </topicref>
+</map>

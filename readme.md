@@ -1,1 +1,1 @@
-See [https://gdps.simulton.com]
+See https://gpds.simulton.com

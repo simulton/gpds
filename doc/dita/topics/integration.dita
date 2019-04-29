@@ -2,7 +2,7 @@
 <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
 <task id="Untitled">
     <title>Integration</title>
-    <shortdesc></shortdesc>
+    <shortdesc/>
     <taskbody>
         <context>
             <p>Integrating GPDS into a project is extremely simple as it's a header-only C++
@@ -11,6 +11,15 @@
         <steps>
             <step>
                 <cmd>Acquire a copy of the GPDS library.</cmd>
+                <choices>
+                    <choice>Integrate the <xref href="https://github.com/simulton/gpds"
+                            format="html" scope="external">official git repository</xref> into your
+                        git repository as a submodule.</choice>
+                    <choice>Download a <xref
+                            href="https://github.com/simulton/GPDS/archive/master.zip" format="zip"
+                            scope="external">ZIP archive</xref> and copy its contents to your
+                        project.</choice>
+                </choices>
             </step>
             <step>
                 <cmd>Add the GPDS header directory to the include path of your project.</cmd>

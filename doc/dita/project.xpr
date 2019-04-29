@@ -6,6 +6,10 @@
             <serialized version="21.0" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
+                        <String>keys.context</String>
+                        <String>${pdu}/maps/webhelp.ditamap</String>
+                    </entry>
+                    <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
                             <scenarioAssociation>
@@ -96,13 +100,13 @@
                                 <field name="publishingTemplateDataPO">
                                     <publishingTemplate>
                                         <field name="templateRoot">
-                                            <String>${configured.ditaot.dir}/plugins/com.oxygenxml.webhelp.responsive/templates/oxygen</String>
+                                            <String>C:/Users/joel/Documents/projects/webhelp_templates/simulton/</String>
                                         </field>
                                         <field name="descriptorRelativePath">
-                                            <String>oxygen-tiles.opt</String>
+                                            <String>WebHelp responsive - Simulton.opt</String>
                                         </field>
                                         <field name="isCustomTemplate">
-                                            <Boolean>false</Boolean>
+                                            <Boolean>true</Boolean>
                                         </field>
                                     </publishingTemplate>
                                 </field>
@@ -242,6 +246,29 @@
                                                     <String></String>
                                                     <String></String>
                                                 </String-array>
+                                            </field>
+                                        </ditaParameter>
+                                        <ditaParameter>
+                                            <field name="name">
+                                                <String>webhelp.fragment.welcome</String>
+                                            </field>
+                                            <field name="description">
+                                                <null/>
+                                            </field>
+                                            <field name="value">
+                                                <String>${pd}/webhelp/fragments/welcome.xhtml</String>
+                                            </field>
+                                            <field name="defaultValue">
+                                                <null/>
+                                            </field>
+                                            <field name="type">
+                                                <Integer>2</Integer>
+                                            </field>
+                                            <field name="possibleValues">
+                                                <null/>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <null/>
                                             </field>
                                         </ditaParameter>
                                     </list>

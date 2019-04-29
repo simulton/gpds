@@ -8,11 +8,17 @@
             <navtitle>Introduction</navtitle>
             <shortdesc>An introduction to GPDS</shortdesc>
         </topicmeta>
-    
+        
         <topicref href="../topics/what.dita">
             <topicmeta>
                 <navtitle>What?</navtitle>
                 <shortdesc>What is GPDS?</shortdesc>
+            </topicmeta>
+        </topicref>
+        
+        <topicref href="../topics/features.dita">
+            <topicmeta>
+                <navtitle>Features</navtitle>
             </topicmeta>
         </topicref>
         
@@ -24,18 +30,40 @@
         </topicref>
     </topicref>
     
-    <topicref href="../topics/integration.dita">
+    <topicref collection-type="sequence" chunk="to-content">
         <topicmeta>
             <navtitle>Integration</navtitle>
             <shortdesc>A guide on how to integrate GPDS into a project</shortdesc>
         </topicmeta>
+        
+        <topicref href="../topics/requirements.dita">
+            <topicmeta>
+                <navtitle>Requirements</navtitle>
+            </topicmeta>
+        </topicref>
+        
+        <topicref href="../topics/integration.dita">
+            <topicmeta>
+                <navtitle>Integration</navtitle>
+                <shortdesc>A guide on how to integrate GPDS into a project</shortdesc>
+            </topicmeta>
+        </topicref>
+        
     </topicref>
     
-    <topicref href="../topics/usage.dita">
+    <mapref href="architecture.ditamap"/>
+    
+    <topicref collection-type="sequence" chunk="to-content">
+        
         <topicmeta>
             <navtitle>Usage</navtitle>
-            <shortdesc>How to use GPDS</shortdesc>
+            <shortdesc>A guide on how to use GPDS</shortdesc>
         </topicmeta>
+        
     </topicref>
+
+    <topichead navtitle="Glossary" locktitle="yes">
+        <mapref href="../glossary/glossary.ditamap" type="glossentry" keys="dita"/>
+    </topichead>
     
 </map>

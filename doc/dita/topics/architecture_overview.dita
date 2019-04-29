@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="architecture_overview">
+    <title>Architecture Overview</title>
+    <shortdesc></shortdesc>
+    <conbody>
+        <p>The following figure provides an overview of the overal architecture of GPDS.</p>
+        <fig id="fig_v32_5sj_4hb">
+            <title>Overall architecture</title>
+            <image href="../../uml/exports/svg/Model!Architecture_0.svg" id="image_w32_5sj_4hb"
+            />
+        </fig>
+        <dl>
+            <dlentry>
+                <dt>Serialize</dt>
+                <dd>An abstract class which application classes need to inherit from in order to
+                    support (de)serialization through GPDS.</dd>
+            </dlentry>
+            <dlentry>
+                <dt>Container</dt>
+                <dd>A class to represent the data to be (de)serialized. It allows storing various
+                    datatypes in a key/value fashion. Containers can be nested.</dd>
+            </dlentry>
+            <dlentry>
+                <dt>Archiver</dt>
+                <dd>An abstract class which  provides interfaces to (de)serialize data to/from STL
+                    streams.</dd>
+            </dlentry>
+            <dlentry>
+                <dt>ArchiverXml</dt>
+                <dd>An <term>Archiver</term> implementation to (de)serialize to/form XML files.</dd>
+            </dlentry>
+        </dl>
+    </conbody>
+</concept>

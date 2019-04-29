@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="features">
+    <title>Features</title>
+    <body>
+        <ul id="ul_gks_x12_4hb">
+            <li>Modern C++</li>
+            <li>Header only</li>
+            <li>XML backend</li>
+        </ul>
+    </body>
+</topic>

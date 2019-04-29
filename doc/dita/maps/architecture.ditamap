@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>Architecture</title>
+    
+    <topicref collection-type="sequence" chunk="to-content">
+        <topicmeta>
+            <navtitle>Architecture</navtitle>
+            <shortdesc>A closer look at GPDS' architecture.</shortdesc>
+        </topicmeta>
+        
+        <topicref href="../topics/architecture_overview.dita"/>
+        
+    </topicref>
+</map>

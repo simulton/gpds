@@ -4,13 +4,13 @@
     <title>Why?</title>
     <body>
         <p>There are plenty of different existing serializers that allow producing XML output.
-            However, a lot of them enforce a strong scheme on the generated XML. GPDS allows
+            However, a lot of them enforce a strong scheme on the generated XML. <ph keyref="projectname"/> allows
             generating XML files with a generic data format that can also be used efficiently within
             other XML processing applications.</p>
         <p>Consider the following class:</p>
         <p><image href="../../uml/exports/svg/Misc!Example_01_2.svg"/></p>
         <p>Or represented as C++ classes:</p>
-        <codeblock outputclass="language-cpp">class Color {
+        <codeblock outputclass="language-cpp"><![CDATA[class Color {
 public:
 	std::string name;
 	int red;
@@ -24,63 +24,63 @@ public:
 	std::string model;
 	int yearOfConstruction;
 	Color color;
-};</codeblock>
+};]]></codeblock>
         <p>Many generic serializers with XML backends would generate the following XML:</p>
-        <codeblock outputclass="language-xml">&lt;value>
-  &lt;value type="string">Jeep&lt;/value>
-  &lt;value type="string">Grand Cherokee&lt;/value>
-  &lt;value type="int">2009&lt;/value>
-  &lt;value>
-    &lt;value type="string">Black&lt;/value>
-    &lt;value type="int">0&lt;/value>
-    &lt;value type="int">0&lt;/value>
-    &lt;value type="int">0&lt;/value>
-  &lt;/value>
-&lt;/value></codeblock>
+        <codeblock outputclass="language-xml"><![CDATA[<value>
+  <value type="string">Jeep</value>
+  <value type="string">Grand Cherokee</value>
+  <value type="int">2009</value>
+  <value>
+    <value type="string">Black</value>
+    <value type="int">0</value>
+    <value type="int">0</value>
+    <value type="int">0</value>
+  </value>
+</value>]]></codeblock>
         <p>This works fine as long as the produced XML content is only used by the class/software that
             serialized and deserialized to/from it. However, if the produced XML should also be used
             outside of that class/software it's very tedious to work with as it's not clear what the
             values refer to.</p>
-        <p>The goal of GDS is to produce XML that consists of a more generic structure that can also be
+        <p>The goal of <ph keyref="projectname"/> is to produce XML that consists of a more generic structure that can also be
             used by other applications:</p>
-        <codeblock outputclass="language-xml">&lt;car>
-  &lt;manufacturer>Jeep&lt;/manufacturer>
-  &lt;model>Grand Cherokee&lt;/model>
-  &lt;year_of_construction>2009&lt;/year_of_construction>
-  &lt;color name="Black">
-    &lt;red>0&lt;/red>
-    &lt;green>0&lt;/green>
-    &lt;blue>0&lt;/blue>
-  &lt;/color>
-&lt;/car></codeblock>
-        <p>GDS also provides several configuration options to still annotate the element types if
+        <codeblock outputclass="language-xml"><![CDATA[<car>
+  <manufacturer>Jeep</manufacturer>
+  <model>Grand Cherokee</model>
+  <year_of_construction>2009</year_of_construction>
+  <color name="Black">
+    <red>0</red>
+    <green>0</green>
+    <blue>0</blue>
+  </color>
+</car>]]></codeblock>
+        <p><ph keyref="projectname"/> also provides several configuration options to still annotate the element types if
             desired so:</p>
-        <codeblock outputclass="language-xml">&lt;value>
-  &lt;value type="string">Jeep&lt;/value>
-  &lt;value type="string">Grand Cherokee&lt;/value>
-  &lt;value type="int">2009&lt;/value>
-  &lt;value>
-    &lt;value type="string">Black&lt;/value>
-    &lt;value type="int">0&lt;/value>
-    &lt;value type="int">0&lt;/value>
-    &lt;value type="int">0&lt;/value>
-  &lt;/value>
-&lt;/value></codeblock>
+        <codeblock outputclass="language-xml"><![CDATA[<value>
+  <value type="string">Jeep</value>
+  <value type="string">Grand Cherokee</value>
+  <value type="int">2009</value>
+  <value>
+    <value type="string">Black</value>
+    <value type="int">0</value>
+    <value type="int">0</value>
+    <value type="int">0</value>
+  </value>
+</value>]]></codeblock>
         <p>This works fine as long as the produced XML content is only used by the class/software that
             serialized and deserialized to/from it. However, if the produced XML should also be used
             outside of that class/software it's very tedious to work with as it's not clear what the
             values refer to.</p>
-        <p>The goal of GPDS is to produce XML that consists of a more generic structure that can
+        <p>The goal of <ph keyref="projectname"/> is to produce XML that consists of a more generic structure that can
             also be used by other applications:</p>
-        <codeblock outputclass="language-xml">&lt;car gds:type="container">
-  &lt;manufacturer gds:type="string">Jeep&lt;/manufacturer>
-  &lt;model gds:type="string">Grand Cherokee&lt;/model>
-  &lt;year_of_construction gds:type="int">2009&lt;/year_of_construction>
-  &lt;color name="Black" gds:type="container">
-    &lt;red gds:type="int">0&lt;/red>
-    &lt;green gds:type="int">0&lt;/green>
-    &lt;blue gds:type="int">0&lt;/blue>
-  &lt;/color>
-&lt;/car></codeblock>
+        <codeblock outputclass="language-xml"><![CDATA[<car gds:type="container">
+  <manufacturer gds:type="string">Jeep</manufacturer>
+  <model gds:type="string">Grand Cherokee</model>
+  <year_of_construction gds:type="int">2009</year_of_construction>
+  <color name="Black" gds:type="container">
+    <red gds:type="int">0</red>
+    <green gds:type="int">0</green>
+    <blue gds:type="int">0</blue>
+  </color>
+</car>]]></codeblock>
     </body>
 </topic>

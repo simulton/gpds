@@ -3,6 +3,6 @@
 <topic id="Untitled">
     <title>What?</title>
     <body>
-        <p>GPDS is a <b>G</b>eneral <b>P</b>urpose <b>D</b>ata <b>S</b>erializer implemented as a header-only C++ library.</p>
+        <p><ph keyref="projectname"/> is a <b>G</b>eneral <b>P</b>urpose <b>D</b>ata <b>S</b>erializer implemented as a header-only C++ library.</p>
     </body>
 </topic>

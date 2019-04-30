@@ -11,7 +11,7 @@
         </metadata>
     </prolog>
     <conbody>
-        <p>The following figure provides an overview of the overal architecture of GPDS.</p>
+        <p>The following figure provides an overview of the overal architecture of <ph keyref="projectname"/>.</p>
         <fig id="fig_v32_5sj_4hb">
             <title>Overall architecture</title>
             <image href="../../uml/exports/svg/Model!Architecture_0.svg" id="image_w32_5sj_4hb"
@@ -28,7 +28,7 @@
                 <dlentry>
                     <dt>Serialize</dt>
                     <dd>An abstract class which application classes need to inherit from in order to
-                        support (de)serialization through GPDS.</dd>
+                        support (de)serialization through <ph keyref="projectname"/>.</dd>
                 </dlentry>
                 <dlentry>
                     <dt>Container</dt>

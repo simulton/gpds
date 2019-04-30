@@ -12,12 +12,12 @@
     </prolog>
     <taskbody>
         <context>
-            <p>Integrating GPDS into a project is extremely simple as it's a header-only C++
+            <p>Integrating <ph keyref="projectname"/> into a project is extremely simple as it's a header-only C++
                 library.</p>
         </context>
         <steps>
             <step>
-                <cmd>Acquire a copy of the GPDS library.</cmd>
+                <cmd>Acquire a copy of the <ph keyref="projectname"/> library.</cmd>
                 <choices>
                     <choice>Integrate the <xref href="https://github.com/simulton/gpds"
                             format="html" scope="external">official git repository</xref> into your
@@ -29,7 +29,7 @@
                 </choices>
             </step>
             <step>
-                <cmd>Add the GPDS header directory to the include path of your project.</cmd>
+                <cmd>Add the <ph keyref="projectname"/> header directory to the include path of your project.</cmd>
             </step>
         </steps>
     </taskbody>

@@ -11,6 +11,6 @@
     </prolog>
     
     <body>
-        <p>Using GPDS only requires a C++17 compatible compiler.</p>
+        <p>Using <ph keyref="projectname"/> only requires a C++17 compatible compiler.</p>
     </body>
 </topic>

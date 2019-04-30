@@ -60,5 +60,6 @@
     <mapref href="architecture.ditamap"/>
     <mapref href="usage.ditamap"/>
     <mapref href="archiver.ditamap"/>
+    <mapref href="reference.ditamap"/>
     
 </map>

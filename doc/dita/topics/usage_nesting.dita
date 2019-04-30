@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="usage_nested_items">
+    <title>Nesting</title>
+    
+    <shortdesc><apiname>GPDS::Container</apiname> allows nesting.</shortdesc>
+    
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>usage
+                    <indexterm>nesting</indexterm>
+                </indexterm>
+            </keywords>
+        </metadata>
+    </prolog> 
+    
+    <conbody>
+        <p></p>
+    </conbody>
+</concept>

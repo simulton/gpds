@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="classes">
+    <title>Classes</title>
+    <shortdesc></shortdesc>
+    
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>classes</indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    
+    <conbody>
+        <p></p>
+    </conbody>
+</concept>

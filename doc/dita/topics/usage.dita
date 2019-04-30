@@ -32,7 +32,7 @@
                 <image href="../../uml/exports/svg/Misc!Example_02_3.svg"/>
             </fig>
             <p>Corresponding C++ code:</p>
-            <codeblock outputclass="language-cpp"><![CDATA[class Color : GPDS::Serialize
+            <codeblock outputclass="language-cpp"><![CDATA[class Color : public GPDS::Serialize
 {
 public:
     std::string name;
@@ -58,7 +58,7 @@ public:
     }
 };
 
-class MyObject : GPDS::Serialize
+class MyObject : public GPDS::Serialize
 {
 public:
     Color color;
@@ -92,9 +92,11 @@ public:
             <p>Create an instance of <apiname>ArchiverXml</apiname> (or of any other
                 <apiname>Archiver</apiname> class).</p>
             <p>Call <apiname>Archiver::save()</apiname> to serialize:</p>
-            <codeblock outputclass="language-cpp"><![CDATA[std::sstream stream;
+            <codeblock outputclass="language-cpp"><![CDATA[Car car;
+
+std::sstream stream;
 GPDS::ArchiverXml ar;
-ar.save(stream, object, "myObject");
+ar.save(stream, car, "car");
 
 std::cout << stream.str() << std::endl]]></codeblock>
         </example>
@@ -104,9 +106,10 @@ std::cout << stream.str() << std::endl]]></codeblock>
             <p>Create an instance of <apiname>ArchiverXml</apiname> (or of any other
                 <apiname>Archiver</apiname> class).</p>
             <p>Call <apiname>Archiver::load()</apiname> to serialize:</p>
-            <codeblock outputclass="language-cpp"><![CDATA[MyObject object;
+            <codeblock outputclass="language-cpp"><![CDATA[Car car;
+
 GPDS::ArchiverXml ar;
-ar.load(stream, object, "myObject");]]></codeblock>
+ar.load(stream, car, "car");]]></codeblock>
         </example>
     </body>
     

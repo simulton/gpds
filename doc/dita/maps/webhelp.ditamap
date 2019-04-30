@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
-<map>
+<map>    
     <title>GPDS</title>
+    
+    <topicmeta>
+        <author>Joel Bodenmann</author>
+    </topicmeta>
+    
+    <mapref href="keydefs.ditamap" processing-role="resource-only"/>
     
     <topicref collection-type="sequence" chunk="to-content">
         <topicmeta>
@@ -52,18 +58,6 @@
     </topicref>
     
     <mapref href="architecture.ditamap"/>
-    
-    <topicref collection-type="sequence" chunk="to-content">
-        
-        <topicmeta>
-            <navtitle>Usage</navtitle>
-            <shortdesc>A guide on how to use GPDS</shortdesc>
-        </topicmeta>
-        
-    </topicref>
-
-    <topichead navtitle="Glossary" locktitle="yes">
-        <mapref href="../glossary/glossary.ditamap" type="glossentry" keys="dita"/>
-    </topichead>
+    <mapref href="usage.ditamap"/>
     
 </map>

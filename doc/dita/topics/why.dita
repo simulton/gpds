@@ -8,7 +8,7 @@
             generating XML files with a generic data format that can also be used efficiently within
             other XML processing applications.</p>
         <p>Consider the following class:</p>
-        <p><image href="../../uml/exports/svg/Misc!Examples_2.svg"/></p>
+        <p><image href="../../uml/exports/svg/Misc!Example_01_2.svg"/></p>
         <p>Or represented as C++ classes:</p>
         <codeblock outputclass="language-cpp">class Color {
 public:

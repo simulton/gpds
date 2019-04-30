@@ -2,9 +2,117 @@
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
 <topic id="Untitled">
     <title>Usage</title>
+    
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+          <keywords>
+              <indexterm>usage
+                  <index-see-also>integration</index-see-also>
+              </indexterm>
+          </keywords>
+        </metadata>
+    </prolog> 
+    
     <body>
-        <p>This topic explains the usage of the GPDS library. See <xref href="integration.dita"/>
+        <p>This topic explains the usage of the <ph keyref="projectname"/> library. See <xref href="integration.dita"/>
             for instructions on how to integrate the library into a project.</p>
-        <p></p>
+        <section>
+            <title>Make class serializable</title>
+            <p>A class needs to inherit from the <apiname>Container</apiname> class in order to
+                become serializable through <ph keyref="projectname"/>.</p>
+        </section>
+        
+        <example>
+            <title>Implement <apiname>Serialize</apiname> interface</title>
+            <p>Implement the <apiname>GPDS::Serialize</apiname> interface by inheriting from the
+                respective class to make your own class become serializable through <ph
+                    keyref="projectname"/> as shown by the following UML class diagram:</p>
+            <fig>
+                <image href="../../uml/exports/svg/Misc!Example_02_3.svg"/>
+            </fig>
+            <p>Corresponding C++ code:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[class Color : GPDS::Serialize
+{
+public:
+    std::string name;
+    int red, green, blue;
+
+    virtual GPDS::Container toContainer() const override
+    {
+        GPDS::Container c;
+        c.addEntry("name", name);
+        c.addEntry("red", red);
+        c.addEntry("green", green);
+        c.addEntry("blue", blue);
+
+        return c;
+    }
+
+    virtual void fromContainer(const GPDS::Container& c) override
+    {
+        name = c.getEntry<std::string>("name");
+        red = c.getEntry<int>("red");
+        green = c.getEntry<int>("green");
+        blue = c.getEntry<int>("blue");
+    }
+};
+
+class MyObject : GPDS::Serialize
+{
+public:
+    Color color;
+    std::string manufacturer;
+    std::string model;
+    int yearOfConstruction;
+
+    virtual GPDS::Container toContainer() const override
+    {
+        GPDS::Container c;
+        c.addEntry("color", color.toContainer());
+        c.addEntry("manufacturer", manufacturer);
+        c.addEntry("model", model);
+        c.addEntry("year_of_construction", yearOfConstruction);
+
+        return c;
+    }
+
+    virtual void fromContainer(const GPDS::Container& c) override
+    {
+        color.fromContainer( c.getEntry<Container>("color") );
+        manufacturer = c.getEntry<std::string>("manufacturer");
+        model = c.getEntry<std::string>("model");
+        yearOfConstruction = c.getEntry<int>("year_of_construction");
+    }
+};]]></codeblock>
+        </example>
+        
+        <example>
+            <title>Serialize</title>
+            <p>Create an instance of <apiname>ArchiverXml</apiname> (or of any other
+                <apiname>Archiver</apiname> class).</p>
+            <p>Call <apiname>Archiver::save()</apiname> to serialize:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[std::sstream stream;
+GPDS::ArchiverXml ar;
+ar.save(stream, object, "myObject");
+
+std::cout << stream.str() << std::endl]]></codeblock>
+        </example>
+        
+        <example>
+            <title>Deserialize</title>
+            <p>Create an instance of <apiname>ArchiverXml</apiname> (or of any other
+                <apiname>Archiver</apiname> class).</p>
+            <p>Call <apiname>Archiver::load()</apiname> to serialize:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[MyObject object;
+GPDS::ArchiverXml ar;
+ar.load(stream, object, "myObject");]]></codeblock>
+        </example>
     </body>
+    
+    <related-links>
+        <link href="integration.dita"/>
+        <link href="architecture_overview.dita"/>
+    </related-links>
+    
 </topic>

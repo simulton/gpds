@@ -2,7 +2,14 @@
 <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
 <task id="Untitled">
     <title>Integration</title>
-    <shortdesc/>
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>integration</indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
     <taskbody>
         <context>
             <p>Integrating GPDS into a project is extremely simple as it's a header-only C++

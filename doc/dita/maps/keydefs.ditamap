@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map id="keydefs">
+    <title>Key Definitions</title>
+    <keydef keys="projectname" product="GPDS">
+        <topicmeta>
+            <keywords>
+                <keyword>GPDS</keyword>
+            </keywords>
+        </topicmeta>
+    </keydef>
+    <keydef keys="namespace">
+        <topicmeta>
+            <keywords>
+                <keyword>GPDS</keyword>
+            </keywords>
+        </topicmeta>
+    </keydef>
+    
+</map>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE glossentry PUBLIC "-//OASIS//DTD DITA Glossary//EN" "glossary.dtd">
-<glossentry id="Untitled">
-    <glossterm>Container</glossterm>
-    <glossdef>A class to represent the data to be (de)serialized. It allows storing various datatypes
-            in a key/value fashion. Containers can be nested.
-    </glossdef>
-</glossentry>

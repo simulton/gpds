@@ -126,36 +126,6 @@
                                     <list>
                                         <ditaParameter>
                                             <field name="name">
-                                                <String>fix.external.refs.com.oxygenxml</String>
-                                            </field>
-                                            <field name="description">
-                                                <null/>
-                                            </field>
-                                            <field name="value">
-                                                <String>true</String>
-                                            </field>
-                                            <field name="defaultValue">
-                                                <String>false</String>
-                                            </field>
-                                            <field name="type">
-                                                <Integer>4</Integer>
-                                            </field>
-                                            <field name="possibleValues">
-                                                <String-array>
-                                                    <String>true</String>
-                                                    <String>false</String>
-                                                    <null/>
-                                                </String-array>
-                                            </field>
-                                            <field name="possibleValuesDescriptions">
-                                                <String-array>
-                                                    <String></String>
-                                                    <String></String>
-                                                </String-array>
-                                            </field>
-                                        </ditaParameter>
-                                        <ditaParameter>
-                                            <field name="name">
                                                 <String>args.figurelink.style</String>
                                             </field>
                                             <field name="description">
@@ -220,6 +190,36 @@
                                         </ditaParameter>
                                         <ditaParameter>
                                             <field name="name">
+                                                <String>fix.external.refs.com.oxygenxml</String>
+                                            </field>
+                                            <field name="description">
+                                                <null/>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                            <field name="defaultValue">
+                                                <String>false</String>
+                                            </field>
+                                            <field name="type">
+                                                <Integer>4</Integer>
+                                            </field>
+                                            <field name="possibleValues">
+                                                <String-array>
+                                                    <String>true</String>
+                                                    <String>false</String>
+                                                    <null/>
+                                                </String-array>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <String-array>
+                                                    <String></String>
+                                                    <String></String>
+                                                </String-array>
+                                            </field>
+                                        </ditaParameter>
+                                        <ditaParameter>
+                                            <field name="name">
                                                 <String>force-unique</String>
                                             </field>
                                             <field name="description">
@@ -273,31 +273,33 @@
                                         </ditaParameter>
                                         <ditaParameter>
                                             <field name="name">
-                                                <String>webhelp.publication.toc.hide.chunked.topics</String>
+                                                <String>webhelp.publication.toc.links</String>
                                             </field>
                                             <field name="description">
                                                 <null/>
                                             </field>
                                             <field name="value">
-                                                <String>no</String>
+                                                <String>all</String>
                                             </field>
                                             <field name="defaultValue">
-                                                <String>yes</String>
+                                                <String>chapter</String>
                                             </field>
                                             <field name="type">
                                                 <Integer>4</Integer>
                                             </field>
                                             <field name="possibleValues">
                                                 <String-array>
-                                                    <String>yes</String>
-                                                    <String>no</String>
+                                                    <String>topic</String>
+                                                    <String>chapter</String>
+                                                    <String>all</String>
                                                     <null/>
                                                 </String-array>
                                             </field>
                                             <field name="possibleValuesDescriptions">
                                                 <String-array>
-                                                    <String></String>
-                                                    <String></String>
+                                                    <String>The Publication TOC will include only the links to the current topic and its children.</String>
+                                                    <String>The Publication TOC will include the links to the current topic, its children, and its ancestors.</String>
+                                                    <String>The Publication TOC will include all links.</String>
                                                 </String-array>
                                             </field>
                                         </ditaParameter>
@@ -328,38 +330,6 @@
                                                 <String-array>
                                                     <String></String>
                                                     <String></String>
-                                                </String-array>
-                                            </field>
-                                        </ditaParameter>
-                                        <ditaParameter>
-                                            <field name="name">
-                                                <String>webhelp.publication.toc.links</String>
-                                            </field>
-                                            <field name="description">
-                                                <null/>
-                                            </field>
-                                            <field name="value">
-                                                <String>all</String>
-                                            </field>
-                                            <field name="defaultValue">
-                                                <String>chapter</String>
-                                            </field>
-                                            <field name="type">
-                                                <Integer>4</Integer>
-                                            </field>
-                                            <field name="possibleValues">
-                                                <String-array>
-                                                    <String>topic</String>
-                                                    <String>chapter</String>
-                                                    <String>all</String>
-                                                    <null/>
-                                                </String-array>
-                                            </field>
-                                            <field name="possibleValuesDescriptions">
-                                                <String-array>
-                                                    <String>The Publication TOC will include only the links to the current topic and its children.</String>
-                                                    <String>The Publication TOC will include the links to the current topic, its children, and its ancestors.</String>
-                                                    <String>The Publication TOC will include all links.</String>
                                                 </String-array>
                                             </field>
                                         </ditaParameter>

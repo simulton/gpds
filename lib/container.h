@@ -7,7 +7,7 @@
 #include <map>
 #include <vector>
 
-namespace Gds
+namespace Gpds
 {
 
     class Container

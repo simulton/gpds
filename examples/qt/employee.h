@@ -4,14 +4,14 @@
 #include "../../lib/serialize.h"
 #include "address.h"
 
-class Employee : public Gds::Serialize
+class Employee : public Gpds::Serialize
 {
 public:
     Employee() = default;
 
-    virtual Gds::Container toContainer() const override
+    virtual Gpds::Container toContainer() const override
     {
-        Gds::Container c;
+        Gpds::Container c;
         c.addEntry("first_name", firstName);
         c.addEntry("last_name", lastName);
         c.addEntry("address", address.toContainer());
@@ -20,11 +20,11 @@ public:
         return c;
     }
 
-    virtual void fromContainer(const Gds::Container& container) override
+    virtual void fromContainer(const Gpds::Container& container) override
     {
         firstName = container.getEntry<std::string>("first_name");
         lastName = container.getEntry<std::string>("last_name");
-        address.fromContainer( container.getEntry<Gds::Container>("address") );
+        address.fromContainer( container.getEntry<Gpds::Container>("address") );
         enabled = container.getEntry<bool>("enabled");
     }
 

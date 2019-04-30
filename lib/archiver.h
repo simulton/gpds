@@ -2,7 +2,7 @@
 
 #include "serialize.h"
 
-namespace Gds
+namespace Gpds
 {
 
     class Archiver

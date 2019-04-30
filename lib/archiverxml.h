@@ -5,7 +5,7 @@
 #include "3rdparty/rapidxml-1.13/rapidxml_ext.hpp"
 #include "3rdparty/rapidxml-1.13/rapidxml_print.hpp"
 
-namespace Gds
+namespace Gpds
 {
 
     class ArchiverXml : public Archiver

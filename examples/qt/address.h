@@ -3,14 +3,14 @@
 #include <sstream>
 #include "../../lib/serialize.h"
 
-class Address : public Gds::Serialize
+class Address : public Gpds::Serialize
 {
 public:
     Address() = default;
 
-    virtual Gds::Container toContainer() const override
+    virtual Gpds::Container toContainer() const override
     {
-        Gds::Container c;
+        Gpds::Container c;
 
         c.addEntry("address_1", address1);
         c.addEntry("address_2", address2);
@@ -20,7 +20,7 @@ public:
         return c;
     }
 
-    virtual void fromContainer(const Gds::Container& container) override
+    virtual void fromContainer(const Gpds::Container& container) override
     {
         address1 = container.getEntry<std::string>("address_1");
         address2 = container.getEntry<std::string>("address_2");

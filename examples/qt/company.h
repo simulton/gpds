@@ -7,21 +7,21 @@
 #include "employee.h"
 #include "../../lib/serialize.h"
 
-class Company : public Gds::Serialize
+class Company : public Gpds::Serialize
 {
 public:
     Company() = default;
 
-    virtual Gds::Container toContainer() const override
+    virtual Gpds::Container toContainer() const override
     {
         // Employees
-        Gds::Container employeesContainer;
+        Gpds::Container employeesContainer;
         for (const Employee& employee : employees) {
             employeesContainer.addEntry("employee", employee.toContainer());
         }
 
         // Root
-        Gds::Container c;
+        Gpds::Container c;
         c.addEntry("name", name);
         c.addEntry("random_int", offices);
         c.addEntry("random_double", randomDouble);
@@ -31,11 +31,11 @@ public:
         return c;
     }
 
-    virtual void fromContainer(const Gds::Container& container) override
+    virtual void fromContainer(const Gpds::Container& container) override
     {
         // Employees
-        const auto& employeesContainer = container.getEntry<Gds::Container>("employees");
-        for (const auto& employeeContainer : employeesContainer.getEntries<Gds::Container>("employee")) {
+        const auto& employeesContainer = container.getEntry<Gpds::Container>("employees");
+        for (const auto& employeeContainer : employeesContainer.getEntries<Gpds::Container>("employee")) {
             employees.emplace_back().fromContainer( employeeContainer );
         }
 
@@ -43,7 +43,7 @@ public:
         name = container.getEntry<std::string>("name");
         offices = container.getEntry<int>("random_int");
         randomDouble = container.getEntry<double>("random_double");
-        address.fromContainer(container.getEntry<Gds::Container>("address"));
+        address.fromContainer(container.getEntry<Gpds::Container>("address"));
 
         std::cout << "company: " << std::endl;
         std::cout << toString("  ") << std::endl;

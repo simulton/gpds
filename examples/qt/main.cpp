@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     company1.address = company1Address;
 
     std::stringstream stream;
-    Gds::ArchiverXml ar;
+    Gpds::ArchiverXml ar;
     ar.save(stream, company1, "company");
 
     std::cout << stream.str();

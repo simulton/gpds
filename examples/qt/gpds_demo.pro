@@ -3,7 +3,7 @@ QT -= gui
 CONFIG += c++17 silent console
 CONFIG -= app_bundle
 
-include (../../lib/gds.pri)
+include (../../lib/gpds.pri)
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings

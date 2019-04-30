@@ -63,7 +63,7 @@
 											"top": 214,
 											"width": 1103,
 											"height": 13,
-											"text": "GDS"
+											"text": "GPDS"
 										},
 										{
 											"_type": "LabelView",
@@ -187,7 +187,7 @@
 											"top": 746,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from GPDS)"
 										},
 										{
 											"_type": "LabelView",
@@ -875,7 +875,7 @@
 											"top": -756,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from GPDS)"
 										},
 										{
 											"_type": "LabelView",
@@ -1090,7 +1090,7 @@
 											"top": 80,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from GPDS)"
 										},
 										{
 											"_type": "LabelView",
@@ -3120,7 +3120,7 @@
 											"top": 734,
 											"width": 119,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from GPDS)"
 										},
 										{
 											"_type": "LabelView",
@@ -3608,7 +3608,7 @@
 											"top": -360,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from GPDS)"
 										},
 										{
 											"_type": "LabelView",
@@ -3777,7 +3777,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "GDS",
+					"name": "Gpds",
 					"ownedElements": [
 						{
 							"_type": "UMLInterface",
@@ -5207,7 +5207,7 @@
 											"top": 462,
 											"width": 247,
 											"height": 13,
-											"text": "GDS"
+											"text": "Gpds"
 										},
 										{
 											"_type": "LabelView",
@@ -5938,7 +5938,7 @@
 											"top": 646,
 											"width": 119.1962890625,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -6391,7 +6391,7 @@
 											"top": 531,
 											"width": 144.7080078125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",

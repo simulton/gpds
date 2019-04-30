@@ -2,7 +2,7 @@
 
 #include "container.h"
 
-namespace Gds
+namespace Gpds
 {
 
     class Serialize
@@ -10,8 +10,8 @@ namespace Gds
     public:
         virtual ~Serialize() = default;
 
-        virtual Gds::Container toContainer() const = 0;
-        virtual void fromContainer(const Gds::Container& container) = 0;
+        virtual Gpds::Container toContainer() const = 0;
+        virtual void fromContainer(const Gpds::Container& container) = 0;
     };
 
 }

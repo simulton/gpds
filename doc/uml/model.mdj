@@ -63,7 +63,7 @@
 											"top": 214,
 											"width": 1103,
 											"height": 13,
-											"text": "GPDS"
+											"text": "Gpds"
 										},
 										{
 											"_type": "LabelView",
@@ -187,7 +187,7 @@
 											"top": 746,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GPDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -875,7 +875,7 @@
 											"top": -756,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GPDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -1090,7 +1090,7 @@
 											"top": 80,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GPDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -1439,13 +1439,30 @@
 											"height": 13,
 											"text": "+annotateTypes: bool",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFqczfqdr0y2NU=",
+											"_parent": {
+												"$ref": "AAAAAAFqTDH5zI5kEwo="
+											},
+											"model": {
+												"$ref": "AAAAAAFqczfqQL0v4OI="
+											},
+											"font": "Arial;13;0",
+											"left": 413,
+											"top": 507,
+											"width": 144.9169921875,
+											"height": 13,
+											"text": "+prefixAnnotations: bool",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 408,
 									"top": 472,
 									"width": 154.9169921875,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -1501,7 +1518,7 @@
 							"left": 408,
 							"top": 432,
 							"width": 154.9169921875,
-							"height": 88,
+							"height": 93,
 							"showNamespace": true,
 							"nameCompartment": {
 								"$ref": "AAAAAAFqTDH5zI5fF34="
@@ -3120,7 +3137,7 @@
 											"top": 734,
 											"width": 119,
 											"height": 13,
-											"text": "(from GPDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -3608,7 +3625,7 @@
 											"top": -360,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GPDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -4625,6 +4642,15 @@
 											},
 											"name": "annotateTypes",
 											"type": "bool"
+										},
+										{
+											"_type": "UMLAttribute",
+											"_id": "AAAAAAFqczfqQL0v4OI=",
+											"_parent": {
+												"$ref": "AAAAAAFqTDHtsY5a/F8="
+											},
+											"name": "prefixAnnotations",
+											"type": "bool"
 										}
 									]
 								},
@@ -5312,7 +5338,7 @@
 											"font": "Arial;13;1",
 											"left": 637,
 											"top": 503,
-											"width": 119.1962890625,
+											"width": 120,
 											"height": 13,
 											"text": "Address"
 										},
@@ -5325,7 +5351,7 @@
 											"font": "Arial;13;0",
 											"left": 637,
 											"top": 518,
-											"width": 119.1962890625,
+											"width": 120,
 											"height": 13,
 											"text": "(from MyApplication)"
 										},
@@ -5346,7 +5372,7 @@
 									"font": "Arial;13;0",
 									"left": 632,
 									"top": 496,
-									"width": 129.1962890625,
+									"width": 130,
 									"height": 40,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFqTF5/97CevHk="
@@ -5383,7 +5409,7 @@
 											"font": "Arial;13;0",
 											"left": 637,
 											"top": 541,
-											"width": 119.1962890625,
+											"width": 120,
 											"height": 13,
 											"text": "+address1: string",
 											"horizontalAlignment": 0
@@ -5400,7 +5426,7 @@
 											"font": "Arial;13;0",
 											"left": 637,
 											"top": 556,
-											"width": 119.1962890625,
+											"width": 120,
 											"height": 13,
 											"text": "+address2: string",
 											"horizontalAlignment": 0
@@ -5417,7 +5443,7 @@
 											"font": "Arial;13;0",
 											"left": 637,
 											"top": 571,
-											"width": 119.1962890625,
+											"width": 120,
 											"height": 13,
 											"text": "+city: string",
 											"horizontalAlignment": 0
@@ -5434,7 +5460,7 @@
 											"font": "Arial;13;0",
 											"left": 637,
 											"top": 586,
-											"width": 119.1962890625,
+											"width": 120,
 											"height": 13,
 											"text": "+country: string",
 											"horizontalAlignment": 0
@@ -5443,7 +5469,7 @@
 									"font": "Arial;13;0",
 									"left": 632,
 									"top": 536,
-									"width": 129.1962890625,
+									"width": 130,
 									"height": 68
 								},
 								{
@@ -5499,7 +5525,7 @@
 							"containerChangeable": true,
 							"left": 632,
 							"top": 496,
-							"width": 129.1962890625,
+							"width": 130,
 							"height": 108,
 							"showNamespace": true,
 							"nameCompartment": {
@@ -5645,9 +5671,9 @@
 										"$ref": "AAAAAAFqTF6StrDFKzg="
 									},
 									"font": "Arial;13;0",
-									"left": 601,
+									"left": 600,
 									"top": 510,
-									"width": 19.5126953125,
+									"width": 20,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -5870,7 +5896,7 @@
 							"tail": {
 								"$ref": "AAAAAAFqTF5/97Cc/jw="
 							},
-							"points": "760:544;904:544",
+							"points": "761:544;904:544",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFqTF/fOLJPcRA="
@@ -7520,7 +7546,7 @@
 											"top": 315,
 											"width": 144.7080078125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -7735,7 +7761,7 @@
 											"top": 230,
 											"width": 317.10986328125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -9255,7 +9281,7 @@
 											"top": 502,
 											"width": 79,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -9433,7 +9459,7 @@
 											"top": 369,
 											"width": 347.7314453125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -9759,7 +9785,7 @@
 											"top": 321,
 											"width": 96.0908203125,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",
@@ -11171,7 +11197,7 @@
 											"top": 669,
 											"width": 119,
 											"height": 13,
-											"text": "(from GDS)"
+											"text": "(from Gpds)"
 										},
 										{
 											"_type": "LabelView",

@@ -11,15 +11,19 @@ namespace Gpds
     class ArchiverXml : public Archiver
     {
     public:
+        const std::string NAMESPACE_PREFIX = "gpds:";
+
         struct Settings {
             bool annotateListCount;
             bool annotateTypes;
+            bool prefixAnnotations;
         };
 
         ArchiverXml()
         {
             settings.annotateListCount = true;
             settings.annotateTypes = false;
+            settings.prefixAnnotations = true;
         }
 
         virtual ~ArchiverXml() override = default;
@@ -119,7 +123,11 @@ namespace Gpds
 
                         // Annotate list if supposed to
                         if (settings.annotateListCount and container.isList()) {
-                            child->append_attribute( doc.allocate_attribute( "gds:count", doc.allocate_string( std::to_string( container.entries.size() ).data() ) ) );
+                            std::string attributeString = "count";
+                            if (settings.prefixAnnotations) {
+                                attributeString = NAMESPACE_PREFIX + attributeString;
+                            }
+                            child->append_attribute( doc.allocate_attribute( doc.allocate_string( attributeString.c_str() ), doc.allocate_string( std::to_string( container.entries.size() ).data() ) ) );
                         }
 
                         // Recursion
@@ -131,7 +139,11 @@ namespace Gpds
 
                 // Annotate type if supposed to
                 if (settings.annotateTypes and !container.isList()) {
-                    child->append_attribute( doc.allocate_attribute( "gds:type", Container::typeString(type) ) );
+                    std::string attributeString = "type";
+                    if (settings.prefixAnnotations) {
+                        attributeString = NAMESPACE_PREFIX + attributeString;
+                    }
+                    child->append_attribute( doc.allocate_attribute( doc.allocate_string( attributeString.c_str() ), Container::typeString(type) ) );
                 }
 
                 assert(child);

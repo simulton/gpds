@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="reference_classes">
+    <title>Classes</title>
+    <shortdesc>The various classes provided by the <ph keyref="namespace"/> namespace.</shortdesc>
+    <conbody>
+        <p>The <ph keyref="namespace"/> namespace provides the following classes:<ul id="ul_bbn_4xh_phb">
+            <li><apiname>Container</apiname></li>
+            </ul></p>
+    </conbody>
+</concept>

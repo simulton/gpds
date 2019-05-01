@@ -3,12 +3,13 @@
 <map>
     <title>Classes</title>
     
-    <topichead>
+    <topicref href="../topics/reference_classes.dita">
         <topicmeta>
             <navtitle>Classes</navtitle>
             <shortdesc>The various classes provided by the <ph keyref="namespace"/> namespace.</shortdesc>
         </topicmeta>
-        <topicref href="../topics/class_container.dita"/>
-    </topichead>
+        
+        <mapref href="reference_class_container.ditamap"/>
+    </topicref>
     
 </map>

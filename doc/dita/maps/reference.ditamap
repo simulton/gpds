@@ -8,6 +8,7 @@
             <navtitle>Reference</navtitle>
             <shortdesc>The code/API reference</shortdesc>
         </topicmeta>
-        <mapref href="classes.ditamap"/>
+        
+        <mapref href="reference_classes.ditamap"/>
     </topichead>
 </map>

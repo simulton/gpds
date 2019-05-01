@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="reference_container_design">
+    <title>Class design</title>
+    <shortdesc></shortdesc>
+    <conbody>
+        <fig>
+            <title>Container class design</title>
+            <image href="../../uml/exports/svg/Documentation!Container_5.svg"/>
+        </fig>
+    </conbody>
+</concept>

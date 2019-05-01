@@ -17,17 +17,6 @@
     </prolog>
     
     <conbody>
-        <example>
-            <title>Class design</title>
-            <fig>
-                <title>Container class design</title>
-                <image href="../../uml/exports/svg/Documentation!Container_5.svg"/>
-            </fig>
-        </example>
-        <example>
-            <title>Entries</title>
-            <p>An entry is a key-value pair consisting of a string key and a value of one of the following types:
-            </p>
-        </example>
+
     </conbody>
 </concept>

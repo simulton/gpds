@@ -3,7 +3,7 @@
 <concept id="usage_nested_items">
     <title>Nesting</title>
     
-    <shortdesc><apiname>GPDS::Container</apiname> allows nesting.</shortdesc>
+    <shortdesc><apiname>Gpds::Container</apiname> allows nesting.</shortdesc>
     
     <prolog>
         <author>Joel Bodenmann</author>

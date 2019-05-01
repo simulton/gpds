@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="reference_container_attribute">
+    <title>Attribute</title>
+    <conbody>
+        <p>An attribute is a key-value pair where both the key and the value or of type <codeph>std::string</codeph>.</p>
+        <p>Keys are unique. Calling <apiname>addArgument()</apiname> with a <parmname>key</parmname>
+            that has previously alredy been added will have no effect. The previously passed <parmname>value</parmname>
+            will remain being associated with the specified <parmname>key</parmname>.</p>
+        <example>
+            <title>Add an argument</title>
+            <codeblock outputclass="language-cpp"><![CDATA[Gpds::Container c;
+c.addArgument("id", "72042135");]]></codeblock>
+        </example>
+        <example>
+            <title>Get an argument</title>
+            <codeblock outputclass="language-cpp"><![CDATA[Gpds::Container c;
+std::cout << "id=" << c.getArgument("id") << std::endl;]]></codeblock>
+        </example>
+    </conbody>
+</concept>

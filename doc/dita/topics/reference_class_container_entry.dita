@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="reference_container_entry">
+    <title>Entry</title>
+    <conbody>
+        <p>An entry is a key-value pair consisting of a string key and a value of one of the
+            following types: <ul id="ul_yp5_4sf_phb">
+                <li><codeph>bool</codeph></li>
+                <li><codeph>int</codeph></li>
+                <li><codeph>double</codeph></li>
+                <li><codeph>std::string</codeph></li>
+                <li><codeph>Container</codeph> (for <xref href="usage_nesting.dita"
+                    >nesting</xref>)</li>
+            </ul></p>
+
+        <example>
+            <title>Add an entry</title>
+            <p>Adding an entry can be achieved by using the <apiname>Container::addEntry()</apiname>
+                base function and it's overloads.</p>
+            <codeblock outputclass="language-cpp"><![CDATA[Gpds::Container c;]]></codeblock>
+        </example>
+
+        <example>
+            <title>Get an entry</title>
+            <p>Getting an entry from a deserialized <apiname>Container</apiname> is achieved through
+                the Container::getEntry() function.</p>
+            <codeblock outputclass="language-cpp"><![CDATA[Gpds::Container c;]]></codeblock>
+        </example>
+    </conbody>
+</concept>

@@ -30,12 +30,12 @@ public:
   <value type="string">Jeep</value>
   <value type="string">Grand Cherokee</value>
   <value type="int">2009</value>
-  <value>
+  <valuelist>
     <value type="string">Black</value>
     <value type="int">0</value>
     <value type="int">0</value>
     <value type="int">0</value>
-  </value>
+  </valuelist>
 </value>]]></codeblock>
         <p>This works fine as long as the produced XML content is only used by the class/software that
             serialized and deserialized to/from it. However, if the produced XML should also be used

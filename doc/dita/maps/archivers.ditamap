@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Classification Map//EN" "classifyMap.dtd">
+<map>
+    <title>Archivers</title>
+    
+    <topicref href="../topics/archivers.dita">
+        <topicmeta>
+            <navtitle>Archivers</navtitle>
+            <shortdesc>The various backends.</shortdesc>
+        </topicmeta>
+        
+        <mapref href="archiver_xml.ditamap"/>
+    </topicref>
+    
+</map>

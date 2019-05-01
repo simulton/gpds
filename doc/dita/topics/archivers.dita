@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="archivers">
+    <title>Archiver</title>
+    <shortdesc>The various (de)serialization backends.</shortdesc>
+    <conbody>
+        <p>The following backends are available for (de)serialization:<ul id="ul_thh_b13_phb">
+                <li>XML</li>
+            </ul></p>
+    </conbody>
+</concept>

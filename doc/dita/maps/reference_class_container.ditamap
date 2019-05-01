@@ -9,8 +9,9 @@
             <shortdesc>The <apiname>Container</apiname> class.</shortdesc>
         </topicmeta>
         
-        <topicref href="../topics/reference_class_container_design.dita"/>
-        <topicref href="../topics/reference_class_container_entry.dita"/>
-        <topicref href="../topics/reference_class_container_attribute.dita"/>
+        <topicref href="../topics/reference_class_container_overview.dita">
+            <topicref href="../topics/reference_class_container_entry.dita"/>
+            <topicref href="../topics/reference_class_container_attribute.dita"/>
+        </topicref>
     </topicref>
 </map>

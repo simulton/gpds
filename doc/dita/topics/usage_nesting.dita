@@ -3,7 +3,7 @@
 <concept id="usage_nested_items">
     <title>Nesting</title>
     
-    <shortdesc><apiname>Gpds::Container</apiname> allows nesting.</shortdesc>
+    <shortdesc>The <apiname>Container</apiname> allows for nesting.</shortdesc>
     
     <prolog>
         <author>Joel Bodenmann</author>
@@ -17,6 +17,18 @@
     </prolog> 
     
     <conbody>
-        <p></p>
+        <p>The <apiname>Container</apiname> class allows for nesting to produce serialized output
+            that represents hierarchical/polymorphic data.</p>
+        <example>
+            <title>Created nested values</title>
+            <p>Nesting is achieved by passing a <apiname>Container</apiname> to <apiname>Container::addEntry()</apiname>.</p>
+            <codeblock outputclass="language-cpp"><![CDATA[Example: ToDo]]></codeblock>
+        </example>
+        <example>
+            <title>Retrieve nested values</title>
+            <p>Nested containers can be retrieved by calling
+                    <codeph>Container::getEntry&lt;Gpds::Container>()</codeph>.</p>
+            <codeblock outputclass="language-cpp"><![CDATA[Example: ToDo]]></codeblock>
+        </example>
     </conbody>
 </concept>

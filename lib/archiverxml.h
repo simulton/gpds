@@ -11,6 +11,10 @@ namespace Gpds
     class ArchiverXml : public Archiver
     {
     public:
+        // Deal with name hiding
+        using Archiver::save;
+        using Archiver::load;
+
         const std::string NAMESPACE_PREFIX = "gpds:";
 
         struct Settings {
@@ -28,7 +32,7 @@ namespace Gpds
 
         virtual ~ArchiverXml() override = default;
 
-        virtual bool save(std::ostream& stream, const Serialize& object, const std::string& rootName) const override
+        virtual bool save(std::ostream& stream, const Container& container, const std::string& rootName) const override
         {
             // Create the document
             rapidxml::xml_document<> doc;
@@ -45,7 +49,7 @@ namespace Gpds
             doc.append_node(root);
 
             // Add the Serialize data
-            writeEntry(doc, *root, object.toContainer());
+            writeEntry(doc, *root, container);
 
             // Add data to stream
             stream << doc;
@@ -56,7 +60,7 @@ namespace Gpds
             return true;
         }
 
-        virtual bool load(std::istream& stream, Serialize& object, const std::string& rootName) override
+        virtual bool load(std::istream& stream, Container& container, const std::string& rootName) override
         {
             // Create the document
             std::string string(std::istreambuf_iterator<char>(stream), {});
@@ -70,11 +74,7 @@ namespace Gpds
             }
 
             // Handle all nodes children recursively
-            Container container;
             readEntry(*rootNode, container);
-
-            // Deserialize the object
-            object.fromContainer(container);
 
             return true;
         }

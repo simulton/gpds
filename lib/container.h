@@ -21,14 +21,12 @@ namespace Gpds
             ContainerType
         };
 
-        using Value     = std::variant<bool, int, double, std::string, Container>;
-        using Entry     = std::pair< ValueType, Value >;
-        using Entries   = std::multimap< std::string, Entry >;
-        using Arguments = std::map< std::string, std::string >;
+        using Value = std::variant<bool, int, double, std::string, Container>;
+        using Entry = std::pair< ValueType, Value >;
 
         // Helper function to retrieve the index of the type T in the the VariantType
         template<class VariantType, class T, std::size_t index = 0>
-        static constexpr std::size_t variant_index()
+        static constexpr std::size_t variantIndex()
         {
             if constexpr (index == std::variant_size_v<VariantType>) {
                 return index;
@@ -39,7 +37,7 @@ namespace Gpds
             }
 
             else {
-                return variant_index<VariantType, T, index + 1>();
+                return variantIndex<VariantType, T, index + 1>();
             }
         }
 
@@ -104,7 +102,7 @@ namespace Gpds
             // Extract value & type info
             const Value& value = it->second.second;
             const std::size_t& typeIndexVariant = value.index();
-            std::size_t typeIndexTemplate = static_cast<std::size_t>( variant_index<Value, T>() );
+            std::size_t typeIndexTemplate = static_cast<std::size_t>( variantIndex<Value, T>() );
 
             // Ensure that T and the variant type are the same
             if ( typeIndexVariant != typeIndexTemplate ) {
@@ -172,8 +170,8 @@ namespace Gpds
         }
 
         std::string name;
-        Arguments arguments;
-        Entries entries;
+        std::map< std::string, std::string > arguments;
+        std::multimap< std::string, Entry > entries;
     };
 
 }

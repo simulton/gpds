@@ -27,8 +27,6 @@ namespace Gpds
     class Value
     {
     public:
-        using myVariant = std::variant<bool, int, double, std::string, Container*>;
-
         std::map< std::string, std::string > attributes;
         std::string comment;
 
@@ -159,7 +157,7 @@ namespace Gpds
         }
 
     private:
-        myVariant _value;
+        std::variant<bool, int, double, std::string, Container*> _value;
 
         // Implementation is located in container.h to prevent
         // circular dependency

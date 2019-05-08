@@ -59,8 +59,6 @@ namespace Gpds
         template<typename T>
         constexpr bool isType() const noexcept
         {
-            static_assert( isValidType<T>(), "T must be contained in Ts...");
-
             return std::holds_alternative<T>( _value );
         }
 
@@ -81,8 +79,6 @@ namespace Gpds
         template<typename T>
         void set(const T& value)
         {
-            static_assert( isValidType<T>(), "T must be contained in Ts...");
-
             _value = value;
         }
 
@@ -94,8 +90,6 @@ namespace Gpds
         template<typename T>
         constexpr T get() const
         {
-            static_assert( isValidType<T>(), "T must be contained in Ts...");
-
             return std::get<T>( _value );
         }
 

@@ -33,7 +33,10 @@ namespace Gpds
         std::string comment;
 
         Value( ) = default;
+
         Value( const Value& other ) :
+            attributes( other.attributes ),
+            comment( other.comment ),
             _value( other._value )
         {
             if ( std::holds_alternative<Container*>( _value ) ) {
@@ -42,16 +45,25 @@ namespace Gpds
         }
 
         Value( Value&& other ) :
+            attributes( std::move( other.attributes ) ),
+            comment( std::move( other.comment ) ),
             _value( std::move( other._value) )
         {
             other._value = nullptr;
         }
 
-        template<class T>
-        Value( const T& value, const std::string& comment = std::string() ) :
-            comment( comment )
+        template<class T,
+            typename std::enable_if< not std::is_class<T>::value, T >::type* = nullptr>
+        Value( const T& value)
         {
             set<T>(value);
+        }
+
+        template <class T,
+                typename std::enable_if< std::is_class<T>::value, T >::type* = nullptr>
+        Value( T&& value )
+        {
+            set<T>( std::move( value ) );
         }
 
         virtual ~Value() noexcept
@@ -83,9 +95,15 @@ namespace Gpds
         }
 
         template<typename T>
-        constexpr void set(const T& value)
+        void set(const T& value)
         {
             _value = value;
+        }
+
+        template<typename T>
+        void set(T&& value)
+        {
+            _value = std::move( value );
         }
 
         template<typename T = Container&>
@@ -93,6 +111,13 @@ namespace Gpds
         {
             freeContainerMemory();
             allocateContainerMemory(container);
+        }
+
+        template<typename T = Container&&>
+        void set(Container&& container)
+        {
+            freeContainerMemory();
+            allocateContainerMemory( std::move( container ) );
         }
 
         template<typename T>
@@ -123,6 +148,7 @@ namespace Gpds
         // Implementation is located in container.h to prevent
         // circular dependency
         void allocateContainerMemory(const Container& container);
+        void allocateContainerMemory(Container&& container);
         void freeContainerMemory();
     };
 }

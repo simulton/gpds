@@ -92,7 +92,13 @@ namespace Gpds
     }
 
     // Not located in value.h to prevent circular dependency
-    void Value::allocateContainerMemory(const Gpds::Container &container)
+    void Value::allocateContainerMemory(const Container& container)
+    {
+        _value = new Container( container );
+    }
+
+    // Not located in value.h to prevent circular dependency
+    void Value::allocateContainerMemory(Container&& container)
     {
         _value = new Container( std::move( container ) );
     }

@@ -126,9 +126,11 @@ namespace Gpds
             return std::get<T>( _value );
         }
 
-        void addAttribute(const std::string& key, const std::string& value)
+        Value& addAttribute(const std::string& key, const std::string& value)
         {
             attributes.emplace( key, value );
+
+            return *this;
         }
 
         std::string getAttribute(const std::string& key) const
@@ -140,6 +142,20 @@ namespace Gpds
             }
 
             return std::string();
+        }
+
+        Value& setComment(const std::string& comment)
+        {
+            this->comment = comment;
+
+            return *this;
+        }
+
+        Value& setComment(std::string&& comment)
+        {
+            this->comment = std::move( comment );
+
+            return *this;
         }
 
     private:

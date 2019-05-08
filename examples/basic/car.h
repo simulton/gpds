@@ -19,7 +19,7 @@ public:
         c.addValue("manufacturer", manufacturer);
         c.addValue("model", model);
         c.addValue("year_of_construction", year_of_construction);
-        c.addValue("color", color.toContainer());
+        c.addValue("color", color.toContainer()).addAttribute("id", "42");
 
         return c;
     }

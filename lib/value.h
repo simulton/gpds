@@ -33,8 +33,19 @@ namespace Gpds
         std::string comment;
 
         Value( ) = default;
-        Value( const Value& other ) = default;
-        Value( Value&& other ) = default;
+        Value( const Value& other ) :
+            _value( other._value )
+        {
+            if ( std::holds_alternative<Container*>( _value ) ) {
+                allocateContainerMemory( *std::get<Container*>( _value ) );
+            }
+        }
+
+        Value( Value&& other ) :
+            _value( std::move( other._value) )
+        {
+            other._value = nullptr;
+        }
 
         template<class T>
         Value( const T& value, const std::string& comment = std::string() ) :
@@ -48,12 +59,7 @@ namespace Gpds
             // Ensure that we won't throw
             assert( not _value.valueless_by_exception() );
 
-            // Containers need to be cleaned up
-            if ( std::holds_alternative<Container*>( _value ) ) {
-#warning ToDO: Free up memory
-                //std::cout << "foo = " << std::get<Container*>( _value ) << std::endl;
-                //delete std::get<Container*>( _value );
-            }
+            freeContainerMemory();
         }
 
         template<typename T>
@@ -77,15 +83,17 @@ namespace Gpds
         }
 
         template<typename T>
-        void set(const T& value)
+        constexpr void set(const T& value)
         {
             _value = value;
         }
 
-        // Implementation is located in container.h to prevent
-        // circular dependency
         template<typename T = Container&>
-        void set(const Container& container);
+        void set(const Container& container)
+        {
+            freeContainerMemory();
+            allocateContainerMemory(container);
+        }
 
         template<typename T>
         constexpr T get() const
@@ -111,5 +119,10 @@ namespace Gpds
 
     private:
         myVariant _value;
+
+        // Implementation is located in container.h to prevent
+        // circular dependency
+        void allocateContainerMemory(const Container& container);
+        void freeContainerMemory();
     };
 }

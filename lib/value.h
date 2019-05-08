@@ -24,22 +24,6 @@ namespace Gpds
         return contains< T, bool, int, double, std::string, Container* >;
     }
 
-    template<class VariantType, class T, std::size_t index = 0>
-    static constexpr std::size_t variantIndex()
-    {
-        if constexpr (index == std::variant_size_v<VariantType>) {
-            return index;
-        }
-
-        else if constexpr (std::is_same_v<std::variant_alternative_t<index, VariantType>, T>) {
-            return index;
-        }
-
-        else {
-            return variantIndex<VariantType, T, index + 1>();
-        }
-    }
-
     class Value
     {
     public:

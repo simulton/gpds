@@ -100,11 +100,6 @@ namespace Gpds
                 const auto& key = doc.allocate_string( keyValuePair.first.c_str() );
                 const Value& value = keyValuePair.second;
 
-                // Add all arguments
-                for ( const auto& attribute : value.attributes ) {
-                    root.append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
-                }
-
                 // Create a new node in the DOM
                 rapidxml::xml_node<>* child = nullptr;
                 {
@@ -130,6 +125,11 @@ namespace Gpds
                         // This shouldn't happen
                         assert( false );
                     }
+                }
+
+                // Add all arguments
+                for ( const auto& attribute : value.attributes ) {
+                    child->append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
                 }
 
                 assert(child);

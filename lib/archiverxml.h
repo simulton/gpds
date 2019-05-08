@@ -4,7 +4,7 @@
 #include "archiver.h"
 #include "3rdparty/rapidxml-1.13/rapidxml_ext.hpp"
 #include "3rdparty/rapidxml-1.13/rapidxml_print.hpp"
-
+#include <iostream>
 namespace Gpds
 {
 
@@ -45,7 +45,6 @@ namespace Gpds
 
             // Add the root node
             rapidxml::xml_node<>* root = doc.allocate_node(rapidxml::node_element, rootName.data());
-            root->append_attribute(doc.allocate_attribute("version", "1.0"));
             doc.append_node(root);
 
             // Add the Serialize data
@@ -84,58 +83,56 @@ namespace Gpds
     private:
         void writeEntry(rapidxml::xml_document<>& doc, rapidxml::xml_node<>& root, const Container& container) const
         {
-            // Add all arguments
-            for (const auto& argument : container.arguments) {
-                root.append_attribute( doc.allocate_attribute( argument.first.data(), argument.second.data() ) );
+            // Annotate list if supposed to
+            if (settings.annotateListCount and container.isList()) {
+                std::string attributeString = "count";
+                if (settings.prefixAnnotations) {
+                    attributeString = NAMESPACE_PREFIX + attributeString;
+                }
+
+                root.append_attribute(doc.allocate_attribute(doc.allocate_string(attributeString.c_str()), doc.allocate_string(std::to_string(container.values.size()).data())));
             }
 
-            // Iterate through all entries in this container
-            for (const auto& entry : container.entries) {
+            // Iterate through all values in this container
+            for ( const auto& keyValuePair: container.values ) {
 
                 // Some aliases to make the code easier to read
-                const auto& name = doc.allocate_string( entry.first.c_str() );
-                const Container::ValueType& type = entry.second.first;
-                const Container::Value& value = entry.second.second;
+                const auto& key = doc.allocate_string( keyValuePair.first.c_str() );
+                const Value& value = keyValuePair.second;
+
+                // Add all arguments
+                for ( const auto& attribute : value.attributes ) {
+                    root.append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
+                }
 
                 // Create a new node in the DOM
                 rapidxml::xml_node<>* child = nullptr;
-                switch (type) {
-                    case Container::BoolType:
-                        child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::get<bool>( value ) ? "true" : "false"));
-                        break;
-
-                    case Container::IntType:
-                        child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::to_string( std::get<int>( value ) ).data() ));
-                        break;
-
-                    case Container::DoubleType:
-                        child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::to_string( std::get<double>( value ) ).data() ));
-                        break;
-
-                    case Container::StringType:
-                        child = doc.allocate_node(rapidxml::node_element, name, doc.allocate_string( std::get<std::string>( value ).data() ) );
-                        break;
-
-                    case Container::ContainerType:
-                    {
-                        const Container& container = std::get<Container>( value );
-                        child = doc.allocate_node(rapidxml::node_element, name );
-
-                        // Annotate list if supposed to
-                        if (settings.annotateListCount and container.isList()) {
-                            std::string attributeString = "count";
-                            if (settings.prefixAnnotations) {
-                                attributeString = NAMESPACE_PREFIX + attributeString;
-                            }
-                            child->append_attribute( doc.allocate_attribute( doc.allocate_string( attributeString.c_str() ), doc.allocate_string( std::to_string( container.entries.size() ).data() ) ) );
-                        }
-
+                {
+                    if ( value.isType<bool>() ) {
+                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<bool>() ? "true" : "false"));
+                    }
+                    else if ( value.isType<int>() ) {
+                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( std::to_string( value.get<int>() ).data() ));
+                    }
+                    else if ( value.isType<double>() ) {
+                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( std::to_string( value.get<double>() ).data() ));
+                    }
+                    else if ( value.isType<std::string>() ) {
+                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<std::string>().data() ) );
+                    }
+                    else if ( value.isType<Container*>() ) {
                         // Recursion
-                        writeEntry(doc, *child, container);
-
-                        break;
+                        const Container* childContainer = value.get<Container*>();
+                        child = doc.allocate_node( rapidxml::node_element, key );
+                        writeEntry(doc, *child, *childContainer);
+                    }
+                    else {
+                        // This shouldn't happen
+                        assert( false );
                     }
                 }
+
+                assert(child);
 
                 // Annotate type if supposed to
                 if (settings.annotateTypes and !container.isList()) {
@@ -143,66 +140,68 @@ namespace Gpds
                     if (settings.prefixAnnotations) {
                         attributeString = NAMESPACE_PREFIX + attributeString;
                     }
-                    child->append_attribute( doc.allocate_attribute( doc.allocate_string( attributeString.c_str() ), Container::typeString(type) ) );
+                    child->append_attribute( doc.allocate_attribute( doc.allocate_string( attributeString.c_str() ), value.typeString() ) );
                 }
 
-                assert(child);
                 root.append_node(child);
             }
         }
 
         void readEntry(rapidxml::xml_node<>& rootNode, Container& container)
         {
-            // Arguments
-            for(const rapidxml::xml_attribute<>* attribute = rootNode.first_attribute(); attribute; attribute = attribute->next_attribute()) {
-                container.addArgument( attribute->name(), attribute->value() );
-            }
-
             // Handle all nodes children recursively
             for (rapidxml::xml_node<>* node = rootNode.first_node(); node; node = node->next_sibling()) {
                 // Extract the name & value
-                std::string name( node->name() );
-                std::string value( node->value() );
+                std::string keyString( node->name() );
+                std::string valueString( node->value() );
+
+                // Create the Value
+                Value value;
+
+                // Arguments
+                for ( const rapidxml::xml_attribute<>* attribute = rootNode.first_attribute(); attribute; attribute = attribute->next_attribute() ) {
+                    value.addAttribute( attribute->name(), attribute->value() );
+                }
 
                 // It's a text element
-                if (!value.empty()) {
+                if ( not valueString.empty() ) {
                     // Is it a boolean 'true' value?
-                    if ( value == "true" ) {
-                        container.addEntry( name , Container::BoolType, true );
-                        continue;
+                    if ( valueString == "true" ) {
+                        value.set( true );
+                        goto stringParsed;
                     }
 
                     // Is it a boolean 'false' value?
-                    if ( value == "false" ) {
-                        container.addEntry( name , Container::BoolType, false );
-                        continue;
+                    if ( valueString == "false" ) {
+                        value.set( false );
+                        goto stringParsed;
                     }
 
                     // Is it an integer?
                     {
                         // Ensure that this is an integer
                         bool isInteger = true;
-                        for (std::string::const_iterator it = value.cbegin(); it != value.cend(); ++it) {
+                        for (std::string::const_iterator it = valueString.cbegin(); it != valueString.cend(); ++it) {
                             // Make sure that this is a digit
-                            if ( !std::isdigit( static_cast<int>( *it ) ) ) {
+                            if ( not std::isdigit( static_cast<int>( *it ) ) ) {
                                 isInteger = false;
                             }
 
                             // Check for minus sign
-                            if (it == value.cbegin() and !isInteger and *it == '-') {
+                            if ( it == valueString.cbegin() and !isInteger and *it == '-' ) {
                                 isInteger = true;
                             }
 
-                            if (!isInteger) {
+                            if ( not isInteger ) {
                                 break;
                             }
                         }
 
-                        if (isInteger) {
+                        if ( isInteger ) {
                             try {
-                                int i = std::stoi( value );
-                                container.addEntry( name, Container::IntType, i);
-                                continue;
+                                int i = std::stoi( valueString );
+                                value.set( i );
+                                goto stringParsed;
                             } catch (const std::invalid_argument& e) {
                                 (void)e;
                                 // Nothing to do here. Fall through.
@@ -214,9 +213,9 @@ namespace Gpds
                     {
 
                         try {
-                            double d = std::stod( value );
-                            container.addEntry( name, Container::DoubleType, d);
-                            continue;
+                            double d = std::stod( valueString );
+                            value.set( d );
+                            goto stringParsed;
                         } catch (const std::invalid_argument& e) {
                             (void)e;
                             // Nothing to do here. Fall through.
@@ -225,19 +224,25 @@ namespace Gpds
 
                     // Lets assume it's just a string :>
                     {
-                        container.addEntry( name , Container::StringType, value );
-                        continue;
+                        value.set( valueString );
+                        goto stringParsed;
                     }
+
+                    stringParsed:
+                    // Nothing to do here
+                    int i = 0;
+                    (void)i;
                 }
 
                 // It's a another container
                 else {
                     Container childContainer;
-                    readEntry(*node, childContainer);
-                    container.addEntry( name, Container::ContainerType, childContainer );
 
-                    continue;
+                    readEntry(*node, childContainer);
+                    value.set( std::move( childContainer ) );
                 }
+
+                container.addValue( keyString, value );
             }
         }
     };

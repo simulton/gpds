@@ -55,7 +55,7 @@ namespace Gpds
 
         Container& addAttribute(std::string&& key, std::string&& value)
         {
-            attributes.addAttribute( std::forward< std::string >( key ), std::forward< std::string >( value ) );
+            attributes.add( std::forward< std::string >( key ), std::forward< std::string >( value ) );
 
             return *this;
         }
@@ -67,7 +67,7 @@ namespace Gpds
 
         std::optional< std::string > getAttribute(std::string&& key) const
         {
-            return attributes.getAttribute( std::forward< std::string >( key ) );
+            return attributes.get( std::forward< std::string >( key ) );
         }
 
         Container& setComment(const std::string& comment)

@@ -25,7 +25,7 @@ namespace Gpds
 
         ArchiverXml()
         {
-            settings.annotateListCount = true;
+            settings.annotateListCount = false;
             settings.annotateTypes = false;
             settings.prefixAnnotations = true;
         }

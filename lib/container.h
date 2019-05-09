@@ -43,7 +43,7 @@ namespace Gpds
             const auto& range = values.equal_range( key );
             std::vector<T> values( std::distance( range.first, range.second ) );
             for (auto it = range.first; it != range.second; it++) {
-                values[ std::distance( range.first, it ) ] =  it->second.get<T>();
+                values[ std::distance( range.first, it ) ] = it->second.get<T>();
             }
 
             return values;

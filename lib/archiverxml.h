@@ -4,7 +4,7 @@
 #include "archiver.h"
 #include "3rdparty/rapidxml-1.13/rapidxml_ext.hpp"
 #include "3rdparty/rapidxml-1.13/rapidxml_print.hpp"
-#include <iostream>
+
 namespace Gpds
 {
 
@@ -93,6 +93,11 @@ namespace Gpds
                 root.append_attribute(doc.allocate_attribute(doc.allocate_string(attributeString.c_str()), doc.allocate_string(std::to_string(container.values.size()).data())));
             }
 
+            // Add all container arguments
+            for ( const auto& attribute : container.attributes.map ) {
+                root.append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
+            }
+
             // Iterate through all values in this container
             for ( const auto& keyValuePair: container.values ) {
 
@@ -127,8 +132,8 @@ namespace Gpds
                     }
                 }
 
-                // Add all arguments
-                for ( const auto& attribute : value.attributes ) {
+                // Add all value arguments
+                for ( const auto& attribute : value.attributes.map ) {
                     child->append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
                 }
 
@@ -164,9 +169,9 @@ namespace Gpds
                 // Create the Value
                 Value value;
 
-                // Arguments
+                // Container arguments
                 for ( const rapidxml::xml_attribute<>* attribute = rootNode.first_attribute(); attribute; attribute = attribute->next_attribute() ) {
-                    value.addAttribute( attribute->name(), attribute->value() );
+                    container.addAttribute( attribute->name(), attribute->value() );
                 }
 
                 // It's a text element
@@ -235,9 +240,14 @@ namespace Gpds
                     }
 
                     stringParsed:
-                    // Nothing to do here
-                    int i = 0;
-                    (void)i;
+
+                    // Arguments
+                    {
+                        // Value arguments
+                        for ( const rapidxml::xml_attribute<>* attribute = node->first_attribute(); attribute; attribute = attribute->next_attribute() ) {
+                            value.addAttribute( attribute->name(), attribute->value() );
+                        }
+                    };
                 }
 
                 // It's a another container

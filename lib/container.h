@@ -3,12 +3,15 @@
 #include <cassert>
 #include <map>
 #include "value.h"
+#include "attributes.h"
 
 namespace Gpds
 {
     class Container
     {
     public:
+        Attributes attributes;
+
         Container() = default;
         Container(const Container& other) = default;
         Container( Container&& other ) = default;
@@ -47,6 +50,18 @@ namespace Gpds
             }
 
             return values;
+        }
+
+        Container& addAttribute(std::string&& key, std::string&& value)
+        {
+            attributes.addAttribute( std::forward< std::string >( key ), std::forward< std::string >( value ) );
+
+            return *this;
+        }
+
+        std::optional< std::string > getAttribute(std::string&& key) const
+        {
+            return attributes.getAttribute( std::forward< std::string >( key ) );
         }
 
         bool isList() const

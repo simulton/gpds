@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <optional>
+#include "attributes.h"
 
 namespace Gpds
 {
@@ -27,7 +29,7 @@ namespace Gpds
     class Value
     {
     public:
-        std::map< std::string, std::string > attributes;
+        Attributes attributes;
         std::string comment;
 
         Value( ) = default;
@@ -124,22 +126,16 @@ namespace Gpds
             return std::get<T>( _value );
         }
 
-        Value& addAttribute(const std::string& key, const std::string& value)
+        Value& addAttribute(std::string&& key, std::string&& value)
         {
-            attributes.emplace( key, value );
+            attributes.addAttribute( std::forward< std::string >( key ), std::forward< std::string >( value ) );
 
             return *this;
         }
 
-        std::string getAttribute(const std::string& key) const
+        std::optional< std::string > getAttribute(std::string&& key) const
         {
-            for ( auto it = attributes.cbegin(); it != attributes.cend(); ++it ) {
-                if ( it->first == key ) {
-                    return it->second;
-                }
-            }
-
-            return std::string();
+            return attributes.getAttribute( std::forward< std::string >( key ) );
         }
 
         Value& setComment(const std::string& comment)

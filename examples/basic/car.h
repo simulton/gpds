@@ -4,8 +4,7 @@
 #include "../../lib/serialize.h"
 #include "color.h"
 
-class Car : public Gpds::Serialize
-{
+class Car : public Gpds::Serialize {
 public:
     std::string manufacturer;
     std::string model;
@@ -19,16 +18,16 @@ public:
         c.addValue("manufacturer", manufacturer);
         c.addValue("model", model);
         c.addValue("year_of_construction", year_of_construction);
-        c.addValue("color", color.toContainer()).addAttribute("id", "42");
+        c.addValue("color", color.toContainer());
 
         return c;
     }
 
-    virtual void fromContainer(const Gpds::Container& c) override
+    virtual void fromContainer(const Gpds::Container &c) override
     {
         manufacturer = c.getValue<std::string>("manufacturer");
         model = c.getValue<std::string>("model");
         year_of_construction = c.getValue<int>("year_of_construction");
-        color.fromContainer( *c.getValue<Gpds::Container*>("color") );
+        color.fromContainer( *c.getValue<Gpds::Container*>( "color" ) );
     }
 };

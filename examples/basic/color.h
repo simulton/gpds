@@ -15,16 +15,22 @@ public:
     {
         Gpds::Container c;
 
+        c.addAttribute("format", "1");
+
         c.addValue("name", name);
-        c.addValue("red", red);
-        c.addValue("green", green);
-        c.addValue("blue", blue);
+        c.addValue("red", red).addAttribute("depth", "32");
+        c.addValue("green", green).addAttribute("depth", "32");
+        c.addValue("blue", blue).addAttribute("depth", "32");
 
         return c;
     }
 
     virtual void fromContainer(const Gpds::Container& c) override
     {
+        // Retrieve format
+        const std::string& formatString = c.getAttribute("format").value_or("n/a");
+        assert( formatString == "1" );
+
         name = c.getValue<std::string>("name");
         red = c.getValue<int>("red");
         green = c.getValue<int>("green");

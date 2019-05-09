@@ -93,6 +93,15 @@ namespace Gpds
                 root.append_attribute(doc.allocate_attribute(doc.allocate_string(attributeString.c_str()), doc.allocate_string(std::to_string(container.values.size()).data())));
             }
 
+            // Add container comment (if any)
+            if ( not container.comment.empty() ) {
+                auto parentNode = root.parent();
+                if ( parentNode ) {
+                    rapidxml::xml_node<> *commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, container.comment.c_str() );
+                    parentNode->prepend_node( commentNode );
+                }
+            }
+
             // Add all container arguments
             for ( const auto& attribute : container.attributes.map ) {
                 root.append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
@@ -148,7 +157,7 @@ namespace Gpds
                     child->append_attribute( doc.allocate_attribute( doc.allocate_string( attributeString.c_str() ), value.typeString() ) );
                 }
 
-                // Add comment (if any)
+                // Add value comment (if any)
                 if ( not value.comment.empty() ) {
                     rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, value.comment.c_str() );
                     root.append_node( commentNode );

@@ -13,8 +13,9 @@ public:
     {
         Gpds::Container c;
 
+        c.setComment("All of our cars:");
         for ( const auto& car : cars ) {
-            c.addValue( "car", car.toContainer() );
+            c.addValue( "car", car.toContainer() ).setComment("One of our cars:");
         }
 
         return c;

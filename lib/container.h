@@ -11,6 +11,7 @@ namespace Gpds
     {
     public:
         Attributes attributes;
+        std::string comment;
 
         Container() = default;
         Container(const Container& other) = default;
@@ -67,6 +68,20 @@ namespace Gpds
         std::optional< std::string > getAttribute(std::string&& key) const
         {
             return attributes.getAttribute( std::forward< std::string >( key ) );
+        }
+
+        Container& setComment(const std::string& comment)
+        {
+            this->comment = comment;
+
+            return *this;
+        }
+
+        Container& setComment(std::string&& comment)
+        {
+            this->comment = std::move( comment );
+
+            return *this;
         }
 
         bool isList() const

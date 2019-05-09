@@ -15,6 +15,7 @@ public:
     {
         Gpds::Container c;
 
+        c.setComment("a color object");
         c.addAttribute("format", "1");
         c.addAttribute("name", name);
 

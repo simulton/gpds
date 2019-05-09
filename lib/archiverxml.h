@@ -18,6 +18,7 @@ namespace Gpds
         const std::string NAMESPACE_PREFIX = "gpds:";
 
         struct Settings {
+            bool printComments;
             bool annotateListCount;
             bool annotateTypes;
             bool prefixAnnotations;
@@ -25,6 +26,7 @@ namespace Gpds
 
         ArchiverXml()
         {
+            settings.printComments = true;
             settings.annotateListCount = false;
             settings.annotateTypes = false;
             settings.prefixAnnotations = true;
@@ -94,7 +96,7 @@ namespace Gpds
             }
 
             // Add container comment (if any)
-            if ( not container.comment.empty() ) {
+            if ( settings.printComments and not container.comment.empty() ) {
                 auto parentNode = root.parent();
                 if ( parentNode ) {
                     rapidxml::xml_node<> *commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, container.comment.c_str() );
@@ -158,7 +160,7 @@ namespace Gpds
                 }
 
                 // Add value comment (if any)
-                if ( not value.comment.empty() ) {
+                if ( settings.printComments and not value.comment.empty() ) {
                     rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, value.comment.c_str() );
                     root.append_node( commentNode );
                 }

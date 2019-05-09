@@ -22,9 +22,9 @@ namespace Gpds
         }
 
         template<class T>
-        T getValue(const std::string& key) const
+        T getValue( const std::string& key, T&& defaultValue = T() ) const
         {
-            auto it = values.find(key);
+            auto it = values.find( key );
 
             if ( it != values.end() ) {
                 const Value& value = it->second;
@@ -34,7 +34,7 @@ namespace Gpds
                 return it->second.get<T>();
             }
 
-            return T();
+            return std::move( defaultValue );
         }
 
         template<class T>

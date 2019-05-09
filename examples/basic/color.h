@@ -16,8 +16,8 @@ public:
         Gpds::Container c;
 
         c.addAttribute("format", "1");
+        c.addAttribute("name", name);
 
-        c.addValue("name", name);
         c.addValue("red", red).addAttribute("depth", "32");
         c.addValue("green", green).addAttribute("depth", "32");
         c.addValue("blue", blue).addAttribute("depth", "32");
@@ -31,7 +31,7 @@ public:
         const std::string& formatString = c.getAttribute("format").value_or("n/a");
         assert( formatString == "1" );
 
-        name = c.getValue<std::string>("name");
+        name = c.getAttribute("name").value_or("n/a");
         red = c.getValue<int>("red");
         green = c.getValue<int>("green");
         blue = c.getValue<int>("blue");

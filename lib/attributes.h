@@ -14,7 +14,7 @@ namespace Gpds
 
         void addAttribute(std::string&& key, std::string&& value)
         {
-            map.emplace( std::move( key ), std::move( value ) );
+            map.emplace( std::forward< std::string >( key ), std::forward< std::string >( value ) );
         }
 
         std::optional< std::string > getAttribute(const std::string& key) const

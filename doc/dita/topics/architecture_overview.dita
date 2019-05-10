@@ -32,8 +32,17 @@
                 </dlentry>
                 <dlentry>
                     <dt>Container</dt>
-                    <dd>A class to represent the data to be (de)serialized. It allows storing various
-                        datatypes in a key/value fashion. Containers can be nested.</dd>
+                    <dd>A class to represent an object to be (de)serialized.</dd>
+                </dlentry>
+                <dlentry>
+                    <dt>Value</dt>
+                    <dd>A class to represent a single value to be (de)serialized. It allows storing various
+                        datatypes in a key/value fashion. Values can be nested.</dd>
+                </dlentry>
+                <dlentry>
+                    <dt>Attribute</dt>
+                    <dd>A wrapper class to represent attributes. Attributes are key/value pairs of
+                        strings which are used to annotate a Value.</dd>
                 </dlentry>
                 <dlentry>
                     <dt>Archiver</dt>

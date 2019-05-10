@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="terminology">
+    <title>Terminology</title>
+    <shortdesc></shortdesc>
+    
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>terminology
+                    <index-see-also>reference</index-see-also>
+                </indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    
+    <conbody>
+        <section>
+            <title>Value vs. Container</title>
+            <p>The <apiname>Value</apiname> and <apiname>Container</apiname> classes implement the
+                core concept of <ph keyref="projectname"/>'s serialization design. Therefore, it's
+                important to understand their difference and how to use them properly.</p>
+            <p>The following figure illustrates how these two classes are used to model a C++ object
+                for the (de)serialization process:</p>
+            <fig>
+                <image href="../../resources/terminology_value_vs_container.png"/>
+            </fig>
+        </section>
+    </conbody>
+</concept>

@@ -10,12 +10,12 @@
         <example>
             <title>Add an argument</title>
             <codeblock outputclass="language-cpp"><![CDATA[Gpds::Container c;
-c.addArgument("id", "72042135");]]></codeblock>
+c.addAttribute("id", "72042135");]]></codeblock>
         </example>
         <example>
             <title>Get an argument</title>
             <codeblock outputclass="language-cpp"><![CDATA[Gpds::Container c;
-std::cout << "id=" << c.getArgument("id") << std::endl;]]></codeblock>
+std::cout << "id=" << c.getAttribute("id") << std::endl;]]></codeblock>
         </example>
     </conbody>
 </concept>

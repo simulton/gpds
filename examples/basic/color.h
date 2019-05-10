@@ -16,7 +16,7 @@ public:
         Gpds::Container c;
 
         c.setComment("a color object");
-        c.addAttribute("format", "1");
+        c.addAttribute("format", "rgb");
         c.addAttribute("name", name);
 
         c.addValue("red", red).addAttribute("depth", "32");
@@ -30,7 +30,7 @@ public:
     {
         // Retrieve format
         const std::string& formatString = c.getAttribute("format").value_or("n/a");
-        assert( formatString == "1" );
+        assert( formatString == "rgb" );
 
         name = c.getAttribute("name").value_or("n/a");
         red = c.getValue<int>("red");

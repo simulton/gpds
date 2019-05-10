@@ -21,14 +21,17 @@
             that represents hierarchical/polymorphic data.</p>
         <example>
             <title>Created nested values</title>
-            <p>Nesting is achieved by passing a <apiname>Container</apiname> to <apiname>Container::addEntry()</apiname>.</p>
-            <codeblock outputclass="language-cpp"><![CDATA[Example: ToDo]]></codeblock>
+            <p>Nesting is achieved by passing a <apiname>Container</apiname> to <apiname>Container::addValue()</apiname>.</p>
+            <codeblock outputclass="language-cpp"><![CDATA[Color color;
+Gpds::Container c;
+c.addValue( "color", color.toContainer() );]]></codeblock>
         </example>
         <example>
             <title>Retrieve nested values</title>
             <p>Nested containers can be retrieved by calling
-                    <codeph>Container::getEntry&lt;Gpds::Container>()</codeph>.</p>
-            <codeblock outputclass="language-cpp"><![CDATA[Example: ToDo]]></codeblock>
+                    <codeph>Container::getValue&lt;Gpds::Container*>()</codeph>.</p>
+            <codeblock outputclass="language-cpp"><![CDATA[Color color;
+color.fromContainer( *carContainer.getValue<Gpds::Container*>( "color" );]]></codeblock>
         </example>
     </conbody>
 </concept>

@@ -9,6 +9,7 @@
             <shortdesc>A guide on how to use GPDS</shortdesc>
         </topicmeta>
         
+        <topicref href="../topics/terminology.dita"/>
         <topicref href="../topics/usage_overview.dita"/>
         <topicref href="../topics/usage_nesting.dita"/>
     </topicref>

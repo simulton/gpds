@@ -10,7 +10,7 @@
         </topicmeta>
         
         <topicref href="../topics/reference_class_container_overview.dita">
-            <topicref href="../topics/reference_class_container_entry.dita"/>
+            <topicref href="../topics/reference_class_container_value.dita"/>
             <topicref href="../topics/reference_class_container_attribute.dita"/>
         </topicref>
     </topicref>

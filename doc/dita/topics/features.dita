@@ -12,9 +12,10 @@
     </prolog>
     <body>
         <ul id="ul_gks_x12_4hb">
-            <li>Modern C++</li>
-            <li>Header only</li>
+            <li>Leverages modern C++</li>
+            <li>Header-only library</li>
             <li>XML backend</li>
+            <li>Easy to use</li>
         </ul>
     </body>
 </topic>

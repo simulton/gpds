@@ -8,7 +8,9 @@
         <author>Joel Bodenmann</author>
         <metadata>
             <keywords>
-                <indexterm>classes</indexterm>
+                <indexterm>classes
+                    <index-see-also>reference</index-see-also>
+                </indexterm>
             </keywords>
         </metadata>
     </prolog>

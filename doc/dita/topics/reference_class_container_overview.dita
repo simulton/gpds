@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-<concept id="reference_container_design">
+<concept id="reference_container_overview">
     <title>Overview</title>
     <shortdesc></shortdesc>
     <conbody>
+        <p>The container class represents an object which should be (de)serializable through <ph
+                keyref="projectname"/>.</p>
+        <p>The following figure shows the <apiname>Container</apiname> class design and related classes:</p>
         <fig>
             <title>Container class design</title>
             <image href="../../uml/exports/svg/Documentation!Container_5.svg"/>

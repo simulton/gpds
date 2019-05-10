@@ -6,17 +6,22 @@
         <author>Joel Bodenmann</author>
         <metadata>
             <keywords>
-                <indexterm>architecture</indexterm>
+                <indexterm>architecture
+                    <index-see-also>terminology</index-see-also>
+                </indexterm>
             </keywords>
         </metadata>
     </prolog>
     <conbody>
-        <p>The following figure provides an overview of the overal architecture of <ph keyref="projectname"/>.</p>
-        <fig id="fig_v32_5sj_4hb">
-            <title>Overall architecture</title>
-            <image href="../../uml/exports/svg/Model!Architecture_0.svg" id="image_w32_5sj_4hb"
-            />
-        </fig>
+        <section>
+            <title>Design</title>
+            <p>The following figure provides an overview of the overal architecture of <ph keyref="projectname"/>.</p>
+            <fig id="fig_v32_5sj_4hb">
+                <title>Overall architecture</title>
+                <image href="../../uml/exports/svg/Model!Architecture_0.svg" id="image_w32_5sj_4hb"
+                />
+            </fig>
+        </section>
         <section>
             <title>Namespace</title>
             <p>Everything is encapuslated in the namespace <ph keyref="namespace"/>.</p>
@@ -37,7 +42,7 @@
                 <dlentry>
                     <dt>Value</dt>
                     <dd>A class to represent a single value to be (de)serialized. It allows storing various
-                        datatypes in a key/value fashion. Values can be nested.</dd>
+                        datatypes in a key/value fashion. A <apiname>Value</apiname> may contain a <apiname>Container</apiname> to allow for <xref href="usage_nesting.dita">nesting</xref>.</dd>
                 </dlentry>
                 <dlentry>
                     <dt>Attribute</dt>

@@ -25,7 +25,7 @@ public:
 	int yearOfConstruction;
 	Color color;
 };]]></codeblock>
-        <p>Many generic serializers with XML backends would generate the following XML:</p>
+        <p>Many generic serializers with XML backends would generate the following XML (or similar):</p>
         <codeblock outputclass="language-xml"><![CDATA[<value>
   <value type="string">Jeep</value>
   <value type="string">Grand Cherokee</value>
@@ -47,40 +47,36 @@ public:
   <manufacturer>Jeep</manufacturer>
   <model>Grand Cherokee</model>
   <year_of_construction>2009</year_of_construction>
-  <color name="Black">
+  <color>
+    <name>Black</name>
     <red>0</red>
     <green>0</green>
     <blue>0</blue>
   </color>
 </car>]]></codeblock>
-        <p><ph keyref="projectname"/> also provides several configuration options to still annotate the element types if
-            desired so:</p>
-        <codeblock outputclass="language-xml"><![CDATA[<value>
-  <value type="string">Jeep</value>
-  <value type="string">Grand Cherokee</value>
-  <value type="int">2009</value>
-  <value>
-    <value type="string">Black</value>
-    <value type="int">0</value>
-    <value type="int">0</value>
-    <value type="int">0</value>
-  </value>
-</value>]]></codeblock>
-        <p>This works fine as long as the produced XML content is only used by the class/software that
-            serialized and deserialized to/from it. However, if the produced XML should also be used
-            outside of that class/software it's very tedious to work with as it's not clear what the
-            values refer to.</p>
-        <p>The goal of <ph keyref="projectname"/> is to produce XML that consists of a more generic structure that can
-            also be used by other applications:</p>
-        <codeblock outputclass="language-xml"><![CDATA[<car gds:type="container">
-  <manufacturer gds:type="string">Jeep</manufacturer>
-  <model gds:type="string">Grand Cherokee</model>
-  <year_of_construction gds:type="int">2009</year_of_construction>
-  <color name="Black" gds:type="container">
-    <red gds:type="int">0</red>
-    <green gds:type="int">0</green>
-    <blue gds:type="int">0</blue>
+        <p>Furthermore, <ph keyref="projectname"/> provides comments and attributes which allow to
+            take advantage of more powerful XML tools/techniques when processing the generated XML
+            outside of the application which (de)serializes it:</p>
+        <codeblock outputclass="language-xml"><![CDATA[<car>
+  <manufacturer>Jeep</manufacturer>
+  <model>Grand Cherokee</model>
+  <year_of_construction>2009</year_of_construction>
+  <color name="Black" format="rgb">
+    <red depth="32">0</red>
+    <green depth="32">0</green>
+    <blue depth="32">0</blue>
   </color>
 </car>]]></codeblock>
+        <p><ph keyref="projectname"/> also provides several configuration options to still annotate the element types if
+            desired so:</p>
+        <codeblock outputclass="language-xml"><![CDATA[<car>
+  <manufacturer gpds:type="string">Jeep</manufacturer>
+  <model gpds:type="string">Grand Cherokee</model>
+  <year_of_construction gpds:type="int">2009</year_of_construction>
+  <color gpds:type="nested">
+    <red gpds:type="int">0</red>
+    <green gpds:type="int">0</green>
+    <blue gpds:type="int">0</blue>
+  </color>]]></codeblock>
     </body>
 </topic>

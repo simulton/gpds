@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="reference_container_value">
+    <title>Value</title>
+    <conbody>
+        <p>A value is a key-value pair consisting of a string key and a value of one of the
+            following types: <ul id="ul_yp5_4sf_phb">
+                <li><codeph>bool</codeph></li>
+                <li><codeph>int</codeph></li>
+                <li><codeph>double</codeph></li>
+                <li><codeph>std::string</codeph></li>
+                <li><codeph>Container*</codeph> (for <xref href="usage_nesting.dita"
+                    >nesting</xref>)</li>
+            </ul></p>
+
+        <example>
+            <title>Add a value</title>
+            <p>Adding a value can be achieved by using the <apiname>Container::addValue()</apiname> function:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[Gpds::Container c;
+
+double scale = 4.2;
+c.addValue( "scale", scale );]]></codeblock>
+        </example>
+        
+        <example>
+            <title>Get a value</title>
+            <p>Getting a value from a deserialized <apiname>Container</apiname> can be achieved
+                through the <apiname>Container::getValue()</apiname> function. The value's <codeph>key</codeph> is
+                passed as a parameter:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[double scale = c.getValue<double>( "scale" );]]></codeblock>
+        </example>
+        
+        <example>
+            <title>Get a value with a default value</title>
+            <p>The <apiname>Container::getValue()</apiname> function also allows supplying an
+                optional default value which will be returned if no value exists for the specified
+                <codeph>key</codeph>:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[double scale = c.getValue<double>( "scale", 1.0 );]]></codeblock>
+        </example>
+        
+        <example>
+            <title>Get multiple values with the same <codeph>key</codeph></title>
+            <p>It's possible to store multiple values with the same <codeph>key</codeph> in a container. Multiple values can be retrieved from a deserialized container by using the <apiname>Container::getValues()</apiname> function:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[for (const Gpds::Container* carContainer : c.getValues<Gpds::Container*>( "car" ) ) {
+    Car car;
+    car.fromContainer( *carContainer );
+    cars.push_front( car );
+}]]></codeblock>
+        </example>
+    </conbody>
+</concept>

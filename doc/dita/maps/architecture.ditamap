@@ -6,10 +6,11 @@
     <topicref collection-type="sequence" chunk="to-content">
         <topicmeta>
             <navtitle>Architecture</navtitle>
-            <shortdesc>A closer look at GPDS' architecture.</shortdesc>
+            <shortdesc>A closer look at <ph keyref="projectname"/>' architecture.</shortdesc>
         </topicmeta>
         
         <topicref href="../topics/architecture_overview.dita"/>
+        <topicref href="../topics/terminology.dita"/>
         
     </topicref>
 </map>

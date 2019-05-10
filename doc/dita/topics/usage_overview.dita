@@ -12,11 +12,20 @@
               </indexterm>
           </keywords>
         </metadata>
-    </prolog> 
+    </prolog>
     
     <body>
         <p>This topic explains the usage of the <ph keyref="projectname"/> library. See <xref href="integration.dita"/>
             for instructions on how to integrate the library into a project.</p>
+        
+        <section>
+            <title>General usage</title>
+            <p>The following figure illustrates how <ph keyref="projectname"/> is used by an address book application:</p>
+            <fig>
+                <image href="../../uml/exports/svg/Model!Usage_1.svg"/>
+            </fig>
+        </section>
+        
         <section>
             <title>Make class serializable</title>
             <p>A class needs to inherit from the <apiname>Container</apiname> class in order to
@@ -32,59 +41,80 @@
                 <image href="../../uml/exports/svg/Misc!Example_02_3.svg"/>
             </fig>
             <p>Corresponding C++ code:</p>
-            <codeblock outputclass="language-cpp"><![CDATA[class Color : public Gpds::Serialize
-{
+            <codeblock outputclass="language-cpp"><![CDATA[class Car : public Gpds::Serialize {
 public:
-    std::string name;
-    int red, green, blue;
+    std::string manufacturer;
+    std::string model;
+    int year_of_construction;
+    Color color;
 
     virtual Gpds::Container toContainer() const override
     {
         Gpds::Container c;
-        c.addEntry("name", name);
-        c.addEntry("red", red);
-        c.addEntry("green", green);
-        c.addEntry("blue", blue);
+
+        c.addValue("manufacturer", manufacturer);
+        c.addValue("model", model);
+        c.addValue("year_of_construction", year_of_construction);
+        c.addValue("color", color.toContainer());
 
         return c;
     }
 
-    virtual void fromContainer(const Gpds::Container& c) override
+    virtual void fromContainer(const Gpds::Container &c) override
     {
-        name = c.getEntry<std::string>("name");
-        red = c.getEntry<int>("red");
-        green = c.getEntry<int>("green");
-        blue = c.getEntry<int>("blue");
+        manufacturer = c.getValue<std::string>("manufacturer");
+        model = c.getValue<std::string>("model");
+        year_of_construction = c.getValue<int>("year_of_construction");
+        color.fromContainer( *c.getValue<Gpds::Container*>( "color" ) );
     }
 };
 
-class MyObject : public Gpds::Serialize
+class Color : public Gpds::Serialize
 {
 public:
-    Color color;
-    std::string manufacturer;
-    std::string model;
-    int yearOfConstruction;
+    std::string name;
+    int red;
+    int green;
+    int blue;
 
     virtual Gpds::Container toContainer() const override
     {
         Gpds::Container c;
-        c.addEntry("color", color.toContainer());
-        c.addEntry("manufacturer", manufacturer);
-        c.addEntry("model", model);
-        c.addEntry("year_of_construction", yearOfConstruction);
+
+        c.addAttribute("format", "rgb");
+        c.addAttribute("name", name);
+
+        c.addValue("red", red).addAttribute("depth", "32");
+        c.addValue("green", green).addAttribute("depth", "32");
+        c.addValue("blue", blue).addAttribute("depth", "32");
 
         return c;
     }
 
     virtual void fromContainer(const Gpds::Container& c) override
     {
-        color.fromContainer( c.getEntry<Container>("color") );
-        manufacturer = c.getEntry<std::string>("manufacturer");
-        model = c.getEntry<std::string>("model");
-        yearOfConstruction = c.getEntry<int>("year_of_construction");
+        // Retrieve format
+        const std::string& formatString = c.getAttribute("format").value_or("n/a");
+        assert( formatString == "rgb" );
+
+        name = c.getAttribute("name").value_or("n/a");
+        red = c.getValue<int>("red");
+        green = c.getValue<int>("green");
+        blue = c.getValue<int>("blue");
     }
 };]]></codeblock>
+            <p>Once serialized with the XML archiver, the following output is produced:</p>
+            <codeblock outputclass="language-xml"><![CDATA[<car>
+    <color format="rgb" name="Black">
+        <blue depth="32">0</blue>
+        <green depth="32">0</green>
+        <red depth="32">0</red>
+    </color>
+    <manufacturer>Jeep</manufacturer>
+    <model>Grand Cherokee</model>
+    <year_of_construction>2009</year_of_construction>
+</car>]]></codeblock>
+            <note type="note">Values within a container are sorted alphabetically to improve look-up time.</note>
         </example>
         
         <example>

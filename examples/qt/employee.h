@@ -12,20 +12,20 @@ public:
     virtual Gpds::Container toContainer() const override
     {
         Gpds::Container c;
-        c.addEntry("first_name", firstName);
-        c.addEntry("last_name", lastName);
-        c.addEntry("address", address.toContainer());
-        c.addEntry("enabled", enabled);
+        c.addValue("first_name", firstName);
+        c.addValue("last_name", lastName);
+        c.addValue("address", address.toContainer());
+        c.addValue("enabled", enabled);
 
         return c;
     }
 
     virtual void fromContainer(const Gpds::Container& container) override
     {
-        firstName = container.getEntry<std::string>("first_name");
-        lastName = container.getEntry<std::string>("last_name");
-        address.fromContainer( container.getEntry<Gpds::Container>("address") );
-        enabled = container.getEntry<bool>("enabled");
+        firstName = container.getValue<std::string>("first_name");
+        lastName = container.getValue<std::string>("last_name");
+        address.fromContainer( *container.getValue<Gpds::Container*>("address") );
+        enabled = container.getValue<bool>("enabled");
     }
 
     std::string toString(const std::string& indentation) const

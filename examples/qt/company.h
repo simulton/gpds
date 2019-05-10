@@ -17,16 +17,16 @@ public:
         // Employees
         Gpds::Container employeesContainer;
         for (const Employee& employee : employees) {
-            employeesContainer.addEntry("employee", employee.toContainer());
+            employeesContainer.addValue("employee", employee.toContainer());
         }
 
         // Root
         Gpds::Container c;
-        c.addEntry("name", name);
-        c.addEntry("random_int", offices);
-        c.addEntry("random_double", randomDouble);
-        c.addEntry("address", address.toContainer());
-        c.addEntry("employees", employeesContainer);
+        c.addValue("name", name);
+        c.addValue("random_int", offices);
+        c.addValue("random_double", randomDouble);
+        c.addValue("address", address.toContainer());
+        c.addValue("employees", employeesContainer);
 
         return c;
     }
@@ -34,16 +34,16 @@ public:
     virtual void fromContainer(const Gpds::Container& container) override
     {
         // Employees
-        const auto& employeesContainer = container.getEntry<Gpds::Container>("employees");
-        for (const auto& employeeContainer : employeesContainer.getEntries<Gpds::Container>("employee")) {
-            employees.emplace_back().fromContainer( employeeContainer );
+        const auto& employeesContainer = container.getValue<Gpds::Container*>("employees");
+        for (const auto& employeeContainer : employeesContainer->getValues<Gpds::Container*>("employee")) {
+            employees.emplace_back().fromContainer( *employeeContainer );
         }
 
         // Root
-        name = container.getEntry<std::string>("name");
-        offices = container.getEntry<int>("random_int");
-        randomDouble = container.getEntry<double>("random_double");
-        address.fromContainer(container.getEntry<Gpds::Container>("address"));
+        name = container.getValue<std::string>("name");
+        offices = container.getValue<int>("random_int");
+        randomDouble = container.getValue<double>("random_double");
+        address.fromContainer(*container.getValue<Gpds::Container*>("address"));
 
         std::cout << "company: " << std::endl;
         std::cout << toString("  ") << std::endl;

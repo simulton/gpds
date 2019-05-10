@@ -12,20 +12,20 @@ public:
     {
         Gpds::Container c;
 
-        c.addEntry("address_1", address1);
-        c.addEntry("address_2", address2);
-        c.addEntry("city", city);
-        c.addEntry("country", country);
+        c.addValue("address_1", address1);
+        c.addValue("address_2", address2);
+        c.addValue("city", city);
+        c.addValue("country", country);
 
         return c;
     }
 
     virtual void fromContainer(const Gpds::Container& container) override
     {
-        address1 = container.getEntry<std::string>("address_1");
-        address2 = container.getEntry<std::string>("address_2");
-        city = container.getEntry<std::string>("city");
-        country = container.getEntry<std::string>("country");
+        address1 = container.getValue<std::string>("address_1");
+        address2 = container.getValue<std::string>("address_2");
+        city = container.getValue<std::string>("city");
+        country = container.getValue<std::string>("country");
     }
 
     std::string toString(const std::string_view& indentation) const

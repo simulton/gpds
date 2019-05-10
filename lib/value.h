@@ -80,6 +80,11 @@ namespace Gpds
             return std::holds_alternative<T>( _value );
         }
 
+        constexpr bool isEmpty() const
+        {
+            return _value.valueless_by_exception();
+        }
+
         constexpr const char* typeString() const
         {
             if ( std::holds_alternative<Container*>( _value ) ) {

@@ -30,7 +30,7 @@ namespace Gpds
         {
             auto it = values.find( key );
 
-            if ( it != values.end() ) {
+            if ( it != values.end() and not it->second.isEmpty() ) {
                 const Value& value = it->second;
 
                 assert( value.isType<T>() );

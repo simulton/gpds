@@ -13,9 +13,9 @@
     <body>
         <ul id="ul_gks_x12_4hb">
             <li>Leverages modern C++</li>
-            <li>Header-only library</li>
             <li>XML backend</li>
             <li>Easy to use</li>
+            <li>MIT licensed (open source)</li>
         </ul>
     </body>
 </topic>

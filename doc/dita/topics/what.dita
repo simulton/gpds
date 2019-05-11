@@ -3,6 +3,7 @@
 <topic id="Untitled">
     <title>What?</title>
     <body>
-        <p><ph keyref="projectname"/> is a <b>G</b>eneral <b>P</b>urpose <b>D</b>ata <b>S</b>erializer implemented as a header-only C++ library.</p>
+        <p><ph keyref="projectname"/> is a <b>G</b>eneral <b>P</b>urpose <b>D</b>ata
+            <b>S</b>erializer implemented as a very small C++ library.</p>
     </body>
 </topic>

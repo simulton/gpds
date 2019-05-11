@@ -165,8 +165,11 @@ namespace Gpds
     private:
         std::variant<bool, int, double, std::string, Container*> _value;
 
-        // Implementation is located in container.h to prevent
-        // circular dependency
+        // Implementation is located in value.cpp to prevent
+        // circular dependency.
+        // This keeps this library from being a header-only library. Maybe
+        // someone could tell me how to fix this in a way that we can achieve
+        // a header-only library again.
         void allocateContainerMemory(const Container& container);
         void allocateContainerMemory(Container&& container);
         void freeContainerMemory();

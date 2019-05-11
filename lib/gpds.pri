@@ -8,7 +8,8 @@ HEADERS += \
     $$PWD/container.h \
     $$PWD/serialize.h \
     $$PWD/archiver.h \
-    $$PWD/archiverxml.h
+    $$PWD/archiverxml.h \
+    $$PWD/utils.h
 
 SOURCES += \
     $$PWD/value.cpp

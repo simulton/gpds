@@ -1,9 +1,9 @@
 #pragma once
 
-#include <cassert>
 #include <map>
 #include "value.h"
 #include "attributes.h"
+#include "utils.h"
 
 namespace Gpds
 {
@@ -33,7 +33,7 @@ namespace Gpds
             if ( it != values.end() and not it->second.isEmpty() ) {
                 const Value& value = it->second;
 
-                assert( value.isType<T>() );
+                GPDS_ASSERT( value.isType<T>() );
 
                 return it->second.get<T>();
             }

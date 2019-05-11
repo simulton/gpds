@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include "utils.h"
 #include "archiver.h"
 #include "3rdparty/rapidxml-1.13/rapidxml_ext.hpp"
 #include "3rdparty/rapidxml-1.13/rapidxml_print.hpp"
@@ -137,9 +138,14 @@ namespace Gpds
                         child = doc.allocate_node( rapidxml::node_element, key );
                         writeEntry(doc, *child, *childContainer);
                     }
+                    #ifdef GPDS_SUPPORT_QT
+                        else if ( value.isType<QString>() ) {
+                            child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<QString>().toUtf8().constData() ) );
+                        }
+                    #endif
                     else {
                         // This shouldn't happen
-                        assert( false );
+                        GPDS_ASSERT( false );
                     }
                 }
 
@@ -148,7 +154,7 @@ namespace Gpds
                     child->append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
                 }
 
-                assert(child);
+                GPDS_ASSERT( child );
 
                 // Annotate type if supposed to
                 if (settings.annotateTypes and !container.isList()) {

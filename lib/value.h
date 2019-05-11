@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cassert>
 #include <type_traits>
 #include <variant>
 #include <string>
@@ -8,6 +7,7 @@
 #include <map>
 #include <optional>
 #include "attributes.h"
+#include "utils.h"
 
 namespace Gpds
 {
@@ -69,7 +69,7 @@ namespace Gpds
         virtual ~Value() noexcept
         {
             // Ensure that we won't throw
-            assert( not _value.valueless_by_exception() );
+            GPDS_ASSERT( not _value.valueless_by_exception() );
 
             freeContainerMemory();
         }

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="archiver_xml_settings">
+    <title>Settings</title>
+    <shortdesc></shortdesc>
+    <conbody>
+        <p>The XML archiver provides several settings to customize the XML output.</p>
+        <p>The effect of each setting will be shown based on the following XML output (unless noted otherwise):</p>
+        <codeblock outputclass="language-xml"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<!--All of our cars:-->
+<cars>
+    <!--One of our cars:-->
+    <car>
+        <color format="rgb" name="Gray">
+            <blue depth="32">50</blue>
+            <green depth="32">50</green>
+            <red depth="32">50</red>
+        </color>
+        <manufacturer>Audi</manufacturer>
+        <model>A6</model>
+        <year_of_construction>2015</year_of_construction>
+    </car>
+    <!--One of our cars:-->
+    <car>
+        <color format="rgb" name="Black">
+            <blue depth="32">0</blue>
+            <green depth="32">0</green>
+            <red depth="32">0</red>
+        </color>
+        <manufacturer>Jeep</manufacturer>
+        <model>Grand Cherokee</model>
+        <year_of_construction>2009</year_of_construction>
+    </car>
+</cars>]]></codeblock>
+        
+        <section>
+            <title>Print comments</title>
+            <p>The <apiname>printComments</apiname> settings allow to control whether the <apiname>Value</apiname> and <apiname>Container</apiname> comments should be shown in the XML output.</p>
+            <p>Setting this to <codeph>false</codeph> will tell the archiver to omit all comments:</p>
+            <codeblock outputclass="language-xml"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<cars>
+    <car>
+        <color format="rgb" name="Gray">
+            <blue depth="32">50</blue>
+            <green depth="32">50</green>
+            <red depth="32">50</red>
+        </color>
+        <manufacturer>Audi</manufacturer>
+        <model>A6</model>
+        <year_of_construction>2015</year_of_construction>
+    </car>
+    <car>
+        <color format="rgb" name="Black">
+            <blue depth="32">0</blue>
+            <green depth="32">0</green>
+            <red depth="32">0</red>
+        </color>
+        <manufacturer>Jeep</manufacturer>
+        <model>Grand Cherokee</model>
+        <year_of_construction>2009</year_of_construction>
+    </car>
+</cars>]]></codeblock>
+        </section>
+        
+        <section id="anotate_types">
+            <title>Annotate types</title>
+            <p>Whether types should be annotated by using XML attributes.</p>
+            <p>Setting this to <codeph>true</codeph> will tell the archiver to annotate all element types:</p>
+            <codeblock outputclass="language-xml"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<!--All of our cars:-->
+<cars type="nested">
+    <!--One of our cars:-->
+    <car type="nested">
+        <color format="rgb" name="Gray" type="nested">
+            <blue depth="32" type="int">50</blue>
+            <green depth="32" type="int">50</green>
+            <red depth="32" type="int">50</red>
+        </color>
+        <manufacturer type="string">Audi</manufacturer>
+        <model type="string">A6</model>
+        <year_of_construction type="int">2015</year_of_construction>
+    </car>
+    <!--One of our cars:-->
+    <car type="nested">
+        <color format="rgb" name="Black" type="nested">
+            <blue depth="32" type="int">0</blue>
+            <green depth="32" type="int">0</green>
+            <red depth="32" type="int">0</red>
+        </color>
+        <manufacturer type="string">Jeep</manufacturer>
+        <model type="string">Grand Cherokee</model>
+        <year_of_construction type="int">2009</year_of_construction>
+    </car>
+</cars>]]></codeblock>
+        </section>
+        
+        <section id="annotate_list_count">
+            <title>Annotate list count</title>
+            <p>Controls whether the element count should be annotated in a list (sequence of
+                elements).</p>
+            <p>This can be useful for more advanced parsers as this can be used to optimize memory
+                allocation.</p>
+            <p>If set to <codeph>false</codeph>:</p>
+            <codeblock outputclass="language-xml"><![CDATA[<cars>
+    <car/>
+    <car/>
+    <car/>
+</cars>]]></codeblock>
+            <p>If set to <codeph>true</codeph>:</p>
+            <codeblock outputclass="language-xml"><![CDATA[<cars count="3">
+    <car/>
+    <car/>
+    <car/>
+</cars>]]></codeblock>
+        </section>
+        
+        <section id="prefix_annotations">
+            <title>Prefix annotations</title>
+            <p>Controls whether the various annotations such as type and list annotations (XML attributes) should be prefixed with the <ph keyref="namespace"/> namespace.</p>
+            <p>If set to <codeph>false</codeph>:</p>
+            <codeblock outputclass="language-xml"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<!--All of our cars:-->
+<cars type="nested" gpds:count="2">
+    <!--One of our cars:-->
+    <car type="nested">
+        <color format="rgb" name="Gray" type="nested">
+            <blue depth="32" type="int">50</blue>
+            <green depth="32" type="int">50</green>
+            <red depth="32" type="int">50</red>
+        </color>
+        <manufacturer type="string">Audi</manufacturer>
+        <model type="string">A6</model>
+        <year_of_construction type="int">2015</year_of_construction>
+    </car>
+    <!--One of our cars:-->
+    <car type="nested">
+        <color format="rgb" name="Black" type="nested">
+            <blue depth="32" type="int">0</blue>
+            <green depth="32" type="int">0</green>
+            <red depth="32" type="int">0</red>
+        </color>
+        <manufacturer type="string">Jeep</manufacturer>
+        <model type="string">Grand Cherokee</model>
+        <year_of_construction type="int">2009</year_of_construction>
+    </car>
+</cars>]]></codeblock>
+            <p>If set to <codeph>true</codeph>:</p>
+            <codeblock outputclass="language-xml"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<!--All of our cars:-->
+<cars gpds:type="nested" gpds:count="2">
+    <!--One of our cars:-->
+    <car gpds:type="nested">
+        <color format="rgb" name="Gray" gpds:type="nested">
+            <blue depth="32" gpds:type="int">50</blue>
+            <green depth="32" gpds:type="int">50</green>
+            <red depth="32" gpds:type="int">50</red>
+        </color>
+        <manufacturer gpds:type="string">Audi</manufacturer>
+        <model gpds:type="string">A6</model>
+        <year_of_construction gpds:type="int">2015</year_of_construction>
+    </car>
+    <!--One of our cars:-->
+    <car gpds:type="nested">
+    <color format="rgb" name="Black" gpds:type="nested">
+        <blue depth="32" gpds:type="int">0</blue>
+        <green depth="32" gpds:type="int">0</green>
+        <red depth="32" gpds:type="int">0</red>
+    </color>
+    <manufacturer gpds:type="string">Jeep</manufacturer>
+    <model gpds:type="string">Grand Cherokee</model>
+    <year_of_construction gpds:type="int">2009</year_of_construction>
+    </car>
+</cars>]]></codeblock>
+            
+        </section>
+    </conbody>
+</concept>

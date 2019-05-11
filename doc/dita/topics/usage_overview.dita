@@ -144,7 +144,7 @@ ar.load(stream, car, "car");]]></codeblock>
     </body>
     
     <related-links>
-        <link href="integration.dita"/>
+        <link href="integration_general.dita"/>
         <link href="architecture_overview.dita"/>
     </related-links>
     

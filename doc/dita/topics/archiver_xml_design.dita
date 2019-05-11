@@ -4,7 +4,7 @@
     <title>Design</title>
     <conbody>
         <fig>
-            <image href="../../uml/exports/svg/Misc!Example_03_4.svg"/>
+            <image href="../../uml/exports/svg/Documentation!ArchiverXml_4.svg"/>
         </fig>
         <p>The XML archiver is powered by <xref href="http://rapidxml.sourceforge.net/"
                 format="html" scope="external">RapidXML</xref>.</p>

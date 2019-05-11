@@ -11,5 +11,6 @@
         </topicmeta>
         
         <topicref href="../topics/archiver_xml_design.dita"/>
+        <topicref href="../topics/archiver_xml_settings.dita"/>
     </topicref>
 </map>

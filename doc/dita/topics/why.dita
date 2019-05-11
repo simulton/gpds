@@ -67,7 +67,7 @@ public:
     <blue depth="32">0</blue>
   </color>
 </car>]]></codeblock>
-        <p><ph keyref="projectname"/> also provides several configuration options to still annotate the element types if
+        <p><ph keyref="projectname"/> also provides several <xref href="archiver_xml_settings.dita">configuration options</xref> to still annotate the element types if
             desired so:</p>
         <codeblock outputclass="language-xml"><![CDATA[<car>
   <manufacturer gpds:type="string">Jeep</manufacturer>

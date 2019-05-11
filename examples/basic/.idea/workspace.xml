@@ -12,10 +12,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb5707d-d169-4ff8-a6fb-8d53ac72966c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/maps/webhelp.ditamap" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/maps/webhelp.ditamap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/integration.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/integration.dita" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../doc/dita/maps/archiver_xml.ditamap" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/maps/archiver_xml.ditamap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/archiver_xml_design.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/archiver_xml_design.dita" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/usage_overview.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/usage_overview.dita" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../doc/uml/exports/svg/Misc!Example_03_4.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../doc/uml/exports/svg/Model!Architecture_0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/uml/exports/svg/Model!Architecture_0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../doc/uml/model.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/uml/model.mdj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="76" selection-start-line="5" selection-start-column="76" selection-end-line="5" selection-end-column="76" />
+            <state relative-caret-position="187">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -256,12 +259,12 @@
       <workItem from="1557334745580" duration="32002000" />
       <workItem from="1557515181848" duration="2711000" />
       <workItem from="1557522645723" duration="110000" />
-      <workItem from="1557577746243" duration="737000" />
+      <workItem from="1557577746243" duration="1368000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86145000" />
+    <option name="totallyTimeSpent" value="86776000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -274,14 +277,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="3086" height="1702" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49302325" visible="true" weight="0.11731659" />
-      <window_info id="Structure" order="1" sideWeight="0.5069767" side_tool="true" visible="true" weight="0.11731659" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4936306" visible="true" weight="0.11731659" />
+      <window_info id="Structure" order="1" sideWeight="0.5063694" side_tool="true" visible="true" weight="0.11731659" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6026667" visible="true" weight="0.4522293" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6026667" weight="0.4522293" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49706668" weight="0.29144096" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -477,8 +479,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="76" selection-start-line="5" selection-start-column="76" selection-end-line="5" selection-end-column="76" />
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>

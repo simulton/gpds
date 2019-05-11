@@ -15,7 +15,7 @@
     </prolog>
     
     <body>
-        <p>This topic explains the usage of the <ph keyref="projectname"/> library. See <xref href="integration.dita"/>
+        <p>This topic explains the usage of the <ph keyref="projectname"/> library. See <xref href="integration_general.dita"/>
             for instructions on how to integrate the library into a project.</p>
         
         <section>

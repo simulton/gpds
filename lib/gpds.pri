@@ -10,4 +10,5 @@ HEADERS += \
     $$PWD/archiver.h \
     $$PWD/archiverxml.h
 
-SOURCES +=
+SOURCES += \
+    $$PWD/value.cpp

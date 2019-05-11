@@ -185,91 +185,96 @@ namespace Gpds
                     container.addAttribute( attribute->name(), attribute->value() );
                 }
 
-                // It's a text element
-                if ( not valueString.empty() ) {
-                    // Is it a boolean 'true' value?
-                    if ( valueString == "true" ) {
-                        value.set( true );
-                        goto stringParsed;
-                    }
+                // Ensure that it's not an empty element
+                if ( node->first_node() ) {
 
-                    // Is it a boolean 'false' value?
-                    if ( valueString == "false" ) {
-                        value.set( false );
-                        goto stringParsed;
-                    }
+                    // It's a text element
+                    if (not valueString.empty()) {
+                        // Is it a boolean 'true' value?
+                        if (valueString == "true") {
+                            value.set(true);
+                            goto stringParsed;
+                        }
 
-                    // Is it an integer?
-                    {
-                        // Ensure that this is an integer
-                        bool isInteger = true;
-                        for (std::string::const_iterator it = valueString.cbegin(); it != valueString.cend(); ++it) {
-                            // Make sure that this is a digit
-                            if ( not std::isdigit( static_cast<int>( *it ) ) ) {
-                                isInteger = false;
+                        // Is it a boolean 'false' value?
+                        if (valueString == "false") {
+                            value.set(false);
+                            goto stringParsed;
+                        }
+
+                        // Is it an integer?
+                        {
+                            // Ensure that this is an integer
+                            bool isInteger = true;
+                            for (std::string::const_iterator it = valueString.cbegin(); it != valueString.cend(); ++it) {
+                                // Make sure that this is a digit
+                                if (not std::isdigit(static_cast<int>( *it ))) {
+                                    isInteger = false;
+                                }
+
+                                // Check for minus sign
+                                if (it == valueString.cbegin() and !isInteger and *it == '-') {
+                                    isInteger = true;
+                                }
+
+                                if (not isInteger) {
+                                    break;
+                                }
                             }
 
-                            // Check for minus sign
-                            if ( it == valueString.cbegin() and !isInteger and *it == '-' ) {
-                                isInteger = true;
-                            }
-
-                            if ( not isInteger ) {
-                                break;
+                            if (isInteger) {
+                                try {
+                                    int i = std::stoi(valueString);
+                                    value.set(i);
+                                    goto stringParsed;
+                                } catch (const std::invalid_argument &e) {
+                                    (void) e;
+                                    // Nothing to do here. Fall through.
+                                }
                             }
                         }
 
-                        if ( isInteger ) {
+                        // Is it a double?
+                        {
+
                             try {
-                                int i = std::stoi( valueString );
-                                value.set( i );
+                                double d = std::stod(valueString);
+                                value.set(d);
                                 goto stringParsed;
-                            } catch (const std::invalid_argument& e) {
-                                (void)e;
+                            } catch (const std::invalid_argument &e) {
+                                (void) e;
                                 // Nothing to do here. Fall through.
                             }
                         }
-                    }
 
-                    // Is it a double?
-                    {
-
-                        try {
-                            double d = std::stod( valueString );
-                            value.set( d );
+                        // Lets assume it's just a string :>
+                        {
+                            value.set(valueString);
                             goto stringParsed;
-                        } catch (const std::invalid_argument& e) {
-                            (void)e;
-                            // Nothing to do here. Fall through.
                         }
+
+                        stringParsed:
+
+                        // Arguments
+                        {
+                            // Value arguments
+                            for (const rapidxml::xml_attribute<> *attribute = node->first_attribute(); attribute; attribute = attribute->next_attribute()) {
+                                value.addAttribute(attribute->name(), attribute->value());
+                            }
+                        };
                     }
 
-                    // Lets assume it's just a string :>
-                    {
-                        value.set( valueString );
-                        goto stringParsed;
+                        // It's a another container
+                    else {
+                        Container childContainer;
+
+                        readEntry(*node, childContainer);
+                        value.set(std::move(childContainer));
                     }
 
-                    stringParsed:
+                    container.addValue(keyString, value);
 
-                    // Arguments
-                    {
-                        // Value arguments
-                        for ( const rapidxml::xml_attribute<>* attribute = node->first_attribute(); attribute; attribute = attribute->next_attribute() ) {
-                            value.addAttribute( attribute->name(), attribute->value() );
-                        }
-                    };
                 }
-
-                // It's a another container
-                else {
-                    Container childContainer;
-
-                    readEntry(*node, childContainer);
-                    value.set( std::move( childContainer ) );
-                }
-
-                container.addValue( keyString, value );
             }
         }
     };

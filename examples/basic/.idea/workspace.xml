@@ -12,23 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb5707d-d169-4ff8-a6fb-8d53ac72966c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/maps/architecture.ditamap" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/maps/architecture.ditamap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/maps/reference_class_container.ditamap" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/maps/reference_class_container.ditamap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/maps/usage.ditamap" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/maps/usage.ditamap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../doc/dita/maps/webhelp.ditamap" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/maps/webhelp.ditamap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/architecture_overview.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/architecture_overview.dita" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/classes.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/classes.dita" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/features.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/features.dita" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/reference_class_container_attribute.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/reference_class_container_attribute.dita" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/reference_class_container_entry.dita" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/reference_class_container_overview.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/reference_class_container_overview.dita" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/usage_nesting.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/usage_nesting.dita" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/usage_overview.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/usage_overview.dita" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/why.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/why.dita" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/uml/exports/svg/Model!Usage_1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/uml/exports/svg/Model!Usage_1.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/uml/model.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/uml/model.mdj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../doc/dita/topics/integration.dita" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/dita/topics/integration.dita" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/color.h" beforeDir="false" afterPath="$PROJECT_DIR$/color.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,25 +31,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/car.h">
+        <entry file="file://$PROJECT_DIR$/carcatalog.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+            <state relative-caret-position="306">
+              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
               <folding>
-                <element signature="e#14#31#0" expanded="true" />
+                <element signature="e#14#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/carcatalog.h">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-              <folding>
-                <element signature="e#14#37#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="5" column="76" selection-start-line="5" selection-start-column="76" selection-end-line="5" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -137,8 +121,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../lib/archiverxml.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="425">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -177,7 +161,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/cmake-build-debug/CarCatalog.h" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/../../lib/3rdparty/rapidxml-1.13/rapidxml_print.hpp" />
         <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/../../lib/arguments.h" />
@@ -188,6 +171,7 @@
         <option value="$PROJECT_DIR$/../../lib/value.h" />
         <option value="$PROJECT_DIR$/../../lib/container.h" />
         <option value="$PROJECT_DIR$/color.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -212,6 +196,11 @@
             <path>
               <item name="basic" type="b2602c69:ProjectViewProjectNode" />
               <item name="basic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="basic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="basic" type="462c0819:PsiDirectoryNode" />
+              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -265,12 +254,14 @@
       <workItem from="1557306039141" duration="4688000" />
       <workItem from="1557330265420" duration="2797000" />
       <workItem from="1557334745580" duration="32002000" />
-      <workItem from="1557515181848" duration="2485000" />
+      <workItem from="1557515181848" duration="2711000" />
+      <workItem from="1557522645723" duration="110000" />
+      <workItem from="1557577746243" duration="737000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85072000" />
+    <option name="totallyTimeSpent" value="86145000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -283,9 +274,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="3086" height="1702" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49418604" visible="true" weight="0.115994714" />
-      <window_info id="Structure" order="1" sideWeight="0.50581396" side_tool="true" visible="true" weight="0.115994714" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49302325" visible="true" weight="0.11731659" />
+      <window_info id="Structure" order="1" sideWeight="0.5069767" side_tool="true" visible="true" weight="0.11731659" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -384,14 +376,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../lib/arguments.h" />
     <entry file="file://$PROJECT_DIR$/../../lib/attributess.h" />
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/../../lib/foo.h" />
+    <entry file="file://$PROJECT_DIR$/car.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="48" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
+        <state relative-caret-position="119">
+          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#14#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../lib/foo.h" />
+    <entry file="file://$PROJECT_DIR$/color.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <folding>
+            <element signature="e#14#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../lib/serialize.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -439,6 +444,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../lib/archiverxml.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../lib/archiver.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -453,40 +465,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../lib/archiverxml.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/color.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
-          <folding>
-            <element signature="e#14#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/car.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-          <folding>
-            <element signature="e#14#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/carcatalog.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="306">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
           <folding>
             <element signature="e#14#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="76" selection-start-line="5" selection-start-column="76" selection-end-line="5" selection-end-column="76" />
         </state>
       </provider>
     </entry>

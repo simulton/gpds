@@ -3,7 +3,7 @@ project(basic)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(basic main.cpp car.h color.h carcatalog.h)
+add_executable(basic main.cpp car.h color.h carcatalog.h ../../lib/value.cpp)
 
 include_directories(../..l/lib)
 

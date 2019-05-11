@@ -35,28 +35,8 @@
             </topicmeta>
         </topicref>
     </topicref>
-
-    <topicref collection-type="sequence" chunk="to-content">
-        <topicmeta>
-            <navtitle>Integration</navtitle>
-            <shortdesc>A guide on how to integrate <ph keyref="projectname"/> into a project</shortdesc>
-        </topicmeta>
-
-        <topicref href="../topics/requirements.dita">
-            <topicmeta>
-                <navtitle>Requirements</navtitle>
-            </topicmeta>
-        </topicref>
-
-        <topicref href="../topics/integration.dita">
-            <topicmeta>
-                <navtitle>Integration</navtitle>
-                <shortdesc>A guide on how to integrate <ph keyref="projectname"/> into a project</shortdesc>
-            </topicmeta>
-        </topicref>
-
-    </topicref>
-
+    
+    <mapref href="integration.ditamap"/>
     <mapref href="architecture.ditamap"/>
     <mapref href="usage.ditamap"/>
     <mapref href="archivers.ditamap"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
 <task id="Untitled">
-    <title>Integration</title>
+    <title>Integration (General)</title>
     <prolog>
         <author>Joel Bodenmann</author>
         <metadata>
@@ -12,8 +12,7 @@
     </prolog>
     <taskbody>
         <context>
-            <p>Integrating <ph keyref="projectname"/> into a project is extremely simple as it's a header-only C++
-                library.</p>
+            <p>Integrating <ph keyref="projectname"/> into a project is extremely simple.</p>
         </context>
         <steps>
             <step>
@@ -30,6 +29,9 @@
             </step>
             <step>
                 <cmd>Add the <ph keyref="projectname"/> header directory to the include path of your project.</cmd>
+            </step>
+            <step>
+                <cmd>Add <codeph>lib/value.cpp</codeph> to your list of source files.</cmd>
             </step>
         </steps>
     </taskbody>

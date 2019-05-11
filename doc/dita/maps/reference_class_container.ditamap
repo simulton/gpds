@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
 <map>
-    <title>Class Container</title>
+    <title>Class Value</title>
     
     <topicref collection-type="sequence" chunk="to-content">
         <topicmeta>
-            <navtitle>Container</navtitle>
-            <shortdesc>The <apiname>Container</apiname> class.</shortdesc>
+            <navtitle>Value</navtitle>
+            <shortdesc>The <apiname>Value</apiname> class.</shortdesc>
         </topicmeta>
         
-        <topicref href="../topics/reference_class_container_overview.dita">
-            <topicref href="../topics/reference_class_container_value.dita"/>
-            <topicref href="../topics/reference_class_container_attribute.dita"/>
+        <topicref href="../topics/reference_class_value_overview.dita">
         </topicref>
     </topicref>
 </map>

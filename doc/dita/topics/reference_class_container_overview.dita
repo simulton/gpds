@@ -4,7 +4,7 @@
     <title>Overview</title>
     <shortdesc></shortdesc>
     <conbody>
-        <p>The container class represents an object which should be (de)serializable through <ph
+        <p>The <apiname>Container</apiname> class represents an object which should be (de)serializable through <ph
                 keyref="projectname"/>.</p>
         <p>The following figure shows the <apiname>Container</apiname> class design and related classes:</p>
         <fig>

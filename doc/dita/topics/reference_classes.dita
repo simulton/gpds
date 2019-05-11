@@ -3,9 +3,28 @@
 <concept id="reference_classes">
     <title>Classes</title>
     <shortdesc>The various classes provided by the <ph keyref="namespace"/> namespace.</shortdesc>
+    
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>reference
+                    <index-see-also>architecture</index-see-also>
+                </indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    
     <conbody>
         <p>The <ph keyref="namespace"/> namespace provides the following classes:<ul id="ul_bbn_4xh_phb">
             <li><apiname>Container</apiname></li>
+            <li><apiname>Value</apiname></li>
+            <li><apiname>Attribute</apiname></li>
+            <li><apiname>Serialize</apiname></li>
+            <li><apiname>Archiver</apiname></li>
+            <li><apiname>ArchiverXml</apiname></li>
             </ul></p>
+        <p>See <xref href="architecture_overview.dita">architecture</xref> for more information
+            about the overall architecture of <ph keyref="projectname"/>.</p>
     </conbody>
 </concept>

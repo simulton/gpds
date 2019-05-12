@@ -8,9 +8,7 @@
 #include <optional>
 #include "attributes.h"
 #include "utils.h"
-#ifdef GPDS_SUPPORT_QT
-    #include <QString>
-#endif
+#include "types.h"
 
 namespace Gpds
 {
@@ -26,28 +24,12 @@ namespace Gpds
 
     template<typename T>
     static constexpr bool isValidType() {
-        return contains< T, bool, int, double, std::string, Container* >;
+        return contains< T, gBool, gInt, gReal, gString, gContainer >;
     }
 
     class Value
     {
     public:
-        using gBool = bool;
-        using gInt = int;
-        using gDouble =
-            #ifdef GPDS_SUPPORT_QT
-                qreal;
-            #else
-                double;
-            #endif
-        using gString =
-            #ifdef GPDS_SUPPORT_QT
-                QString;
-            #else
-                std::string;
-            #endif
-        using gContainer = Container*;
-
         Attributes attributes;
         std::string comment;
 
@@ -190,7 +172,7 @@ namespace Gpds
         std::variant<
             gBool,
             gInt,
-            gDouble,
+            gReal,
             gString,
             gContainer
         > _value;

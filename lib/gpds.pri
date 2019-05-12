@@ -12,7 +12,8 @@ HEADERS += \
     $$PWD/serialize.h \
     $$PWD/archiver.h \
     $$PWD/archiverxml.h \
-    $$PWD/utils.h
+    $$PWD/utils.h \
+    $$PWD/types.h
 
 SOURCES += \
     $$PWD/value.cpp

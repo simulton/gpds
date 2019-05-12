@@ -6,6 +6,7 @@ HEADERS += \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_print.hpp \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_utils.hpp \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_ext.hpp \
+    $$PWD/attributes.h \
     $$PWD/value.h \
     $$PWD/container.h \
     $$PWD/serialize.h \

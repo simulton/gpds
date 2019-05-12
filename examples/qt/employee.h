@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sstream>
+#include <QTextStream>
 #include "../../lib/serialize.h"
 #include "address.h"
 
@@ -22,28 +22,23 @@ public:
 
     virtual void fromContainer(const Gpds::Container& container) override
     {
-        firstName = container.getValue<std::string>("first_name");
-        lastName = container.getValue<std::string>("last_name");
+        firstName = container.getValue<QString>("first_name");
+        lastName = container.getValue<QString>("last_name");
         address.fromContainer( *container.getValue<Gpds::Container*>("address") );
         enabled = container.getValue<bool>("enabled");
     }
 
-    std::string toString(const std::string& indentation) const
+    void toString(QTextStream& s, const QString& indentation) const
     {
-        std::stringstream s;
-        s << std::boolalpha;
-
-        s << indentation << "first name : " << firstName << std::endl;
-        s << indentation << "last name  : " << lastName << std::endl;
-        s << indentation << "address    : " << std::endl;
-        s << address.toString(indentation + indentation) << std::endl;
-        s << indentation << "enabled    : " << enabled;
-
-        return s.str();
+        s << indentation << "first name : " << firstName;
+        s << indentation << "last name  : " << lastName;
+        s << indentation << "address    : ";
+        address.toString(s, indentation + indentation);
+        s << indentation << "enabled    : ";
     }
 
-    std::string firstName;
-    std::string lastName;
+    QString firstName;
+    QString lastName;
     Address address;
     bool enabled;
 };

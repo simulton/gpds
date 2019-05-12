@@ -1,5 +1,5 @@
 #include <sstream>
-#include <iostream>
+#include <QtDebug>
 #include <QCoreApplication>
 #include "../../lib/archiverxml.h"
 #include "employee.h"
@@ -49,15 +49,26 @@ int main(int argc, char *argv[])
 
     std::stringstream stream;
     Gpds::ArchiverXml ar;
-    ar.save(stream, company1, "company");
 
-    std::cout << stream.str();
-    std::cout << std::endl;
+    // Serialize
+    {
+        ar.save(stream, company1, "company");
 
-    Company restoredCompany;
-    ar.load(stream, restoredCompany, "company");
+        qDebug() << "--- Serialized data: ---";
+        qDebug() << stream.str().c_str();
+    }
 
-    exit(0);
+    // Deserialize
+    {
+        Company restoredCompany;
+        ar.load(stream, restoredCompany, "company");
+
+        QString str;
+        QTextStream s(&str);
+        restoredCompany.toString(s, "");
+        qDebug() << "--- Deserialized data: ---";
+        qDebug() << s.readAll();
+    }
 
     return a.exec();
 }

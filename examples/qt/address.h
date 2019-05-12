@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sstream>
+#include <QTextStream>
 #include "../../lib/serialize.h"
 
 class Address : public Gpds::Serialize
@@ -22,26 +22,22 @@ public:
 
     virtual void fromContainer(const Gpds::Container& container) override
     {
-        address1 = container.getValue<std::string>("address_1");
-        address2 = container.getValue<std::string>("address_2");
-        city = container.getValue<std::string>("city");
-        country = container.getValue<std::string>("country");
+        address1 = container.getValue<QString>("address_1");
+        address2 = container.getValue<QString>("address_2");
+        city = container.getValue<QString>("city");
+        country = container.getValue<QString>("country");
     }
 
-    std::string toString(const std::string_view& indentation) const
+    void toString(QTextStream& s, const QString& indentation) const
     {
-        std::stringstream s;
-
-        s << indentation << "address 1 : " << address1 << std::endl;
-        s << indentation << "address 2 : " << address2 << std::endl;
-        s << indentation << "city      : " << city << std::endl;
+        s << indentation << "address 1 : " << address1;
+        s << indentation << "address 2 : " << address2;
+        s << indentation << "city      : " << city;
         s << indentation << "country   : " << country;
-
-        return s.str();
     }
 
-    std::string address1;
-    std::string address2;
-    std::string city;
-    std::string country;
+    QString address1;
+    QString address2;
+    QString city;
+    QString country;
 };

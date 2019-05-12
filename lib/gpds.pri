@@ -1,3 +1,5 @@
+DEFINES += GPDS_SUPPORT_QT
+
 HEADERS += \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml.hpp \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_iterators.hpp \

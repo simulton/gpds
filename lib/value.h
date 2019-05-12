@@ -8,6 +8,9 @@
 #include <optional>
 #include "attributes.h"
 #include "utils.h"
+#ifdef GPDS_SUPPORT_QT
+    #include <QString>
+#endif
 
 namespace Gpds
 {
@@ -29,6 +32,22 @@ namespace Gpds
     class Value
     {
     public:
+        using gBool = bool;
+        using gInt = int;
+        using gDouble =
+            #ifdef GPDS_SUPPORT_QT
+                qreal;
+            #else
+                double;
+            #endif
+        using gString =
+            #ifdef GPDS_SUPPORT_QT
+                QString;
+            #else
+                std::string;
+            #endif
+        using gContainer = Container*;
+
         Attributes attributes;
         std::string comment;
 
@@ -96,7 +115,12 @@ namespace Gpds
                     [](const int&)          { return "int"; },
                     [](const double&)       { return "double"; },
                     [](const std::string&)  { return "string"; }
+                    #ifdef GPDS_SUPPORT_QT
+                        ,[](const QString&) { return "string"; }
+                    #endif
             }, _value);
+
+            return "n/a";
         }
 
         template<typename T>
@@ -163,7 +187,13 @@ namespace Gpds
         }
 
     private:
-        std::variant<bool, int, double, std::string, Container*> _value;
+        std::variant<
+            gBool,
+            gInt,
+            gDouble,
+            gString,
+            gContainer
+        > _value;
 
         // Implementation is located in value.cpp to prevent
         // circular dependency.

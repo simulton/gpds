@@ -129,9 +129,6 @@ namespace Gpds
                     else if ( value.isType<double>() ) {
                         child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( std::to_string( value.get<double>() ).data() ));
                     }
-                    else if ( value.isType<std::string>() ) {
-                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<std::string>().data() ) );
-                    }
                     else if ( value.isType<Container*>() ) {
                         // Recursion
                         const Container* childContainer = value.get<Container*>();
@@ -141,6 +138,10 @@ namespace Gpds
                     #ifdef GPDS_SUPPORT_QT
                         else if ( value.isType<QString>() ) {
                             child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<QString>().toUtf8().constData() ) );
+                        }
+                    #else
+                        else if ( value.isType<std::string>() ) {
+                            child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<std::string>().data() ) );
                         }
                     #endif
                     else {
@@ -255,7 +256,11 @@ namespace Gpds
 
                         // Lets assume it's just a string :>
                         {
-                            value.set(valueString);
+                            #ifdef GPDS_SUPPORT_QT
+                                value.set( QString::fromStdString( valueString ) );
+                            #else
+                                value.set(valueString);
+                            #endif
                             goto stringParsed;
                         }
 

@@ -25,6 +25,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    address.h \
-    employee.h \
-    company.h
+    color.h \
+    car.h \
+    carcatalog.h

@@ -2,57 +2,65 @@
 #include <QtDebug>
 #include <QCoreApplication>
 #include "../../lib/archiverxml.h"
-#include "employee.h"
-#include "address.h"
-#include "company.h"
+#include "car.h"
+#include "color.h"
+#include "carcatalog.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    // Create employee 1
-    Employee employee1;
-    employee1.firstName = "John";
-    employee1.lastName = "Doe";
-    employee1.enabled = false;
+    CarCatalog catalog;
+    Car car;
 
-    // Create employee 2
-    Employee employee2;
-    employee2.firstName = "Peter";
-    employee2.lastName = "Peterson";
-    Address address2;
-    address2.address1 = "Bad boys street 420";
-    address2.city = "Cracktown";
-    address2.country = "Lichtenstein";
-    employee2.address = address2;
-    employee2.enabled = true;
+    // Create a Jeep
+    {
+        car.manufacturer = "Jeep";
+        car.model = "Grand Cherokee";
+        car.year_of_construction = 2009;
+        Color color;
+        color.name = "Black";
+        color.red = 0;
+        color.green = 0;
+        color.blue = 0;
+        car.color = color;
+        catalog.cars.push_front(car);
+    }
 
-    // Create employee 3
-    Employee employee3;
-    employee3.firstName = "Karl";
-    employee3.lastName = "Karlson";
-    employee3.enabled = true;
+    // Create an Audi
+    {
+        car.manufacturer = "Audi";
+        car.model = "A6";
+        car.year_of_construction = 2015;
+        Color color;
+        color.name = "Gray";
+        color.red = 50;
+        color.green = 50;
+        color.blue = 50;
+        car.color = color;
+        catalog.cars.push_front(car);
+    }
 
-    // Create a company
-    Address company1Address;
-    company1Address.address1 = "Seewjinenstrasse 2";
-    company1Address.city = "3930 Visp";
-    company1Address.country = "Switzerland";
-    Company company1;
-    company1.name = "Simulton Holding AG";
-    company1.offices = 7;
-    company1.randomDouble = 3.1415;
-    company1.employees.push_back(employee1);
-    company1.employees.push_back(employee2);
-    company1.employees.push_back(employee3);
-    company1.address = company1Address;
+    // Create a partially empty car
+    {
+        car.manufacturer = "";
+        car.model = "";
+        car.year_of_construction = 0;
+        Color color;
+        color.name = "Baby Vomit Green";
+        color.red = 137;
+        color.green = 155;
+        color.blue = 4;
+        car.color = color;
+        catalog.cars.push_front(car);
+    }
 
     std::stringstream stream;
     Gpds::ArchiverXml ar;
 
     // Serialize
     {
-        ar.save(stream, company1, "company");
+        ar.save(stream, catalog, "cars");
 
         qDebug() << "--- Serialized data: ---";
         qDebug() << stream.str().c_str();
@@ -60,12 +68,12 @@ int main(int argc, char *argv[])
 
     // Deserialize
     {
-        Company restoredCompany;
-        ar.load(stream, restoredCompany, "company");
+        CarCatalog restoredCatalog;
+        ar.load(stream, restoredCatalog, "cars");
 
         QString str;
         QTextStream s(&str);
-        restoredCompany.toString(s, "");
+        //restoredCatalog.toString(s, "");
         qDebug() << "--- Deserialized data: ---";
         qDebug() << s.readAll();
     }

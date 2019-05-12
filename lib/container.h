@@ -33,7 +33,9 @@ namespace Gpds
             if ( it != values.end() and not it->second.isEmpty() ) {
                 const Value& value = it->second;
 
-                GPDS_ASSERT( value.isType<T>() );
+                if ( not value.isType<T>() ) {
+                    return std::move( defaultValue );
+                }
 
                 return it->second.get<T>();
             }

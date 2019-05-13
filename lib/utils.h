@@ -10,4 +10,10 @@ namespace Gpds
             printf("  Line     : %d\n", __LINE__); \
             abort();  \
         }
+
+    #ifdef GPDS_SUPPORT_QT
+        #define GPDS_STR_TO_CSTR( x )   x.toUtf8().constData()
+    #else
+        #define GPDS_STR_TO_CSTR( x )   x.c_str()
+    #endif
 }

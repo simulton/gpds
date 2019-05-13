@@ -100,21 +100,21 @@ namespace Gpds
             if ( settings.printComments and not container.comment.isEmpty() ) {
                 auto parentNode = root.parent();
                 if ( parentNode ) {
-                    rapidxml::xml_node<> *commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, container.comment.cStr() );
+                    rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, GPDS_STR_TO_CSTR( container.comment ) );
                     parentNode->prepend_node( commentNode );
                 }
             }
 
             // Add all container arguments
             for ( const auto& attribute : container.attributes.map ) {
-                root.append_attribute( doc.allocate_attribute( attribute.first.cStr(), attribute.second.cStr() ) );
+                root.append_attribute( doc.allocate_attribute( GPDS_STR_TO_CSTR( attribute.first ), GPDS_STR_TO_CSTR( attribute.second ) ) );
             }
 
             // Iterate through all values in this container
             for ( const auto& keyValuePair: container.values ) {
 
                 // Some aliases to make the code easier to read
-                const auto& key = doc.allocate_string( keyValuePair.first.cStr() );
+                const auto& key = doc.allocate_string( GPDS_STR_TO_CSTR( keyValuePair.first ) );
                 const Value& value = keyValuePair.second;
 
                 // Create a new node in the DOM
@@ -130,7 +130,7 @@ namespace Gpds
                         child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( std::to_string( value.get<double>() ).data() ));
                     }
                     else if ( value.isType<gString>() ) {
-                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<gString>().cStr() ) );
+                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( GPDS_STR_TO_CSTR( value.get<gString>() ) ) );
                     }
                     else if ( value.isType<Container*>() ) {
                         // Recursion
@@ -146,7 +146,7 @@ namespace Gpds
 
                 // Add all value arguments
                 for ( const auto& attribute : value.attributes.map ) {
-                    child->append_attribute( doc.allocate_attribute( attribute.first.cStr(), attribute.second.cStr() ) );
+                    child->append_attribute( doc.allocate_attribute( GPDS_STR_TO_CSTR( attribute.first ), GPDS_STR_TO_CSTR( attribute.second ) ) );
                 }
 
                 GPDS_ASSERT( child );
@@ -162,7 +162,7 @@ namespace Gpds
 
                 // Add value comment (if any)
                 if ( settings.printComments and not value.comment.isEmpty() ) {
-                    rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, value.comment.cStr() );
+                    rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, GPDS_STR_TO_CSTR( value.comment ) );
                     root.append_node( commentNode );
                 }
 
@@ -277,6 +277,7 @@ namespace Gpds
 
                 }
             }
+
         }
     };
 

@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <optional>
+#include "types.h"
 
 namespace Gpds
 {
@@ -10,14 +11,14 @@ namespace Gpds
     class Attributes
     {
     public:
-        std::map< std::string, std::string> map;
+        std::map< gString, gString> map;
 
-        void add(std::string&& key, std::string&& value)
+        void add(gString&& key, gString&& value)
         {
-            map.emplace( std::forward< std::string >( key ), std::forward< std::string >( value ) );
+            map.emplace( std::forward< gString >( key ), std::forward< gString >( value ) );
         }
 
-        std::optional< std::string > get(const std::string& key) const
+        std::optional< gString > get(const gString& key) const
         {
             for ( auto it = map.cbegin(); it != map.cend(); ++it ) {
                 if ( it->first == key ) {

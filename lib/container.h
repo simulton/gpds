@@ -4,6 +4,7 @@
 #include "value.h"
 #include "attributes.h"
 #include "utils.h"
+#include "types.h"
 
 namespace Gpds
 {
@@ -11,14 +12,14 @@ namespace Gpds
     {
     public:
         Attributes attributes;
-        std::string comment;
+        gString comment;
 
         Container() = default;
         Container(const Container& other) = default;
         Container( Container&& other ) = default;
 
         template<class T>
-        Value& addValue( const std::string& key, T&& value )
+        Value& addValue( const gString& key, T&& value )
         {
             auto it = values.emplace( std::make_pair(key, std::forward<T>( value )) );
 
@@ -26,7 +27,7 @@ namespace Gpds
         }
 
         template<class T>
-        T getValue( const std::string& key, T&& defaultValue = T() ) const
+        T getValue( const gString& key, T&& defaultValue = T() ) const
         {
             auto it = values.find( key );
 
@@ -44,7 +45,7 @@ namespace Gpds
         }
 
         template<class T>
-        std::vector<T> getValues(const std::string& key) const
+        std::vector<T> getValues(const gString& key) const
         {
             const auto& range = values.equal_range( key );
             std::vector<T> values( std::distance( range.first, range.second ) );
@@ -55,31 +56,31 @@ namespace Gpds
             return values;
         }
 
-        Container& addAttribute(std::string&& key, std::string&& value)
+        Container& addAttribute(gString&& key, gString&& value)
         {
-            attributes.add( std::forward< std::string >( key ), std::forward< std::string >( value ) );
+            attributes.add( std::forward< gString >( key ), std::forward< gString >( value ) );
 
             return *this;
         }
 
-        Container& addAttribute(std::string&& key, const std::string& value)
+        Container& addAttribute(gString&& key, const gString& value)
         {
-            return addAttribute( std::forward< std::string >( key ), std::string( value ) ) ;
+            return addAttribute( std::forward< gString >( key ), gString( value ) );
         }
 
-        std::optional< std::string > getAttribute(std::string&& key) const
+        std::optional< gString > getAttribute(gString&& key) const
         {
-            return attributes.get( std::forward< std::string >( key ) );
+            return attributes.get( std::forward< gString >( key ) );
         }
 
-        Container& setComment(const std::string& comment)
+        Container& setComment(const gString& comment)
         {
             this->comment = comment;
 
             return *this;
         }
 
-        Container& setComment(std::string&& comment)
+        Container& setComment(gString&& comment)
         {
             this->comment = std::move( comment );
 
@@ -94,7 +95,7 @@ namespace Gpds
             }
 
             // Ensure that all elements are the same
-            std::string_view name;
+            gString name;
             for (auto it = values.cbegin(); it != values.cend(); ++it) {
                 // Store the name so we can compare them
                 if (it == values.begin()) {
@@ -115,7 +116,7 @@ namespace Gpds
             return true;
         }
 
-        std::multimap< std::string, Value > values;
+        std::multimap< gString, Value > values;
     };
 
 }

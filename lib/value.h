@@ -31,7 +31,7 @@ namespace Gpds
     {
     public:
         Attributes attributes;
-        std::string comment;
+        gString comment;
 
         Value( ) = default;
 
@@ -93,13 +93,10 @@ namespace Gpds
             }
 
             return std::visit(overload{
-                    [](const bool&)         { return "bool"; },
-                    [](const int&)          { return "int"; },
-                    [](const double&)       { return "double"; },
-                    [](const std::string&)  { return "string"; }
-                    #ifdef GPDS_SUPPORT_QT
-                        ,[](const QString&) { return "string"; }
-                    #endif
+                    [](const gBool&)    { return "bool"; },
+                    [](const gInt&)     { return "int"; },
+                    [](const gReal&)    { return "double"; },
+                    [](const gString&)  { return "string"; }
             }, _value);
 
             return "n/a";
@@ -137,31 +134,31 @@ namespace Gpds
             return std::get<T>( _value );
         }
 
-        Value& addAttribute(std::string&& key, std::string&& value)
+        Value& addAttribute(gString&& key, gString&& value)
         {
-            attributes.add( std::forward< std::string >( key ), std::forward< std::string >( value ) );
+            attributes.add( std::forward< gString >( key ), std::forward< gString >( value ) );
 
             return *this;
         }
 
-        Value& addAttribute(std::string&& key, const std::string& value)
+        Value& addAttribute(gString&& key, const gString& value)
         {
-            return addAttribute( std::forward< std::string >( key ), std::string( value ) );
+            return addAttribute( std::forward< gString >( key ), gString( value ) );
         }
 
-        std::optional< std::string > getAttribute(std::string&& key) const
+        std::optional< gString > getAttribute(gString&& key) const
         {
-            return attributes.get( std::forward< std::string >( key ) );
+            return attributes.get( std::forward< gString >( key ) );
         }
 
-        Value& setComment(const std::string& comment)
+        Value& setComment(const gString& comment)
         {
             this->comment = comment;
 
             return *this;
         }
 
-        Value& setComment(std::string&& comment)
+        Value& setComment(gString&& comment)
         {
             this->comment = std::move( comment );
 

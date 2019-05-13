@@ -97,37 +97,40 @@ namespace Gpds
             }
 
             // Add container comment (if any)
-            if ( settings.printComments and not container.comment.empty() ) {
+            if ( settings.printComments and not container.comment.isEmpty() ) {
                 auto parentNode = root.parent();
                 if ( parentNode ) {
-                    rapidxml::xml_node<> *commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, container.comment.c_str() );
+                    rapidxml::xml_node<> *commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, container.comment.cStr() );
                     parentNode->prepend_node( commentNode );
                 }
             }
 
             // Add all container arguments
             for ( const auto& attribute : container.attributes.map ) {
-                root.append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
+                root.append_attribute( doc.allocate_attribute( attribute.first.cStr(), attribute.second.cStr() ) );
             }
 
             // Iterate through all values in this container
             for ( const auto& keyValuePair: container.values ) {
 
                 // Some aliases to make the code easier to read
-                const auto& key = doc.allocate_string( keyValuePair.first.c_str() );
+                const auto& key = doc.allocate_string( keyValuePair.first.cStr() );
                 const Value& value = keyValuePair.second;
 
                 // Create a new node in the DOM
                 rapidxml::xml_node<>* child = nullptr;
                 {
-                    if ( value.isType<bool>() ) {
+                    if ( value.isType<gBool>() ) {
                         child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<bool>() ? "true" : "false"));
                     }
-                    else if ( value.isType<int>() ) {
+                    else if ( value.isType<gInt>() ) {
                         child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( std::to_string( value.get<int>() ).data() ));
                     }
-                    else if ( value.isType<double>() ) {
+                    else if ( value.isType<gReal>() ) {
                         child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( std::to_string( value.get<double>() ).data() ));
+                    }
+                    else if ( value.isType<gString>() ) {
+                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<gString>().cStr() ) );
                     }
                     else if ( value.isType<Container*>() ) {
                         // Recursion
@@ -135,15 +138,6 @@ namespace Gpds
                         child = doc.allocate_node( rapidxml::node_element, key );
                         writeEntry(doc, *child, *childContainer);
                     }
-                    #ifdef GPDS_SUPPORT_QT
-                        else if ( value.isType<QString>() ) {
-                            child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<QString>().toUtf8().constData() ) );
-                        }
-                    #else
-                        else if ( value.isType<std::string>() ) {
-                            child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<std::string>().data() ) );
-                        }
-                    #endif
                     else {
                         // This shouldn't happen
                         GPDS_ASSERT( false );
@@ -152,7 +146,7 @@ namespace Gpds
 
                 // Add all value arguments
                 for ( const auto& attribute : value.attributes.map ) {
-                    child->append_attribute( doc.allocate_attribute( attribute.first.data(), attribute.second.data() ) );
+                    child->append_attribute( doc.allocate_attribute( attribute.first.cStr(), attribute.second.cStr() ) );
                 }
 
                 GPDS_ASSERT( child );
@@ -167,8 +161,8 @@ namespace Gpds
                 }
 
                 // Add value comment (if any)
-                if ( settings.printComments and not value.comment.empty() ) {
-                    rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, value.comment.c_str() );
+                if ( settings.printComments and not value.comment.isEmpty() ) {
+                    rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, value.comment.cStr() );
                     root.append_node( commentNode );
                 }
 
@@ -181,8 +175,8 @@ namespace Gpds
             // Handle all nodes children recursively
             for (rapidxml::xml_node<>* node = rootNode.first_node(); node; node = node->next_sibling()) {
                 // Extract the name & value
-                std::string keyString( node->name() );
-                std::string valueString( node->value() );
+                gString keyString( node->name() );
+                String valueString( node->value() );
 
                 // Create the Value
                 Value value;
@@ -196,7 +190,7 @@ namespace Gpds
                 if ( node->first_node() ) {
 
                     // It's a text element
-                    if (not valueString.empty()) {
+                    if ( not valueString.empty() ) {
                         // Is it a boolean 'true' value?
                         if (valueString == "true") {
                             value.set(true);
@@ -231,7 +225,7 @@ namespace Gpds
 
                             if (isInteger) {
                                 try {
-                                    int i = std::stoi(valueString);
+                                    int i = std::stoi( valueString );
                                     value.set(i);
                                     goto stringParsed;
                                 } catch (const std::invalid_argument &e) {
@@ -245,7 +239,7 @@ namespace Gpds
                         {
 
                             try {
-                                double d = std::stod(valueString);
+                                double d = std::stod( valueString );
                                 value.set(d);
                                 goto stringParsed;
                             } catch (const std::invalid_argument &e) {
@@ -254,13 +248,9 @@ namespace Gpds
                             }
                         }
 
-                        // Lets assume it's just a string :>
+                        // Lets just assume it's a string :>
                         {
-                            #ifdef GPDS_SUPPORT_QT
-                                value.set( QString::fromStdString( valueString ) );
-                            #else
-                                value.set(valueString);
-                            #endif
+                            value.set( valueString.toNative() );
                             goto stringParsed;
                         }
 

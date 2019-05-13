@@ -97,7 +97,7 @@ namespace Gpds
             }
 
             // Add container comment (if any)
-            if ( settings.printComments and not container.comment.isEmpty() ) {
+            if ( settings.printComments and not GPDS_STR_IS_EMPTY( container.comment ) ) {
                 auto parentNode = root.parent();
                 if ( parentNode ) {
                     rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, GPDS_STR_TO_CSTR( container.comment ) );
@@ -161,7 +161,7 @@ namespace Gpds
                 }
 
                 // Add value comment (if any)
-                if ( settings.printComments and not value.comment.isEmpty() ) {
+                if ( settings.printComments and not GPDS_STR_IS_EMPTY( value.comment ) ) {
                     rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, GPDS_STR_TO_CSTR( value.comment ) );
                     root.append_node( commentNode );
                 }

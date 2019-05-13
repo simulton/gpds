@@ -38,7 +38,7 @@ namespace Gpds
         #else
             std::string toNative() const
             {
-                return this;
+                return *this;
             }
         #endif
 

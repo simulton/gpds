@@ -1,5 +1,6 @@
 *.o
 *.dll
+*.dll.a
 *.a
 *.exe
 *.user.*
@@ -8,6 +9,22 @@
 *-Debug
 build-*
 
+# Install
+install
+
 # Documentation stuff
 doc/dita/out
 doc/dita/temp
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps

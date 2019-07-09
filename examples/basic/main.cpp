@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "../../lib/archiverxml.h"
+#include "../../install/include/archiverxml.h"
 #include "carcatalog.h"
 
 int main()

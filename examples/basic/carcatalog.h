@@ -1,7 +1,7 @@
 #pragma once
 
 #include <forward_list>
-#include "../../lib/serialize.h"
+#include "gpds.h"
 #include "car.h"
 
 class CarCatalog : public Gpds::Serialize

@@ -2,8 +2,9 @@
 
 #include <optional>
 #include <string>
-#include "gpds.h"
 #include <iostream>
+#include "gpds.h"
+
 static bool read_file( const std::string& path, Gpds::Serialize& object )
 {
     std::ifstream file( path );

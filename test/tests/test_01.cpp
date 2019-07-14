@@ -4,6 +4,13 @@
 #include "../test.h"
 #include "gpds/serialize.h"
 
+static const std::string FILE_CONTENT =
+    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+    "<data>"
+    "  <boolean>true</boolean>"
+    "  <boolean>false</boolean>"
+    "</data>";
+
 class TestData01 : public Gpds::Serialize
 {
 public:
@@ -30,7 +37,7 @@ TEST_CASE( "Read Datatype: Boolean" )
 
     // Parse test file
     TestData01 data;
-    REQUIRE( read_file( "../../test/data/test_data_01.xml", data ) );
+    REQUIRE( deserialize( FILE_CONTENT, data ) );
 
     // Ensure that data is the same
     REQUIRE( data.data == knownGood );

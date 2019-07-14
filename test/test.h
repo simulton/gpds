@@ -1,23 +1,20 @@
 #pragma once
 
 #include <string>
-#include <fstream>
+#include <sstream>
 #include <iostream>
 #include "gpds/serialize.h"
 #include "gpds/archiverxml.h"
 
-static bool read_file( const std::string& path, Gpds::Serialize& object )
+static bool deserialize( const std::string& content , Gpds::Serialize& object )
 {
-    std::ifstream file( path );
-    if ( not file.is_open() ) {
-        return false;
-    }
+    std::stringstream stream( content );
 
     Gpds::ArchiverXml ar;
 
     bool ret = false;
     try {
-        ret = ar.load(file, object, "data");
+        ret = ar.load(stream, object, "data");
     } catch ( std::exception& e ) {
         std::cout << "EXCEPTION: " << e.what() << std::endl;
         return false;

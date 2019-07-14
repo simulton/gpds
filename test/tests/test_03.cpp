@@ -3,6 +3,15 @@
 #include "../test.h"
 #include "gpds/serialize.h"
 
+static const std::string FILE_CONTENT =
+    "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+    "<data>"
+    "  <real>-0.0</real>"
+    "  <real>0.0</real>"
+    "  <real>-1.0</real>"
+    "  <real>1.0</real>"
+    "</data>";
+
 class TestData03 : public Gpds::Serialize
 {
 public:
@@ -31,7 +40,7 @@ TEST_CASE( "Read Datatype: Real" )
 
     // Parse test file
     TestData03 data;
-    REQUIRE( read_file( "../../test/data/test_data_03.xml", data ) );
+    REQUIRE( deserialize( FILE_CONTENT, data ) );
 
     // Ensure that data is the same
     REQUIRE( data.data == knownGood );

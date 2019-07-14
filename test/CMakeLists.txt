@@ -2,6 +2,8 @@
 # Testing (using catch2)
 ###
 
+# Add the Catch2 CMake modules as we don't expect it to be properly installed on
+# the system.
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/3rdparty/catch2/contrib)
 
 # Add catch2
@@ -25,6 +27,4 @@ target_link_libraries(gpds_tests Catch2::Catch2)
 
 include(CTest)
 include(Catch)
-catch_discover_tests(
-	gpds_tests
-	WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/test)
+catch_discover_tests(gpds_tests)

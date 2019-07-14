@@ -1,8 +1,8 @@
 #include <vector>
 #include <iostream>
-#include "../3rdparty/catch2/catch.hpp"
+#include "catch2/catch.hpp"
 #include "../test.h"
-#include "gpds.h"
+#include "gpds/serialize.h"
 
 class TestData01 : public Gpds::Serialize
 {
@@ -20,7 +20,7 @@ public:
     }
 };
 
-TEST_CASE( "Test 01 - Datatype: Boolean" )
+TEST_CASE( "Read Datatype: Boolean" )
 {
     // The "known good" data
     const std::vector<bool> knownGood = {
@@ -30,9 +30,8 @@ TEST_CASE( "Test 01 - Datatype: Boolean" )
 
     // Parse test file
     TestData01 data;
-    REQUIRE( read_file( "../test/data/test_data_01.xml", data ) );
+    REQUIRE( read_file( "../../test/data/test_data_01.xml", data ) );
 
     // Ensure that data is the same
     REQUIRE( data.data == knownGood );
 }
-

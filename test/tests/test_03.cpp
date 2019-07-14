@@ -1,7 +1,7 @@
 #include <vector>
-#include "../3rdparty/catch2/catch.hpp"
+#include "catch2/catch.hpp"
 #include "../test.h"
-#include "gpds.h"
+#include "gpds/serialize.h"
 
 class TestData03 : public Gpds::Serialize
 {
@@ -19,7 +19,7 @@ public:
     }
 };
 
-TEST_CASE( "Test 03 - Datatype: Real" )
+TEST_CASE( "Read Datatype: Real" )
 {
     // The "known good" data
     const std::vector<double> knownGood = {
@@ -31,7 +31,7 @@ TEST_CASE( "Test 03 - Datatype: Real" )
 
     // Parse test file
     TestData03 data;
-    REQUIRE( read_file( "../test/data/test_data_03.xml", data ) );
+    REQUIRE( read_file( "../../test/data/test_data_03.xml", data ) );
 
     // Ensure that data is the same
     REQUIRE( data.data == knownGood );

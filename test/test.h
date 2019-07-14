@@ -1,9 +1,10 @@
 #pragma once
 
-#include <optional>
 #include <string>
+#include <fstream>
 #include <iostream>
-#include "gpds.h"
+#include "gpds/serialize.h"
+#include "gpds/archiverxml.h"
 
 static bool read_file( const std::string& path, Gpds::Serialize& object )
 {

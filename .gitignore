@@ -2,6 +2,8 @@
 *.o
 *.dll
 *.dll.a
+*.so
+*.so.*
 *.a
 *.exe
 *.user.*
@@ -9,6 +11,8 @@
 *.pro.*
 *-Debug
 build-*
+cmake-build-*
+build/
 
 # Install
 install

@@ -41,6 +41,3 @@ install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/3rdparty/rapidxml-1.13/
 	DESTINATION gpds
 	FILES_MATCHING PATTERN "*.hpp")
 
-# Copy single-inclusion-header
-install(FILES ${CMAKE_CURRENT_LIST_DIR}/gpds/gpds.h
-		DESTINATION gpds)

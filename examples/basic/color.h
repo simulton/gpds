@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "../../lib/serialize.h"
+#include "gpds.h"
 
 class Color : public Gpds::Serialize
 {

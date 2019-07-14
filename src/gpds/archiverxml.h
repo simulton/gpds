@@ -3,8 +3,8 @@
 #include <algorithm>
 #include "utils.h"
 #include "archiver.h"
-#include "3rdparty/rapidxml-1.13/rapidxml_ext.hpp"
-#include "3rdparty/rapidxml-1.13/rapidxml_print.hpp"
+#include "rapidxml_ext.hpp"
+#include "rapidxml_print.hpp"
 
 namespace Gpds
 {

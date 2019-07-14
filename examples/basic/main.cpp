@@ -1,11 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "../../lib/archiverxml.h"
+#include "gpds.h"
 #include "carcatalog.h"
 
 int main()
 {
+    std::cout << "foo"<< std::endl;
+
     CarCatalog catalog;
     Car car;
 

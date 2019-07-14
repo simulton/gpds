@@ -18,7 +18,8 @@ set(HEADERS
 set(FILES ${SOURCES} ${HEADERS})
 
 # Include directories
-include_directories(.
+include_directories(
+	.
 	3rdparty/rapidxml-1.13)
 
 # Generate shared library

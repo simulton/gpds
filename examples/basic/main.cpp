@@ -1,13 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "gpds.h"
+#include "gpds/archiverxml.h"
 #include "carcatalog.h"
 
 int main()
 {
-    std::cout << "foo"<< std::endl;
-
     CarCatalog catalog;
     Car car;
 

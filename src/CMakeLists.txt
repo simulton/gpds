@@ -26,18 +26,24 @@ include_directories(
 add_library(gpds-objs OBJECT ${FILES})
 
 # Generate shared library
-if (GPDS_BUILD_LIBRARY_SHARED)
-	add_library(gpds SHARED $<TARGET_OBJECTS:gpds-objs>)
-else()
-	add_library(gpds STATIC $<TARGET_OBJECTS:gpds-objs>)
-endif()
+add_library(gpds-shared SHARED $<TARGET_OBJECTS:gpds-objs>)
+set_target_properties(gpds-shared
+	PROPERTIES
+		OUTPUT_NAME "gpds")
+
+# Generate static library
+add_library(gpds-static STATIC $<TARGET_OBJECTS:gpds-objs>)
+set_target_properties(gpds-static
+	PROPERTIES
+		OUTPUT_NAME "gpds")
 
 ###
 # Install
 ###
 
-# Copy library
-install(TARGETS gpds DESTINATION lib)
+# Copy libraries
+install(TARGETS gpds-static DESTINATION lib)
+install(TARGETS gpds-shared DESTINATION lib)
 
 # Copy GPDS headers
 install(FILES ${HEADERS} DESTINATION gpds)

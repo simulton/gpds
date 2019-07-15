@@ -11,7 +11,6 @@ project(gpds
 # Lets have some options! \o/
 option(GPDS_BUILD_TESTS "Build the unit tests" on)
 option(GPDS_BUILD_EXAMPLES "Build the examples" off)
-option(GPDS_BUILD_LIBRARY_SHARED "Build a shared library instead of a static one" off)
 
 # Compiler settings
 set(CMAKE_CXX_STANDARD 17)

@@ -22,8 +22,14 @@ include_directories(
 	.
 	3rdparty/rapidxml-1.13)
 
+
 # Generate objects library
 add_library(gpds-objs OBJECT ${FILES})
+# this is only needed for older compilers
+# but doesn't hurt either to have it
+set_target_properties(gpds-objs
+	PROPERTIES
+		POSITION_INDEPENDENT_CODE 1)
 
 # Generate shared library
 add_library(gpds-shared SHARED $<TARGET_OBJECTS:gpds-objs>)

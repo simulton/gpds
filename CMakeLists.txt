@@ -9,7 +9,9 @@ project(gpds
 	VERSION 0.1.0)
 
 # Lets have some options! \o/
+option(GPDS_BUILD_TESTS "Build the unit tests" on)
 option(GPDS_BUILD_EXAMPLES "Build the examples" off)
+option(GPDS_BUILD_LIBRARY_SHARED "Build a shared library instead of a static one" off)
 
 # Compiler settings
 set(CMAKE_CXX_STANDARD 17)
@@ -22,10 +24,12 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 add_subdirectory(src)
 
 # Testing
-enable_testing()
-add_subdirectory(test)
+if (GPDS_BUILD_TESTS OR true)
+	enable_testing()
+	add_subdirectory(test)
+endif()
 
 # Examples
-if (GPDS_BUILD_EXAMPLES)
+if (GPDS_BUILD_EXAMPLES OR true)
 	add_subdirectory(examples/basic)
 endif()

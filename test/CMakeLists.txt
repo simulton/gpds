@@ -11,23 +11,23 @@ add_subdirectory(3rdparty/catch2)
 
 # Include directories
 include_directories(
-	../src/gpds
+	../src
 	../src/3rdparty/rapidxml-1.13
 	3rdparty/catch2/single_include)
 
 # Build test application
 add_executable(
-	gpds_tests
+	gpds-tests
 	test.h
 	test_main.cpp
 	tests/test_01.cpp
 	tests/test_02.cpp
 	tests/test_03.cpp
 	tests/test_04.cpp)
-target_link_libraries(gpds_tests gpds)
-target_link_libraries(gpds_tests Catch2::Catch2)
+target_link_libraries(gpds-tests $<TARGET_OBJECTS:gpds-objs>)
+target_link_libraries(gpds-tests Catch2::Catch2)
 
 # Automatically discover tests
 include(CTest)
 include(Catch)
-catch_discover_tests(gpds_tests)
+catch_discover_tests(gpds-tests)

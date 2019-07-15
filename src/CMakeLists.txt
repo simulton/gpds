@@ -22,9 +22,15 @@ include_directories(
 	.
 	3rdparty/rapidxml-1.13)
 
-# Generate shared library
-add_library(gpds SHARED ${FILES})
+# Generate objects library
+add_library(gpds-objs OBJECT ${FILES})
 
+# Generate shared library
+if (GPDS_BUILD_LIBRARY_SHARED)
+	add_library(gpds SHARED $<TARGET_OBJECTS:gpds-objs>)
+else()
+	add_library(gpds STATIC $<TARGET_OBJECTS:gpds-objs>)
+endif()
 
 ###
 # Install

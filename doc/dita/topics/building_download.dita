@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="building_download">
+    <title>Downloading</title>
+    <prolog>
+        <metadata>
+            <keywords>
+                <indexterm>building</indexterm>
+                <indexterm>downloading</indexterm>
+                <indexterm>repository</indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    
+    <taskbody>
+        <context>
+            <p>The best way to download <ph keyref="projectname"/> is by cloning the <xref
+                    href="https://github.com/simulton/gpds" format="html" scope="external">official
+                    repository</xref>.</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Clone the repository:</cmd>
+                <stepxmp><codeblock><![CDATA[$> git clone https://github.com/simulton/gpds]]></codeblock></stepxmp>
+            </step>
+            <step>
+                <cmd>Get all submodules:</cmd>
+                <stepxmp><codeblock><![CDATA[$> cd gpds
+$> git submodule update --init --recursive]]></codeblock></stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="build_cmake">
+    <title>Building</title>
+    
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>building</indexterm>
+                <indexterm>cmake</indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    
+    <conbody>
+        <p>GPDS comes with <xref href="https://cmake.org/" format="html" scope="external"
+                >cmake</xref> integration which allows to build the library (static and shared),
+            examples and unit tests.</p>
+        
+        <section>
+            <title>Targets</title>
+            <p>The following cmake targets are interesting to a user:</p>
+            <dl>
+                <dlentry>
+                    <dt>gpds-static</dt>
+                    <dd>Build gpds as a static library.</dd>
+                </dlentry>
+                <dlentry>
+                    <dt>gpds-shared</dt>
+                    <dd>Build gpds as a shared/dynamic library.</dd>
+                </dlentry>
+                <dlentry>
+                    <dt>gpds-tests</dt>
+                    <dd>Build (and run) the unit tests.</dd>
+                </dlentry>
+                <dlentry>
+                    <dt>gpds-examples</dt>
+                    <dd>Build the example application(s) that showcase how to use <ph keyref="projectname"/>.</dd>
+                </dlentry>
+            </dl>
+        </section>
+    </conbody>
+</concept>

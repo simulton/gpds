@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="build_unittests">
+    <title>Build examples</title>
+    
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>building</indexterm>
+                <indexterm>cmake</indexterm>
+                <indexterm>examples</indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    
+    <taskbody>
+        <context>
+            <p>Build and run the example application(s).</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Create a build directory:</cmd>
+                <stepxmp><codeblock><![CDATA[$> mkdir build
+$> cd build]]></codeblock></stepxmp>
+            </step>
+            <step>
+                <cmd>Generate the configuration and build:</cmd>
+                <stepxmp><codeblock><![CDATA[$> cd build
+$> cmake ..
+$> make gpds-example]]></codeblock></stepxmp>
+                <stepresult>An executable that runs the example(s) of <ph keyref="projectname"/> is
+                    available under <codeph>/build/examples/</codeph> in form of
+                        <codeph>gpds-example.exe</codeph> (or equivalent).</stepresult>
+            </step>
+            <step>
+                <cmd>Run the example(s)</cmd>
+                <stepxmp>
+                    <codeblock><![CDATA[$> build/examples/basic/gpds-example]]></codeblock>
+                </stepxmp>
+                <stepresult>The example application(s) are being executed.</stepresult>
+            </step>
+        </steps>
+    </taskbody>
+</task>

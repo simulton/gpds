@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>Building</title>
+    
+    <topicmeta>
+        <author>Joel Bodenmann</author>
+    </topicmeta>
+        
+    <topicref collection-type="sequence" chunk="to-content">
+        <topicmeta>
+            <navtitle>Building</navtitle>
+            <shortdesc>A guide on how to build <ph keyref="projectname"/>.</shortdesc>
+        </topicmeta>
+        
+        <topicref href="../topics/building_download.dita"/>
+        <topicref href="../topics/building_cmake.dita"/>
+        <topicref href="../topics/building_library_static.dita"/>
+        <topicref href="../topics/building_library_shared.dita"/>
+        <topicref href="../topics/building_unittests.dita"/>
+        <topicref href="../topics/building_examples.dita"/>
+    
+    </topicref>
+</map>

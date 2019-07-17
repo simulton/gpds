@@ -13,6 +13,7 @@
             <shortdesc>A guide on how to integrate <ph keyref="projectname"/> into a project</shortdesc>
         </topicmeta>
         
+        <topicref href="../topics/integration_overview.dita"/>
         <topicref href="../topics/requirements.dita"/>
         <topicref href="../topics/integration_general.dita"/>        
         <topicref href="../topics/integration_qt.dita"/>

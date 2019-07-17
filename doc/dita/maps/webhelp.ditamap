@@ -36,6 +36,7 @@
         </topicref>
     </topicref>
     
+    <mapref href="building.ditamap"/>
     <mapref href="integration.ditamap"/>
     <mapref href="architecture.ditamap"/>
     <mapref href="usage.ditamap"/>

@@ -1,10 +1,10 @@
 #pragma once
 
 #include <map>
-#include "value.h"
-#include "attributes.h"
-#include "utils.h"
-#include "types.h"
+#include <gpds/value.h>
+#include <gpds/attributes.h>
+#include <gpds/utils.h>
+#include <gpds/types.h>
 
 namespace Gpds
 {

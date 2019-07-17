@@ -1,7 +1,7 @@
 DEFINES += GPDS_SUPPORT_QT
 
 INCLUDEPATH += \
-    $$PWD/include \
+    $$PWD \
     $$PWD/3rdparty/rapidxml-1.13
 
 HEADERS += \
@@ -10,14 +10,14 @@ HEADERS += \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_print.hpp \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_utils.hpp \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_ext.hpp \
-    $$PWD/include/attributes.h \
-    $$PWD/include/value.h \
-    $$PWD/include/container.h \
-    $$PWD/include/serialize.h \
-    $$PWD/include/archiver.h \
-    $$PWD/include/archiverxml.h \
-    $$PWD/include/utils.h \
-    $$PWD/include/types.h
+    $$PWD/gpds/attributes.h \
+    $$PWD/gpds/value.h \
+    $$PWD/gpds/container.h \
+    $$PWD/gpds/serialize.h \
+    $$PWD/gpds/archiver.h \
+    $$PWD/gpds/archiverxml.h \
+    $$PWD/gpds/utils.h \
+    $$PWD/gpds/types.h
 
 SOURCES += \
     $$PWD/src/value.cpp

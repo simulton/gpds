@@ -6,9 +6,9 @@
 #include <vector>
 #include <map>
 #include <optional>
-#include "attributes.h"
-#include "utils.h"
-#include "types.h"
+#include <gpds/attributes.h>
+#include <gpds/utils.h>
+#include <gpds/types.h>
 
 namespace Gpds
 {

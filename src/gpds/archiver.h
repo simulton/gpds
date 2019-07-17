@@ -1,6 +1,6 @@
 #pragma once
 
-#include "serialize.h"
+#include <gpds/serialize.h>
 
 namespace Gpds
 {

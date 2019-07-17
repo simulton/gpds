@@ -1,8 +1,8 @@
 #pragma once
 
 #include <algorithm>
-#include "utils.h"
-#include "archiver.h"
+#include <gpds/utils.h>
+#include <gpds/archiver.h>
 #include "rapidxml_ext.hpp"
 #include "rapidxml_print.hpp"
 

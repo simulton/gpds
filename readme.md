@@ -1,6 +1,6 @@
 GPDS is a **G**eneral **P**urpose **D**ata **S**erializer implemented as a very small C++ library.
-It allows to serialize C++ classes to an from XML files in a generic format that can be processed
-by other XML processing software.
+It allows to serialize C++ classes to and from XML files in a generic format that can be processed
+by other XML processing software (or just for the sake of readability).
 
 Consider the following C++ class:
 ```

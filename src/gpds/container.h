@@ -73,6 +73,17 @@ namespace Gpds
             return attributes.get( std::forward< gString >( key ) );
         }
 
+        std::optional<gString> getValueAttribute(const gString& valueKey, const gString& attributeKey) const
+        {
+            auto it = values.find( valueKey );
+
+            if ( it != values.end() and not it->second.isEmpty() ) {
+                return it->second.getAttribute( attributeKey );
+            }
+
+            return std::nullopt;
+        }
+
         Container& setComment(const gString& comment)
         {
             this->comment = comment;

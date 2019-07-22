@@ -146,9 +146,9 @@ namespace Gpds
             return addAttribute( std::forward< gString >( key ), gString( value ) );
         }
 
-        std::optional< gString > getAttribute(gString&& key) const
+        std::optional< gString > getAttribute(const gString& keyString) const
         {
-            return attributes.get( std::forward< gString >( key ) );
+            return attributes.get( keyString );
         }
 
         Value& setComment(const gString& comment)

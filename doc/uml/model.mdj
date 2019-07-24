@@ -1467,7 +1467,7 @@
 											"top": 489,
 											"width": 384.3046875,
 											"height": 13,
-											"text": "+getValueAttribute(valueKey: string, attributeKey: String): string",
+											"text": "+getValueAttribute(valueKey: string, attributeKey: String): T",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3971,7 +3971,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFsGnfeiGWp22w="
 											},
-											"type": "string",
+											"type": "T",
 											"direction": "return"
 										}
 									]
@@ -8994,7 +8994,7 @@
 											"top": 193,
 											"width": 384.3046875,
 											"height": 13,
-											"text": "+getValueAttribute(valueKey: string, attributeKey: String): string",
+											"text": "+getValueAttribute(valueKey: string, attributeKey: String): T",
 											"horizontalAlignment": 0
 										},
 										{
@@ -10948,7 +10948,7 @@
 											"top": 361,
 											"width": 384.3046875,
 											"height": 13,
-											"text": "+getValueAttribute(valueKey: string, attributeKey: String): string",
+											"text": "+getValueAttribute(valueKey: string, attributeKey: String): T",
 											"horizontalAlignment": 0
 										},
 										{

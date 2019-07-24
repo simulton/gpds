@@ -29,10 +29,10 @@ public:
     virtual void fromContainer(const Gpds::Container& c) override
     {
         // Retrieve format
-        const std::string& formatString = c.getAttribute("format").value_or("n/a");
+        const std::string& formatString = c.getAttribute<std::string>("format").value_or("n/a");
         assert( formatString == "rgb" );
 
-        name = c.getAttribute("name").value_or("n/a");
+        name = c.getAttribute<std::string>("name").value_or("n/a");
         red = c.getValue<int>("red");
         green = c.getValue<int>("green");
         blue = c.getValue<int>("blue");

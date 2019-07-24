@@ -9,7 +9,7 @@ static const std::string FILE_CONTENT =
     "  <string>Hello World!</string>"
     "</data>";
 
-class TestData : public Gpds::Serialize
+class TestData04 : public Gpds::Serialize
 {
 public:
     std::vector<std::string> data;
@@ -33,7 +33,7 @@ TEST_CASE( "Read Datatype: String" )
     };
 
     // Parse test file
-    TestData data;
+    TestData04 data;
     REQUIRE( deserialize( FILE_CONTENT, data ) );
 
     // Ensure that data is the same

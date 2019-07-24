@@ -74,12 +74,13 @@ namespace Gpds
             return attributes.get<T>( std::forward< gString >( key ) );
         }
 
-        std::optional<gString> getValueAttribute(const gString& valueKey, const gString& attributeKey) const
+        template<typename T>
+        std::optional<T> getValueAttribute(const gString& valueKey, const gString& attributeKey) const
         {
             auto it = values.find( valueKey );
 
             if ( it != values.end() and not it->second.isEmpty() ) {
-                return it->second.getAttribute( attributeKey );
+                return it->second.getAttribute<T>( attributeKey );
             }
 
             return std::nullopt;

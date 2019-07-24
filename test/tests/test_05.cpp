@@ -85,7 +85,6 @@ public:
 
             }
         }
-        REQUIRE( data.size() == knownGood.size() );
     }
 };
 

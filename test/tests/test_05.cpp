@@ -28,17 +28,17 @@ using Data = std::vector<std::variant<
 
 // The "known good" data
 static const Data knownGood = {
-        true,
-        false,
-        0,
-        1,
-        42,
-        -17,
-        -0.0,
-        0.0,
-        -1.0,
-        1.0,
-        std::string("Hello GPDS!")
+    true,
+    false,
+    0,
+    1,
+    42,
+    -17,
+    -0.0,
+    0.0,
+    -1.0,
+    1.0,
+    std::string("Hello GPDS!")
 };
 
 class TestData05 : public Gpds::Serialize

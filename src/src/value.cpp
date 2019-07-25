@@ -21,7 +21,7 @@ Value::Value( Value&& other ) :
     other._value = nullptr;
 }
 
-Value::~Value()
+Value::~Value() noexcept 
 {
     // Ensure that we won't throw
     GPDS_ASSERT( not _value.valueless_by_exception() );

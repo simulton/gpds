@@ -35,27 +35,6 @@ Value::~Value()
     freeContainerMemory();
 }
 
-constexpr bool Value::isEmpty() const
-{
-    return _value.valueless_by_exception();
-}
-
-constexpr const char* Value::typeString() const
-{
-    if ( std::holds_alternative<Container*>( _value ) ) {
-        return "nested";
-    }
-
-    return std::visit(overload{
-            [](const gBool&)    { return "bool"; },
-            [](const gInt&)     { return "int"; },
-            [](const gReal&)    { return "double"; },
-            [](const gString&)  { return "string"; }
-    }, _value);
-
-    return "n/a";
-}
-
 void Value::fromString(std::string&& string)
 {
     // Is it a boolean 'true' value?

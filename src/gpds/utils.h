@@ -14,20 +14,6 @@ namespace Gpds
             abort();  \
         }
 
-    // This only works where the RapidXML document instance named doc is in scope as not all underlying
-    // string classes return a C string that stays in scope (eg. QString)
-    #ifdef GPDS_SUPPORT_QT
-        #define GPDS_STR_TO_CSTR( x )   ( doc.allocate_string( x.toUtf8().constData() ) )
-    #else
-        #define GPDS_STR_TO_CSTR( x )   ( x.c_str() )
-    #endif
-
-    #ifdef GPDS_SUPPORT_QT
-        #define GPDS_STR_IS_EMPTY( x )  ( x.isEmpty() )
-    #else
-        #define GPDS_STR_IS_EMPTY( x )  ( x.empty() )
-    #endif
-
     template<typename T>
     static std::string valueToString( const T& value )
     {

@@ -1,7 +1,9 @@
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 # List of source files
-set(SOURCES src/value.cpp)
+set(SOURCES
+	src/container.cpp
+	src/value.cpp)
 
 # List of header files
 set(HEADERS

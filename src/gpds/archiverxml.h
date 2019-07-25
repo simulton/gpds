@@ -262,7 +262,7 @@ namespace Gpds
                             for (const rapidxml::xml_attribute<> *attribute = node->first_attribute(); attribute; attribute = attribute->next_attribute()) {
                                 value.addAttribute(attribute->name(), attribute->value());
                             }
-                        };
+                        }
                     }
 
                         // It's a another container

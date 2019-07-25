@@ -1,12 +1,6 @@
 #include <gpds/value.h>
 #include <gpds/container.h>
 
-// These functions are not located in value.h to prevent circular dependency issues
-// between the 'Container' and the 'Value' class.
-// These three functions are the only thing that keep us from having a nice header-only
-// library.
-// Maybe someone more experienced could tell me how to fix this.
-
 using namespace Gpds;
 
 Value::Value( const Value& other ) :
@@ -157,13 +151,11 @@ void Value::freeContainerMemory()
     }
 }
 
-// Not located in value.h to prevent circular dependency
 void Value::allocateContainerMemory(const Container& container)
 {
     _value = new Container( container );
 }
 
-// Not located in value.h to prevent circular dependency
 void Value::allocateContainerMemory(Container&& container)
 {
     _value = new Container( std::move( container ) );

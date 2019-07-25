@@ -81,7 +81,7 @@ namespace Gpds
 
             return "n/a";
         }
-        
+
         void fromString(std::string&& string);
         std::string toString() const;
 
@@ -141,11 +141,6 @@ namespace Gpds
             #endif
         > _value;
 
-        // Implementation is located in value.cpp to prevent
-        // circular dependency.
-        // This keeps this library from being a header-only library. Maybe
-        // someone could tell me how to fix this in a way that we can achieve
-        // a header-only library again.
         void allocateContainerMemory(const Container& container);
         void allocateContainerMemory(Container&& container);
         void freeContainerMemory();

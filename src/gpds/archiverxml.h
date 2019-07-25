@@ -120,27 +120,17 @@ namespace Gpds
                 // Create a new node in the DOM
                 rapidxml::xml_node<>* child = nullptr;
                 {
-                    if ( value.isType<gBool>() ) {
-                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.get<bool>() ? "true" : "false"));
-                    }
-                    else if ( value.isType<gInt>() ) {
-                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( std::to_string( value.get<int>() ).data() ));
-                    }
-                    else if ( value.isType<gReal>() ) {
-                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( std::to_string( value.get<double>() ).data() ));
-                    }
-                    else if ( value.isType<gString>() ) {
-                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( GPDS_STR_TO_CSTR( value.get<gString>() ) ) );
-                    }
-                    else if ( value.isType<Container*>() ) {
+                    // Nested container
+                    if ( value.isType<Container*>() ) {
                         // Recursion
                         const Container* childContainer = value.get<Container*>();
                         child = doc.allocate_node( rapidxml::node_element, key );
                         writeEntry(doc, *child, *childContainer);
                     }
+
+                    // Simple value
                     else {
-                        // This shouldn't happen
-                        GPDS_ASSERT( false );
+                        child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.toString().data() ) );
                     }
                 }
 

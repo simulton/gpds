@@ -35,7 +35,7 @@ namespace Gpds
 
         virtual ~ArchiverXml() override = default;
 
-        virtual bool save(std::string& string, const Container& container, const std::string& rootName) const override
+        virtual bool save(std::ostream& stream, const Container& container, const std::string& rootName) const override
         {
             // Create the document
             rapidxml::xml_document<> doc;
@@ -54,9 +54,7 @@ namespace Gpds
             writeEntry(doc, *root, container);
 
             // Add data to stream
-            std::stringstream stream;
             stream << doc;
-            string = stream.str();
 
             // Free up memory
             doc.clear();
@@ -64,9 +62,10 @@ namespace Gpds
             return true;
         }
 
-        virtual bool load(std::string& string, Container& container, const std::string& rootName) override
+        virtual bool load(std::istream& stream, Container& container, const std::string& rootName) override
         {
             // Create the document
+            std::string string(std::istreambuf_iterator<char>(stream), {});
             rapidxml::xml_document<> doc;
             doc.parse<0>(string.data());
 

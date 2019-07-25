@@ -2882,7 +2882,7 @@
 											"top": 149,
 											"width": 371.7314453125,
 											"height": 13,
-											"text": "+save(string: string, c: Value, rootName: string): bool",
+											"text": "+save(stream: ostream, c: Value, rootName: string): bool",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2899,7 +2899,7 @@
 											"top": 164,
 											"width": 371.7314453125,
 											"height": 13,
-											"text": "+save(string: string, object: Serialize, rootName: string): bool",
+											"text": "+save(stream: ostream, object: Serialize, rootName: string): bool",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2916,7 +2916,7 @@
 											"top": 179,
 											"width": 371.7314453125,
 											"height": 13,
-											"text": "+load(string: string, c: Value, rootName: string): bool",
+											"text": "+load(stream: istream, c: Value, rootName: string): bool",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2933,7 +2933,7 @@
 											"top": 194,
 											"width": 371.7314453125,
 											"height": 13,
-											"text": "+load(string: string, object: Serialize, rootName: string): bool",
+											"text": "+load(stream: istream, object: Serialize, rootName: string): bool",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4627,8 +4627,8 @@
 											"_parent": {
 												"$ref": "AAAAAAFqeFzgJ9kpVkE="
 											},
-											"name": "string",
-											"type": "string"
+											"name": "stream",
+											"type": "ostream"
 										},
 										{
 											"_type": "UMLParameter",
@@ -4676,8 +4676,8 @@
 											"_parent": {
 												"$ref": "AAAAAAFqeF34L9obMN4="
 											},
-											"name": "string",
-											"type": "string"
+											"name": "stream",
+											"type": "ostream"
 										},
 										{
 											"_type": "UMLParameter",
@@ -4724,8 +4724,8 @@
 											"_parent": {
 												"$ref": "AAAAAAFqeF9D2dyU+kw="
 											},
-											"name": "string",
-											"type": "string"
+											"name": "stream",
+											"type": "istream"
 										},
 										{
 											"_type": "UMLParameter",
@@ -4773,8 +4773,8 @@
 											"_parent": {
 												"$ref": "AAAAAAFqeF/Ee95nJmU="
 											},
-											"name": "string",
-											"type": "string"
+											"name": "stream",
+											"type": "istream"
 										},
 										{
 											"_type": "UMLParameter",

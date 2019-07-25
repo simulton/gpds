@@ -4,7 +4,7 @@
 #include "../test.h"
 #include "gpds/serialize.h"
 
-static std::string FILE_CONTENT =
+static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
     "<data>"
     "  <int>-0</int>"
@@ -53,7 +53,7 @@ TEST_CASE( "Read Datatype: Integer" )
 
     // Parse test file
     TestData02 data;
-    REQUIRE( deserialize( FILE_CONTENT, data, "data" ) );
+    REQUIRE( deserialize( FILE_CONTENT, data ) );
 
     // Ensure that data is the same
     REQUIRE( data.data == knownGood );

@@ -106,6 +106,7 @@ namespace Gpds
         }
 
         void fromString(std::string&& string);
+        std::string toString() const;
 
         template<typename T>
         void set(const T& value)

@@ -75,6 +75,27 @@ void Value::fromString(std::string&& string)
     }
 }
 
+std::string Value::toString() const
+{
+    if ( isType<gBool>() ) {
+        return valueToString( get<gBool>() );
+    }
+
+    else if ( isType<gInt>() ) {
+        return valueToString( get<gInt>() );
+    }
+
+    else if ( isType<gReal>() ) {
+        return valueToString( get<gReal>() );
+    }
+
+    else if ( isType<gString>() ) {
+        return valueToString( get<gString>() );
+    }
+
+    return {};
+}
+
 void Value::freeContainerMemory()
 {
     // Containers need to be cleaned up

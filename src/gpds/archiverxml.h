@@ -1,14 +1,10 @@
 #pragma once
 
-#include <algorithm>
-#include <gpds/utils.h>
 #include <gpds/archiver.h>
-#include "rapidxml_ext.hpp"
-#include "rapidxml_print.hpp"
+#include "3rdparty/rapidxml-1.13/rapidxml.hpp"
 
 namespace Gpds
 {
-
     class ArchiverXml : public Archiver
     {
     public:

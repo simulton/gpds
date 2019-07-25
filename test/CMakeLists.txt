@@ -25,7 +25,8 @@ add_executable(
 	tests/test_03.cpp
 	tests/test_04.cpp
 	tests/test_05.cpp
-	tests/test_06.cpp)
+	tests/test_06.cpp
+	tests/test_07.cpp)
 target_link_libraries(gpds-tests $<TARGET_OBJECTS:gpds-objs>)
 target_link_libraries(gpds-tests Catch2::Catch2)
 

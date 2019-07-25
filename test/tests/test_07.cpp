@@ -1,4 +1,4 @@
-#include <vector>
+#include <sstream>
 #include "catch2/catch.hpp"
 #include "../test.h"
 #include "gpds/serialize.h"
@@ -14,12 +14,12 @@ TEST_CASE( "Color class" )
     red1.blue = 0;
 
     // Serialize
-    std::string serialized;
-    REQUIRE( serialize( serialized, red1, "color" ) );
+    std::stringstream serialized;
+    REQUIRE( GpdsTest::Test::serialize( serialized, red1, "color" ) );
 
     // Deserialize
     GpdsTest::Color red2;
-    REQUIRE( deserialize( serialized, red2, "color" ) );
+    REQUIRE( GpdsTest::Test::deserialize( serialized, red2, "color" ) );
 
     // Ensure that data is the same
     REQUIRE( red1 == red2 );

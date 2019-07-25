@@ -1,5 +1,5 @@
 #include <vector>
-#include <iostream>
+#include <sstream>
 #include "catch2/catch.hpp"
 #include "../test.h"
 #include "gpds/serialize.h"
@@ -37,7 +37,8 @@ TEST_CASE( "Read Datatype: Boolean" )
 
     // Parse test file
     TestData01 data;
-    REQUIRE( deserialize( FILE_CONTENT, data ) );
+    std::stringstream stream( FILE_CONTENT );
+    REQUIRE( GpdsTest::Test::deserialize( stream, data, "data" ) );
 
     // Ensure that data is the same
     REQUIRE( data.data == knownGood );

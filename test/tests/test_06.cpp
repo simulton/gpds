@@ -1,4 +1,5 @@
 #include <vector>
+#include <sstream>
 #include "catch2/catch.hpp"
 #include "../test.h"
 #include "gpds/serialize.h"
@@ -120,7 +121,8 @@ TEST_CASE( "Read Attributes: Container Attributes" )
 {
     // Parse test file
     TestData06 testData;
-    REQUIRE( deserialize( FILE_CONTENT, testData ) );
+    std::stringstream stream( FILE_CONTENT );
+    REQUIRE( GpdsTest::Test::deserialize( stream, testData, "data" ) );
 
     // Ensure that data is the same
     REQUIRE( testData.data.size() == knownGood.size() );

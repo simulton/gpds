@@ -19,6 +19,7 @@ include_directories(
 add_executable(
 	gpds-tests
 	test.h
+	test.cpp
 	test_main.cpp
 	tests/test_01.cpp
 	tests/test_02.cpp

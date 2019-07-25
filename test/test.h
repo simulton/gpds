@@ -1,24 +1,17 @@
 #pragma once
 
 #include <string>
-#include <sstream>
-#include <iostream>
-#include "gpds/serialize.h"
-#include "gpds/archiverxml.h"
+#include <ostream>
+#include <istream>
 
-static bool deserialize( const std::string& content , Gpds::Serialize& object )
-{
-    std::stringstream stream( content );
+namespace Gpds {
+    class Serialize;
+}
 
-    Gpds::ArchiverXml ar;
-
-    bool ret = false;
-    try {
-        ret = ar.load(stream, object, "data");
-    } catch ( std::exception& e ) {
-        std::cout << "EXCEPTION: " << e.what() << std::endl;
-        return false;
-    }
-
-    return ret;
+namespace GpdsTest {
+    class Test {
+    public:
+        static bool serialize(std::ostream &stream, Gpds::Serialize &object, const std::string &rootName);
+        static bool deserialize(std::istream &stream, Gpds::Serialize &object, const std::string &rootName);
+    };
 }

@@ -1,6 +1,5 @@
-#include <gpds/archiverxml.h>
-
 #include <algorithm>
+#include <gpds/archiverxml.h>
 #include <gpds/utils.h>
 #include "rapidxml_ext.hpp"
 #include "rapidxml_print.hpp"

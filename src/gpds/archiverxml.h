@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+#include <istream>
 #include <gpds/archiver.h>
 #include "3rdparty/rapidxml-1.13/rapidxml.hpp"
 

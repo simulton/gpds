@@ -3,7 +3,7 @@
 #include "../test.h"
 #include "gpds/serialize.h"
 
-static const std::string FILE_CONTENT =
+static std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
     "<data>"
     "  <value attribute=\"true\">"
@@ -120,7 +120,7 @@ TEST_CASE( "Read Attributes: Container Attributes" )
 {
     // Parse test file
     TestData06 testData;
-    REQUIRE( deserialize( FILE_CONTENT, testData ) );
+    REQUIRE( deserialize( FILE_CONTENT, testData, "data" ) );
 
     // Ensure that data is the same
     REQUIRE( testData.data.size() == knownGood.size() );

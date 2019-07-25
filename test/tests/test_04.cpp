@@ -3,7 +3,7 @@
 #include "../test.h"
 #include "gpds/serialize.h"
 
-static const std::string FILE_CONTENT =
+static std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
     "<data>"
     "  <string>Hello World!</string>"
@@ -34,7 +34,7 @@ TEST_CASE( "Read Datatype: String" )
 
     // Parse test file
     TestData04 data;
-    REQUIRE( deserialize( FILE_CONTENT, data ) );
+    REQUIRE( deserialize( FILE_CONTENT, data, "data" ) );
 
     // Ensure that data is the same
     REQUIRE( data.data == knownGood );

@@ -1,5 +1,8 @@
 #pragma once
 
+#ifdef GPDS_SUPPORT_QT
+    #include <QString>
+#endif
 #include <type_traits>
 #include <variant>
 #include <string>
@@ -173,6 +176,9 @@ namespace Gpds
             gReal,
             gString,
             gContainer
+            #ifdef GPDS_SUPPORT_QT
+                ,QString,
+            #endif
         > _value;
 
         // Implementation is located in value.cpp to prevent

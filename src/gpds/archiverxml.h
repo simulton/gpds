@@ -176,7 +176,7 @@ namespace Gpds
             for (rapidxml::xml_node<>* node = rootNode.first_node(); node; node = node->next_sibling()) {
                 // Extract the name & value
                 gString keyString( node->name() );
-                String valueString( node->value() );
+                std::string valueString( node->value() );
 
                 // Create the Value
                 Value value;
@@ -250,7 +250,7 @@ namespace Gpds
 
                         // Lets just assume it's a string :>
                         {
-                            value.set( valueString.toNative() );
+                            value.set( valueString );
                             goto stringParsed;
                         }
 

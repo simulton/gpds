@@ -191,70 +191,7 @@ namespace Gpds
 
                     // It's a text element
                     if ( not valueString.empty() ) {
-                        // Is it a boolean 'true' value?
-                        if (valueString == "true") {
-                            value.set(true);
-                            goto stringParsed;
-                        }
-
-                        // Is it a boolean 'false' value?
-                        if (valueString == "false") {
-                            value.set(false);
-                            goto stringParsed;
-                        }
-
-                        // Is it an integer?
-                        {
-                            // Ensure that this is an integer
-                            bool isInteger = true;
-                            for (std::string::const_iterator it = valueString.cbegin(); it != valueString.cend(); ++it) {
-                                // Make sure that this is a digit
-                                if (not std::isdigit(static_cast<int>( *it ))) {
-                                    isInteger = false;
-                                }
-
-                                // Check for minus sign
-                                if (it == valueString.cbegin() and !isInteger and *it == '-') {
-                                    isInteger = true;
-                                }
-
-                                if (not isInteger) {
-                                    break;
-                                }
-                            }
-
-                            if (isInteger) {
-                                try {
-                                    int i = std::stoi( valueString );
-                                    value.set(i);
-                                    goto stringParsed;
-                                } catch (const std::invalid_argument &e) {
-                                    (void) e;
-                                    // Nothing to do here. Fall through.
-                                }
-                            }
-                        }
-
-                        // Is it a double?
-                        {
-
-                            try {
-                                double d = std::stod( valueString );
-                                value.set(d);
-                                goto stringParsed;
-                            } catch (const std::invalid_argument &e) {
-                                (void) e;
-                                // Nothing to do here. Fall through.
-                            }
-                        }
-
-                        // Lets just assume it's a string :>
-                        {
-                            value.set( valueString );
-                            goto stringParsed;
-                        }
-
-                        stringParsed:
+                        value.fromString( std::move( valueString ));
 
                         // Arguments
                         {

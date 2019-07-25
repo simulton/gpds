@@ -37,24 +37,9 @@ namespace Gpds
         gString comment;
 
         Value( ) = default;
-
-        Value( const Value& other ) :
-            attributes( other.attributes ),
-            comment( other.comment ),
-            _value( other._value )
-        {
-            if ( std::holds_alternative<Container*>( _value ) ) {
-                allocateContainerMemory( *std::get<Container*>( _value ) );
-            }
-        }
-
-        Value( Value&& other ) :
-            attributes( std::move( other.attributes ) ),
-            comment( std::move( other.comment ) ),
-            _value( std::move( other._value) )
-        {
-            other._value = nullptr;
-        }
+        Value( const Value& other );
+        Value( Value&& other );
+        virtual ~Value() noexcept;
 
         template<class T,
             typename std::enable_if< not std::is_class<T>::value, T >::type* = nullptr>
@@ -70,41 +55,14 @@ namespace Gpds
             set<T>( std::move( value ) );
         }
 
-        virtual ~Value() noexcept
-        {
-            // Ensure that we won't throw
-            GPDS_ASSERT( not _value.valueless_by_exception() );
-
-            freeContainerMemory();
-        }
-
         template<typename T>
         constexpr bool isType() const noexcept
         {
             return std::holds_alternative<T>( _value );
         }
 
-        constexpr bool isEmpty() const
-        {
-            return _value.valueless_by_exception();
-        }
-
-        constexpr const char* typeString() const
-        {
-            if ( std::holds_alternative<Container*>( _value ) ) {
-                return "nested";
-            }
-
-            return std::visit(overload{
-                    [](const gBool&)    { return "bool"; },
-                    [](const gInt&)     { return "int"; },
-                    [](const gReal&)    { return "double"; },
-                    [](const gString&)  { return "string"; }
-            }, _value);
-
-            return "n/a";
-        }
-
+        constexpr bool isEmpty() const;
+        constexpr const char* typeString() const;
         void fromString(std::string&& string);
         std::string toString() const;
 
@@ -140,17 +98,8 @@ namespace Gpds
             return std::get<T>( _value );
         }
 
-        Value& addAttribute(gString&& key, gString&& value)
-        {
-            attributes.add( std::forward< gString >( key ), std::forward< gString >( value ) );
-
-            return *this;
-        }
-
-        Value& addAttribute(gString&& key, const gString& value)
-        {
-            return addAttribute( std::forward< gString >( key ), gString( value ) );
-        }
+        Value& addAttribute(gString&& key, gString&& value);
+        Value& addAttribute(gString&& key, const gString& value);
 
         template<typename T>
         std::optional<T> getAttribute(gString&& key) const
@@ -158,19 +107,8 @@ namespace Gpds
             return attributes.get<T>( std::forward<gString>( key ) );
         }
 
-        Value& setComment(const gString& comment)
-        {
-            this->comment = comment;
-
-            return *this;
-        }
-
-        Value& setComment(gString&& comment)
-        {
-            this->comment = std::move( comment );
-
-            return *this;
-        }
+        Value& setComment(const gString& comment);
+        Value& setComment(gString&& comment);
 
     private:
         std::variant<

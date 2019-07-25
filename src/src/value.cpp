@@ -9,6 +9,53 @@
 
 using namespace Gpds;
 
+Value::Value( const Value& other ) :
+    attributes( other.attributes ),
+    comment( other.comment ),
+    _value( other._value )
+{
+    if ( std::holds_alternative<Container*>( _value ) ) {
+        allocateContainerMemory( *std::get<Container*>( _value ) );
+    }
+}
+
+Value::Value( Value&& other ) :
+    attributes( std::move( other.attributes ) ),
+    comment( std::move( other.comment ) ),
+    _value( std::move( other._value) )
+{
+    other._value = nullptr;
+}
+
+Value::~Value()
+{
+    // Ensure that we won't throw
+    GPDS_ASSERT( not _value.valueless_by_exception() );
+
+    freeContainerMemory();
+}
+
+constexpr bool Value::isEmpty() const
+{
+    return _value.valueless_by_exception();
+}
+
+constexpr const char* Value::typeString() const
+{
+    if ( std::holds_alternative<Container*>( _value ) ) {
+        return "nested";
+    }
+
+    return std::visit(overload{
+            [](const gBool&)    { return "bool"; },
+            [](const gInt&)     { return "int"; },
+            [](const gReal&)    { return "double"; },
+            [](const gString&)  { return "string"; }
+    }, _value);
+
+    return "n/a";
+}
+
 void Value::fromString(std::string&& string)
 {
     // Is it a boolean 'true' value?
@@ -94,6 +141,32 @@ std::string Value::toString() const
     }
 
     return {};
+}
+
+Value& Value::addAttribute(gString&& key, gString&& value)
+{
+    attributes.add( std::forward< gString >( key ), std::forward< gString >( value ) );
+
+    return *this;
+}
+
+Value& Value::addAttribute(gString&& key, const gString& value)
+{
+    return addAttribute( std::forward< gString >( key ), gString( value ) );
+}
+
+Value& Value::setComment(const gString& comment)
+{
+    this->comment = comment;
+
+    return *this;
+}
+
+Value& Value::setComment(gString&& comment)
+{
+    this->comment = std::move( comment );
+
+    return *this;
 }
 
 void Value::freeContainerMemory()

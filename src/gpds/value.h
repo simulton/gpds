@@ -137,7 +137,7 @@ namespace Gpds
             gString,
             gContainer
             #ifdef GPDS_SUPPORT_QT
-                ,QString,
+                ,QString
             #endif
         > _value;
 

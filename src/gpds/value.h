@@ -105,6 +105,8 @@ namespace Gpds
             return "n/a";
         }
 
+        void fromString(std::string&& string);
+
         template<typename T>
         void set(const T& value)
         {

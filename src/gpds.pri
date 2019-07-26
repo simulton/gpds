@@ -20,4 +20,6 @@ HEADERS += \
     $$PWD/gpds/types.h
 
 SOURCES += \
-    $$PWD/src/value.cpp
+    $$PWD/src/archiverxml.cpp \
+    $$PWD/src/container.cpp \
+    $$PWD/src/value.cpp \

@@ -55,10 +55,10 @@ install(TARGETS gpds-static DESTINATION gpds/lib)
 install(TARGETS gpds-shared DESTINATION gpds/lib)
 
 # Copy GPDS headers
-install(FILES ${HEADERS} DESTINATION gpds/include)
+install(FILES ${HEADERS} DESTINATION gpds/include/gpds)
 
 # Copy rapidxml headers
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/3rdparty/rapidxml-1.13/
-	DESTINATION gpds/include
+	DESTINATION gpds/include/gpds
 	FILES_MATCHING PATTERN "*.hpp")
 

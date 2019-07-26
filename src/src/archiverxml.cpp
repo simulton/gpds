@@ -149,7 +149,7 @@ void ArchiverXml::readEntry(rapidxml::xml_node<>& rootNode, Container& container
 
         // Container arguments
         for ( const rapidxml::xml_attribute<>* attribute = rootNode.first_attribute(); attribute; attribute = attribute->next_attribute() ) {
-            container.addAttribute( attribute->name(), attribute->value() );
+            container.addAttribute( attribute->name(), std::string( attribute->value() ) );
         }
 
         // Ensure that it's not an empty element
@@ -163,7 +163,7 @@ void ArchiverXml::readEntry(rapidxml::xml_node<>& rootNode, Container& container
                 {
                     // Value arguments
                     for (const rapidxml::xml_attribute<> *attribute = node->first_attribute(); attribute; attribute = attribute->next_attribute()) {
-                        value.addAttribute(attribute->name(), attribute->value());
+                        value.addAttribute(attribute->name(), std::string(attribute->value()));
                     }
                 }
             }

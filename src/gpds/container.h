@@ -57,8 +57,13 @@ namespace Gpds
             return values;
         }
 
-        Container& addAttribute(gString&& key, gString&& value);
-        Container& addAttribute(gString&& key, const gString& value);
+        template<typename T>
+        Container& addAttribute(gString&& key, const T& value)
+        {
+            attributes.add( std::forward< gString >( key ), value );
+
+            return *this;
+        };
 
         template<typename T>
         std::optional<T> getAttribute(gString&& key) const

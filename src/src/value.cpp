@@ -116,18 +116,6 @@ std::string Value::toString() const
     return {};
 }
 
-Value& Value::addAttribute(gString&& key, gString&& value)
-{
-    attributes.add( std::forward< gString >( key ), std::forward< gString >( value ) );
-
-    return *this;
-}
-
-Value& Value::addAttribute(gString&& key, const gString& value)
-{
-    return addAttribute( std::forward< gString >( key ), gString( value ) );
-}
-
 Value& Value::setComment(const gString& comment)
 {
     this->comment = comment;

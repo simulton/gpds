@@ -2,18 +2,6 @@
 
 using namespace Gpds;
 
-Container& Container::addAttribute(gString&& key, gString&& value)
-{
-    attributes.add( std::forward< gString >( key ), std::forward< gString >( value ) );
-
-    return *this;
-}
-
-Container& Container::addAttribute(gString&& key, const gString& value)
-{
-    return addAttribute( std::forward< gString >( key ), gString( value ) );
-}
-
 Container& Container::setComment(const gString& comment)
 {
     this->comment = comment;

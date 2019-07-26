@@ -1,3 +1,5 @@
+[![Build Status](https://ci.simulton.com/buildStatus/icon?job=GPDS)](https://ci.simulton.com/job/GPDS/)
+
 GPDS is a **G**eneral **P**urpose **D**ata **S**erializer implemented as a very small C++ library.
 It allows to serialize C++ classes to and from XML files in a generic format that can be processed
 by other XML processing software (or just for the sake of readability).

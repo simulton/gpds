@@ -15,7 +15,7 @@
     </prolog>
     
     <body>
-        <p>This topic explains the usage of the <ph keyref="projectname"/> library. See <xref href="integration_general.dita"/>
+        <p>This topic explains the usage of the <ph keyref="projectname"/> library. See <xref href="integration.dita"/>
             for instructions on how to integrate the library into a project.</p>
         
         <section>
@@ -144,7 +144,7 @@ ar.load(stream, car, "car");]]></codeblock>
     </body>
     
     <related-links>
-        <link href="integration_general.dita"/>
+        <link href="integration.dita"/>
         <link href="architecture_overview.dita"/>
     </related-links>
     

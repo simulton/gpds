@@ -1,5 +1,3 @@
-DEFINES += GPDS_SUPPORT_QT
-
 INCLUDEPATH += \
     $$PWD \
     $$PWD/3rdparty/rapidxml-1.13

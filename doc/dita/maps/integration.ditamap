@@ -15,8 +15,7 @@
         
         <topicref href="../topics/integration_overview.dita"/>
         <topicref href="../topics/requirements.dita"/>
-        <topicref href="../topics/integration_general.dita"/>        
-        <topicref href="../topics/integration_qt.dita"/>
+        <topicref href="../topics/integration.dita"/>
     
     </topicref>
 </map>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
-<task id="Untitled">
-    <title>Integration (General)</title>
+<task id="integration">
+    <title>Integration</title>
     <prolog>
         <author>Joel Bodenmann</author>
         <metadata>

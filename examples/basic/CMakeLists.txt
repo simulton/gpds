@@ -5,8 +5,8 @@ set(_files ${_sources} ${_headers})
 
 # Add library
 include_directories(
-    ../../src
-    ../../src/3rdparty/rapidxml-1.13
+    ../../lib/include
+    ../../lib/3rdparty/rapidxml-1.13
 )
 
 # Build the executable

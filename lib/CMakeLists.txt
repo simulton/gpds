@@ -8,21 +8,21 @@ set(SOURCES
 
 # List of header files
 set(HEADERS
-	gpds/archiver.h
-	gpds/archiverxml.h
-	gpds/attributes.h
-	gpds/container.h
-	gpds/serialize.h
-	gpds/types.h
-	gpds/utils.h
-	gpds/value.h)
+	include/gpds/archiver.h
+	include/gpds/archiverxml.h
+	include/gpds/attributes.h
+	include/gpds/container.h
+	include/gpds/serialize.h
+	include/gpds/types.h
+	include/gpds/utils.h
+	include/gpds/value.h)
 
 # List of header + source files
 set(FILES ${SOURCES} ${HEADERS})
 
 # Include directories
 include_directories(
-	.
+	include
 	3rdparty/rapidxml-1.13)
 
 
@@ -51,14 +51,14 @@ set_target_properties(gpds-static
 ###
 
 # Copy libraries
-install(TARGETS gpds-static DESTINATION lib)
-install(TARGETS gpds-shared DESTINATION lib)
+install(TARGETS gpds-static DESTINATION gpds/lib)
+install(TARGETS gpds-shared DESTINATION gpds/lib)
 
 # Copy GPDS headers
-install(FILES ${HEADERS} DESTINATION gpds)
+install(FILES ${HEADERS} DESTINATION gpds/include)
 
 # Copy rapidxml headers
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/3rdparty/rapidxml-1.13/
-	DESTINATION gpds
+	DESTINATION gpds/include
 	FILES_MATCHING PATTERN "*.hpp")
 

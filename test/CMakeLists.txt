@@ -11,8 +11,8 @@ add_subdirectory(3rdparty/catch2)
 
 # Include directories
 include_directories(
-	../src
-	../src/3rdparty/rapidxml-1.13
+	../lib/include
+	../lib/3rdparty/rapidxml-1.13
 	3rdparty/catch2/single_include)
 
 # Build test application

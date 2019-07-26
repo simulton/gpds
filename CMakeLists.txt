@@ -17,7 +17,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 
 # Build the actual library
-add_subdirectory(src)
+add_subdirectory(lib)
 
 # Testing
 if (GPDS_BUILD_TESTS)

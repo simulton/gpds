@@ -9,6 +9,9 @@ project(gpds
 option(GPDS_BUILD_TESTS "Build the unit tests" on)
 option(GPDS_BUILD_EXAMPLES "Build the examples" on)
 
+# User settings
+set(CMAKE_DEBUG_POSTFIX d)
+
 # Compiler settings
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)

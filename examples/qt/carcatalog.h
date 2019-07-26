@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QList>
-#include "../../lib/serialize.h"
+#include <gpds/serialize.h>
 #include "car.h"
 
 class CarCatalog : public Gpds::Serialize

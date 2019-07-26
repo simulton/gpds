@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QString>
-#include "../../lib/serialize.h"
+#include <gpds/serialize.h>
 #include "color.h"
 
 class Car : public Gpds::Serialize {

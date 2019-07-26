@@ -1,7 +1,7 @@
 #include <sstream>
 #include <QtDebug>
 #include <QCoreApplication>
-#include "../../lib/archiverxml.h"
+#include <gpds/archiverxml.h>
 #include "car.h"
 #include "color.h"
 #include "carcatalog.h"

@@ -1,5 +1,5 @@
 INCLUDEPATH += \
-    $$PWD \
+    $$PWD/include \
     $$PWD/3rdparty/rapidxml-1.13
 
 HEADERS += \

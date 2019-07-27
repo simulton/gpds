@@ -86,13 +86,13 @@ install(TARGETS gpds-static EXPORT GpdsTargets
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
 		"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
-		VERSION ${Upstream_VERSION}
+		VERSION ${Gpds_VERSION}
 		COMPATIBILITY AnyNewerVersion
 )
 
 export(EXPORT GpdsTargets
 		FILE "${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsTargets.cmake"
-		NAMESPACE Upstream::
+		NAMESPACE Gpds::
 		)
 configure_file(GpdsConfig.cmake
 		"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfig.cmake"
@@ -104,7 +104,7 @@ install(EXPORT GpdsTargets
 		FILE
 		GpdsTargets.cmake
 		NAMESPACE
-		Upstream::
+		Gpds::
 		DESTINATION
 		${ConfigPackageLocation}
 		)

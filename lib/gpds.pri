@@ -8,14 +8,14 @@ HEADERS += \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_print.hpp \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_utils.hpp \
     $$PWD/3rdparty/rapidxml-1.13/rapidxml_ext.hpp \
-    $$PWD/gpds/attributes.h \
-    $$PWD/gpds/value.h \
-    $$PWD/gpds/container.h \
-    $$PWD/gpds/serialize.h \
-    $$PWD/gpds/archiver.h \
-    $$PWD/gpds/archiverxml.h \
-    $$PWD/gpds/utils.h \
-    $$PWD/gpds/types.h
+    $$PWD/include/gpds/attributes.h \
+    $$PWD/include/gpds/value.h \
+    $$PWD/include/gpds/container.h \
+    $$PWD/include/gpds/serialize.h \
+    $$PWD/include/gpds/archiver.h \
+    $$PWD/include/gpds/archiverxml.h \
+    $$PWD/include/gpds/utils.h \
+    $$PWD/include/gpds/types.h
 
 SOURCES += \
     $$PWD/src/archiverxml.cpp \

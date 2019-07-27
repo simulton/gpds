@@ -4,6 +4,7 @@ project(gpds
 	LANGUAGES CXX
 	HOMEPAGE_URL "https://gpds.simulton.com")
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 # List of source files

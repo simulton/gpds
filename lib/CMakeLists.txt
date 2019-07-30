@@ -125,17 +125,21 @@ include(CMakePackageConfigHelpers)
 # Copy GPDS headers
 install(
 	FILES ${HEADERS_PUBLIC}
-	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds)
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
+)
 
 # Install export header
-install(FILES
-	${PROJECT_BINARY_DIR}/gpds_export.h
-	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds)
+install(
+	FILES ${PROJECT_BINARY_DIR}/gpds_export.h
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
+)
 
 # Copy rapidxml headers
-install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/3rdparty/rapidxml-1.13/
+install(
+	DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/3rdparty/rapidxml-1.13/
 	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
-	FILES_MATCHING PATTERN "*.hpp")
+	FILES_MATCHING PATTERN "*.hpp"
+)
 
 # Targets
 install(

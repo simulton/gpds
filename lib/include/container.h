@@ -64,7 +64,7 @@ namespace Gpds
             attributes.add( std::forward< gString >( key ), value );
 
             return *this;
-        };
+        }
 
         template<typename T>
         std::optional<T> getAttribute(gString&& key) const

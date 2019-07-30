@@ -45,7 +45,7 @@ target_include_directories(gpds-objs
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rapidxml-1.13>
 	INTERFACE
-		$<INSTALL_INTERFACE:gpds/include>)
+		$<INSTALL_INTERFACE:include>)
 
 
 
@@ -60,7 +60,7 @@ target_include_directories(
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rapidxml-1.13>
 	INTERFACE
-		$<INSTALL_INTERFACE:gpds/include>
+		$<INSTALL_INTERFACE:include>
 )
 
 
@@ -80,7 +80,7 @@ target_include_directories(
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rapidxml-1.13>
 	INTERFACE
-		$<INSTALL_INTERFACE:gpds/include>
+		$<INSTALL_INTERFACE:include>
 )
 
 # Common library properties

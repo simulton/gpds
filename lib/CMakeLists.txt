@@ -163,7 +163,7 @@ write_basic_package_version_file(
 	COMPATIBILITY AnyNewerVersion
 )
 install(
-		FILES
+	FILES
 		GpdsConfig.cmake
 		"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
 		DESTINATION ${ConfigPackageLocation}

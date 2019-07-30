@@ -158,7 +158,7 @@ install(
 		COMPONENT bin
 	INCLUDES
 		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
-		COMPONENT dev)
+)
 
 # Package version
 write_basic_package_version_file(

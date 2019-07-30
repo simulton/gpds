@@ -2,11 +2,8 @@
 # Testing (using catch2)
 ###
 
-# Add the Catch2 CMake modules as we don't expect it to be properly installed on
-# the system.
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/3rdparty/catch2/contrib)
-
 # Add catch2
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/3rdparty/catch2/contrib)
 add_subdirectory(3rdparty/catch2)
 
 # Build test application

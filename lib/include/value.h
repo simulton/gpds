@@ -6,9 +6,10 @@
 #include <vector>
 #include <map>
 #include <optional>
-#include <gpds/attributes.h>
-#include <gpds/utils.h>
-#include <gpds/types.h>
+#include "gpds_export.h"
+#include "attributes.h"
+#include "utils.h"
+#include "types.h"
 
 namespace Gpds
 {
@@ -27,7 +28,7 @@ namespace Gpds
         return contains< T, gBool, gInt, gReal, gString, gContainer >;
     }
 
-    class Value
+    class GPDS_EXPORT Value
     {
     public:
         Attributes attributes;

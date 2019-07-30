@@ -1,11 +1,12 @@
 #pragma once
 
-#include <gpds/serialize.h>
+#include "gpds_export.h"
+#include "serialize.h"
 
 namespace Gpds
 {
 
-    class Archiver
+    class GPDS_EXPORT Archiver
     {
     public:
         virtual ~Archiver() = default;

@@ -2,12 +2,12 @@
 
 #include <ostream>
 #include <istream>
-#include <gpds/archiver.h>
+#include "archiver.h"
 #include "rapidxml.hpp"
 
 namespace Gpds
 {
-    class ArchiverXml : public Archiver
+    class GPDS_EXPORT ArchiverXml : public Archiver
     {
     public:
         // Deal with name hiding

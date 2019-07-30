@@ -1,14 +1,15 @@
 #pragma once
 
 #include <map>
-#include <gpds/value.h>
-#include <gpds/attributes.h>
-#include <gpds/utils.h>
-#include <gpds/types.h>
+#include "gpds_export.h"
+#include "value.h"
+#include "attributes.h"
+#include "utils.h"
+#include "types.h"
 
 namespace Gpds
 {
-    class Container
+    class GPDS_EXPORT Container
     {
     public:
         std::multimap< gString, Value > values;

@@ -3,13 +3,13 @@
 #include <map>
 #include <string>
 #include <optional>
-#include <gpds/types.h>
-#include <gpds/utils.h>
+#include "types.h"
+#include "utils.h"
 
 namespace Gpds
 {
 
-    class Attributes
+    class GPDS_EXPORT Attributes
     {
     public:
         std::map< gString, gString> map;

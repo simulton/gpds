@@ -4,6 +4,7 @@ project(gpds
 	LANGUAGES CXX
 	HOMEPAGE_URL "https://gpds.simulton.com")
 
+# Some bacis cmake configuration
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
@@ -24,11 +25,13 @@ set(HEADERS_PUBLIC
 	include/utils.h
 	include/value.h)
 
-# Generate objects library
+
+
+################################################################################
+# Object library                                                               #
+################################################################################
+
 add_library(gpds-objs OBJECT "")
-set_target_properties(gpds-objs
-	PROPERTIES
-		POSITION_INDEPENDENT_CODE 1)
 target_compile_features(gpds-objs
 	PUBLIC
 		cxx_std_17)
@@ -44,34 +47,59 @@ target_include_directories(gpds-objs
 	INTERFACE
 		$<INSTALL_INTERFACE:gpds/include>)
 
-###
-# Shared library
-###
-add_library(gpds-shared SHARED $<TARGET_OBJECTS:gpds-objs>)
-set_target_properties(gpds-shared
-	PROPERTIES
-		OUTPUT_NAME "gpds"
-		VERSION ${PROJECT_VERSION}
-		POSITION_INDEPENDENT_CODE 1)
 
-###
-# Static library
-###
+
+################################################################################
+# Shared library                                                               #
+################################################################################
+
+add_library(gpds-shared SHARED $<TARGET_OBJECTS:gpds-objs>)
+target_include_directories(
+	gpds-shared
+	PUBLIC
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rapidxml-1.13>
+	INTERFACE
+		$<INSTALL_INTERFACE:gpds/include>
+)
+
+
+
+################################################################################
+# Static library                                                               #
+################################################################################
+
 add_library(gpds-static STATIC $<TARGET_OBJECTS:gpds-objs>)
 target_compile_definitions(gpds-static
 	PUBLIC
 		GPDS_STATIC_DEFINE
 )
-set_target_properties(gpds-static
+target_include_directories(
+	gpds-static
+	PUBLIC
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rapidxml-1.13>
+	INTERFACE
+		$<INSTALL_INTERFACE:gpds/include>
+)
+
+# Common library properties
+set_target_properties(
+	gpds-objs
+	gpds-static
+	gpds-shared
 	PROPERTIES
+		OUTPUT_NAME "gpds"
 		ARCHIVE_OUTPUT_NAME "gpds"
 		VERSION ${PROJECT_VERSION}
 		POSITION_INDEPENDENT_CODE 1
 )
 
-###
-# Export header
-###
+
+
+################################################################################
+# Export header                                                                #
+################################################################################
 
 include(GenerateExportHeader)
 generate_export_header(gpds-static
@@ -83,11 +111,16 @@ generate_export_header(gpds-static
 	STATIC_DEFINE "GPDS_STATIC_DEFINE"
 	DEFINE_NO_DEPRECATED)
 
-###
-# Install
-###
 
+
+################################################################################
+# Install                                                                      #
+################################################################################
+
+# Some basic stuff we'll need in this section
+set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/Gpds)
 include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
 # Copy GPDS headers
 install(
@@ -123,36 +156,34 @@ install(
 		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
 		COMPONENT dev)
 
-###
-# Packging
-###
-include(CMakePackageConfigHelpers)
+# Package version
 write_basic_package_version_file(
+	"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
+	VERSION ${Gpds_VERSION}
+	COMPATIBILITY AnyNewerVersion
+)
+install(
+		FILES
+		GpdsConfig.cmake
 		"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
-		VERSION ${Gpds_VERSION}
-		COMPATIBILITY AnyNewerVersion
+		DESTINATION ${ConfigPackageLocation}
 )
 
-export(EXPORT GpdsTargets
-	FILE "${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsTargets.cmake"
-	NAMESPACE Gpds::
-)
+# Package configuration
 configure_file(GpdsConfig.cmake
 	"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfig.cmake"
 	COPYONLY
 )
 
-set(ConfigPackageLocation lib/cmake/Gpds)
+# Package export targets
+export(
+	EXPORT GpdsTargets
+	FILE "${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsTargets.cmake"
+	NAMESPACE Gpds::
+)
 install(
 	EXPORT GpdsTargets
 	FILE GpdsTargets.cmake
 	NAMESPACE Gpds::
-	DESTINATION ${ConfigPackageLocation}
-)
-
-install(
-	FILES
-		GpdsConfig.cmake
-		"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
 	DESTINATION ${ConfigPackageLocation}
 )

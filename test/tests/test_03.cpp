@@ -2,7 +2,7 @@
 #include <sstream>
 #include "catch2/catch.hpp"
 #include "../test.h"
-#include "gpds/serialize.h"
+#include "serialize.h"
 
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "gpds/serialize.h"
+#include "serialize.h"
 
 namespace GpdsTest {
 

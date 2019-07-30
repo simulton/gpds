@@ -1,7 +1,7 @@
 #include <sstream>
 #include "catch2/catch.hpp"
 #include "../test.h"
-#include "gpds/serialize.h"
+#include "serialize.h"
 #include "color.h"
 
 TEST_CASE( "Color class" )

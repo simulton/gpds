@@ -9,15 +9,8 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/3rdparty/catch2/contrib)
 # Add catch2
 add_subdirectory(3rdparty/catch2)
 
-# Include directories
-include_directories(
-	../lib/include
-	../lib/3rdparty/rapidxml-1.13
-	3rdparty/catch2/single_include)
-
 # Build test application
-add_executable(
-	gpds-tests
+add_executable(gpds-tests
 	test.h
 	test.cpp
 	test_main.cpp
@@ -28,7 +21,7 @@ add_executable(
 	tests/test_05.cpp
 	tests/test_06.cpp
 	tests/test_07.cpp)
-target_link_libraries(gpds-tests $<TARGET_OBJECTS:gpds-objs>)
+target_link_libraries(gpds-tests gpds-static)
 target_link_libraries(gpds-tests Catch2::Catch2)
 
 # Automatically discover tests

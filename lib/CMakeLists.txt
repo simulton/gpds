@@ -40,6 +40,10 @@ target_sources(gpds-objs
 		${HEADERS_PUBLIC}
 	PRIVATE
 		${SOURCES_PRIVATE})
+target_compile_definitions(gpds-objs
+	PUBLIC
+		gpds_shared_EXPORTS		# We're building this library!
+)
 target_include_directories(gpds-objs
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -102,7 +106,7 @@ set_target_properties(
 ################################################################################
 
 include(GenerateExportHeader)
-generate_export_header(gpds-static
+generate_export_header(gpds-shared
 	BASE_NAME gpds
 	DEPRECATED_MACRO_NAME "GPDS_DEPRECATED"
 	NO_DEPRECATED_MACRO_NAME "GPDS_NO_DEPRECATED"

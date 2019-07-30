@@ -118,9 +118,9 @@ generate_export_header(gpds-static
 ################################################################################
 
 # Some basic stuff we'll need in this section
-set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/Gpds)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
+set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/Gpds)
 
 # Copy GPDS headers
 install(

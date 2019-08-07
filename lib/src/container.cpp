@@ -31,8 +31,8 @@ bool Container::isList() const
             name = it->first;
         }
 
-        // Gotta be a container type
-        if ( not it->second.isType<Container*>() ) {
+        // Must not be a container
+        if ( it->second.isType<Container*>() ) {
             return false;
         }
 

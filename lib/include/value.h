@@ -124,9 +124,9 @@ namespace Gpds
         }
 
         template<typename T>
-        std::optional<T> getAttribute(gString&& key) const
+        std::optional<T> getAttribute(const gString& key) const
         {
-            return attributes.get<T>( std::forward<gString>( key ) );
+            return attributes.get<T>( key );
         }
 
         Value& setComment(const gString& comment);

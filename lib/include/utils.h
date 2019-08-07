@@ -35,7 +35,10 @@ namespace Gpds
         }
 
         else if constexpr ( std::is_same<T, gReal>::value ) {
-            return std::to_string( value );
+            std::string str = std::to_string( value );
+            // Remove trailing zeros
+            str.erase( str.find_last_not_of('0') + 1, std::string::npos );
+            return str;
         }
 
         else if constexpr ( std::is_same<T, gString>::value ) {

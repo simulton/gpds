@@ -95,6 +95,12 @@ namespace Gpds
             _value = std::move( value );
         }
 
+        template<typename T = std::string>
+        void set(const char* string)
+        {
+            _value = std::string(string);
+        }
+
         template<typename T = Container&>
         void set(const Container& container)
         {

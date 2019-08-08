@@ -1,3 +1,4 @@
+#include <cstring>
 #include "catch2/catch.hpp"
 #include "../test.h"
 #include "serialize.h"
@@ -66,7 +67,7 @@ TEST_CASE( "values can be created", "[Value]" )
         Gpds::Container* container = new Gpds::Container;
         container->addValue("name", std::string("John Doe"));
         Gpds::Value value(container);
-        REQUIRE(value.typeString() == "nested");
+        REQUIRE( strcmp( value.typeString(), "nested" ) == 0 );
 
         SECTION( "retrieving value from container" ) {
             auto ctnr = value.get<Gpds::Container*>();

@@ -1,8 +1,6 @@
 #include <algorithm>
 #include "archiverxml.h"
 #include "utils.h"
-#include "rapidxml_ext.hpp"
-#include "rapidxml_print.hpp"
 
 using namespace Gpds;
 
@@ -17,26 +15,25 @@ ArchiverXml::ArchiverXml()
 bool ArchiverXml::save(std::ostream& stream, const Container& container, const std::string& rootName) const
 {
     // Create the document
-    rapidxml::xml_document<> doc;
+    tinyxml2::XMLDocument doc;
 
     // Add the XML declaration
-    rapidxml::xml_node<>* decl = doc.allocate_node(rapidxml::node_declaration);
-    decl->append_attribute(doc.allocate_attribute("version", "1.0"));
-    decl->append_attribute(doc.allocate_attribute("encoding", "utf-8"));
-    doc.append_node(decl);
+    doc.NewDeclaration();
 
     // Add the root node
-    rapidxml::xml_node<>* root = doc.allocate_node(rapidxml::node_element, rootName.data());
-    doc.append_node(root);
+    tinyxml2::XMLElement* root = doc.NewElement(rootName.data());
+    doc.InsertEndChild(root);
 
     // Add the Serialize data
     writeEntry(doc, *root, container);
 
     // Add data to stream
-    stream << doc;
+    tinyxml2::XMLPrinter printer;
+    doc.Print(&printer);
+    stream << printer.CStr();
 
     // Free up memory
-    doc.clear();
+    doc.Clear();
 
     return true;
 }
@@ -45,11 +42,11 @@ bool ArchiverXml::load(std::istream& stream, Container& container, const std::st
 {
     // Create the document
     std::string string(std::istreambuf_iterator<char>(stream), {});
-    rapidxml::xml_document<> doc;
-    doc.parse<0>(string.data());
+    tinyxml2::XMLDocument doc;
+    doc.Parse(string.data());
 
     // Retrieve the root node
-    rapidxml::xml_node<>* rootNode = doc.first_node(rootName.data());
+    tinyxml2::XMLElement* rootNode = doc.FirstChildElement(rootName.data());
     if (!rootNode) {
         return false;
     }
@@ -60,7 +57,7 @@ bool ArchiverXml::load(std::istream& stream, Container& container, const std::st
     return true;
 }
 
-void ArchiverXml::writeEntry(rapidxml::xml_document<>& doc, rapidxml::xml_node<>& root, const Container& container) const
+void ArchiverXml::writeEntry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const Container& container) const
 {
     // Annotate list if supposed to
     if (settings.annotateListCount and container.isList()) {
@@ -69,50 +66,51 @@ void ArchiverXml::writeEntry(rapidxml::xml_document<>& doc, rapidxml::xml_node<>
             attributeString = NAMESPACE_PREFIX + attributeString;
         }
 
-        root.append_attribute(doc.allocate_attribute(doc.allocate_string(attributeString.c_str()), doc.allocate_string(std::to_string(container.values.size()).data())));
+        root.SetAttribute(attributeString.c_str(), std::to_string(container.values.size()).data());
     }
 
     // Add container comment (if any)
     if ( settings.printComments and not container.comment.empty() ) {
-        auto parentNode = root.parent();
+        auto parentNode = root.Parent();
         if ( parentNode ) {
-            rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, container.comment.c_str() );
-            parentNode->prepend_node( commentNode );
+            tinyxml2::XMLComment* comment = doc.NewComment(container.comment.c_str());
+            doc.InsertAfterChild(parentNode, comment);
         }
     }
 
     // Add all container arguments
     for ( const auto& attribute : container.attributes.map ) {
-        root.append_attribute( doc.allocate_attribute( attribute.first.c_str(), attribute.second.c_str() ) );
+        root.SetAttribute(attribute.first.c_str(), attribute.second.c_str());
     }
 
     // Iterate through all values in this container
     for ( const auto& keyValuePair: container.values ) {
 
         // Some aliases to make the code easier to read
-        const auto& key = doc.allocate_string( keyValuePair.first.c_str() );
+        const auto& key = keyValuePair.first.c_str();
         const Value& value = keyValuePair.second;
 
         // Create a new node in the DOM
-        rapidxml::xml_node<>* child = nullptr;
+        tinyxml2::XMLElement* child = nullptr;
         {
             // Nested container
             if ( value.isType<Container*>() ) {
                 // Recursion
                 const Container* childContainer = value.get<Container*>();
-                child = doc.allocate_node( rapidxml::node_element, key );
+                child = doc.NewElement(key);
                 writeEntry(doc, *child, *childContainer);
             }
 
                 // Simple value
             else {
-                child = doc.allocate_node(rapidxml::node_element, key, doc.allocate_string( value.toString().data() ) );
+                child = doc.NewElement(key);
+                child->SetText(value.toString().data());
             }
         }
 
         // Add all value arguments
         for ( const auto& attribute : value.attributes.map ) {
-            child->append_attribute( doc.allocate_attribute( attribute.first.c_str(), attribute.second.c_str() ) );
+            child->SetAttribute(attribute.first.c_str(), attribute.second.c_str());
         }
 
         GPDS_ASSERT( child );
@@ -123,62 +121,56 @@ void ArchiverXml::writeEntry(rapidxml::xml_document<>& doc, rapidxml::xml_node<>
             if (settings.prefixAnnotations) {
                 attributeString = NAMESPACE_PREFIX + attributeString;
             }
-            child->append_attribute( doc.allocate_attribute( doc.allocate_string( attributeString.c_str() ), value.typeString() ) );
+            child->SetAttribute(attributeString.c_str(), value.typeString());
         }
 
         // Add value comment (if any)
         if ( settings.printComments and not value.comment.c_str() ) {
-            rapidxml::xml_node<>* commentNode = doc.allocate_node( rapidxml::node_comment, nullptr, value.comment.c_str() );
-            root.append_node( commentNode );
+            tinyxml2::XMLComment* comment = doc.NewComment( value.comment.c_str() );
+            root.InsertEndChild(comment);
         }
 
-        root.append_node(child);
+        root.InsertEndChild(child);
     }
 }
 
-void ArchiverXml::readEntry(rapidxml::xml_node<>& rootNode, Container& container)
+void ArchiverXml::readEntry(tinyxml2::XMLElement& rootNode, Container& container)
 {
     // Handle all nodes children recursively
-    for (rapidxml::xml_node<>* node = rootNode.first_node(); node; node = node->next_sibling()) {
+    for (tinyxml2::XMLElement* node = rootNode.FirstChildElement(); node; node = node->NextSiblingElement()) {
         // Extract the name & value
-        gString keyString( node->name() );
-        std::string valueString( node->value() );
+        gString keyString( node->Name() );
 
         // Create the Value
         Value value;
 
         // Container arguments
-        for ( const rapidxml::xml_attribute<>* attribute = rootNode.first_attribute(); attribute; attribute = attribute->next_attribute() ) {
-            container.addAttribute( attribute->name(), std::string( attribute->value() ) );
+        for ( const tinyxml2::XMLAttribute* attribute = rootNode.FirstAttribute(); attribute; attribute = attribute->Next() ) {
+            container.addAttribute( attribute->Name(), std::string( attribute->Value() ) );
         }
 
-        // Ensure that it's not an empty element
-        if ( node->first_node() ) {
+        // It's a text element
+        if ( node->GetText() ) {
+            value.fromString( std::string(node->GetText()) );
 
-            // It's a text element
-            if ( not valueString.empty() ) {
-                value.fromString( std::move( valueString ));
-
-                // Arguments
-                {
-                    // Value arguments
-                    for (const rapidxml::xml_attribute<> *attribute = node->first_attribute(); attribute; attribute = attribute->next_attribute()) {
-                        value.addAttribute(attribute->name(), std::string(attribute->value()));
-                    }
+            // Arguments
+            {
+                // Value arguments
+                for (const tinyxml2::XMLAttribute* attribute = node->FirstAttribute(); attribute; attribute = attribute->Next()) {
+                    value.addAttribute(attribute->Name(), std::string(attribute->Value()));
                 }
             }
-
-                // It's a another container
-            else {
-                Container childContainer;
-
-                readEntry(*node, childContainer);
-                value.set(std::move(childContainer));
-            }
-
-            container.addValue(keyString, value);
-
         }
+        // It's a another container
+        else if ( node->FirstChild() ) {
+            Container childContainer;
+
+            readEntry(*node, childContainer);
+            value.set(std::move(childContainer));
+        }
+
+        container.addValue(keyString, value);
+
     }
 
 }

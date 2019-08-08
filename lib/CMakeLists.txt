@@ -12,7 +12,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 set(SOURCES_PRIVATE
 	src/archiverxml.cpp
 	src/container.cpp
-	src/value.cpp)
+	src/value.cpp
+	3rdparty/tinyxml2/tinyxml2.cpp)
 
 # List of public header files
 set(HEADERS_PUBLIC
@@ -23,7 +24,8 @@ set(HEADERS_PUBLIC
 	include/serialize.h
 	include/types.h
 	include/utils.h
-	include/value.h)
+	include/value.h
+	3rdparty/tinyxml2/tinyxml2.h)
 
 
 
@@ -47,7 +49,6 @@ target_compile_definitions(gpds-objs
 target_include_directories(gpds-objs
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rapidxml-1.13>
 	INTERFACE
 		$<INSTALL_INTERFACE:include>)
 
@@ -62,7 +63,6 @@ target_include_directories(
 	gpds-shared
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rapidxml-1.13>
 	INTERFACE
 		$<INSTALL_INTERFACE:include>
 )
@@ -82,7 +82,6 @@ target_include_directories(
 	gpds-static
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/rapidxml-1.13>
 	INTERFACE
 		$<INSTALL_INTERFACE:include>
 )
@@ -136,13 +135,6 @@ install(
 install(
 	FILES ${PROJECT_BINARY_DIR}/gpds_export.h
 	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
-)
-
-# Copy rapidxml headers
-install(
-	DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/3rdparty/rapidxml-1.13/
-	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
-	FILES_MATCHING PATTERN "*.hpp"
 )
 
 # Targets

@@ -3,7 +3,7 @@
 #include <ostream>
 #include <istream>
 #include "archiver.h"
-#include "rapidxml.hpp"
+#include "3rdparty/tinyxml2/tinyxml2.h"
 
 namespace Gpds
 {
@@ -34,8 +34,8 @@ namespace Gpds
         virtual bool load(std::istream& stream, Container& container, const std::string& rootName) override;
 
     private:
-        void writeEntry(rapidxml::xml_document<>& doc, rapidxml::xml_node<>& root, const Container& container) const;
-        void readEntry(rapidxml::xml_node<>& rootNode, Container& container);
+        void writeEntry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const Container& container) const;
+        void readEntry(tinyxml2::XMLElement& rootNode, Container& container);
     };
 
 }

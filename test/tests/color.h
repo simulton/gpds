@@ -52,7 +52,6 @@ namespace GpdsTest {
         {
             // Retrieve format
             const std::string& formatString = c.getAttribute<std::string>("format").value_or("n/a");
-            assert(formatString == "rgb");
 
             name = c.getAttribute<std::string>("name").value_or("n/a");
             red = c.getValue<int>("red");

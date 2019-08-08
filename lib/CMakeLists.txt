@@ -15,6 +15,10 @@ set(SOURCES_PRIVATE
 	src/value.cpp
 	3rdparty/tinyxml2/tinyxml2.cpp)
 
+# List of private header files
+set(HEADERS_PRIVATE
+	3rdparty/tinyxml2/tinyxml2.h)
+
 # List of public header files
 set(HEADERS_PUBLIC
 	include/archiver.h
@@ -24,8 +28,7 @@ set(HEADERS_PUBLIC
 	include/serialize.h
 	include/types.h
 	include/utils.h
-	include/value.h
-	3rdparty/tinyxml2/tinyxml2.h)
+	include/value.h)
 
 
 
@@ -41,7 +44,8 @@ target_sources(gpds-objs
 	PUBLIC
 		${HEADERS_PUBLIC}
 	PRIVATE
-		${SOURCES_PRIVATE})
+		${SOURCES_PRIVATE}
+		${HEADERS_PRIVATE})
 target_compile_definitions(gpds-objs
 	PUBLIC
 		gpds_shared_EXPORTS		# We're building this library!

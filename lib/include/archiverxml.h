@@ -3,7 +3,12 @@
 #include <ostream>
 #include <istream>
 #include "archiver.h"
-#include "3rdparty/tinyxml2/tinyxml2.h"
+
+namespace tinyxml2
+{
+    class XMLDocument;
+    class XMLElement;
+}
 
 namespace Gpds
 {

@@ -3,4 +3,4 @@
 	url = https://github.com/catchorg/Catch2.git
 [submodule "lib/3rdparty/tinyxml2"]
 	path = lib/3rdparty/tinyxml2
-	url = https://github.com/leethomason/tinyxml2
+	url = https://github.com/leethomason/tinyxml2.git

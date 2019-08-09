@@ -77,14 +77,40 @@ void Value::fromString(std::string&& string)
 
     // Is it a double?
     {
+        // Ensure that this is a double
+        bool isDouble = true;
+        bool foundPoint = false;
+        for (std::string::const_iterator it = string.cbegin(); it != string.cend(); ++it) {
+            // Make sure that this is a digit
+            if (not std::isdigit(static_cast<int>( *it ))) {
+                // Check if its a decimal point
+                if (!foundPoint and *it == '.') {
+                    isDouble = true;
+                    foundPoint = true;
+                } else {
+                    isDouble = false;
+                }
+            }
 
-        try {
-            double d = std::stod( string );
-            set(d);
-            return;
-        } catch (const std::invalid_argument &e) {
-            (void) e;
-            // Nothing to do here. Fall through.
+            // Check for minus sign
+            if (it == string.cbegin() and !isDouble and *it == '-') {
+                isDouble = true;
+            }
+
+            if (not isDouble) {
+                break;
+            }
+        }
+
+        if (isDouble) {
+            try {
+                double d = std::stod( string );
+                set(d);
+                return;
+            } catch (const std::invalid_argument &e) {
+                (void) e;
+                // Nothing to do here. Fall through.
+            }
         }
     }
 

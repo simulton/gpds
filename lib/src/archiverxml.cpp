@@ -147,7 +147,7 @@ void ArchiverXml::readEntry(tinyxml2::XMLElement& rootNode, Container& container
 
         // Container arguments
         for ( const tinyxml2::XMLAttribute* attribute = rootNode.FirstAttribute(); attribute; attribute = attribute->Next() ) {
-            container.addAttribute( attribute->Name(), std::string( attribute->Value() ) );
+            container.addAttribute( std::string( attribute->Name() ), std::string( attribute->Value() ) );
         }
 
         // It's a text element
@@ -158,7 +158,7 @@ void ArchiverXml::readEntry(tinyxml2::XMLElement& rootNode, Container& container
             {
                 // Value arguments
                 for (const tinyxml2::XMLAttribute* attribute = node->FirstAttribute(); attribute; attribute = attribute->Next()) {
-                    value.addAttribute(attribute->Name(), std::string(attribute->Value()));
+                    value.addAttribute( std::string( attribute->Name() ), std::string(attribute->Value()));
                 }
             }
         }

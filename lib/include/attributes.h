@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <optional>
+#include "gpds_export.h"
 #include "types.h"
 #include "utils.h"
 
@@ -12,7 +13,12 @@ namespace Gpds
     class GPDS_EXPORT Attributes
     {
     public:
-        std::map< gString, gString> map;
+        std::map<gString, gString> map;
+
+        Attributes( ) = default;
+        Attributes( const Attributes& other );
+        Attributes( Attributes&& other );
+        virtual ~Attributes( ) = default;
 
         template<typename T>
         void add(gString&& key, const T& value)

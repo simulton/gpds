@@ -27,6 +27,7 @@ namespace Gpds
         }
 
         template<typename T>
+        [[nodiscard]]
         std::optional<T> get(const gString& key) const
         {
             // Get string

@@ -29,6 +29,7 @@ namespace Gpds
         }
 
         template<class T>
+        [[nodiscard]]
         T getValue( const gString& key, T&& defaultValue = T() ) const
         {
             auto it = values.find( key );
@@ -47,6 +48,7 @@ namespace Gpds
         }
 
         template<class T>
+        [[nodiscard]]
         std::vector<T> getValues(const gString& key) const
         {
             const auto& range = values.equal_range( key );
@@ -67,12 +69,14 @@ namespace Gpds
         }
 
         template<typename T>
+        [[nodiscard]]
         std::optional<T> getAttribute(gString&& key) const
         {
             return attributes.get<T>( std::forward< gString >( key ) );
         }
 
         template<typename T>
+        [[nodiscard]]
         std::optional<T> getValueAttribute(const gString& valueKey, const gString& attributeKey) const
         {
             auto it = values.find( valueKey );
@@ -86,7 +90,7 @@ namespace Gpds
 
         Container& setComment(const gString& comment);
         Container& setComment(gString&& comment);
-        bool isList() const;
+        [[nodiscard]] bool isList() const;
     };
 
 }

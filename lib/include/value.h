@@ -19,11 +19,13 @@ namespace Gpds
     template<class ...Ts> overload(Ts...) -> overload<Ts...>;
 
     template<typename T, typename ...Ts>
+    [[nodiscard]]
     static constexpr bool contains() {
         return std::disjunction_v< std::is_same< T, Ts > ... >;
     }
 
     template<typename T>
+    [[nodiscard]]
     static constexpr bool isValidType() {
         return contains< T, gBool, gInt, gReal, gString, gContainer >;
     }
@@ -54,17 +56,18 @@ namespace Gpds
         }
 
         template<typename T>
+        [[nodiscard]]
         constexpr bool isType() const noexcept
         {
             return std::holds_alternative<T>( _value );
         }
 
-        constexpr bool isEmpty() const
+        [[nodiscard]] constexpr bool isEmpty() const
         {
             return _value.valueless_by_exception();
         }
 
-        constexpr const char* typeString() const
+        [[nodiscard]] constexpr const char* typeString() const
         {
             if ( std::holds_alternative<Container*>( _value ) ) {
                 return "nested";
@@ -81,7 +84,7 @@ namespace Gpds
         }
 
         void fromString(std::string&& string);
-        std::string toString() const;
+        [[nodiscard]] std::string toString() const;
 
         template<typename T>
         void set(const T& value)
@@ -116,6 +119,7 @@ namespace Gpds
         }
 
         template<typename T>
+        [[nodiscard]]
         constexpr T get() const
         {
             return std::get<T>( _value );
@@ -130,6 +134,7 @@ namespace Gpds
         }
 
         template<typename T>
+        [[nodiscard]]
         std::optional<T> getAttribute(const gString& key) const
         {
             return attributes.get<T>( key );

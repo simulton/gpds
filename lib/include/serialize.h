@@ -11,7 +11,7 @@ namespace Gpds
     public:
         virtual ~Serialize() = default;
 
-        virtual Gpds::Container toContainer() const = 0;
+        [[nodiscard]] virtual Gpds::Container toContainer() const = 0;
         virtual void fromContainer(const Gpds::Container& container) = 0;
     };
 

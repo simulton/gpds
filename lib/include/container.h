@@ -20,6 +20,12 @@ namespace Gpds
         Container(const Container& other) = default;
         Container( Container&& other ) = default;
 
+        Container& operator+=(const Container& rhs) {
+            values.insert(rhs.values.cbegin(), rhs.values.cend());
+            attributes += rhs.attributes;
+            return *this;
+        }
+
         template<class T>
         Value& addValue( const gString& key, T&& value )
         {

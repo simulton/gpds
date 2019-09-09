@@ -20,6 +20,12 @@ namespace Gpds
         Attributes( Attributes&& other );
         virtual ~Attributes( ) = default;
 
+        Attributes& operator+=(const Attributes& other)
+        {
+            map.insert(other.map.cbegin(), other.map.cend());
+            return *this;
+        }
+
         template<typename T>
         void add(gString&& key, const T& value)
         {

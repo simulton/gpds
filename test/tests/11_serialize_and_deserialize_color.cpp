@@ -1,5 +1,5 @@
 #include <sstream>
-#include "catch2/catch.hpp"
+#include "doctest.h"
 #include "../test.h"
 #include "serialize.h"
 #include "color.h"

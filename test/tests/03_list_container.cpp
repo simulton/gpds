@@ -1,4 +1,4 @@
-#include "catch2/catch.hpp"
+#include "doctest.h"
 #include "../test.h"
 #include "serialize.h"
 
@@ -6,7 +6,7 @@ TEST_CASE( "container can contain a list of elements" )
 {
     Gpds::Container container;
 
-    SECTION( "creating list container" ) {
+    SUBCASE( "creating list container" ) {
         for (int i = 0; i < 10; i++) {
             container.addValue("list-item", i);
         }

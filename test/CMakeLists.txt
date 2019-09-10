@@ -1,10 +1,27 @@
 ###
-# Testing (using catch2)
+# Testing (using doctest)
 ###
 
-# Add catch2
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/3rdparty/catch2/contrib)
-add_subdirectory(3rdparty/catch2)
+# Add doctest
+configure_file(CMakeLists.txt.in doctest/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+		RESULT_VARIABLE result
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doctest )
+if (result)
+	message(FATAL_ERROR "CMake step for doctest failed: ${result}")
+endif()
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+		RESULT_VARIABLE result
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doctest )
+if (result)
+	message(FATAL_ERROR "Build step for doctest failed: ${result}")
+endif()
+
+add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/doctest-src
+		         ${CMAKE_CURRENT_BINARY_DIR}/doctest-build
+			     EXCLUDE_FROM_ALL)
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/doctest-src/doctest)
 
 # Find tests
 FILE(GLOB TESTS tests/*.cpp)
@@ -16,9 +33,8 @@ add_executable(gpds-tests
 	test_main.cpp
 	${TESTS})
 target_link_libraries(gpds-tests gpds-static)
-target_link_libraries(gpds-tests Catch2::Catch2)
 
 # Automatically discover tests
 include(CTest)
-include(Catch)
-catch_discover_tests(gpds-tests)
+include(${CMAKE_CURRENT_BINARY_DIR}/doctest-src/scripts/cmake/doctest.cmake)
+doctest_discover_tests(gpds-tests)

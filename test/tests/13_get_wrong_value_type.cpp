@@ -7,7 +7,7 @@
 TEST_CASE( "retrieving wrong type from value throws an exception" )
 {
     Gpds::Value value("1234");
-    REQUIRE_THROWS_AS(value.get<int>(), std::bad_variant_access);
+    REQUIRE_THROWS_AS(int foo = value.get<int>(), std::bad_variant_access);
 }
 
 TEST_CASE( "retrieving wronge type from container" )

@@ -2,7 +2,6 @@
 #include "../test.h"
 #include "value.h"
 #include "container.h"
-#include <iostream>
 
 TEST_CASE( "retrieving wrong type from value throws an exception" )
 {
@@ -28,4 +27,3 @@ TEST_CASE( "retrieving wronge type from container" )
         REQUIRE(opt.value() == 1234);
     }
 }
-

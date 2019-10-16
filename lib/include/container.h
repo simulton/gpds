@@ -60,6 +60,9 @@ namespace Gpds
             const auto& range = values.equal_range( key );
             std::vector<T> values( std::distance( range.first, range.second ) );
             for (auto it = range.first; it != range.second; it++) {
+                if (it->second.isEmpty() or not it->second.isType<T>()) {
+                    continue;
+                }
                 values[ std::distance( range.first, it ) ] = it->second.get<T>();
             }
 

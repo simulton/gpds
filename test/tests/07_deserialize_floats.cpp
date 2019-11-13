@@ -13,23 +13,23 @@ static const std::string FILE_CONTENT =
     "  <real>1.0</real>"
     "</data>";
 
-class TestData03 : public Gpds::Serialize
+class test_data_7 : public gpds::serialize
 {
 public:
     std::vector<double> data;
 
-    virtual Gpds::Container toContainer() const override
+    virtual gpds::container to_container() const override
     {
-        return { };
+        return {};
     }
 
-    virtual void fromContainer( const Gpds::Container& object ) override
+    virtual void from_container(const gpds::container& object) override
     {
-        data = object.getValues<double>( "real" );
+        data = object.get_values<double>("real");
     }
 };
 
-TEST_CASE( "Read Datatype: Real" )
+TEST_CASE("Read Datatype: Real")
 {
     // The "known good" data
     const std::vector<double> knownGood = {
@@ -40,10 +40,10 @@ TEST_CASE( "Read Datatype: Real" )
     };
 
     // Parse test file
-    TestData03 data;
-    std::stringstream stream( FILE_CONTENT );
-    REQUIRE( GpdsTest::Test::deserialize( stream, data, "data" ) );
+    test_data_7 data;
+    std::stringstream stream(FILE_CONTENT);
+    REQUIRE(gpds_test::test::deserialize(stream, data, "data"));
 
     // Ensure that data is the same
-    REQUIRE( data.data == knownGood );
+    REQUIRE(data.data == knownGood);
 }

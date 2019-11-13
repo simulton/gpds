@@ -1,35 +1,35 @@
 #include "value.h"
 #include "container.h"
 
-using namespace Gpds;
+using namespace gpds;
 
-Value::Value( const Value& other ) :
-    attributes( other.attributes ),
-    comment( other.comment ),
-    _value( other._value )
+value::value(const value& other) :
+        attributes(other.attributes),
+        comment(other.comment),
+        m_value(other.m_value)
 {
-    if ( std::holds_alternative<Container*>( _value ) ) {
-        allocateContainerMemory( *std::get<Container*>( _value ) );
+    if (std::holds_alternative<container*>(m_value)) {
+        allocate_container_memory(*std::get<container*>(m_value));
     }
 }
 
-Value::Value( Value&& other ) :
-    attributes( std::move( other.attributes ) ),
-    comment( std::move( other.comment ) ),
-    _value( std::move( other._value) )
+value::value(value&& other) :
+        attributes(std::move(other.attributes)),
+        comment(std::move(other.comment)),
+        m_value(std::move(other.m_value))
 {
-    other._value = nullptr;
+    other.m_value = nullptr;
 }
 
-Value::~Value() noexcept 
+value::~value() noexcept
 {
     // Ensure that we won't throw
-    GPDS_ASSERT( not _value.valueless_by_exception() );
+    GPDS_ASSERT(not m_value.valueless_by_exception());
 
-    freeContainerMemory();
+    free_container_memory();
 }
 
-void Value::fromString(std::string&& string)
+void value::from_string(std::string&& string)
 {
     // Is it a boolean 'true' value?
     if (string == "true") {
@@ -65,10 +65,10 @@ void Value::fromString(std::string&& string)
 
         if (isInteger) {
             try {
-                int i = std::stoi( string );
+                int i = std::stoi(string);
                 set(i);
                 return;
-            } catch (const std::invalid_argument &e) {
+            } catch (const std::invalid_argument& e) {
                 (void) e;
                 // Nothing to do here. Fall through.
             }
@@ -104,10 +104,10 @@ void Value::fromString(std::string&& string)
 
         if (isDouble) {
             try {
-                double d = std::stod( string );
+                double d = std::stod(string);
                 set(d);
                 return;
-            } catch (const std::invalid_argument &e) {
+            } catch (const std::invalid_argument& e) {
                 (void) e;
                 // Nothing to do here. Fall through.
             }
@@ -116,61 +116,61 @@ void Value::fromString(std::string&& string)
 
     // Lets just assume it's a string :>
     {
-        set( std::move( string ) );
+        set(std::move(string));
         return;
     }
 }
 
-std::string Value::toString() const
+std::string value::to_string() const
 {
-    if ( isType<gBool>() ) {
-        return valueToString( get<gBool>() );
+    if (is_type<gBool>()) {
+        return value_to_string(get<gBool>());
     }
 
-    else if ( isType<gInt>() ) {
-        return valueToString( get<gInt>() );
+    else if (is_type<gInt>()) {
+        return value_to_string(get<gInt>());
     }
 
-    else if ( isType<gReal>() ) {
-        return valueToString( get<gReal>() );
+    else if (is_type<gReal>()) {
+        return value_to_string(get<gReal>());
     }
 
-    else if ( isType<gString>() ) {
-        return valueToString( get<gString>() );
+    else if (is_type<gString>()) {
+        return value_to_string(get<gString>());
     }
 
     return {};
 }
 
-Value& Value::setComment(const gString& comment)
+value& value::set_comment(const gString& comment)
 {
     this->comment = comment;
 
     return *this;
 }
 
-Value& Value::setComment(gString&& comment)
+value& value::set_comment(gString&& comment)
 {
-    this->comment = std::move( comment );
+    this->comment = std::move(comment);
 
     return *this;
 }
 
-void Value::freeContainerMemory()
+void value::free_container_memory()
 {
     // Containers need to be cleaned up
-    if ( std::holds_alternative<Container*>( _value ) ) {
-        delete std::get<Container*>( _value );
-        _value = nullptr;
+    if (std::holds_alternative<container*>(m_value)) {
+        delete std::get<container*>(m_value);
+        m_value = nullptr;
     }
 }
 
-void Value::allocateContainerMemory(const Container& container)
+void value::allocate_container_memory(const container& container)
 {
-    _value = new Container( container );
+    m_value = new gpds::container(container);
 }
 
-void Value::allocateContainerMemory(Container&& container)
+void value::allocate_container_memory(container&& container)
 {
-    _value = new Container( std::move( container ) );
+    m_value = new gpds::container(std::move(container));
 }

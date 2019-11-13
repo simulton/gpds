@@ -4,14 +4,17 @@
 #include <ostream>
 #include <istream>
 
-namespace Gpds {
-    class Serialize;
+namespace gpds
+{
+    class serialize;
 }
 
-namespace GpdsTest {
-    class Test {
+namespace gpds_test
+{
+    class test
+    {
     public:
-        static bool serialize(std::ostream &stream, Gpds::Serialize &object, const std::string &rootName);
-        static bool deserialize(std::istream &stream, Gpds::Serialize &object, const std::string &rootName);
+        static bool serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName);
+        static bool deserialize(std::istream& stream, gpds::serialize& object, const std::string& rootName);
     };
 }

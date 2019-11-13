@@ -19,23 +19,23 @@ static const std::string FILE_CONTENT =
     "  <int>32767</int>"
     "</data>";
 
-class TestData02 : public Gpds::Serialize
+class test_data_6 : public gpds::serialize
 {
 public:
     std::vector<int> data;
 
-    virtual Gpds::Container toContainer() const override
+    virtual gpds::container to_container() const override
     {
-        return { };
+        return {};
     }
 
-    virtual void fromContainer( const Gpds::Container& object ) override
+    virtual void from_container(const gpds::container& object) override
     {
-        data = object.getValues<int>( "int" );
+        data = object.get_values<int>("int");
     }
 };
 
-TEST_CASE( "Read Datatype: Integer" )
+TEST_CASE("Read Datatype: Integer")
 {
     // The "known good" data
     const std::vector<int> knownGood = {
@@ -52,11 +52,11 @@ TEST_CASE( "Read Datatype: Integer" )
     };
 
     // Parse test file
-    TestData02 data;
-    std::stringstream stream( FILE_CONTENT );
-    REQUIRE( GpdsTest::Test::deserialize( stream, data, "data" ) );
+    test_data_6 data;
+    std::stringstream stream(FILE_CONTENT);
+    REQUIRE(gpds_test::test::deserialize(stream, data, "data"));
 
     // Ensure that data is the same
-    REQUIRE( data.data == knownGood );
+    REQUIRE(data.data == knownGood);
 }
 

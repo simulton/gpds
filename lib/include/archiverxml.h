@@ -10,18 +10,19 @@ namespace tinyxml2
     class XMLElement;
 }
 
-namespace Gpds
+namespace gpds
 {
-    class GPDS_EXPORT ArchiverXml : public Archiver
+    class GPDS_EXPORT archiver_xml : public archiver
     {
     public:
         // Deal with name hiding
-        using Archiver::save;
-        using Archiver::load;
+        using archiver::save;
+        using archiver::load;
 
         const std::string NAMESPACE_PREFIX = "gpds:";
 
-        struct Settings {
+        struct Settings
+        {
             bool printComments;
             bool annotateListCount;
             bool annotateTypes;
@@ -30,17 +31,17 @@ namespace Gpds
 
         Settings settings;
 
-        ArchiverXml();
-        ArchiverXml( const ArchiverXml& other ) = default;
-        ArchiverXml( ArchiverXml&& other ) = default;
-        virtual ~ArchiverXml() override = default;
+        archiver_xml();
+        archiver_xml(const archiver_xml& other) = default;
+        archiver_xml(archiver_xml&& other) = default;
+        virtual ~archiver_xml() override = default;
 
-        virtual bool save(std::ostream& stream, const Container& container, const std::string& rootName) const override;
-        virtual bool load(std::istream& stream, Container& container, const std::string& rootName) override;
+        virtual bool save(std::ostream& stream, const container& container, const std::string& rootName) const override;
+        virtual bool load(std::istream& stream, container& container, const std::string& rootName) override;
 
     private:
-        void writeEntry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const Container& container) const;
-        void readEntry(tinyxml2::XMLElement& rootNode, Container& container);
+        void write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const container& container) const;
+        void read_entry(tinyxml2::XMLElement& rootNode, container& container);
     };
 
 }

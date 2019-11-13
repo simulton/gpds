@@ -7,15 +7,16 @@ static const std::string FILE_CONTENT =
         "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         "<data/>";
 
-TEST_CASE( "Empty elements are deserialized correctly" ) {
+TEST_CASE("Empty elements are deserialized correctly")
+{
 
     std::stringstream ss(FILE_CONTENT);
-    Gpds::Container container;
+    gpds::container container;
 
-    Gpds::ArchiverXml ar;
+    gpds::archiver_xml ar;
     ar.load(ss, container, "data");
 
     std::vector<std::string> vector;
-    vector = container.getValues<std::string>("test");
+    vector = container.get_values<std::string>("test");
     REQUIRE(vector.size() == 0);
 }

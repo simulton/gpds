@@ -3,32 +3,32 @@
 #include "gpds_export.h"
 #include "serialize.h"
 
-namespace Gpds
+namespace gpds
 {
 
-    class GPDS_EXPORT Archiver
+    class GPDS_EXPORT archiver
     {
     public:
-        virtual ~Archiver() = default;
+        virtual ~archiver() = default;
 
-        virtual bool save(std::ostream& stream, const Container& container, const std::string& rootName) const = 0;
+        virtual bool save(std::ostream& stream, const container& container, const std::string& rootName) const = 0;
 
-        bool save(std::ostream& stream, const Serialize& object, const std::string& rootName) const
+        bool save(std::ostream& stream, const serialize& object, const std::string& rootName) const
         {
-            return save(stream, object.toContainer(), rootName);
+            return save(stream, object.to_container(), rootName);
         }
 
-        virtual bool load(std::istream& stream, Container& container, const std::string& rootName) = 0;
+        virtual bool load(std::istream& stream, container& container, const std::string& rootName) = 0;
 
-        bool load(std::istream& stream, Serialize& object, const std::string& rootName)
+        bool load(std::istream& stream, serialize& object, const std::string& rootName)
         {
-            Gpds::Container container;
+            gpds::container container;
             bool err = load(stream, container, rootName);
             if (!err) {
                 return false;
             }
 
-            object.fromContainer(container);
+            object.from_container(container);
 
             return true;
         }

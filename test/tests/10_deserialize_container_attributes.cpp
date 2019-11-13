@@ -42,15 +42,15 @@ static const std::string FILE_CONTENT =
     "  </value>"
     "</data>";
 
-using Data = std::vector<std::variant<
-    Gpds::gBool,
-    Gpds::gInt,
-    Gpds::gReal,
-    Gpds::gString
+using data = std::vector<std::variant<
+    gpds::gBool,
+    gpds::gInt,
+    gpds::gReal,
+    gpds::gString
 >>;
 
 // The "known good" data
-static const Data knownGood = {
+static const data knownGood = {
     true,
     false,
     0,
@@ -64,68 +64,68 @@ static const Data knownGood = {
     std::string("Hello GPDS!")
 };
 
-class TestData06 : public Gpds::Serialize
+class test_data_10 : public gpds::serialize
 {
 public:
-    Data data;
+    data data;
 
-    virtual Gpds::Container toContainer() const override
+    virtual gpds::container to_container() const override
     {
-        return { };
+        return {};
     }
 
-    virtual void fromContainer( const Gpds::Container& object ) override
+    virtual void from_container(const gpds::container& object) override
     {
-        const auto& valueContainers = object.getValues<Gpds::Container*>( "value" );
-        for ( std::size_t i = 0; i < valueContainers.size(); i++ ) {
-            const Gpds::Container* c = valueContainers.at( i );
-            REQUIRE( c );
+        const auto& valueContainers = object.get_values<gpds::container*>("value");
+        for (std::size_t i = 0; i < valueContainers.size(); i++) {
+            const gpds::container* c = valueContainers.at(i);
+            REQUIRE(c);
 
             // Figure out which type we need
-            switch ( i ) {
+            switch (i) {
                 case 0:
                 case 1:
-                    data.emplace_back( c->getAttribute<Gpds::gBool>( "attribute" ).value( ) );
+                    data.emplace_back(c->get_attribute<gpds::gBool>("attribute").value());
                     break;
 
                 case 2:
                 case 3:
                 case 4:
                 case 5:
-                    data.emplace_back( c->getAttribute<Gpds::gInt>( "attribute" ).value(  ) );
+                    data.emplace_back(c->get_attribute<gpds::gInt>("attribute").value());
                     break;
 
                 case 6:
                 case 7:
                 case 8:
                 case 9:
-                    data.emplace_back( c->getAttribute<Gpds::gReal>( "attribute" ).value( ) );
+                    data.emplace_back(c->get_attribute<gpds::gReal>("attribute").value());
                     break;
 
                 case 10:
-                    data.emplace_back( c->getAttribute<Gpds::gString>( "attribute" ).value( ) );
+                    data.emplace_back(c->get_attribute<gpds::gString>("attribute").value());
                     break;
             }
         }
 
 
-        for ( const Gpds::Container* valueContainer : object.getValues<Gpds::Container*>( "value" ) ) {
-            REQUIRE( valueContainer );
+        for (const gpds::container* valueContainer : object.get_values<gpds::container*>("value")) {
+            REQUIRE(valueContainer);
 
 
         }
     }
 };
 
-TEST_CASE( "Read Attributes: Container Attributes" )
+TEST_CASE("Read Attributes: Container Attributes")
 {
     // Parse test file
-    TestData06 testData;
-    std::stringstream stream( FILE_CONTENT );
-    REQUIRE( GpdsTest::Test::deserialize( stream, testData, "data" ) );
+    test_data_10 testData;
+    std::stringstream stream(FILE_CONTENT);
+    REQUIRE(gpds_test::test::deserialize(stream, testData, "data"));
 
     // Ensure that data is the same
-    REQUIRE( testData.data.size() == knownGood.size() );
-    REQUIRE( testData.data == knownGood );
+    REQUIRE(testData.data.size() == knownGood.size());
+    REQUIRE(testData.data == knownGood);
 }
 

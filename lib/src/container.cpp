@@ -1,22 +1,22 @@
 #include "container.h"
 
-using namespace Gpds;
+using namespace gpds;
 
-Container& Container::setComment(const gString& comment)
+container& container::set_comment(const gString& comment)
 {
     this->comment = comment;
 
     return *this;
 }
 
-Container& Container::setComment(gString&& comment)
+container& container::set_comment(gString&& comment)
 {
-    this->comment = std::move( comment );
+    this->comment = std::move(comment);
 
     return *this;
 }
 
-bool Container::isList() const
+bool container::is_list() const
 {
     // We need at least two elements
     if (values.size() < 2) {
@@ -32,7 +32,7 @@ bool Container::isList() const
         }
 
         // Must not be a container
-        if ( it->second.isType<Container*>() ) {
+        if (it->second.is_type<container*>()) {
             return false;
         }
 

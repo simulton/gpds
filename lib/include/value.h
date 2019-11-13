@@ -11,65 +11,67 @@
 #include "utils.h"
 #include "types.h"
 
-namespace Gpds
+namespace gpds
 {
-    class Container;
+    class container;
 
     template<class ...Ts> struct overload : Ts... { using Ts::operator()...; };
     template<class ...Ts> overload(Ts...) -> overload<Ts...>;
 
     template<typename T, typename ...Ts>
     [[nodiscard]]
-    static constexpr bool contains() {
-        return std::disjunction_v< std::is_same< T, Ts > ... >;
+    static constexpr bool contains()
+    {
+        return std::disjunction_v<std::is_same<T, Ts> ...>;
     }
 
     template<typename T>
     [[nodiscard]]
-    static constexpr bool isValidType() {
-        return contains< T, gBool, gInt, gReal, gString, gContainer >;
+    static constexpr bool is_valid_type()
+    {
+        return contains<T, gBool, gInt, gReal, gString, gContainer>;
     }
 
-    class GPDS_EXPORT Value
+    class GPDS_EXPORT value
     {
     public:
-        Attributes attributes;
+        attributes attributes;
         gString comment;
 
-        Value( ) = default;
-        Value( const Value& other );
-        Value( Value&& other );
-        virtual ~Value() noexcept;
+        value() = default;
+        value(const value& other);
+        value(value&& other);
+        virtual ~value() noexcept;
 
         template<class T,
-            typename std::enable_if< not std::is_class<T>::value, T >::type* = nullptr>
-        Value( const T& value)
+                typename std::enable_if<not std::is_class<T>::value, T>::type* = nullptr>
+        value(const T& value)
         {
             set<T>(value);
         }
 
-        template <class T,
-                typename std::enable_if< std::is_class<T>::value, T >::type* = nullptr>
-        Value( T&& value )
+        template<class T,
+                typename std::enable_if<std::is_class<T>::value, T>::type* = nullptr>
+        value(T&& value)
         {
-            set<T>( std::move( value ) );
+            set<T>(std::move(value));
         }
 
         template<typename T>
         [[nodiscard]]
-        constexpr bool isType() const noexcept
+        constexpr bool is_type() const noexcept
         {
-            return std::holds_alternative<T>( _value );
+            return std::holds_alternative<T>(m_value);
         }
 
-        [[nodiscard]] constexpr bool isEmpty() const
+        [[nodiscard]] constexpr bool is_empty() const
         {
-            return _value.valueless_by_exception();
+            return m_value.valueless_by_exception();
         }
 
-        [[nodiscard]] constexpr const char* typeString() const
+        [[nodiscard]] constexpr const char* type_string() const
         {
-            if ( std::holds_alternative<Container*>( _value ) ) {
+            if (std::holds_alternative<container*>(m_value)) {
                 return "nested";
             }
 
@@ -78,70 +80,70 @@ namespace Gpds
                     [](const gInt&)     { return "int"; },
                     [](const gReal&)    { return "double"; },
                     [](const gString&)  { return "string"; }
-            }, _value);
+            }, m_value);
 
             return "n/a";
         }
 
-        void fromString(std::string&& string);
-        [[nodiscard]] std::string toString() const;
+        void from_string(std::string&& string);
+        [[nodiscard]] std::string to_string() const;
 
         template<typename T>
         void set(const T& value)
         {
-            _value = value;
+            m_value = value;
         }
 
         template<typename T>
         void set(T&& value)
         {
-            _value = std::move( value );
+            m_value = std::move(value);
         }
 
         template<typename T = std::string>
         void set(const char* string)
         {
-            _value = std::string(string);
+            m_value = std::string(string);
         }
 
-        template<typename T = Container&>
-        void set(const Container& container)
+        template<typename T = container&>
+        void set(const container& container)
         {
-            freeContainerMemory();
-            allocateContainerMemory(container);
+            free_container_memory();
+            allocate_container_memory(container);
         }
 
-        template<typename T = Container&&>
-        void set(Container&& container)
+        template<typename T = container&&>
+        void set(container&& container)
         {
-            freeContainerMemory();
-            allocateContainerMemory( std::move( container ) );
+            free_container_memory();
+            allocate_container_memory(std::move(container));
         }
 
         template<typename T>
         [[nodiscard]]
         constexpr T get() const
         {
-            return std::get<T>( _value );
+            return std::get<T>(m_value);
         }
 
         template<typename T>
-        Value& addAttribute(gString&& key, const T& value)
+        value& add_attribute(gString&& key, const T& value)
         {
-            attributes.add( std::forward< gString >( key ), value );
+            attributes.add(std::forward<gString>(key), value);
 
             return *this;
         }
 
         template<typename T>
         [[nodiscard]]
-        std::optional<T> getAttribute(const gString& key) const
+        std::optional<T> get_attribute(const gString& key) const
         {
-            return attributes.get<T>( key );
+            return attributes.get<T>(key);
         }
 
-        Value& setComment(const gString& comment);
-        Value& setComment(gString&& comment);
+        value& set_comment(const gString& comment);
+        value& set_comment(gString&& comment);
 
     private:
         std::variant<
@@ -150,10 +152,10 @@ namespace Gpds
             gReal,
             gString,
             gContainer
-        > _value;
+        > m_value;
 
-        void allocateContainerMemory(const Container& container);
-        void allocateContainerMemory(Container&& container);
-        void freeContainerMemory();
+        void allocate_container_memory(const container& container);
+        void allocate_container_memory(container&& container);
+        void free_container_memory();
     };
 }

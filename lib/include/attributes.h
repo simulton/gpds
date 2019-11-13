@@ -7,20 +7,20 @@
 #include "types.h"
 #include "utils.h"
 
-namespace Gpds
+namespace gpds
 {
 
-    class GPDS_EXPORT Attributes
+    class GPDS_EXPORT attributes
     {
     public:
         std::map<gString, gString> map;
 
-        Attributes( ) = default;
-        Attributes( const Attributes& other );
-        Attributes( Attributes&& other );
-        virtual ~Attributes( ) = default;
+        attributes() = default;
+        attributes(const attributes& other);
+        attributes(attributes&& other);
+        virtual ~attributes() = default;
 
-        Attributes& operator+=(const Attributes& other)
+        attributes& operator+=(const attributes& other)
         {
             map.insert(other.map.cbegin(), other.map.cend());
             return *this;
@@ -29,7 +29,7 @@ namespace Gpds
         template<typename T>
         void add(gString&& key, const T& value)
         {
-            map.emplace( std::forward< gString >( key ), valueToString( value ) );
+            map.emplace(std::forward<gString>(key), value_to_string(value));
         }
 
         template<typename T>
@@ -38,17 +38,17 @@ namespace Gpds
         {
             // Get string
             std::string valueString;
-            for ( auto it = map.cbegin(); it != map.cend(); ++it ) {
-                if ( it->first == key ) {
+            for (auto it = map.cbegin(); it != map.cend(); ++it) {
+                if (it->first == key) {
                     valueString = it->second;
                     break;
                 }
             }
-            if ( valueString.empty() ) {
+            if (valueString.empty()) {
                 return std::nullopt;
             }
 
-            return stringToValue<T>( valueString );
+            return string_to_value<T>(valueString);
         }
 
     };

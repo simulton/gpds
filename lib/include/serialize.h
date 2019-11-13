@@ -3,16 +3,16 @@
 #include "gpds_export.h"
 #include "container.h"
 
-namespace Gpds
+namespace gpds
 {
 
-    class GPDS_EXPORT Serialize
+    class GPDS_EXPORT serialize
     {
     public:
-        virtual ~Serialize() = default;
+        virtual ~serialize() = default;
 
-        [[nodiscard]] virtual Gpds::Container toContainer() const = 0;
-        virtual void fromContainer(const Gpds::Container& container) = 0;
+        [[nodiscard]] virtual gpds::container to_container() const = 0;
+        virtual void from_container(const gpds::container& container) = 0;
     };
 
 }

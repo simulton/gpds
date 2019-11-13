@@ -1,15 +1,15 @@
 #include "attributes.h"
 
-namespace Gpds
+namespace gpds
 {
 
-    Attributes::Attributes(const Attributes& other) :
-        map( other.map )
+    attributes::attributes(const attributes& other) :
+        map(other.map)
     {
     }
 
-    Attributes::Attributes(Attributes&& other) :
-        map( std::move( other.map ) )
+    attributes::attributes(attributes&& other) :
+        map(std::move(other.map))
     {
     }
 

@@ -3,9 +3,10 @@
 #include <string>
 #include "serialize.h"
 
-namespace GpdsTest {
+namespace gpds_test
+{
 
-    class Color : public Gpds::Serialize
+    class color : public gpds::serialize
     {
     public:
         std::string name;
@@ -13,50 +14,55 @@ namespace GpdsTest {
         int green;
         int blue;
 
-        Color( ) = default;
-        Color( const Color& other ) = default;
-        Color( Color&& other ) = default;
+        color() = default;
+        color(const color& other) = default;
+        color(color&& other) = default;
 
-        Color& operator=( const Color& rhs ) = default;
-        Color& operator=( Color&& rhs ) = default;
-        bool operator==( const Color& rhs ) const
+        color& operator=(const color& rhs) = default;
+        color& operator=(color&& rhs) = default;
+
+        bool operator==(const color& rhs) const
         {
-            if ( name != rhs.name )
+            if (name != rhs.name) {
                 return false;
-            if ( red != rhs.red )
+            }
+            if (red != rhs.red) {
                 return false;
-            if ( green != rhs.green )
+            }
+            if (green != rhs.green) {
                 return false;
-            if ( blue != rhs.blue )
+            }
+            if (blue != rhs.blue) {
                 return false;
+            }
 
             return true;
         }
 
-        virtual Gpds::Container toContainer() const override
+        virtual gpds::container to_container() const override
         {
-            Gpds::Container c;
+            gpds::container c;
 
-            c.setComment("a color object");
-            c.addAttribute("format", "rgb");
-            c.addAttribute("name", name);
+            c.set_comment("a color object");
+            c.add_attribute("format", "rgb");
+            c.add_attribute("name", name);
 
-            c.addValue("red", red).addAttribute("depth", "32");
-            c.addValue("green", green).addAttribute("depth", "32");
-            c.addValue("blue", blue).addAttribute("depth", "32");
+            c.add_value("red", red).add_attribute("depth", "32");
+            c.add_value("green", green).add_attribute("depth", "32");
+            c.add_value("blue", blue).add_attribute("depth", "32");
 
             return c;
         }
 
-        virtual void fromContainer(const Gpds::Container& c) override
+        virtual void from_container(const gpds::container& c) override
         {
             // Retrieve format
-            const std::string& formatString = c.getAttribute<std::string>("format").value_or("n/a");
+            const std::string& formatString = c.get_attribute<std::string>("format").value_or("n/a");
 
-            name = c.getAttribute<std::string>("name").value_or("n/a");
-            red = c.getValue<int>("red");
-            green = c.getValue<int>("green");
-            blue = c.getValue<int>("blue");
+            name = c.get_attribute<std::string>("name").value_or("n/a");
+            red = c.get_value<int>("red");
+            green = c.get_value<int>("green");
+            blue = c.get_value<int>("blue");
         }
     };
 

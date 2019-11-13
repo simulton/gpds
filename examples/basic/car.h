@@ -4,30 +4,31 @@
 #include "serialize.h"
 #include "color.h"
 
-class Car : public Gpds::Serialize {
+class car : public gpds::serialize
+{
 public:
     std::string manufacturer;
     std::string model;
     int year_of_construction;
-    Color color;
+    color color;
 
-    virtual Gpds::Container toContainer() const override
+    virtual gpds::container to_container() const override
     {
-        Gpds::Container c;
+        gpds::container c;
 
-        c.addValue("manufacturer", manufacturer);
-        c.addValue("model", model);
-        c.addValue("year_of_construction", year_of_construction);
-        c.addValue("color", color.toContainer());
+        c.add_value("manufacturer", manufacturer);
+        c.add_value("model", model);
+        c.add_value("year_of_construction", year_of_construction);
+        c.add_value("color", color.to_container());
 
         return c;
     }
 
-    virtual void fromContainer(const Gpds::Container &c) override
+    virtual void from_container(const gpds::container& c) override
     {
-        manufacturer = c.getValue<std::string>("manufacturer");
-        model = c.getValue<std::string>("model");
-        year_of_construction = c.getValue<int>("year_of_construction");
-        color.fromContainer( *c.getValue<Gpds::Container*>( "color" ) );
+        manufacturer = c.get_value<std::string>("manufacturer");
+        model = c.get_value<std::string>("model");
+        year_of_construction = c.get_value<int>("year_of_construction");
+        color.from_container(*c.get_value<gpds::container*>("color"));
     }
 };

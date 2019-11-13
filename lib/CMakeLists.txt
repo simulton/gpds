@@ -194,6 +194,6 @@ export(
 install(
 	EXPORT GpdsTargets
 	FILE GpdsTargets.cmake
-	NAMESPACE Gpds::
+	NAMESPACE gpds::
 	DESTINATION ${ConfigPackageLocation}
 )

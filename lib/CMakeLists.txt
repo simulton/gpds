@@ -184,7 +184,7 @@ configure_file(GpdsConfig.cmake
 export(
 	EXPORT GpdsTargets
 	FILE "${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsTargets.cmake"
-	NAMESPACE Gpds::
+	NAMESPACE gpds::
 )
 install(
 	EXPORT GpdsTargets

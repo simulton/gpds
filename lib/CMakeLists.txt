@@ -1,3 +1,8 @@
+# Policies
+if (POLICY CMP0076)
+	cmake_policy(SET CMP0076 NEW)
+endif()
+
 # Set project information
 project(gpds
 	VERSION 0.1.0

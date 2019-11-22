@@ -7,10 +7,10 @@ using namespace gpds;
 
 archiver_xml::archiver_xml()
 {
-    settings.printComments = true;
-    settings.annotateListCount = false;
-    settings.annotateTypes = false;
-    settings.prefixAnnotations = true;
+    settings.print_comments = true;
+    settings.annotate_list_count = false;
+    settings.annotate_types = false;
+    settings.prefix_annotations = true;
 }
 
 bool archiver_xml::save(std::ostream& stream, const container& container, const std::string& rootName) const
@@ -61,9 +61,9 @@ bool archiver_xml::load(std::istream& stream, container& container, const std::s
 void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const container& container) const
 {
     // Annotate list if supposed to
-    if (settings.annotateListCount and container.is_list()) {
+    if (settings.annotate_list_count and container.is_list()) {
         std::string attributeString = "count";
-        if (settings.prefixAnnotations) {
+        if (settings.prefix_annotations) {
             attributeString = NAMESPACE_PREFIX + attributeString;
         }
 
@@ -71,7 +71,7 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
     }
 
     // Add container comment (if any)
-    if (settings.printComments and not container.comment.empty()) {
+    if (settings.print_comments and not container.comment.empty()) {
         auto parentNode = root.Parent();
         if (parentNode) {
             tinyxml2::XMLComment* comment = doc.NewComment(container.comment.c_str());
@@ -117,16 +117,16 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
         GPDS_ASSERT(child);
 
         // Annotate type if supposed to
-        if (settings.annotateTypes and !container.is_list()) {
+        if (settings.annotate_types and !container.is_list()) {
             std::string attributeString = "type";
-            if (settings.prefixAnnotations) {
+            if (settings.prefix_annotations) {
                 attributeString = NAMESPACE_PREFIX + attributeString;
             }
             child->SetAttribute(attributeString.c_str(), value.type_string());
         }
 
         // Add value comment (if any)
-        if (settings.printComments and not value.comment.c_str()) {
+        if (settings.print_comments and not value.comment.c_str()) {
             tinyxml2::XMLComment* comment = doc.NewComment(value.comment.c_str());
             root.InsertEndChild(comment);
         }

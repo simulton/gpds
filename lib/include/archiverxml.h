@@ -21,15 +21,15 @@ namespace gpds
 
         const std::string NAMESPACE_PREFIX = "gpds:";
 
-        struct Settings
+        struct settings
         {
-            bool printComments;
-            bool annotateListCount;
-            bool annotateTypes;
-            bool prefixAnnotations;
+            bool print_comments;
+            bool annotate_list_count;
+            bool annotate_types;
+            bool prefix_annotations;
         };
 
-        Settings settings;
+        settings settings;
 
         archiver_xml();
         archiver_xml(const archiver_xml& other) = default;

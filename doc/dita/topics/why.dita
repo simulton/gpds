@@ -10,7 +10,7 @@
         <p>Consider the following class:</p>
         <p><image href="../../uml/exports/svg/Misc!Example_01_2.svg"/></p>
         <p>Or represented as C++ classes:</p>
-        <codeblock outputclass="language-cpp"><![CDATA[class Color {
+        <codeblock outputclass="language-cpp"><![CDATA[class color {
 public:
 	std::string name;
 	int red;
@@ -18,12 +18,12 @@ public:
 	int green;
 };
 
-class Car {
+class car {
 public:
 	std::string manufacturer;
 	std::string model;
-	int yearOfConstruction;
-	Color color;
+	int year_of_construction;
+	color color;
 };]]></codeblock>
         <p>Many generic serializers with XML backends would generate the following XML (or similar):</p>
         <codeblock outputclass="language-xml"><![CDATA[<value>
@@ -77,6 +77,7 @@ public:
     <red gpds:type="int">0</red>
     <green gpds:type="int">0</green>
     <blue gpds:type="int">0</blue>
-  </color>]]></codeblock>
+  </color>
+</car>]]></codeblock>
     </body>
 </topic>

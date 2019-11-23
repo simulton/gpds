@@ -15,10 +15,6 @@
         
         <topicref href="../topics/building_download.dita"/>
         <topicref href="../topics/building_cmake.dita"/>
-        <topicref href="../topics/building_library_static.dita"/>
-        <topicref href="../topics/building_library_shared.dita"/>
-        <topicref href="../topics/building_unittests.dita"/>
-        <topicref href="../topics/building_examples.dita"/>
     
     </topicref>
 </map>

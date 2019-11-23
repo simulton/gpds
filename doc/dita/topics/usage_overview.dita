@@ -15,61 +15,61 @@
     </prolog>
     
     <body>
-        <p>This topic explains the usage of the <ph keyref="projectname"/> library. See <xref href="integration.dita"/>
+        <p>This topic explains the usage of the <ph keyref="projectname"/> library. See <xref href="integration_overview.dita"/>
             for instructions on how to integrate the library into a project.</p>
         
         <section>
             <title>General usage</title>
             <p>The following figure illustrates how <ph keyref="projectname"/> is used by an address book application:</p>
             <fig>
-                <image href="../../uml/exports/svg/Model!Usage_1.svg"/>
+                <image href="../../uml/exports/svg/model!usage_1.svg"/>
             </fig>
         </section>
         
         <section>
             <title>Make class serializable</title>
-            <p>A class needs to inherit from the <apiname>Container</apiname> class in order to
+            <p>A class needs to inherit from the <apiname>container</apiname> class in order to
                 become serializable through <ph keyref="projectname"/>.</p>
         </section>
         
         <example>
-            <title>Implement <apiname>Serialize</apiname> interface</title>
-            <p>Implement the <apiname>Gpds::Serialize</apiname> interface by inheriting from the
+            <title>Implement <apiname>serialize</apiname> interface</title>
+            <p>Implement the <apiname>gpds::serialize</apiname> interface by inheriting from the
                 respective class to make your own class become serializable through <ph
                     keyref="projectname"/> as shown by the following UML class diagram:</p>
             <fig>
-                <image href="../../uml/exports/svg/Misc!Example_02_3.svg"/>
+                <image href="../../uml/exports/svg/misc!example_02_3.svg"/>
             </fig>
             <p>Corresponding C++ code:</p>
-            <codeblock outputclass="language-cpp"><![CDATA[class Car : public Gpds::Serialize {
+            <codeblock outputclass="language-cpp"><![CDATA[class car : public gpds::serialize {
 public:
     std::string manufacturer;
     std::string model;
     int year_of_construction;
-    Color color;
+    color color;
 
-    virtual Gpds::Container toContainer() const override
+    virtual gpds::container to_container() const override
     {
-        Gpds::Container c;
+        gpds::container c;
 
-        c.addValue("manufacturer", manufacturer);
-        c.addValue("model", model);
-        c.addValue("year_of_construction", year_of_construction);
-        c.addValue("color", color.toContainer());
+        c.add_value("manufacturer", manufacturer);
+        c.add_value("model", model);
+        c.add_value("year_of_construction", year_of_construction);
+        c.add_value("color", color.to_container());
 
         return c;
     }
 
-    virtual void fromContainer(const Gpds::Container &c) override
+    virtual void from_container(const pds::container& c) override
     {
-        manufacturer = c.getValue<std::string>("manufacturer");
-        model = c.getValue<std::string>("model");
-        year_of_construction = c.getValue<int>("year_of_construction");
-        color.fromContainer( *c.getValue<Gpds::Container*>( "color" ) );
+        manufacturer = c.get_value<std::string>("manufacturer");
+        model = c.get_value<std::string>("model");
+        year_of_construction = c.get_value<int>("year_of_construction");
+        color.from_container( *c.get_value<gpds::container*>( "color" ) );
     }
 };
 
-class Color : public Gpds::Serialize
+class Color : public gpds::serialize
 {
 public:
     std::string name;
@@ -77,30 +77,30 @@ public:
     int green;
     int blue;
 
-    virtual Gpds::Container toContainer() const override
+    virtual gpds::container to_container() const override
     {
-        Gpds::Container c;
+        gpds::container c;
 
-        c.addAttribute("format", "rgb");
-        c.addAttribute("name", name);
+        c.add_attribute("format", "rgb");
+        c.add_attribute("name", name);
 
-        c.addValue("red", red).addAttribute("depth", "32");
-        c.addValue("green", green).addAttribute("depth", "32");
-        c.addValue("blue", blue).addAttribute("depth", "32");
+        c.add_value("red", red).add_attribute("depth", "32");
+        c.add_value("green", green).add_attribute("depth", "32");
+        c.add_value("blue", blue).add_attribute("depth", "32");
 
         return c;
     }
 
-    virtual void fromContainer(const Gpds::Container& c) override
+    virtual void from_container(const gpds::container& c) override
     {
         // Retrieve format
-        const std::string& formatString = c.getAttribute("format").value_or("n/a");
-        assert( formatString == "rgb" );
+        const std::string& format_string = c.get_attribute("format").value_or("n/a");
+        assert(format_string == std::string("rgb"));
 
-        name = c.getAttribute("name").value_or("n/a");
-        red = c.getValue<int>("red");
-        green = c.getValue<int>("green");
-        blue = c.getValue<int>("blue");
+        name = c.get_attribute("name").value_or("n/a");
+        red = c.get_value<int>("red");
+        green = c.get_value<int>("green");
+        blue = c.get_value<int>("blue");
     }
 };]]></codeblock>
             <p>Once serialized with the XML archiver, the following output is produced:</p>
@@ -119,13 +119,13 @@ public:
         
         <example>
             <title>Serialize</title>
-            <p>Create an instance of <apiname>ArchiverXml</apiname> (or of any other
-                <apiname>Archiver</apiname> class).</p>
-            <p>Call <apiname>Archiver::save()</apiname> to serialize:</p>
-            <codeblock outputclass="language-cpp"><![CDATA[Car car;
+            <p>Create an instance of <apiname>archiver_xml</apiname> (or of any other
+                <apiname>archiver</apiname> class).</p>
+            <p>Call <apiname>archiver::save()</apiname> to serialize:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[class car car;
 
 std::sstream stream;
-Gpds::ArchiverXml ar;
+gpds::archiver_xml ar;
 ar.save(stream, car, "car");
 
 std::cout << stream.str() << std::endl]]></codeblock>
@@ -133,18 +133,18 @@ std::cout << stream.str() << std::endl]]></codeblock>
         
         <example>
             <title>Deserialize</title>
-            <p>Create an instance of <apiname>ArchiverXml</apiname> (or of any other
-                <apiname>Archiver</apiname> class).</p>
-            <p>Call <apiname>Archiver::load()</apiname> to serialize:</p>
-            <codeblock outputclass="language-cpp"><![CDATA[Car car;
+            <p>Create an instance of <apiname>archiver_xml</apiname> (or of any other
+                <apiname>archiver</apiname> class).</p>
+            <p>Call <apiname>archiver::load()</apiname> to serialize:</p>
+            <codeblock outputclass="language-cpp"><![CDATA[class car car;
 
-Gpds::ArchiverXml ar;
+gpds::archiver_xml ar;
 ar.load(stream, car, "car");]]></codeblock>
         </example>
     </body>
     
     <related-links>
-        <link href="integration.dita"/>
+        <link href="integration_overview.dita"/>
         <link href="architecture_overview.dita"/>
     </related-links>
     

@@ -18,44 +18,44 @@
             <p>The following figure provides an overview of the overal architecture of <ph keyref="projectname"/>.</p>
             <fig id="fig_v32_5sj_4hb">
                 <title>Overall architecture</title>
-                <image href="../../uml/exports/svg/Model!Architecture_0.svg" id="image_w32_5sj_4hb"
+                <image href="../../uml/exports/svg/model!architecture_0.svg" id="image_w32_5sj_4hb"
                 />
             </fig>
         </section>
         <section>
             <title>Namespace</title>
-            <p>Everything is encapuslated in the namespace <ph keyref="namespace"/>.</p>
+            <p>Everything is encapuslated in the namespace <codeph><ph keyref="namespace"/></codeph>.</p>
         </section>
         <section>
             <title>Classes</title>
             <p>A user will typically interact with the following classes:</p>
             <dl>
                 <dlentry>
-                    <dt>Serialize</dt>
+                    <dt><apiname>serialize</apiname></dt>
                     <dd>An abstract class which application classes need to inherit from in order to
                         support (de)serialization through <ph keyref="projectname"/>.</dd>
                 </dlentry>
                 <dlentry>
-                    <dt>Container</dt>
+                    <dt><apiname>container</apiname></dt>
                     <dd>A class to represent an object to be (de)serialized.</dd>
                 </dlentry>
                 <dlentry>
-                    <dt>Value</dt>
+                    <dt><apiname>value</apiname></dt>
                     <dd>A class to represent a single value to be (de)serialized. It allows storing various
-                        datatypes in a key/value fashion. A <apiname>Value</apiname> may contain a <apiname>Container</apiname> to allow for <xref href="usage_nesting.dita">nesting</xref>.</dd>
+                        datatypes in a key/value fashion. A <apiname>value</apiname> may contain a <apiname>container</apiname> to allow for <xref href="usage_nesting.dita">nesting</xref>.</dd>
                 </dlentry>
                 <dlentry>
-                    <dt>Attribute</dt>
+                    <dt><apiname>attribute</apiname></dt>
                     <dd>A wrapper class to represent attributes. Attributes are key/value pairs of
-                        strings which are used to annotate a Value.</dd>
+                        strings which are used to annotate a <apiname>value</apiname> or <apiname>container</apiname>.</dd>
                 </dlentry>
                 <dlentry>
-                    <dt>Archiver</dt>
+                    <dt><apiname>archiver</apiname></dt>
                     <dd>An abstract class which  provides interfaces to (de)serialize data to/from STL
                         streams.</dd>
                 </dlentry>
                 <dlentry>
-                    <dt>ArchiverXml</dt>
+                    <dt><apiname>archiver_xml</apiname></dt>
                     <dd>An <term>Archiver</term> implementation to (de)serialize to/form XML files.</dd>
                 </dlentry>
             </dl>

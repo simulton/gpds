@@ -11,9 +11,7 @@
     </prolog>
     
     <conbody>
-        <p><ph keyref="projectname"/> is usually integrated by linking either the static or dynamic
-            (shared) library into the target project. However, it's also possible to directly
-            include the source.</p>
+        <p><ph keyref="projectname"/> can be built as a static or dynamic (shared) library.</p>
         <p>see <xref href="building_cmake.dita"/> to learn how to build the library.</p>
     </conbody>
 </concept>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="integration">
+    <title>Integration - Application</title>
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>integration</indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    <taskbody>
+        <context>
+            <p>After integrating the <ph keyref="projectname"/> library into a client
+                application/library, classes can inherit the <codeph><ph keyref="namespace"
+                    />::serialize</codeph> interface. </p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Make your class(es) inherit the <codeph><ph keyref="namespace"/>::serialize</codeph> interface:</cmd>
+                <stepxmp>
+                    <codeblock outputclass="language-cpp"><![CDATA[#include <gpds/serialize.h>
+
+class my_class : public gpds::serialize
+{
+};]]></codeblock>
+                </stepxmp>
+            </step>
+            <step>
+                <cmd>Implement the <codeph>to_container()</codeph> and <codeph>from_container()</codeph> interface functions:</cmd>
+                <stepxmp>
+                    <codeblock outputclass="language-cpp"><![CDATA[#include <gpds/serialize.h>
+
+class my_class : public gpds::serialize
+{
+    virtual gpds::container to_container() const override {
+        gpds::container c;
+
+        // Add values & attributes here...
+
+        return c;
+    }
+
+    virtual void from_container(const gpds::container& c) override {
+        // Load values & attributes here...
+    }
+};]]></codeblock>
+                </stepxmp>
+            </step>
+            <step>
+                <cmd>Wherever appropriate in the client application/library, use the
+                        <codeph>archiver</codeph> to <b>serialize</b>:</cmd>
+                <stepxmp>
+                    <codeblock outputclass="language-cpp"><![CDATA[#include <fstream>
+#include <gpds/archiver_xml.h>
+
+int main()
+{
+    // Object to serialize
+    my_class c;
+
+    // Create & open file
+    std::ofstream ofile;
+    ofile.open("data.xml");
+
+    // Serialize to file
+    gpds::archiver_xml ar;
+    ar.save(ofile, c, "my_class");
+
+    // Close file
+    ofile.close();
+
+    return 0;
+}
+]]></codeblock>
+                </stepxmp>
+            </step>
+            <step>
+                <cmd>Wherever appropriate in the client application/library, use the
+                        <codeph>archiver</codeph> to <b>deserialize</b>:</cmd>
+                <stepxmp>
+                    <codeblock outputclass="language-cpp"><![CDATA[#include <fstream>
+#include <gpds/archiver_xml.h>
+
+int main()
+{
+    // Object to serialize
+    my_class c;
+
+    // Create & open file
+    std::ifstream ifile;
+    ifile.open("data.xml");
+
+    // Deserialize from file
+    ar.load(ifile, c, "my_class");
+
+    // Close file
+    ifile.close();
+
+    return 0;
+}
+]]></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task>

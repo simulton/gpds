@@ -11,6 +11,7 @@
     </prolog>
     
     <body>
-        <p>Using <ph keyref="projectname"/> only requires a C++17 compatible compiler (and corresponding STL).</p>
+        <p>Using <ph keyref="projectname"/> only requires a C++17 compatible compiler (and
+            corresponding STL). Furthermore, <ph keyref="projectname"/> uses cmake as the primary build system.</p>
     </body>
 </topic>

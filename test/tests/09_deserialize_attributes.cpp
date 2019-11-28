@@ -7,17 +7,17 @@
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
     "<data>"
-    "  <value attribute=\"true\">0</value>"
+    "  <value attribute=\"true\">5</value>"
     "  <value attribute=\"false\">0</value>"
-    "  <value attribute=\"0\">0</value>"
-    "  <value attribute=\"1\">0</value>"
-    "  <value attribute=\"42\">0</value>"
-    "  <value attribute=\"-17\">0</value>"
-    "  <value attribute=\"-0.00\">0</value>"
-    "  <value attribute=\"0.00\">0</value>"
-    "  <value attribute=\"-1.00\">0</value>"
-    "  <value attribute=\"1.00\">0</value>"
-    "  <value attribute=\"Hello GPDS!\">0</value>"
+    "  <value attribute=\"0\"></value>"
+    "  <value attribute=\"1\">lorem</value>"
+    "  <value attribute=\"42\"></value>"
+    "  <value attribute=\"-17\">1234</value>"
+    "  <value attribute=\"-0.00\"></value>"
+    "  <value attribute=\"0.00\">-1234</value>"
+    "  <value attribute=\"-1.00\"></value>"
+    "  <value attribute=\"1.00\">2.3</value>"
+    "  <value attribute=\"Hello GPDS!\"></value>"
     "</data>";
 
 using data = std::vector<std::variant<

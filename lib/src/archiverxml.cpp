@@ -150,9 +150,12 @@ void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& contain
             container.add_attribute(std::string(attribute->Name()), std::string(attribute->Value()));
         }
 
-        // It's a text element
-        if (node->GetText()) {
-            value.from_string(std::string(node->GetText()));
+        // It's a text element or an empty element
+        if (node->GetText() or node->NoChildren()) {
+            // Get the text if it's a text element
+            if (node->GetText()) {
+                value.from_string(std::string(node->GetText()));
+            }
 
             // Arguments
             {

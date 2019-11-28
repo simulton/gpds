@@ -1,7 +1,7 @@
 #include "doctest.h"
 #include "../test.h"
-#include "value.h"
-#include "utils.h"
+#include "value.hpp"
+#include "utils.hpp"
 
 TEST_CASE("values can be converted to strings")
 {

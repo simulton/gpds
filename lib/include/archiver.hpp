@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gpds_export.h"
-#include "serialize.h"
+#include "serialize.hpp"
 
 namespace gpds
 {

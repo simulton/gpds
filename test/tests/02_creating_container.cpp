@@ -1,6 +1,6 @@
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.h"
+#include "serialize.hpp"
 #include <iostream>
 
 TEST_CASE("containers can be created")

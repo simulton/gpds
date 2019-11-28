@@ -7,9 +7,9 @@
 #include <map>
 #include <optional>
 #include "gpds_export.h"
-#include "attributes.h"
-#include "utils.h"
-#include "types.h"
+#include "attributes.hpp"
+#include "utils.hpp"
+#include "types.hpp"
 
 namespace gpds
 {

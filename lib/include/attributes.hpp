@@ -4,8 +4,8 @@
 #include <string>
 #include <optional>
 #include "gpds_export.h"
-#include "types.h"
-#include "utils.h"
+#include "types.hpp"
+#include "utils.hpp"
 
 namespace gpds
 {

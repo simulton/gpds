@@ -1,6 +1,6 @@
 #include "doctest.h"
-#include "container.h"
-#include "archiverxml.h"
+#include "container.hpp"
+#include "archiver_xml.hpp"
 #include <sstream>
 
 static const std::string FILE_CONTENT =

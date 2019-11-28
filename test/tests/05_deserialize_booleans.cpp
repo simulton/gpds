@@ -2,7 +2,7 @@
 #include <sstream>
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.h"
+#include "serialize.hpp"
 
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"

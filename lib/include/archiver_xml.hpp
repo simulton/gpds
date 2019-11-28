@@ -2,7 +2,7 @@
 
 #include <ostream>
 #include <istream>
-#include "archiver.h"
+#include "archiver.hpp"
 
 namespace tinyxml2
 {

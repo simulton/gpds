@@ -15,7 +15,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 # List of private source files
 set(SOURCES_PRIVATE
-	src/archiverxml.cpp
+	src/archiver_xml.cpp
 	src/container.cpp
 	src/value.cpp
 	src/attributes.cpp
@@ -27,14 +27,14 @@ set(HEADERS_PRIVATE
 
 # List of public header files
 set(HEADERS_PUBLIC
-	include/archiver.h
-	include/archiverxml.h
-	include/attributes.h
-	include/container.h
-	include/serialize.h
-	include/types.h
-	include/utils.h
-	include/value.h)
+	include/archiver.hpp
+	include/archiver_xml.hpp
+	include/attributes.hpp
+	include/container.hpp
+	include/serialize.hpp
+	include/types.hpp
+	include/utils.hpp
+	include/value.hpp)
 
 
 

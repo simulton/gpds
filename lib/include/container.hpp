@@ -2,10 +2,10 @@
 
 #include <map>
 #include "gpds_export.h"
-#include "value.h"
-#include "attributes.h"
-#include "utils.h"
-#include "types.h"
+#include "value.hpp"
+#include "attributes.hpp"
+#include "utils.hpp"
+#include "types.hpp"
 
 namespace gpds
 {

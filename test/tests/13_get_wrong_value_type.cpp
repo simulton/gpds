@@ -1,7 +1,7 @@
 #include "doctest.h"
 #include "../test.h"
-#include "value.h"
-#include "container.h"
+#include "value.hpp"
+#include "container.hpp"
 
 TEST_CASE("retrieving wrong type from value throws an exception")
 {

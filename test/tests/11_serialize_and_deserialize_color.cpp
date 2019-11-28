@@ -1,7 +1,7 @@
 #include <sstream>
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.h"
+#include "serialize.hpp"
 #include "color.h"
 
 TEST_CASE("Color class")

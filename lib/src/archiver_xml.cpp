@@ -1,6 +1,6 @@
 #include <algorithm>
-#include "archiverxml.h"
-#include "utils.h"
+#include "archiver_xml.hpp"
+#include "utils.hpp"
 #include "3rdparty/tinyxml2/tinyxml2.h"
 
 using namespace gpds;

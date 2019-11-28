@@ -32,8 +32,8 @@ public:
         const std::string& formatString = c.get_attribute<std::string>("format").value_or("n/a");
 
         name = c.get_attribute<std::string>("name").value_or("n/a");
-        red = c.get_value<int>("red");
-        green = c.get_value<int>("green");
-        blue = c.get_value<int>("blue");
+        red = c.get_value<int>("red").value_or(0);
+        green = c.get_value<int>("green").value_or(0);
+        blue = c.get_value<int>("blue").value_or(0);
     }
 };

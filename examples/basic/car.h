@@ -26,9 +26,9 @@ public:
 
     virtual void from_container(const gpds::container& c) override
     {
-        manufacturer = c.get_value<std::string>("manufacturer");
-        model = c.get_value<std::string>("model");
-        year_of_construction = c.get_value<int>("year_of_construction");
-        color.from_container(*c.get_value<gpds::container*>("color"));
+        manufacturer = c.get_value<std::string>("manufacturer").value_or("");
+        model = c.get_value<std::string>("model").value_or("");
+        year_of_construction = c.get_value<int>("year_of_construction").value_or(0);
+        color.from_container(*c.get_value<gpds::container*>("color").value_or(new gpds::container));
     }
 };

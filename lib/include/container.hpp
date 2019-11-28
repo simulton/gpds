@@ -37,7 +37,7 @@ namespace gpds
 
         template<class T>
         [[nodiscard]]
-        T get_value(const gString& key, T&& defaultValue = T()) const
+        std::optional<T> get_value(const gString& key) const
         {
             auto it = values.find(key);
 
@@ -45,13 +45,13 @@ namespace gpds
                 const value& value = it->second;
 
                 if (not value.is_type<T>()) {
-                    return std::move(defaultValue);
+                    return std::nullopt;
                 }
 
                 return it->second.get<T>();
             }
 
-            return std::move(defaultValue);
+            return std::nullopt;
         }
 
         template<class T>

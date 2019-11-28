@@ -43,8 +43,11 @@ TEST_CASE("Containers can be appended")
     REQUIRE(container2.get_value<int>("value") == 321);
     REQUIRE(container2.get_value<int>("number") == 123);
     REQUIRE(container2.get_attribute<std::string>("string") == "c");
-    gpds::container* sub = container2.get_value<gpds::container*>("subcontainer");
+    gpds::container* sub = nullptr;
+    REQUIRE_NOTHROW(sub = container2.get_value<gpds::container*>("subcontainer").value());
     REQUIRE(sub);
-    REQUIRE(sub->get_value<bool>("bool") == false);
+    auto attr = sub->get_attribute<bool>("bool");
+    REQUIRE(attr);
+    REQUIRE(attr == false);
 }
 

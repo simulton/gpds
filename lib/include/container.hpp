@@ -59,12 +59,12 @@ namespace gpds
         std::vector<T> get_values(const gString& key) const
         {
             const auto& range = values.equal_range(key);
-            std::vector<T> values(std::distance(range.first, range.second));
+            std::vector<T> values;
             for (auto it = range.first; it != range.second; it++) {
                 if (it->second.is_empty() or not it->second.is_type<T>()) {
                     continue;
                 }
-                values[std::distance(range.first, it)] = it->second.get<T>();
+                values.push_back(it->second.get<T>());
             }
 
             return values;

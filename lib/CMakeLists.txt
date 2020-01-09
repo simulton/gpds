@@ -47,8 +47,6 @@ target_compile_features(gpds-objs
 	PUBLIC
 		cxx_std_17)
 target_sources(gpds-objs
-	PUBLIC
-		${HEADERS_PUBLIC}
 	PRIVATE
 		${SOURCES_PRIVATE}
 		${HEADERS_PRIVATE})
@@ -68,14 +66,8 @@ target_include_directories(gpds-objs
 # Shared library                                                               #
 ################################################################################
 
-add_library(gpds-shared SHARED $<TARGET_OBJECTS:gpds-objs>)
-target_include_directories(
-	gpds-shared
-	PUBLIC
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-	INTERFACE
-		$<INSTALL_INTERFACE:include>
-)
+add_library(gpds-shared SHARED)
+target_link_libraries(gpds-shared PUBLIC gpds-objs)
 
 
 
@@ -83,18 +75,8 @@ target_include_directories(
 # Static library                                                               #
 ################################################################################
 
-add_library(gpds-static STATIC $<TARGET_OBJECTS:gpds-objs>)
-target_compile_definitions(gpds-static
-	PUBLIC
-		GPDS_STATIC_DEFINE
-)
-target_include_directories(
-	gpds-static
-	PUBLIC
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-	INTERFACE
-		$<INSTALL_INTERFACE:include>
-)
+add_library(gpds-static STATIC)
+target_link_libraries(gpds-static PUBLIC gpds-objs)
 
 # Common library properties
 set_target_properties(
@@ -152,6 +134,7 @@ install(
 	TARGETS
 		gpds-shared
 		gpds-static
+		gpds-objs
 	EXPORT GpdsTargets
 	LIBRARY
 		DESTINATION ${CMAKE_INSTALL_LIBDIR}

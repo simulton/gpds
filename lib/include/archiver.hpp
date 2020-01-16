@@ -1,5 +1,7 @@
 #pragma once
 
+#include <filesystem>
+#include <fstream>
 #include "gpds_export.h"
 #include "serialize.hpp"
 
@@ -18,6 +20,18 @@ namespace gpds
             return save(stream, object.to_container(), rootName);
         }
 
+        bool save(const std::filesystem::path& path, const container& container, const std::string& rootName) const
+        {
+            std::ofstream file;
+            file.open(path, std::ios::out | std::ios::trunc);
+            if (not file.is_open()) {
+                return false;
+            }
+            bool ret = save(file, container, rootName);
+            file.close();
+            return ret;
+        }
+
         virtual bool load(std::istream& stream, container& container, const std::string& rootName) = 0;
 
         bool load(std::istream& stream, serialize& object, const std::string& rootName)
@@ -31,6 +45,18 @@ namespace gpds
             object.from_container(container);
 
             return true;
+        }
+
+        bool load(const std::filesystem::path& path, container& container, const std::string& rootName)
+        {
+            std::ifstream file;
+            file.open(path);
+            if (not file.is_open()) {
+                return false;
+            }
+            bool ret = load(file, container, rootName);
+            file.close();
+            return ret;
         }
     };
 

@@ -8,6 +8,7 @@ project(gpds
 # Lets have some options! \o/
 option(GPDS_BUILD_TESTS "Build the unit tests" on)
 option(GPDS_BUILD_EXAMPLES "Build the examples" on)
+option(GPDS_FEATURE_XPATH "Build with XPath support" off)
 
 # User settings
 set(CMAKE_DEBUG_POSTFIX d)

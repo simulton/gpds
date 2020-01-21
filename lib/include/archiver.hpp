@@ -5,6 +5,10 @@
 #include "gpds_export.h"
 #include "serialize.hpp"
 
+#ifdef GPDS_FEATURE_XPATH
+    #include "document.hpp"
+#endif
+
 namespace gpds
 {
 
@@ -58,6 +62,10 @@ namespace gpds
             file.close();
             return ret;
         }
+
+#ifdef GPDS_FEATURE_XPATH
+        virtual document* load(std::istream& stream) = 0;
+#endif
     };
 
 }

@@ -39,6 +39,10 @@ namespace gpds
         virtual bool save(std::ostream& stream, const container& container, const std::string& rootName) const override;
         virtual bool load(std::istream& stream, container& container, const std::string& rootName) override;
 
+#ifdef GPDS_FEATURE_XPATH
+        virtual document* load(std::istream& stream) override;
+#endif
+
     private:
         void write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const container& container) const;
         void read_entry(tinyxml2::XMLElement& rootNode, container& container);

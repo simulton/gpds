@@ -39,6 +39,12 @@ set(HEADERS_PUBLIC
 	include/utils.hpp
 	include/value.hpp)
 
+if(GPDS_FEATURE_XPATH)
+	set(HEADERS_PUBLIC ${HEADERS_PUBLIC}
+		include/document.hpp
+		include/document_xml.hpp)
+endif()
+
 
 
 ################################################################################
@@ -57,6 +63,9 @@ target_compile_definitions(gpds-objs
 	PUBLIC
 		gpds_shared_EXPORTS		# We're building this library!
 )
+if(GPDS_FEATURE_XPATH)
+	target_compile_definitions(gpds-objs PUBLIC GPDS_FEATURE_XPATH)
+endif()
 target_include_directories(gpds-objs
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

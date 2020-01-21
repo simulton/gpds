@@ -24,7 +24,7 @@ set(SOURCES_PRIVATE
 # List of private header files
 set(HEADERS_PRIVATE
 	3rdparty/tinyxml2/tinyxml2.h
-	3rdparty/tinyxml2-ex/tixml2ex.h)
+)
 
 include_directories(PUBLIC 3rdparty/tinyxml2)
 
@@ -37,12 +37,22 @@ set(HEADERS_PUBLIC
 	include/serialize.hpp
 	include/types.hpp
 	include/utils.hpp
-	include/value.hpp)
+	include/value.hpp
+)
 
 if(GPDS_FEATURE_XPATH)
 	set(HEADERS_PUBLIC ${HEADERS_PUBLIC}
 		include/document.hpp
-		include/document_xml.hpp)
+		include/document_xml.hpp
+	)
+
+	set(HEADAERS_PRIVATE ${HEADERS_PRIVATE}
+		3rdparty/tinyxml2-ex/tixml2ex.h
+	)
+
+	set(SOURCES_PRIVATE ${SOURCES_PRIVATE}
+		src/document_xml.cpp
+	)
 endif()
 
 

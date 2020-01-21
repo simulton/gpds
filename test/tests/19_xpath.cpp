@@ -16,7 +16,8 @@ TEST_CASE("Query document with XPath")
 {
     gpds::archiver_xml ar;
     std::stringstream stream(FILE_CONTENT);
-    gpds::document* doc = ar.load(stream);
+    std::unique_ptr<gpds::document> doc = ar.load(stream);
+    REQUIRE(doc);
 
     SUBCASE("Query boolean as string") {
         std::string value = doc->query("data/boolean");

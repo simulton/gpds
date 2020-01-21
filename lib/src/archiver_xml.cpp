@@ -184,14 +184,15 @@ void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& contain
 
 #ifdef GPDS_FEATURE_XPATH
 
-document* archiver_xml::load(std::istream& stream)
+std::unique_ptr<document> archiver_xml::load(std::istream& stream)
 {
     // Create the document
     std::string string(std::istreambuf_iterator<char>(stream), {});
-    auto doc = new tinyxml2::XMLDocument;
+    auto doc = std::make_unique<tinyxml2::XMLDocument>();
     doc->Parse(string.data());
-    auto xmlDoc = new document_xml(doc);
-    return xmlDoc;
+    auto xml_doc = std::make_unique<document_xml>(std::move(doc));
+
+    return xml_doc;
 }
 
 #endif

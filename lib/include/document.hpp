@@ -1,10 +1,11 @@
 #pragma once
 
-#include "3rdparty/tinyxml2/tinyxml2.h"
-#include "3rdparty/tinyxml2-ex/tixml2ex.h"
+#include <string>
 
 namespace gpds
 {
+    class value;
+
     class GPDS_EXPORT document
     {
     public:

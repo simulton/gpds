@@ -42,7 +42,7 @@ namespace gpds
         void read_entry(tinyxml2::XMLElement& rootNode, container& container);
 
 #ifdef GPDS_FEATURE_XPATH
-        virtual document* load(std::istream& stream) override;
+        virtual std::unique_ptr<document> load(std::istream& stream) override;
 #endif
 
     private:

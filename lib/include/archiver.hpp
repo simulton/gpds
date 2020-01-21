@@ -64,7 +64,7 @@ namespace gpds
         }
 
 #ifdef GPDS_FEATURE_XPATH
-        virtual document* load(std::istream& stream) = 0;
+        virtual std::unique_ptr<document> load(std::istream& stream) = 0;
 #endif
     };
 

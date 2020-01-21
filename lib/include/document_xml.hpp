@@ -14,12 +14,26 @@ namespace gpds
         {
         }
 
-        [[nodiscard]] value query(const std::string& qry) const override
+        [[nodiscard]] std::string query(const std::string& qry) const override
         {
             tinyxml2::XMLElement* el = tinyxml2::find_element(*m_document, qry);
-            value val;
-            val.from_string(tinyxml2::text(el));
-            return val;
+            return tinyxml2::text(el);
+        }
+
+        [[nodiscard]] value query_value(const std::string& qry) const override
+        {
+            tinyxml2::XMLElement* el = tinyxml2::find_element(*m_document, qry);
+            value value;
+            // It's a container
+            if (el->FirstChild()) {
+                archiver_xml ar;
+                auto container = new gpds::container;
+                ar.read_entry(*el, *container);
+                value.set(container);
+            } else {
+                value.from_string(tinyxml2::text(el));
+            }
+            return value;
         }
     private:
         tinyxml2::XMLDocument* m_document;

@@ -54,7 +54,7 @@ namespace gpds
         bool load(const std::filesystem::path& path, container& container, const std::string& rootName)
         {
             std::ifstream file;
-            file.open(path);
+            file.open(path, std::ios::in);
             if (not file.is_open()) {
                 return false;
             }
@@ -65,6 +65,23 @@ namespace gpds
 
 #ifdef GPDS_FEATURE_XPATH
         virtual std::unique_ptr<document> load(std::istream& stream) = 0;
+
+        virtual std::unique_ptr<document> load(const std::filesystem::path& path)
+        {
+            // Open file
+            std::ifstream file;
+            file.open(path, std::ios::in);
+            if (not file.is_open())
+                return nullptr;
+
+            // Load
+            auto doc = load(file);
+
+            // Close file
+            file.close();
+
+            return doc;
+        }
 #endif
     };
 

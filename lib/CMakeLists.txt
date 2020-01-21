@@ -26,6 +26,7 @@ set(HEADERS_PRIVATE
 	3rdparty/tinyxml2/tinyxml2.h
 )
 
+# Include tinyxml2
 include_directories(PUBLIC 3rdparty/tinyxml2)
 
 # List of public header files

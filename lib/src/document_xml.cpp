@@ -11,10 +11,13 @@ document_xml::document_xml() :
 {
 }
 
-document_xml::document_xml(const document_xml& other)
+document_xml::document_xml(const document_xml& other) :
+    m_document(nullptr)
 {
-#warning ToDo
-    m_document = nullptr;
+    if (other.m_document) {
+        m_document = new tinyxml2::XMLDocument;
+        other.m_document->DeepCopy(m_document);
+    }
 }
 
 document_xml::document_xml(std::unique_ptr<tinyxml2::XMLDocument>&& doc) :

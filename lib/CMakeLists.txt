@@ -23,7 +23,10 @@ set(SOURCES_PRIVATE
 
 # List of private header files
 set(HEADERS_PRIVATE
-	3rdparty/tinyxml2/tinyxml2.h)
+	3rdparty/tinyxml2/tinyxml2.h
+	3rdparty/tinyxml2-ex/tixml2ex.h)
+
+include_directories(PUBLIC 3rdparty/tinyxml2)
 
 # List of public header files
 set(HEADERS_PUBLIC

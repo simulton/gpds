@@ -69,7 +69,7 @@ std::string document_xml::query(const std::string& qry) const
     value value;
 
     // It's a container
-    if (el->FirstChild()) {
+    if (el->FirstChildElement()) {
         archiver_xml ar;
         auto container = new gpds::container;
         ar.read_entry(*el, *container);

@@ -24,12 +24,20 @@ TEST_CASE("Query document with XPath")
         REQUIRE(value == "true");
     }
 
+    SUBCASE("Query boolean") {
+        gpds::value value = doc->query_value("data/boolean");
+        REQUIRE(value.is_type<bool>());
+        std::optional<bool> optional = value.get<bool>();
+        REQUIRE(optional.has_value());
+        REQUIRE(optional.value() == true);
+    }
+
     SUBCASE("Query attribute") {
         std::string value = doc->query("data/boolean[@id='1234']");
         REQUIRE(value == "false");
     }
 
-    SUBCASE("Query container") {
+    SUBCASE("Query container as string") {
         std::string value = doc->query("data");
         REQUIRE(value == FILE_CONTENT.substr(FILE_CONTENT.find('\n') + 1));
     }

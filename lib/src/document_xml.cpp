@@ -49,6 +49,14 @@ std::string document_xml::query(const std::string& qry) const
         return { };
 
     tinyxml2::XMLElement* el = tinyxml2::find_element(*m_document, qry);
+
+    // Take special care if it's an XML fragment
+    if (el->FirstChildElement()) {
+        tinyxml2::XMLPrinter printer;
+        el->Accept(&printer);
+        return printer.CStr();
+    }
+
     return tinyxml2::text(el);
 }
 

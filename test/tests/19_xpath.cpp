@@ -7,10 +7,10 @@
 
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-    "<data>"
-    "  <boolean>true</boolean>"
-    "  <boolean id=\"1234\">false</boolean>"
-    "</data>";
+    "<data>\n"
+    "    <boolean>true</boolean>\n"
+    "    <boolean id=\"1234\">false</boolean>\n"
+    "</data>\n";
 
 TEST_CASE("Query document with XPath")
 {
@@ -27,6 +27,11 @@ TEST_CASE("Query document with XPath")
     SUBCASE("Query attribute") {
         std::string value = doc->query("data/boolean[@id='1234']");
         REQUIRE(value == "false");
+    }
+
+    SUBCASE("Query container") {
+        std::string value = doc->query("data");
+        REQUIRE(value == FILE_CONTENT.substr(FILE_CONTENT.find('\n') + 1));
     }
 
     SUBCASE("Query container") {

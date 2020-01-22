@@ -48,6 +48,11 @@ TEST_CASE("Query document with XPath")
         gpds::container* container = value.get<gpds::container*>();
         REQUIRE(container->get_value<bool>("boolean").has_value());
     }
+
+    SUBCASE("Query an nonexistent element") {
+        std::string value = doc->query("data/this_doesnt_exist");
+        REQUIRE(value.empty());
+    }
 }
 
 #endif

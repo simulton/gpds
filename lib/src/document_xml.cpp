@@ -50,6 +50,9 @@ std::string document_xml::query(const std::string& qry) const
 
     tinyxml2::XMLElement* el = tinyxml2::find_element(*m_document, qry);
 
+    if (not el)
+        return { };
+
     // Take special care if it's an XML fragment
     if (el->FirstChildElement()) {
         tinyxml2::XMLPrinter printer;
@@ -66,6 +69,10 @@ std::string document_xml::query(const std::string& qry) const
         return { };
 
     tinyxml2::XMLElement* el = tinyxml2::find_element(*m_document, qry);
+
+    if (not el)
+        return { };
+
     value value;
 
     // It's a container

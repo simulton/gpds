@@ -7,83 +7,65 @@
 using namespace gpds;
 
 document_xml::document_xml() :
-    m_document(nullptr)
+    m_root(nullptr)
 {
 }
 
 document_xml::document_xml(const document_xml& other) :
-    m_document(nullptr)
+    m_root(nullptr)
 {
-    if (other.m_document) {
-        m_document = new tinyxml2::XMLDocument;
-        other.m_document->DeepCopy(m_document);
+    if (other.m_root) {
+        auto doc = std::get<tinyxml2::XMLDocument*>(other.m_root->m_element);
+        if (doc) {
+            auto xmlDoc = new tinyxml2::XMLDocument;
+            doc->DeepCopy(xmlDoc);
+            m_root = std::make_unique<fragment_xml>(xmlDoc);
+        }
     }
 }
 
-document_xml::document_xml(std::unique_ptr<tinyxml2::XMLDocument>&& doc) :
-    m_document(doc.release())
+document_xml::document_xml(std::unique_ptr<tinyxml2::XMLDocument>&& doc)
 {
+    m_root = std::make_unique<fragment_xml>(doc.release());
     doc.reset();
-}
-
-document_xml::~document_xml()
-{
-    if (m_document)
-        delete m_document;
 }
 
 std::string document_xml::to_string() const
 {
-    if (not m_document)
+    if (not m_root)
         return { };
 
     tinyxml2::XMLPrinter printer;
-    m_document->Print(&printer);
+    auto document = std::get<tinyxml2::XMLDocument*>(m_root->m_element);
+
+    if (not document)
+        return { };
+
+    document->Print(&printer);
 
     return printer.CStr();
 }
 
 std::string document_xml::query(const std::string& qry) const
 {
-    if (not m_document)
+    if (not m_root)
         return { };
 
-    tinyxml2::XMLElement* el = tinyxml2::find_element(*m_document, qry);
-
-    if (not el)
-        return { };
-
-    // Take special care if it's an XML fragment
-    if (el->FirstChildElement()) {
-        tinyxml2::XMLPrinter printer;
-        el->Accept(&printer);
-        return printer.CStr();
-    }
-
-    return tinyxml2::text(el);
+    return m_root->query(qry);
 }
 
-[[nodiscard]] value document_xml::query_value(const std::string& qry) const
+value document_xml::query_value(const std::string& qry) const
 {
-    if (not m_document)
+    if (not m_root)
         return { };
 
-    tinyxml2::XMLElement* el = tinyxml2::find_element(*m_document, qry);
+    return m_root->query_value(qry);
+}
 
-    if (not el)
+std::unique_ptr<fragment> document_xml::query_fragment(const std::string& qry) const
+{
+    if (not m_root)
         return { };
 
-    value value;
-
-    // It's a container
-    if (el->FirstChildElement()) {
-        archiver_xml ar;
-        auto container = new gpds::container;
-        ar.read_entry(*el, *container);
-        value.set(container);
-    } else {
-        value.from_string(tinyxml2::text(el));
-    }
-
-    return value;
+    return m_root->query_fragment(qry);
 }

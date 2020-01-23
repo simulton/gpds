@@ -45,6 +45,8 @@ if(GPDS_FEATURE_XPATH)
 	set(HEADERS_PUBLIC ${HEADERS_PUBLIC}
 		include/document.hpp
 		include/document_xml.hpp
+		include/fragment.hpp
+		include/fragment_xml.hpp
 	)
 
 	set(HEADAERS_PRIVATE ${HEADERS_PRIVATE}
@@ -53,6 +55,7 @@ if(GPDS_FEATURE_XPATH)
 
 	set(SOURCES_PRIVATE ${SOURCES_PRIVATE}
 		src/document_xml.cpp
+		src/fragment_xml.cpp
 	)
 endif()
 

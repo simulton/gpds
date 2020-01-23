@@ -1,20 +1,23 @@
 #pragma once
 
 #include <string>
-#include "fragment.hpp"
+#include <memory>
+#include "value.hpp"
+#include "gpds_export.h"
 
 namespace gpds
 {
-    class value;
+    class container;
 
-    class GPDS_EXPORT document
+    class GPDS_EXPORT fragment
     {
     public:
-        virtual ~document() = default;
-
-        [[nodiscard]] virtual std::string to_string() const = 0;
         [[nodiscard]] virtual std::string query(const std::string& qry) const = 0;
         [[nodiscard]] virtual value query_value(const std::string& qry) const = 0;
         [[nodiscard]] virtual std::unique_ptr<fragment> query_fragment(const std::string& qry) const = 0;
+        [[nodiscard]] virtual container to_container() const = 0;
     };
 }
+
+
+

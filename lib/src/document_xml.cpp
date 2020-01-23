@@ -1,6 +1,5 @@
 #include <vector>
 #include <algorithm>
-#include "3rdparty/tinyxml2-ex/tixml2ex.h"
 #include "document_xml.hpp"
 #include "archiver_xml.hpp"
 
@@ -46,6 +45,14 @@ std::string document_xml::to_string() const
     return printer.CStr();
 }
 
+std::vector<std::string> document_xml::query_list(const std::string& qry) const
+{
+    if (not m_root)
+        return { };
+
+    return m_root->query_list(qry);
+}
+
 std::string document_xml::query(const std::string& qry) const
 {
     if (not m_root)
@@ -54,12 +61,28 @@ std::string document_xml::query(const std::string& qry) const
     return m_root->query(qry);
 }
 
+std::vector<value> document_xml::query_values(const std::string& qry) const
+{
+    if (not m_root)
+        return { };
+
+    return m_root->query_values(qry);
+}
+
 value document_xml::query_value(const std::string& qry) const
 {
     if (not m_root)
         return { };
 
     return m_root->query_value(qry);
+}
+
+std::vector<std::unique_ptr<fragment>> document_xml::query_fragments(const std::string& qry) const
+{
+    if (not m_root)
+        return { };
+
+    return m_root->query_fragments(qry);
 }
 
 std::unique_ptr<fragment> document_xml::query_fragment(const std::string& qry) const

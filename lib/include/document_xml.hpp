@@ -24,8 +24,11 @@ namespace gpds
         explicit document_xml(std::unique_ptr<tinyxml2::XMLDocument>&& doc);
 
         [[nodiscard]] virtual std::string to_string() const override;
+        [[nodiscard]] virtual std::vector<std::string> query_list(const std::string& qry) const override;
         [[nodiscard]] virtual std::string query(const std::string& qry) const override;
+        [[nodiscard]] virtual std::vector<value> query_values(const std::string& qry) const override;
         [[nodiscard]] virtual value query_value(const std::string& qry) const override;
+        [[nodiscard]] virtual std::vector<std::unique_ptr<fragment>> query_fragments(const std::string& qry) const override;
         [[nodiscard]] virtual std::unique_ptr<fragment> query_fragment(const std::string& qry) const override;
 
     private:

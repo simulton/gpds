@@ -91,6 +91,45 @@ TEST_CASE("Query fragments with XPath")
     }
 }
 
+TEST_CASE("Query multiple elements") {
+    gpds::archiver_xml ar;
+    std::stringstream stream(FILE_CONTENT);
+    std::unique_ptr<gpds::document> doc = ar.load(stream);
+    REQUIRE(doc);
+
+    SUBCASE("Query a list of elements") {
+        std::vector<std::string> values = doc->query_list("/data/boolean");
+        REQUIRE(values.size() == 2);
+        REQUIRE(values.front() == "true");
+        REQUIRE(values.back() == "false");
+    }
+
+    SUBCASE("Find all the nodes with a certain name") {
+        std::vector<std::string> values = doc->query_list("//boolean");
+        REQUIRE(values.size() == 2);
+        REQUIRE(values.front() == "true");
+        REQUIRE(values.back() == "false");
+    }
+
+    SUBCASE("Find all the nodes with a certain name and attribute") {
+        std::vector<std::string> values = doc->query_list("//boolean[@id='1234']");
+        REQUIRE(values.size() == 1);
+        REQUIRE(values.front() == "false");
+    }
+
+    SUBCASE("Find all the nodes with a certain name and attribute") {
+        std::vector<gpds::value> values = doc->query_values("data/boolean");
+        REQUIRE(values.size() == 2);
+        REQUIRE(values.front().get<bool>() == true);
+        REQUIRE(values.back().get<bool>() == false);
+    }
+
+    SUBCASE("Find all the nodes with a certain name as fragments") {
+        std::vector<std::unique_ptr<gpds::fragment>> values = doc->query_fragments("/data/boolean");
+        REQUIRE(values.size() == 2);
+    }
+}
+
 TEST_CASE("Convert document to string") {
     gpds::archiver_xml ar;
     std::stringstream stream(FILE_CONTENT);

@@ -1,9 +1,28 @@
 #include <algorithm>
 #include "fragment_xml.hpp"
 #include "3rdparty/tinyxml2/tinyxml2.h"
+#include "3rdparty/tinyxml2-ex/tixml2ex.h"
 #include "archiver_xml.hpp"
 
 using namespace gpds;
+
+
+/**
+ * @note This is not a member function of @p fragment_xml to prevent exposing the @p tinyxml2::Selector<> type to the public
+ *       interface. This way the dependency to tinyxml2 remains internal and clients of this library will not need to worry
+ *       about it at all.
+ */
+static tinyxml2::Selector<tinyxml2::XMLElement> query_elements(const std::string& qry, const fragment_xml::element& element)
+{
+    // Find the element corresponding to the xpath
+    if (std::holds_alternative<tinyxml2::XMLDocument*>(element)) {
+        auto doc = std::get<tinyxml2::XMLDocument*>(element);
+        // In order to work as expected, the query need to start with a slash
+        return tinyxml2::selection(doc->RootElement(), (!qry.empty() && qry[0] == '/') ? qry : '/' + qry);
+    }
+
+    return tinyxml2::selection(std::get<tinyxml2::XMLElement*>(element), qry);
+}
 
 fragment_xml::fragment_xml(tinyxml2::XMLElement* element) :
     m_element(element)
@@ -18,7 +37,7 @@ fragment_xml::fragment_xml(tinyxml2::XMLDocument* document) :
 std::vector<std::string> fragment_xml::query_list(const std::string& qry) const
 {
     // Retrieve the elements
-    const tinyxml2::Selector<tinyxml2::XMLElement> selection = query_elements(qry);
+    const tinyxml2::Selector<tinyxml2::XMLElement> selection = query_elements(qry, m_element);
 
     std::vector<std::string> elements;
     for (const auto& el: selection) {
@@ -48,7 +67,7 @@ std::string fragment_xml::query(const std::string& qry) const
 std::vector<value> fragment_xml::query_values(const std::string& qry) const
 {
     // Retrieve the elements
-    const tinyxml2::Selector<tinyxml2::XMLElement> selection = query_elements(qry);
+    const tinyxml2::Selector<tinyxml2::XMLElement> selection = query_elements(qry, m_element);
 
     std::vector<value> elements;
     for (const auto& el: selection) {
@@ -83,7 +102,7 @@ value fragment_xml::query_value(const std::string& qry) const
 std::vector<std::unique_ptr<fragment>> fragment_xml::query_fragments(const std::string& qry) const
 {
     // Retrieve the elements
-    const tinyxml2::Selector<tinyxml2::XMLElement> selection = query_elements(qry);
+    const tinyxml2::Selector<tinyxml2::XMLElement> selection = query_elements(qry, m_element);
 
     std::vector<std::unique_ptr<fragment>> elements;
     for (const auto& el: selection) {
@@ -121,17 +140,4 @@ gpds::container fragment_xml::to_container() const
     }
 
     return container;
-}
-
-tinyxml2::Selector<tinyxml2::XMLElement> fragment_xml::query_elements(const std::string& qry) const
-{
-    // Find the element corresponding to the xpath
-    if (std::holds_alternative<tinyxml2::XMLDocument*>(m_element)) {
-        auto doc = std::get<tinyxml2::XMLDocument*>(m_element);
-        // In order to work as expected, the query need to start with a slash
-        return tinyxml2::selection(doc->RootElement(), (!qry.empty() && qry[0] == '/') ? qry : '/' + qry);
-    } else {
-        auto element = std::get<tinyxml2::XMLElement*>(m_element);
-        return tinyxml2::selection(element, qry);
-    }
 }

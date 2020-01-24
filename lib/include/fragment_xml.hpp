@@ -1,7 +1,5 @@
 #include "fragment.hpp"
 #include <memory>
-#include <algorithm>
-#include <3rdparty/tinyxml2-ex/tixml2ex.h>
 #include "value.hpp"
 
 namespace tinyxml2
@@ -17,7 +15,10 @@ namespace gpds
     class fragment_xml : public fragment
     {
         friend document_xml;
+
     public:
+        using element = std::variant<tinyxml2::XMLElement*, tinyxml2::XMLDocument*>;
+
         explicit fragment_xml(tinyxml2::XMLElement* element);
         explicit fragment_xml(tinyxml2::XMLDocument* document);
         [[nodiscard]] virtual std::vector<std::string> query_list(const std::string& qry) const override;
@@ -29,9 +30,7 @@ namespace gpds
         [[nodiscard]] virtual container to_container() const override;
 
     private:
-        [[nodiscard]] tinyxml2::Selector<tinyxml2::XMLElement> query_elements(const std::string& qry) const;
-
         // The fragment can either represent an element or a whole document.
-        std::variant<tinyxml2::XMLElement*, tinyxml2::XMLDocument*> m_element;
+        element m_element;
     };
 }

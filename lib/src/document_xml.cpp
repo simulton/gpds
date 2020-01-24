@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "document_xml.hpp"
 #include "archiver_xml.hpp"
+#include "3rdparty/tinyxml2/tinyxml2.h"
 
 using namespace gpds;
 

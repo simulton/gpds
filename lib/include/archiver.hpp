@@ -63,6 +63,18 @@ namespace gpds
             return ret;
         }
 
+        bool load(const std::filesystem::path& path, serialize& object, const std::string& root_name)
+        {
+            gpds::container c;
+            const bool success = load(path, c, root_name);
+            if (not success)
+                return false;
+
+            object.from_container(c);
+
+            return true;
+        }
+
 #ifdef GPDS_FEATURE_XPATH
         virtual std::unique_ptr<document> load(std::istream& stream) = 0;
 

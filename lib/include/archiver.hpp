@@ -36,6 +36,11 @@ namespace gpds
             return ret;
         }
 
+        bool save(const std::filesystem::path& path, const serialize& object, const std::string& root_name) const
+        {
+            return save(path, object.to_container(), root_name);
+        }
+
         virtual bool load(std::istream& stream, container& container, const std::string& rootName) = 0;
 
         bool load(std::istream& stream, serialize& object, const std::string& rootName)

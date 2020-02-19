@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "document_xml.hpp"
 #include "doctest.h"
 #include "container.hpp"

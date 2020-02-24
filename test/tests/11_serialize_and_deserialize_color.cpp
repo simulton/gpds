@@ -1,13 +1,13 @@
 #include <sstream>
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.h"
+#include "serialize.hpp"
 #include "color.h"
 
-TEST_CASE( "Color class" )
+TEST_CASE("Color class")
 {
     // Create a color
-    GpdsTest::Color red1;
+    gpds_test::color red1;
     red1.name = "Red";
     red1.red = 255;
     red1.green = 0;
@@ -15,13 +15,13 @@ TEST_CASE( "Color class" )
 
     // Serialize
     std::stringstream serialized;
-    REQUIRE( GpdsTest::Test::serialize( serialized, red1, "color" ) );
+    REQUIRE(gpds_test::test::serialize(serialized, red1, "color"));
 
     // Deserialize
-    GpdsTest::Color red2;
-    REQUIRE( GpdsTest::Test::deserialize( serialized, red2, "color" ) );
+    gpds_test::color red2;
+    REQUIRE(gpds_test::test::deserialize(serialized, red2, "color"));
 
     // Ensure that data is the same
-    REQUIRE( red1 == red2 );
+    REQUIRE(red1 == red2);
 }
 

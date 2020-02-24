@@ -35,7 +35,7 @@
         
         <section>
             <title>Print comments</title>
-            <p>The <apiname>printComments</apiname> settings allow to control whether the <apiname>Value</apiname> and <apiname>Container</apiname> comments should be shown in the XML output.</p>
+            <p>The <apiname>print_comments</apiname> settings allow to control whether the <apiname>value</apiname> and <apiname>container</apiname> comments should be shown in the XML output.</p>
             <p>Setting this to <codeph>false</codeph> will tell the archiver to omit all comments:</p>
             <codeblock outputclass="language-xml"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <cars>

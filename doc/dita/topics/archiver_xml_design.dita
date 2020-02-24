@@ -4,7 +4,7 @@
     <title>Design</title>
     <conbody>
         <fig>
-            <image href="../../uml/exports/svg/Documentation!ArchiverXml_4.svg"/>
+            <image href="../../uml/exports/svg/documentation!archiver_xml_5.svg"/>
         </fig>
         <p>The XML archiver is powered by <xref href="https://github.com/leethomason/tinyxml2"
                 format="html" scope="external">TinyXML2</xref>.</p>

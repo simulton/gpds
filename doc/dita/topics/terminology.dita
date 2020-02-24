@@ -17,8 +17,8 @@
     
     <conbody>
         <section>
-            <title>Value vs. Container</title>
-            <p>The <apiname>Value</apiname> and <apiname>Container</apiname> classes implement the
+            <title><codeph>value</codeph> vs. <codeph>container</codeph></title>
+            <p>The <apiname>value</apiname> and <apiname>container</apiname> classes implement the
                 core concept of <ph keyref="projectname"/>'s serialization design. Therefore, it's
                 important to understand their difference and how to use them properly.</p>
             <p>The following figure illustrates how these two classes are used to model a C++ object

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="integration">
+    <title>Integration - CMake</title>
+    <prolog>
+        <author>Joel Bodenmann</author>
+        <metadata>
+            <keywords>
+                <indexterm>integration</indexterm>
+                <indexterm>cmake</indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    <taskbody>
+        <context>
+            <p>Integrating <ph keyref="projectname"/> into a client application that also uses cmake
+                is extremely easy as <ph keyref="projectname"/> properly exports the library
+                targets.</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Install the library. See <xref href="building_cmake.dita"/> for instructions.</cmd>
+            </step>
+            <step>
+                <cmd>Include the <ph keyref="projectname"/> package into the client application cmake list using <codeph>find_package()</codeph>:</cmd>
+                <stepxmp>
+                    <codeblock>find_package(Gpds REQUIRED)</codeblock>
+                </stepxmp>
+            </step>
+            <step>
+                <cmd>Link the <ph keyref="projectname"/> library either statically or dynamically to the client application/library:</cmd>
+                <stepxmp>
+                    <p>Link dynamically:</p>
+                    <codeblock>target_link_libraries(my-application gpds::gpds-shared)</codeblock>
+                    <p>or link statically:</p>
+                    <codeblock>target_link_libraries(my-application gpds::gpds-static)</codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task>

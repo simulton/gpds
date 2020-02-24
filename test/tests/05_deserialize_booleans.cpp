@@ -2,7 +2,7 @@
 #include <sstream>
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.h"
+#include "serialize.hpp"
 
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
@@ -11,23 +11,23 @@ static const std::string FILE_CONTENT =
     "  <boolean>false</boolean>"
     "</data>";
 
-class TestData01 : public Gpds::Serialize
+class test_data_5 : public gpds::serialize
 {
 public:
     std::vector<bool> data;
 
-    virtual Gpds::Container toContainer() const override
+    virtual gpds::container to_container() const override
     {
-        return { };
+        return {};
     }
 
-    virtual void fromContainer( const Gpds::Container& object ) override
+    virtual void from_container(const gpds::container& object) override
     {
-        data = object.getValues<bool>( "boolean" );
+        data = object.get_values<bool>("boolean");
     }
 };
 
-TEST_CASE( "Read Datatype: Boolean" )
+TEST_CASE("Read Datatype: Boolean")
 {
     // The "known good" data
     const std::vector<bool> knownGood = {
@@ -36,10 +36,10 @@ TEST_CASE( "Read Datatype: Boolean" )
     };
 
     // Parse test file
-    TestData01 data;
-    std::stringstream stream( FILE_CONTENT );
-    REQUIRE( GpdsTest::Test::deserialize( stream, data, "data" ) );
+    test_data_5 data;
+    std::stringstream stream(FILE_CONTENT);
+    REQUIRE(gpds_test::test::deserialize(stream, data, "data"));
 
     // Ensure that data is the same
-    REQUIRE( data.data == knownGood );
+    REQUIRE(data.data == knownGood);
 }

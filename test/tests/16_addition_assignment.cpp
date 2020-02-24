@@ -1,10 +1,11 @@
 #include "doctest.h"
-#include "container.h"
+#include "container.hpp"
 
-TEST_CASE( "Attributes can be appended" ) {
-    Gpds::Attributes attrs1;
+TEST_CASE("Attributes can be appended")
+{
+    gpds::attributes attrs1;
     attrs1.add("attr1", 1.234);
-    Gpds::Attributes attrs2;
+    gpds::attributes attrs2;
     attrs2.add("attr2", "text");
 
     attrs1 += attrs2;
@@ -13,10 +14,11 @@ TEST_CASE( "Attributes can be appended" ) {
     REQUIRE(attrs1.get<std::string>("attr2") == "text");
 }
 
-TEST_CASE ( "Append attributes with the same name") {
-    Gpds::Attributes attrs1;
+TEST_CASE("Append attributes with the same name")
+{
+    gpds::attributes attrs1;
     attrs1.add("x", 123);
-    Gpds::Attributes attrs2;
+    gpds::attributes attrs2;
     attrs2.add("x", "test");
 
     attrs1 += attrs2;
@@ -24,24 +26,28 @@ TEST_CASE ( "Append attributes with the same name") {
     REQUIRE(attrs1.get<int>("x") == 123);
 }
 
-TEST_CASE( "Containers can be appended" ) {
-    Gpds::Container container1;
-    container1.addValue("number", 123);
-    container1.addAttribute("string", "c");
-    Gpds::Container subContainer;
-    subContainer.addAttribute("bool", false);
-    container1.addValue("subcontainer", subContainer);
+TEST_CASE("Containers can be appended")
+{
+    gpds::container container1;
+    container1.add_value("number", 123);
+    container1.add_attribute("string", "c");
+    gpds::container subContainer;
+    subContainer.add_attribute("bool", false);
+    container1.add_value("subcontainer", subContainer);
 
-    Gpds::Container container2;
-    container2.addValue("value", 321);
+    gpds::container container2;
+    container2.add_value("value", 321);
 
     container2 += container1;
 
-    REQUIRE(container2.getValue<int>("value") == 321);
-    REQUIRE(container2.getValue<int>("number") == 123);
-    REQUIRE(container2.getAttribute<std::string>("string") == "c");
-    Gpds::Container* sub = container2.getValue<Gpds::Container*>("subcontainer");
+    REQUIRE(container2.get_value<int>("value") == 321);
+    REQUIRE(container2.get_value<int>("number") == 123);
+    REQUIRE(container2.get_attribute<std::string>("string") == "c");
+    gpds::container* sub = nullptr;
+    REQUIRE_NOTHROW(sub = container2.get_value<gpds::container*>("subcontainer").value());
     REQUIRE(sub);
-    REQUIRE(sub->getValue<bool>("bool") == false);
+    auto attr = sub->get_attribute<bool>("bool");
+    REQUIRE(attr);
+    REQUIRE(attr == false);
 }
 

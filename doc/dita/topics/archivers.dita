@@ -5,7 +5,7 @@
     <shortdesc>The various (de)serialization backends.</shortdesc>
     <conbody>
         <p>The following backends are available for (de)serialization:<ul id="ul_thh_b13_phb">
-                <li>XML</li>
+            <li><xref href="archiver_xml_design.dita">XML</xref></li>
             </ul></p>
     </conbody>
 </concept>

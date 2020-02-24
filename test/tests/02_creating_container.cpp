@@ -1,60 +1,60 @@
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.h"
+#include "serialize.hpp"
 #include <iostream>
 
-TEST_CASE( "containers can be created" )
+TEST_CASE("containers can be created")
 {
-    Gpds::Container container;
+    gpds::container container;
 
-    SUBCASE( "adding values" ) {
+    SUBCASE("adding values") {
 
-        SUBCASE( "adding an integer value" ) {
-            container.addValue("integer", 1337);
-            REQUIRE(container.getValue<int>("integer") == 1337);
+        SUBCASE("adding an integer value") {
+            container.add_value("integer", 1337);
+            REQUIRE(container.get_value<int>("integer") == 1337);
         }
 
-        SUBCASE( "adding a text value" ) {
-            container.addValue("text", std::string("lorem ipsum"));
-            REQUIRE(container.getValue<std::string>("text") == "lorem ipsum");
+        SUBCASE("adding a text value") {
+            container.add_value("text", std::string("lorem ipsum"));
+            REQUIRE(container.get_value<std::string>("text") == "lorem ipsum");
         }
 
-        SUBCASE( "adding a boolean value" ) {
-            container.addValue("boolean", false);
-            REQUIRE(container.getValue<bool>("boolean") == false);
+        SUBCASE("adding a boolean value") {
+            container.add_value("boolean", false);
+            REQUIRE(container.get_value<bool>("boolean") == false);
         }
 
-        SUBCASE( "adding a floating-point value" ) {
-            container.addValue("float", 2.5);
-            REQUIRE(container.getValue<double>("float") == doctest::Approx(2.5));
-        }
-    }
-
-    SUBCASE( "adding attributes" ) {
-
-        SUBCASE( "adding an integer attribute" ) {
-            container.addAttribute("integer", 1337);
-            REQUIRE(container.getAttribute<int>("integer") == 1337);
-        }
-
-        SUBCASE( "adding a text attribute" ) {
-            container.addAttribute("text", std::string("lorem ipsum"));
-            REQUIRE(container.getAttribute<std::string>("text") == "lorem ipsum");
-        }
-
-        SUBCASE( "adding a boolean attribute" ) {
-            container.addAttribute("boolean", false);
-            REQUIRE(container.getAttribute<bool>("boolean") == false);
-        }
-
-        SUBCASE( "adding a floating-point attribute" ) {
-            container.addAttribute("float", 2.5);
-            REQUIRE(container.getAttribute<double>("float") == doctest::Approx(2.5));
+        SUBCASE("adding a floating-point value") {
+            container.add_value("float", 2.5);
+            REQUIRE(container.get_value<double>("float") == doctest::Approx(2.5));
         }
     }
 
-    SUBCASE( "adding a comment" ) {
-        container.setComment("comment");
+    SUBCASE("adding attributes") {
+
+        SUBCASE("adding an integer attribute") {
+            container.add_attribute("integer", 1337);
+            REQUIRE(container.get_attribute<int>("integer") == 1337);
+        }
+
+        SUBCASE("adding a text attribute") {
+            container.add_attribute("text", std::string("lorem ipsum"));
+            REQUIRE(container.get_attribute<std::string>("text") == "lorem ipsum");
+        }
+
+        SUBCASE("adding a boolean attribute") {
+            container.add_attribute("boolean", false);
+            REQUIRE(container.get_attribute<bool>("boolean") == false);
+        }
+
+        SUBCASE("adding a floating-point attribute") {
+            container.add_attribute("float", 2.5);
+            REQUIRE(container.get_attribute<double>("float") == doctest::Approx(2.5));
+        }
+    }
+
+    SUBCASE("adding a comment") {
+        container.set_comment("comment");
         REQUIRE(container.comment == "comment");
     }
 }

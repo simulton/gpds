@@ -2,7 +2,7 @@
 #include <sstream>
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.h"
+#include "serialize.hpp"
 
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -24,23 +24,23 @@ static const std::string FILE_CONTENT =
     "  <string>\\n\\r\\b</string>"
     "</data>";
 
-class TestData04 : public Gpds::Serialize
+class test_data_8 : public gpds::serialize
 {
 public:
     std::vector<std::string> data;
 
-    virtual Gpds::Container toContainer() const override
+    virtual gpds::container to_container() const override
     {
-        return { };
+        return {};
     }
 
-    virtual void fromContainer( const Gpds::Container& object ) override
+    virtual void from_container(const gpds::container& object) override
     {
-        data = object.getValues<std::string>( "string" );
+        data = object.get_values<std::string>("string");
     }
 };
 
-TEST_CASE( "Read Datatype: String" )
+TEST_CASE("Read Datatype: String")
 {
     // The "known good" data
     const std::vector<std::string> knownGood = {
@@ -62,11 +62,11 @@ TEST_CASE( "Read Datatype: String" )
     };
 
     // Parse test file
-    TestData04 data;
-    std::stringstream stream( FILE_CONTENT );
-    REQUIRE( GpdsTest::Test::deserialize( stream, data, "data" ) );
+    test_data_8 data;
+    std::stringstream stream(FILE_CONTENT);
+    REQUIRE(gpds_test::test::deserialize(stream, data, "data"));
 
     // Ensure that data is the same
-    REQUIRE( data.data == knownGood );
+    REQUIRE(data.data == knownGood);
 }
 

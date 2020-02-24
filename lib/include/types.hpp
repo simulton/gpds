@@ -2,14 +2,14 @@
 
 #include <string>
 
-namespace Gpds
+namespace gpds
 {
-    class Container;
+    class container;
 
     // Value types
     using gBool      = bool;
     using gInt       = int;
     using gReal      = double;
     using gString    = std::string;
-    using gContainer = Container*;
+    using gContainer = container*;
 }

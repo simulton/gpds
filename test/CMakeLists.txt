@@ -23,6 +23,7 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/doctest-src
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/doctest-src/doctest)
 
+include_directories(../lib/3rdparty/tinyxml2)
 # Find tests
 FILE(GLOB TESTS tests/*.cpp)
 

@@ -1,3 +1,8 @@
+# Policies
+if (POLICY CMP0076)
+	cmake_policy(SET CMP0076 NEW)
+endif()
+
 # Set project information
 project(gpds
 	VERSION 0.1.0
@@ -10,7 +15,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 # List of private source files
 set(SOURCES_PRIVATE
-	src/archiverxml.cpp
+	src/archiver_xml.cpp
 	src/container.cpp
 	src/value.cpp
 	src/attributes.cpp
@@ -18,18 +23,41 @@ set(SOURCES_PRIVATE
 
 # List of private header files
 set(HEADERS_PRIVATE
-	3rdparty/tinyxml2/tinyxml2.h)
+	3rdparty/tinyxml2/tinyxml2.h
+)
+
+# Include tinyxml2
+include_directories(PUBLIC 3rdparty/tinyxml2)
 
 # List of public header files
 set(HEADERS_PUBLIC
-	include/archiver.h
-	include/archiverxml.h
-	include/attributes.h
-	include/container.h
-	include/serialize.h
-	include/types.h
-	include/utils.h
-	include/value.h)
+	include/archiver.hpp
+	include/archiver_xml.hpp
+	include/attributes.hpp
+	include/container.hpp
+	include/serialize.hpp
+	include/types.hpp
+	include/utils.hpp
+	include/value.hpp
+)
+
+if(GPDS_FEATURE_XPATH)
+	set(HEADERS_PUBLIC ${HEADERS_PUBLIC}
+		include/document.hpp
+		include/document_xml.hpp
+		include/fragment.hpp
+		include/fragment_xml.hpp
+	)
+
+	set(HEADAERS_PRIVATE ${HEADERS_PRIVATE}
+		3rdparty/tinyxml2-ex/tixml2ex.h
+	)
+
+	set(SOURCES_PRIVATE ${SOURCES_PRIVATE}
+		src/document_xml.cpp
+		src/fragment_xml.cpp
+	)
+endif()
 
 
 
@@ -42,8 +70,6 @@ target_compile_features(gpds-objs
 	PUBLIC
 		cxx_std_17)
 target_sources(gpds-objs
-	PUBLIC
-		${HEADERS_PUBLIC}
 	PRIVATE
 		${SOURCES_PRIVATE}
 		${HEADERS_PRIVATE})
@@ -51,6 +77,9 @@ target_compile_definitions(gpds-objs
 	PUBLIC
 		gpds_shared_EXPORTS		# We're building this library!
 )
+if(GPDS_FEATURE_XPATH)
+	target_compile_definitions(gpds-objs PUBLIC GPDS_FEATURE_XPATH)
+endif()
 target_include_directories(gpds-objs
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -63,14 +92,8 @@ target_include_directories(gpds-objs
 # Shared library                                                               #
 ################################################################################
 
-add_library(gpds-shared SHARED $<TARGET_OBJECTS:gpds-objs>)
-target_include_directories(
-	gpds-shared
-	PUBLIC
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-	INTERFACE
-		$<INSTALL_INTERFACE:include>
-)
+add_library(gpds-shared SHARED)
+target_link_libraries(gpds-shared PUBLIC gpds-objs)
 
 
 
@@ -78,18 +101,8 @@ target_include_directories(
 # Static library                                                               #
 ################################################################################
 
-add_library(gpds-static STATIC $<TARGET_OBJECTS:gpds-objs>)
-target_compile_definitions(gpds-static
-	PUBLIC
-		GPDS_STATIC_DEFINE
-)
-target_include_directories(
-	gpds-static
-	PUBLIC
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-	INTERFACE
-		$<INSTALL_INTERFACE:include>
-)
+add_library(gpds-static STATIC)
+target_link_libraries(gpds-static PUBLIC gpds-objs)
 
 # Common library properties
 set_target_properties(
@@ -147,6 +160,7 @@ install(
 	TARGETS
 		gpds-shared
 		gpds-static
+		gpds-objs
 	EXPORT GpdsTargets
 	LIBRARY
 		DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -184,11 +198,11 @@ configure_file(GpdsConfig.cmake
 export(
 	EXPORT GpdsTargets
 	FILE "${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsTargets.cmake"
-	NAMESPACE Gpds::
+	NAMESPACE gpds::
 )
 install(
 	EXPORT GpdsTargets
 	FILE GpdsTargets.cmake
-	NAMESPACE Gpds::
+	NAMESPACE gpds::
 	DESTINATION ${ConfigPackageLocation}
 )

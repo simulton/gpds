@@ -1,17 +1,17 @@
 #include "test.h"
 
 #include <iostream>
-#include "serialize.h"
-#include "archiverxml.h"
+#include "serialize.hpp"
+#include "archiver_xml.hpp"
 
-bool GpdsTest::Test::serialize( std::ostream& stream, Gpds::Serialize& object, const std::string& rootName )
+bool gpds_test::test::serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName)
 {
-    Gpds::ArchiverXml ar;
+    gpds::archiver_xml ar;
 
     bool ret = false;
     try {
         ret = ar.save(stream, object, rootName);
-    } catch ( std::exception& e ) {
+    } catch (std::exception& e) {
         std::cout << "EXCEPTION: " << e.what() << std::endl;
         return false;
     }
@@ -19,14 +19,14 @@ bool GpdsTest::Test::serialize( std::ostream& stream, Gpds::Serialize& object, c
     return ret;
 }
 
-bool GpdsTest::Test::deserialize( std::istream& stream, Gpds::Serialize& object, const std::string& rootName )
+bool gpds_test::test::deserialize(std::istream& stream, gpds::serialize& object, const std::string& rootName)
 {
-    Gpds::ArchiverXml ar;
+    gpds::archiver_xml ar;
 
     bool ret = false;
     try {
         ret = ar.load(stream, object, rootName);
-    } catch ( std::exception& e ) {
+    } catch (std::exception& e) {
         std::cout << "EXCEPTION: " << e.what() << std::endl;
         return false;
     }

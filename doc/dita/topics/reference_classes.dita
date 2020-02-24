@@ -17,12 +17,12 @@
     
     <conbody>
         <p>The <ph keyref="namespace"/> namespace provides the following classes:<ul id="ul_bbn_4xh_phb">
-            <li><apiname>Container</apiname></li>
-            <li><apiname>Value</apiname></li>
-            <li><apiname>Attribute</apiname></li>
-            <li><apiname>Serialize</apiname></li>
-            <li><apiname>Archiver</apiname></li>
-            <li><apiname>ArchiverXml</apiname></li>
+            <li><xref href="reference_class_container_overview.dita"><apiname>container</apiname></xref></li>
+            <li><xref href="reference_class_value_overview.dita"><apiname>value</apiname></xref></li>
+            <li><apiname>attribute</apiname></li>
+            <li><apiname>serialize</apiname></li>
+            <li><apiname>archiver</apiname></li>
+            <li><xref href="archiver_xml_design.dita"><apiname>archiver_xml</apiname></xref></li>
             </ul></p>
         <p>See <xref href="architecture_overview.dita">architecture</xref> for more information
             about the overall architecture of <ph keyref="projectname"/>.</p>

@@ -1,22 +1,26 @@
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.h"
+#include "serialize.hpp"
 #include <iostream>
 
-TEST_CASE( "containers can be nested" )
+TEST_CASE("containers can be nested")
 {
-    Gpds::Container root;
-    Gpds::Container parent;
-    Gpds::Container child;
+    gpds::container root;
+    gpds::container parent;
+    gpds::container child;
 
-    child.addValue("name", std::string("John Doe"));
+    child.add_value("name", std::string("John Doe"));
 
-    parent.addValue("child", child);
-    REQUIRE(parent.getValue<Gpds::Container*>("child"));
+    parent.add_value("child", child);
+    REQUIRE(parent.get_value<gpds::container*>("child"));
 
-    root.addValue("child", parent);
-    REQUIRE(root.getValue<Gpds::Container*>("child"));
+    root.add_value("child", parent);
+    REQUIRE(root.get_value<gpds::container*>("child"));
 
-    auto str = root.getValue<Gpds::Container*>("child")->getValue<Gpds::Container*>("child")->getValue<std::string>("name");
+    std::optional<std::string> str;
+    REQUIRE_NOTHROW(str = root.get_value<gpds::container*>("child").value()
+        ->get_value<gpds::container*>("child").value()
+        ->get_value<std::string>("name")
+    );
     REQUIRE(str == "John Doe");
 }

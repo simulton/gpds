@@ -125,7 +125,7 @@ TEST_CASE("Read Attributes: Container Attributes")
     REQUIRE(gpds_test::test::deserialize(stream, testData, "data"));
 
     // Ensure that data is the same
-    REQUIRE(testData.data.size() == knownGood.size());
-    REQUIRE(testData.data == knownGood);
+    REQUIRE(testData.d.size() == knownGood.size());
+    REQUIRE(testData.d == knownGood);
 }
 

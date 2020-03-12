@@ -19,6 +19,7 @@ set(SOURCES_PRIVATE
 	src/container.cpp
 	src/value.cpp
 	src/attributes.cpp
+	src/serialize.cpp
 	3rdparty/tinyxml2/tinyxml2.cpp)
 
 # List of private header files

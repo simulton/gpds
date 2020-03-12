@@ -13,7 +13,7 @@ namespace gpds
     {
     public:
         std::multimap<gString, value> values;
-        attributes attributes;
+        class attributes attributes;
         gString comment;
 
         container() = default;

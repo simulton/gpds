@@ -35,7 +35,7 @@ namespace gpds
     class GPDS_EXPORT value
     {
     public:
-        attributes attributes;
+        class attributes attributes;
         gString comment;
 
         value() = default;

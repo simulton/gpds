@@ -10,7 +10,7 @@ public:
     std::string manufacturer;
     std::string model;
     int year_of_construction;
-    color color;
+    class color color;
 
     virtual gpds::container to_container() const override
     {

@@ -67,7 +67,7 @@ static const data knownGood = {
 class test_data_10 : public gpds::serialize
 {
 public:
-    data data;
+    data d;
 
     virtual gpds::container to_container() const override
     {
@@ -85,25 +85,25 @@ public:
             switch (i) {
                 case 0:
                 case 1:
-                    data.emplace_back(c->get_attribute<gpds::gBool>("attribute").value());
+                    d.emplace_back(c->get_attribute<gpds::gBool>("attribute").value());
                     break;
 
                 case 2:
                 case 3:
                 case 4:
                 case 5:
-                    data.emplace_back(c->get_attribute<gpds::gInt>("attribute").value());
+                    d.emplace_back(c->get_attribute<gpds::gInt>("attribute").value());
                     break;
 
                 case 6:
                 case 7:
                 case 8:
                 case 9:
-                    data.emplace_back(c->get_attribute<gpds::gReal>("attribute").value());
+                    d.emplace_back(c->get_attribute<gpds::gReal>("attribute").value());
                     break;
 
                 case 10:
-                    data.emplace_back(c->get_attribute<gpds::gString>("attribute").value());
+                    d.emplace_back(c->get_attribute<gpds::gString>("attribute").value());
                     break;
             }
         }
@@ -125,7 +125,7 @@ TEST_CASE("Read Attributes: Container Attributes")
     REQUIRE(gpds_test::test::deserialize(stream, testData, "data"));
 
     // Ensure that data is the same
-    REQUIRE(testData.data.size() == knownGood.size());
-    REQUIRE(testData.data == knownGood);
+    REQUIRE(testData.d.size() == knownGood.size());
+    REQUIRE(testData.d == knownGood);
 }
 

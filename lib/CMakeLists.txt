@@ -142,7 +142,7 @@ generate_export_header(gpds-shared
 # Some basic stuff we'll need in this section
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
-set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/Gpds)
+set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/gpds)
 
 # Copy GPDS headers
 install(
@@ -178,27 +178,27 @@ install(
 
 # Package version
 write_basic_package_version_file(
-	"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
+	"${CMAKE_CURRENT_BINARY_DIR}/gpds/GpdsConfigVersion.cmake"
 	VERSION ${Gpds_VERSION}
 	COMPATIBILITY AnyNewerVersion
 )
 install(
 	FILES
 		GpdsConfig.cmake
-		"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
+		"${CMAKE_CURRENT_BINARY_DIR}/gpds/GpdsConfigVersion.cmake"
 		DESTINATION ${ConfigPackageLocation}
 )
 
 # Package configuration
 configure_file(GpdsConfig.cmake
-	"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfig.cmake"
+	"${CMAKE_CURRENT_BINARY_DIR}/gpds/GpdsConfig.cmake"
 	COPYONLY
 )
 
 # Package export targets
 export(
 	EXPORT GpdsTargets
-	FILE "${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsTargets.cmake"
+	FILE "${CMAKE_CURRENT_BINARY_DIR}/gpds/GpdsTargets.cmake"
 	NAMESPACE gpds::
 )
 install(

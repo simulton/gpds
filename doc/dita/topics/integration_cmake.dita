@@ -24,7 +24,7 @@
             <step>
                 <cmd>Include the <ph keyref="projectname"/> package into the client application cmake list using <codeph>find_package()</codeph>:</cmd>
                 <stepxmp>
-                    <codeblock>find_package(Gpds REQUIRED)</codeblock>
+                    <codeblock>find_package(gpds REQUIRED)</codeblock>
                 </stepxmp>
             </step>
             <step>

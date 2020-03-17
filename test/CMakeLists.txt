@@ -33,7 +33,6 @@ add_executable(gpds-tests
 	test.cpp
 	test_main.cpp
 	${TESTS})
-#add_dependencies(gpds-tests gpds-static)
 target_link_libraries(gpds-tests gpds-static)
 
 # Automatically discover tests

@@ -1,1 +1,1 @@
-include("${CMAKE_CURRENT_LIST_DIR}/GpdsTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/gpds-targets.cmake")

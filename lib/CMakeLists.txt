@@ -1,8 +1,3 @@
-# Policies
-if (POLICY CMP0076)
-	cmake_policy(SET CMP0076 NEW)
-endif()
-
 # Set project information
 project(gpds
 	VERSION 0.1.0
@@ -42,7 +37,7 @@ set(HEADERS_PUBLIC
 	include/value.hpp
 )
 
-if(GPDS_FEATURE_XPATH)
+if (GPDS_FEATURE_XPATH)
 	set(HEADERS_PUBLIC ${HEADERS_PUBLIC}
 		include/document.hpp
 		include/document_xml.hpp
@@ -73,19 +68,19 @@ target_compile_features(gpds-objs
 target_sources(gpds-objs
 	PRIVATE
 		${SOURCES_PRIVATE}
-		${HEADERS_PRIVATE})
+		${HEADERS_PRIVATE}
+)
 target_compile_definitions(gpds-objs
 	PUBLIC
 		gpds_shared_EXPORTS		# We're building this library!
+		$<$<BOOL:${GPDS_FEATURE_XPATH}>:GPDS_FEATURE_XPATH>
 )
-if(GPDS_FEATURE_XPATH)
-	target_compile_definitions(gpds-objs PUBLIC GPDS_FEATURE_XPATH)
-endif()
 target_include_directories(gpds-objs
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 	INTERFACE
-		$<INSTALL_INTERFACE:include>)
+		$<INSTALL_INTERFACE:include>
+)
 
 
 
@@ -142,7 +137,7 @@ generate_export_header(gpds-shared
 # Some basic stuff we'll need in this section
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
-set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/Gpds)
+set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/gpds)
 
 # Copy GPDS headers
 install(
@@ -162,7 +157,7 @@ install(
 		gpds-shared
 		gpds-static
 		gpds-objs
-	EXPORT GpdsTargets
+	EXPORT gpds-targets
 	LIBRARY
 		DESTINATION ${CMAKE_INSTALL_LIBDIR}
 		COMPONENT lib
@@ -178,32 +173,32 @@ install(
 
 # Package version
 write_basic_package_version_file(
-	"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
+	"${CMAKE_CURRENT_BINARY_DIR}/gpds/gpds-config-version.cmake"
 	VERSION ${Gpds_VERSION}
 	COMPATIBILITY AnyNewerVersion
 )
 install(
 	FILES
-		GpdsConfig.cmake
-		"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfigVersion.cmake"
+		gpds-config.cmake
+		"${CMAKE_CURRENT_BINARY_DIR}/gpds/gpds-config-version.cmake"
 		DESTINATION ${ConfigPackageLocation}
 )
 
 # Package configuration
-configure_file(GpdsConfig.cmake
-	"${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsConfig.cmake"
+configure_file(gpds-config.cmake
+	"${CMAKE_CURRENT_BINARY_DIR}/gpds/gpds-config.cmake"
 	COPYONLY
 )
 
 # Package export targets
 export(
-	EXPORT GpdsTargets
-	FILE "${CMAKE_CURRENT_BINARY_DIR}/Gpds/GpdsTargets.cmake"
+	EXPORT gpds-targets
+	FILE "${CMAKE_CURRENT_BINARY_DIR}/gpds/gpds-targets.cmake"
 	NAMESPACE gpds::
 )
 install(
-	EXPORT GpdsTargets
-	FILE GpdsTargets.cmake
+	EXPORT gpds-targets
+	FILE gpds-targets.cmake
 	NAMESPACE gpds::
 	DESTINATION ${ConfigPackageLocation}
 )

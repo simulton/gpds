@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="21.1">
+<project version="22.0">
     <meta>
         <filters directoryPatterns="" filePatterns="\Qprojext.xpr\E" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="21.1" xml:space="preserve">
+            <serialized version="22.0" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>keys.context</String>
@@ -26,6 +26,11 @@
                                         <String>DITAMAP</String>
                                     </list>
                                 </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
@@ -39,6 +44,11 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>DITAMAP</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
                                     </list>
                                 </field>
                             </scenarioAssociation>
@@ -100,13 +110,13 @@
                                 <field name="publishingTemplateDataPO">
                                     <publishingTemplate>
                                         <field name="templateRoot">
-                                            <String>C:/Users/joel/Documents/projects/webhelp_templates/simulton/</String>
+                                            <String>${configured.ditaot.dir}/plugins/com.oxygenxml.webhelp.responsive/templates/light</String>
                                         </field>
                                         <field name="descriptorRelativePath">
-                                            <String>WebHelp responsive - Simulton.opt</String>
+                                            <String>light-tiles.opt</String>
                                         </field>
                                         <field name="isCustomTemplate">
-                                            <Boolean>true</Boolean>
+                                            <Boolean>false</Boolean>
                                         </field>
                                     </publishingTemplate>
                                 </field>
@@ -126,24 +136,24 @@
                                     <list>
                                         <ditaParameter>
                                             <field name="name">
-                                                <String>fix.external.refs.com.oxygenxml</String>
+                                                <String>args.copycss</String>
                                             </field>
                                             <field name="description">
                                                 <null/>
                                             </field>
                                             <field name="value">
-                                                <String>true</String>
+                                                <String>yes</String>
                                             </field>
                                             <field name="defaultValue">
-                                                <String>false</String>
+                                                <String>yes</String>
                                             </field>
                                             <field name="type">
                                                 <Integer>4</Integer>
                                             </field>
                                             <field name="possibleValues">
                                                 <String-array>
-                                                    <String>true</String>
-                                                    <String>false</String>
+                                                    <String>yes</String>
+                                                    <String>no</String>
                                                     <null/>
                                                 </String-array>
                                             </field>
@@ -152,6 +162,29 @@
                                                     <String></String>
                                                     <String></String>
                                                 </String-array>
+                                            </field>
+                                        </ditaParameter>
+                                        <ditaParameter>
+                                            <field name="name">
+                                                <String>args.css</String>
+                                            </field>
+                                            <field name="description">
+                                                <null/>
+                                            </field>
+                                            <field name="value">
+                                                <String>${pd}/webhelp/simulton.css</String>
+                                            </field>
+                                            <field name="defaultValue">
+                                                <null/>
+                                            </field>
+                                            <field name="type">
+                                                <Integer>2</Integer>
+                                            </field>
+                                            <field name="possibleValues">
+                                                <null/>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <null/>
                                             </field>
                                         </ditaParameter>
                                         <ditaParameter>
@@ -220,6 +253,66 @@
                                         </ditaParameter>
                                         <ditaParameter>
                                             <field name="name">
+                                                <String>clean.output</String>
+                                            </field>
+                                            <field name="description">
+                                                <null/>
+                                            </field>
+                                            <field name="value">
+                                                <String>yes</String>
+                                            </field>
+                                            <field name="defaultValue">
+                                                <String>no</String>
+                                            </field>
+                                            <field name="type">
+                                                <Integer>4</Integer>
+                                            </field>
+                                            <field name="possibleValues">
+                                                <String-array>
+                                                    <String>yes</String>
+                                                    <String>no</String>
+                                                    <null/>
+                                                </String-array>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <String-array>
+                                                    <String></String>
+                                                    <String></String>
+                                                </String-array>
+                                            </field>
+                                        </ditaParameter>
+                                        <ditaParameter>
+                                            <field name="name">
+                                                <String>fix.external.refs.com.oxygenxml</String>
+                                            </field>
+                                            <field name="description">
+                                                <null/>
+                                            </field>
+                                            <field name="value">
+                                                <String>true</String>
+                                            </field>
+                                            <field name="defaultValue">
+                                                <String>false</String>
+                                            </field>
+                                            <field name="type">
+                                                <Integer>4</Integer>
+                                            </field>
+                                            <field name="possibleValues">
+                                                <String-array>
+                                                    <String>true</String>
+                                                    <String>false</String>
+                                                    <null/>
+                                                </String-array>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <String-array>
+                                                    <String></String>
+                                                    <String></String>
+                                                </String-array>
+                                            </field>
+                                        </ditaParameter>
+                                        <ditaParameter>
+                                            <field name="name">
                                                 <String>force-unique</String>
                                             </field>
                                             <field name="description">
@@ -250,25 +343,37 @@
                                         </ditaParameter>
                                         <ditaParameter>
                                             <field name="name">
-                                                <String>webhelp.fragment.welcome</String>
+                                                <String>webhelp.fragment.footer</String>
                                             </field>
                                             <field name="description">
                                                 <null/>
                                             </field>
                                             <field name="value">
-                                                <String>${pd}/webhelp/fragments/welcome.xhtml</String>
+                                                <String>© 2019-2020 &lt;a class="oxyFooter" href="https://simulton.com" target="_blank">Simulton&lt;/a>. All rights reserved.</String>
                                             </field>
                                             <field name="defaultValue">
-                                                <null/>
+                                                <String>
+            Generated by &lt;a class="oxyFooter" href="http://www.oxygenxml.com/xml_webhelp.html" target="_blank">
+            &amp;lt;oXygen/&amp;gt; XML WebHelp
+            &lt;/a>
+        </String>
                                             </field>
                                             <field name="type">
                                                 <Integer>2</Integer>
                                             </field>
                                             <field name="possibleValues">
-                                                <null/>
+                                                <String-array>
+                                                    <String>
+            Generated by &lt;a class="oxyFooter" href="http://www.oxygenxml.com/xml_webhelp.html" target="_blank">
+            &amp;lt;oXygen/&amp;gt; XML WebHelp
+            &lt;/a>
+        </String>
+                                                </String-array>
                                             </field>
                                             <field name="possibleValuesDescriptions">
-                                                <null/>
+                                                <String-array>
+                                                    <String></String>
+                                                </String-array>
                                             </field>
                                         </ditaParameter>
                                         <ditaParameter>
@@ -280,36 +385,6 @@
                                             </field>
                                             <field name="value">
                                                 <String>no</String>
-                                            </field>
-                                            <field name="defaultValue">
-                                                <String>yes</String>
-                                            </field>
-                                            <field name="type">
-                                                <Integer>4</Integer>
-                                            </field>
-                                            <field name="possibleValues">
-                                                <String-array>
-                                                    <String>yes</String>
-                                                    <String>no</String>
-                                                    <null/>
-                                                </String-array>
-                                            </field>
-                                            <field name="possibleValuesDescriptions">
-                                                <String-array>
-                                                    <String></String>
-                                                    <String></String>
-                                                </String-array>
-                                            </field>
-                                        </ditaParameter>
-                                        <ditaParameter>
-                                            <field name="name">
-                                                <String>webhelp.show.publication.toc</String>
-                                            </field>
-                                            <field name="description">
-                                                <null/>
-                                            </field>
-                                            <field name="value">
-                                                <String>yes</String>
                                             </field>
                                             <field name="defaultValue">
                                                 <String>yes</String>
@@ -360,6 +435,36 @@
                                                     <String>The Publication TOC will include only the links to the current topic and its children.</String>
                                                     <String>The Publication TOC will include the links to the current topic, its children, and its ancestors.</String>
                                                     <String>The Publication TOC will include all links.</String>
+                                                </String-array>
+                                            </field>
+                                        </ditaParameter>
+                                        <ditaParameter>
+                                            <field name="name">
+                                                <String>webhelp.show.publication.toc</String>
+                                            </field>
+                                            <field name="description">
+                                                <null/>
+                                            </field>
+                                            <field name="value">
+                                                <String>yes</String>
+                                            </field>
+                                            <field name="defaultValue">
+                                                <String>yes</String>
+                                            </field>
+                                            <field name="type">
+                                                <Integer>4</Integer>
+                                            </field>
+                                            <field name="possibleValues">
+                                                <String-array>
+                                                    <String>yes</String>
+                                                    <String>no</String>
+                                                    <null/>
+                                                </String-array>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <String-array>
+                                                    <String></String>
+                                                    <String></String>
                                                 </String-array>
                                             </field>
                                         </ditaParameter>

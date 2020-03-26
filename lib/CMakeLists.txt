@@ -27,22 +27,22 @@ include_directories(PUBLIC 3rdparty/tinyxml2)
 
 # List of public header files
 set(HEADERS_PUBLIC
-	include/archiver.hpp
-	include/archiver_xml.hpp
-	include/attributes.hpp
-	include/container.hpp
-	include/serialize.hpp
-	include/types.hpp
-	include/utils.hpp
-	include/value.hpp
+	include/gpds/archiver.hpp
+	include/gpds/archiver_xml.hpp
+	include/gpds/attributes.hpp
+	include/gpds/container.hpp
+	include/gpds/serialize.hpp
+	include/gpds/types.hpp
+	include/gpds/utils.hpp
+	include/gpds/value.hpp
 )
 
 if (GPDS_FEATURE_XPATH)
 	set(HEADERS_PUBLIC ${HEADERS_PUBLIC}
-		include/document.hpp
-		include/document_xml.hpp
-		include/fragment.hpp
-		include/fragment_xml.hpp
+		include/gpds/document.hpp
+		include/gpds/document_xml.hpp
+		include/gpds/fragment.hpp
+		include/gpds/fragment_xml.hpp
 	)
 
 	set(HEADAERS_PRIVATE ${HEADERS_PRIVATE}
@@ -77,9 +77,7 @@ target_compile_definitions(gpds-objs
 )
 target_include_directories(gpds-objs
 	PUBLIC
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-	INTERFACE
-		$<INSTALL_INTERFACE:include>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/gpds>
 )
 
 

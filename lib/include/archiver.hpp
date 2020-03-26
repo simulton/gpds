@@ -2,7 +2,7 @@
 
 #include <filesystem>
 #include <fstream>
-#include "gpds_export.h"
+#include "gpds_export.hpp"
 #include "serialize.hpp"
 
 #ifdef GPDS_FEATURE_XPATH

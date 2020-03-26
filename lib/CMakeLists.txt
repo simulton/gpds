@@ -121,12 +121,14 @@ set_target_properties(
 include(GenerateExportHeader)
 generate_export_header(gpds-shared
 	BASE_NAME gpds
+	EXPORT_FILE_NAME gpds_export.hpp
 	DEPRECATED_MACRO_NAME "GPDS_DEPRECATED"
 	NO_DEPRECATED_MACRO_NAME "GPDS_NO_DEPRECATED"
 	EXPORT_MACRO_NAME "GPDS_EXPORT"
 	NO_EXPORT_MACRO_NAME "GPDS_NO_EXPORT"
 	STATIC_DEFINE "GPDS_STATIC_DEFINE"
-	DEFINE_NO_DEPRECATED)
+	DEFINE_NO_DEPRECATED
+)
 
 
 
@@ -147,7 +149,7 @@ install(
 
 # Install export header
 install(
-	FILES ${PROJECT_BINARY_DIR}/gpds_export.h
+	FILES ${PROJECT_BINARY_DIR}/gpds_export.hpp
 	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
 )
 

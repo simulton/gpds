@@ -1,7 +1,7 @@
 #pragma once
 
 #include <filesystem>
-#include "gpds_export.h"
+#include "gpds_export.hpp"
 #include "container.hpp"
 
 namespace gpds

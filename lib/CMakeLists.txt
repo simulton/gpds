@@ -77,7 +77,8 @@ target_compile_definitions(gpds-objs
 )
 target_include_directories(gpds-objs
 	PUBLIC
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/gpds>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/gpds>
 )
 
 

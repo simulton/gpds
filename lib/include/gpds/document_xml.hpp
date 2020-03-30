@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "gpds_export.h"
+#include "gpds_export.hpp"
 #include "document.hpp"
 #include "fragment_xml.hpp"
 

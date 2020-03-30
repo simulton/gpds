@@ -6,7 +6,7 @@
 #include <vector>
 #include <map>
 #include <optional>
-#include "gpds_export.h"
+#include "gpds_export.hpp"
 #include "attributes.hpp"
 #include "utils.hpp"
 #include "types.hpp"

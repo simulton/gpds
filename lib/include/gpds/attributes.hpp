@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 #include <optional>
-#include "gpds_export.h"
+#include "gpds_export.hpp"
 #include "types.hpp"
 #include "utils.hpp"
 

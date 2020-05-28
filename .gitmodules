@@ -1,6 +1,0 @@
-[submodule "lib/3rdparty/tinyxml2"]
-	path = lib/3rdparty/tinyxml2
-	url = https://github.com/leethomason/tinyxml2.git
-[submodule "lib/3rdparty/tinyxml2-ex"]
-	path = lib/3rdparty/tinyxml2-ex
-	url = https://github.com/ooklasd/tinyxml2-ex

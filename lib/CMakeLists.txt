@@ -45,7 +45,7 @@ if (GPDS_FEATURE_XPATH)
 		include/gpds/fragment_xml.hpp
 	)
 
-	set(HEADAERS_PRIVATE ${HEADERS_PRIVATE}
+	set(HEADERS_PRIVATE ${HEADERS_PRIVATE}
 		3rdparty/tinyxml2-ex/tixml2ex.h
 	)
 

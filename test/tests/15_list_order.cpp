@@ -1,6 +1,6 @@
 #include <sstream>
 #include "doctest.h"
-#include "serialize.hpp"
+#include "gpds/serialize.hpp"
 #include "../test.h"
 
 class list_order : public gpds::serialize

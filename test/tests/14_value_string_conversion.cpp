@@ -1,7 +1,6 @@
 #include "doctest.h"
 #include "../test.h"
-#include "value.hpp"
-#include "utils.hpp"
+#include "gpds/value.hpp"
 
 TEST_CASE("values can be converted to strings")
 {

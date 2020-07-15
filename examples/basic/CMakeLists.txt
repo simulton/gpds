@@ -1,12 +1,16 @@
-# A list of our files
-set(SOURCES main.cpp)
-set(HEADERS car.h color.h carcatalog.h)
-
-# Build the executable
-add_executable(gpds-example "")
+add_executable(gpds-example)
 target_sources(gpds-example
     PRIVATE
-        ${SOURCES}
-        ${HEADERS}
+        main.cpp
+        car.h
+        color.h
+        carcatalog.h
 )
-target_link_libraries(gpds-example gpds-static)
+target_include_directories(gpds-example
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}../../lib/include/
+)
+target_link_libraries(gpds-example
+    PRIVATE
+        gpds-static
+)

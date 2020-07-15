@@ -76,8 +76,9 @@ target_compile_definitions(gpds-objs
 		$<$<BOOL:${GPDS_FEATURE_XPATH}>:GPDS_FEATURE_XPATH>
 )
 target_include_directories(gpds-objs
-	PUBLIC
+	INTERFACE
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+	PRIVATE
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/gpds>
 )
 
@@ -169,7 +170,7 @@ install(
 		DESTINATION ${CMAKE_INSTALL_BINDIR}
 		COMPONENT bin
 	INCLUDES
-		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
+		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
 # Package version

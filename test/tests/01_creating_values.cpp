@@ -1,7 +1,7 @@
 #include <cstring>
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.hpp"
+#include "gpds/serialize.hpp"
 
 TEST_CASE("values can be created")
 {

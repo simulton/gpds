@@ -1,6 +1,5 @@
 #include "doctest.h"
-#include "container.hpp"
-#include "archiver_xml.hpp"
+#include "gpds/archiver_xml.hpp"
 #include <sstream>
 
 static const std::string FILE_CONTENT =

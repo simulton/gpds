@@ -1,6 +1,6 @@
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.hpp"
+#include "gpds/serialize.hpp"
 #include <iostream>
 
 TEST_CASE("containers can be nested")

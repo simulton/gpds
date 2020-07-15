@@ -1,6 +1,6 @@
 #include "doctest.h"
 #include "../test.h"
-#include "serialize.hpp"
+#include "gpds/serialize.hpp"
 
 TEST_CASE("container can contain a list of elements")
 {

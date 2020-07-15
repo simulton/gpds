@@ -30,6 +30,7 @@ It can be found here: https://github.com/leethomason/tinyxml2 and has it's own l
 #include <memory>
 #include <exception>
 #include <cassert>
+#include <stdexcept>
 
 #include "tinyxml2.h"
 

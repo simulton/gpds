@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "gpds/archiver_xml.hpp"
 #include "../test.h"
 

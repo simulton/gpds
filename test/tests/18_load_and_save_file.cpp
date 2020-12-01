@@ -1,5 +1,4 @@
-#include <iostream>
-#include "doctest.h"
+#include "../test.h"
 #include "gpds/archiver_xml.hpp"
 
 #define BRAND "Ferrari"

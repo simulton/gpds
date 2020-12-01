@@ -4,6 +4,8 @@
 #include <ostream>
 #include <istream>
 
+#include "doctest.hpp"
+
 namespace gpds
 {
     class serialize;

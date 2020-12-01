@@ -1,5 +1,4 @@
 #include <sstream>
-#include "doctest.h"
 #include "../test.h"
 #include "gpds/serialize.hpp"
 #include "color.h"

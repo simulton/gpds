@@ -1,8 +1,6 @@
-#include <iostream>
-#include <sstream>
-#include "doctest.h"
 #include "gpds/document_xml.hpp"
 #include "gpds/archiver_xml.hpp"
+#include "../test.h"
 
 #ifdef GPDS_FEATURE_XPATH
 

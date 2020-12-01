@@ -1,6 +1,5 @@
-#include "doctest.h"
 #include "gpds/archiver_xml.hpp"
-#include <sstream>
+#include "../test.h"
 
 static const std::string FILE_CONTENT =
         "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"

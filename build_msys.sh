@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Variables
-MAKE_BIN=mingw32-make.exe
-MAKE_JOB_COUNT=4
+BUILD_PARALLEL_JOB_COUNT=4
 CMAKE_BIN=cmake
 
 
@@ -14,17 +13,18 @@ CMAKE_BIN=cmake
 # Terminate script upon errors
 set -ex
 
-# Setup environment
+# Create build directory
 mkdir build
-cd build
 
 # CMake
 ${CMAKE_BIN} \
+	-B build \
+	-S . \
 	-G'MinGW Makefiles' \
 	-DCMAKE_C_COMPILER=gcc \
-	-DCMAKE_CXX_COMPILER=g++ \
-	..
+	-DCMAKE_CXX_COMPILER=g++
 
 # Build
-${MAKE_BIN} -j${MAKE_JOB_COUNT}
-
+${CMAKE_BIN} \
+	--build build \
+	--parallel ${BUILD_PARALLEL_JOB_COUNT}

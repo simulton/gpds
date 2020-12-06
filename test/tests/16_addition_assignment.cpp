@@ -1,5 +1,6 @@
-#include "doctest.h"
 #include "gpds/container.hpp"
+
+#include "../test.h"
 
 TEST_CASE("Attributes can be appended")
 {

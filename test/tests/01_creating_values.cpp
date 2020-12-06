@@ -1,5 +1,4 @@
 #include <cstring>
-#include "doctest.h"
 #include "../test.h"
 #include "gpds/serialize.hpp"
 

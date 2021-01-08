@@ -128,9 +128,9 @@ namespace gpds
         }
 
         template<typename T>
-        value& add_attribute(gString&& key, const T& value)
+        value& add_attribute(const gString& key, const T& value)
         {
-            attributes.add(std::forward<gString>(key), value);
+            attributes.add(key, value);
 
             return *this;
         }

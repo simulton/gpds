@@ -27,9 +27,9 @@ namespace gpds
         }
 
         template<typename T>
-        void add(gString&& key, const T& value)
+        void add(const gString& key, const T& value)
         {
-            map.emplace(std::forward<gString>(key), value_to_string(value));
+            map.emplace(key, value_to_string(value));
         }
 
         template<typename T>

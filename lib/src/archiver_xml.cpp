@@ -105,7 +105,7 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
                 write_entry(doc, *child, *childContainer);
             }
 
-                // Simple value
+            // Simple value
             else {
                 child = doc.NewElement(key);
                 child->SetText(value.to_string().data());
@@ -160,12 +160,9 @@ void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& contain
                 value.from_string(std::string(node->GetText()));
             }
 
-            // Arguments
-            {
-                // Value arguments
-                for (const tinyxml2::XMLAttribute* attribute = node->FirstAttribute(); attribute; attribute = attribute->Next()) {
-                    value.add_attribute(std::string(attribute->Name()), std::string(attribute->Value()));
-                }
+            // Value arguments
+            for (const tinyxml2::XMLAttribute* attribute = node->FirstAttribute(); attribute; attribute = attribute->Next()) {
+                value.add_attribute(std::string(attribute->Name()), std::string(attribute->Value()));
             }
         }
         // It's a another container

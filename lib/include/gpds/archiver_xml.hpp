@@ -41,10 +41,6 @@ namespace gpds
 
         void read_entry(tinyxml2::XMLElement& rootNode, container& container);
 
-#ifdef GPDS_FEATURE_XPATH
-        virtual std::unique_ptr<document> load(std::istream& stream) override;
-#endif
-
     private:
         void write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const container& container) const;
     };

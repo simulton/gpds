@@ -15,7 +15,8 @@ set(SOURCES_PRIVATE
 	src/value.cpp
 	src/attributes.cpp
 	src/serialize.cpp
-	3rdparty/tinyxml2/tinyxml2.cpp)
+	3rdparty/tinyxml2/tinyxml2.cpp
+)
 
 # List of private header files
 set(HEADERS_PRIVATE
@@ -37,24 +38,6 @@ set(HEADERS_PUBLIC
 	include/gpds/value.hpp
 )
 
-if (GPDS_FEATURE_XPATH)
-	set(HEADERS_PUBLIC ${HEADERS_PUBLIC}
-		include/gpds/document.hpp
-		include/gpds/document_xml.hpp
-		include/gpds/fragment.hpp
-		include/gpds/fragment_xml.hpp
-	)
-
-	set(HEADERS_PRIVATE ${HEADERS_PRIVATE}
-		3rdparty/tinyxml2-ex/tixml2ex.h
-	)
-
-	set(SOURCES_PRIVATE ${SOURCES_PRIVATE}
-		src/document_xml.cpp
-		src/fragment_xml.cpp
-	)
-endif()
-
 
 
 ################################################################################
@@ -73,7 +56,6 @@ target_sources(gpds-objs
 target_compile_definitions(gpds-objs
 	PUBLIC
 		gpds_shared_EXPORTS		# We're building this library!
-		$<$<BOOL:${GPDS_FEATURE_XPATH}>:GPDS_FEATURE_XPATH>
 )
 target_include_directories(gpds-objs
 	INTERFACE

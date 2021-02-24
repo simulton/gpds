@@ -1,14 +1,10 @@
 include_directories(../lib/3rdparty/tinyxml2)
 
-# Find tests
-FILE(GLOB TESTS tests/*.cpp)
-
-###
-# Build test application
-###
 set(TARGET gpds-tests)
 
 add_executable(${TARGET})
+
+add_subdirectory(test_suites)
 
 target_sources(
 	${TARGET}
@@ -31,5 +27,11 @@ target_link_libraries(
 		gpds-static
 )
 
-# Automatically discover tests
-include(CTest)
+###
+# CTest
+###
+enable_testing()
+add_test(
+	NAME doctest
+	COMMAND ${TARGET}
+)

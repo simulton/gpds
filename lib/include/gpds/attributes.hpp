@@ -36,19 +36,10 @@ namespace gpds
         [[nodiscard]]
         std::optional<T> get(const gString& key) const
         {
-            // Get string
-            std::string valueString;
-            for (auto it = map.cbegin(); it != map.cend(); ++it) {
-                if (it->first == key) {
-                    valueString = it->second;
-                    break;
-                }
-            }
-            if (valueString.empty()) {
-                return std::nullopt;
-            }
-
-            return string_to_value<T>(valueString);
+            const auto& it = map.find(key);
+            if (it not_eq map.cend())
+                return string_to_value<T>(it->second);
+            return std::nullopt;
         }
 
     };

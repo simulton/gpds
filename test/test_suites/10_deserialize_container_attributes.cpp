@@ -120,8 +120,7 @@ TEST_CASE("Read Attributes: Container Attributes")
 {
     // Parse test file
     test_data_10 testData;
-    std::stringstream stream(FILE_CONTENT);
-    REQUIRE(gpds_test::test::deserialize(stream, testData, "data"));
+    gpds_test::test::deserialize(FILE_CONTENT, testData, "data");
 
     // Ensure that data is the same
     REQUIRE(testData.d.size() == knownGood.size());

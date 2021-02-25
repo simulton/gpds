@@ -14,13 +14,12 @@ TEST_CASE("Color class")
 
     // Serialize
     std::stringstream serialized;
-    REQUIRE(gpds_test::test::serialize(serialized, red1, "color"));
+    gpds_test::test::serialize(serialized, red1, "color");
 
     // Deserialize
     gpds_test::color red2;
-    REQUIRE(gpds_test::test::deserialize(serialized, red2, "color"));
+    gpds_test::test::deserialize(serialized, red2, "color");
 
     // Ensure that data is the same
     REQUIRE(red1 == red2);
 }
-

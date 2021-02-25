@@ -17,6 +17,7 @@ static const std::string FILE_CONTENT =
     "  <value attribute=\"-1.00\"></value>"
     "  <value attribute=\"1.00\">2.3</value>"
     "  <value attribute=\"Hello GPDS!\"></value>"
+    "  <value attribute=\"Hello GPDS!\"/>"
     "</data>";
 
 using data = std::vector<std::variant<
@@ -38,7 +39,8 @@ static const data knownGood = {
     0.0,
     -1.0,
     1.0,
-    std::string("Hello GPDS!")
+    std::string("Hello GPDS!"),
+    std::string("Hello GPDS!"),
 };
 
 class test_data_9 : public gpds::serialize
@@ -79,6 +81,7 @@ public:
                         break;
 
                     case 10:
+                    case 11:
                         d.emplace_back(it->second.get_attribute<gpds::gString>("attribute").value());
                         break;
                 }
@@ -91,8 +94,7 @@ TEST_CASE("Read Attributes: Value Attributes")
 {
     // Parse test file
     test_data_9 testData;
-    std::stringstream stream(FILE_CONTENT);
-    REQUIRE(gpds_test::test::deserialize(stream, testData, "data"));
+    gpds_test::test::deserialize(FILE_CONTENT, testData, "data");
 
     // Ensure that data is the same
     REQUIRE(testData.d.size() == knownGood.size());

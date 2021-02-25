@@ -1,35 +1,28 @@
 #include "test.h"
 
-#include <iostream>
+#include <sstream>
 #include "gpds/serialize.hpp"
 #include "gpds/archiver_xml.hpp"
 
-bool gpds_test::test::serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName)
+void gpds_test::test::serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName)
 {
     gpds::archiver_xml ar;
 
     bool ret = false;
-    try {
-        ret = ar.save(stream, object, rootName);
-    } catch (std::exception& e) {
-        std::cout << "EXCEPTION: " << e.what() << std::endl;
-        return false;
-    }
-
-    return ret;
+    REQUIRE_NOTHROW(ret = ar.save(stream, object, rootName));
+    REQUIRE(ret);
 }
 
-bool gpds_test::test::deserialize(std::istream& stream, gpds::serialize& object, const std::string& rootName)
+void gpds_test::test::deserialize(std::istream& stream, gpds::serialize& object, const std::string& root_name)
 {
     gpds::archiver_xml ar;
-
     bool ret = false;
-    try {
-        ret = ar.load(stream, object, rootName);
-    } catch (std::exception& e) {
-        std::cout << "EXCEPTION: " << e.what() << std::endl;
-        return false;
-    }
+    REQUIRE_NOTHROW(ret = ar.load(stream, object, root_name));
+    REQUIRE(ret);
+}
 
-    return ret;
+void gpds_test::test::deserialize(const std::string& xml_str, gpds::serialize& object, const std::string& root_name)
+{
+    std::stringstream stream(xml_str);
+    return deserialize(stream, object, root_name);
 }

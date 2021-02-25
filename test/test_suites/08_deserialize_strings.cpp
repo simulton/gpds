@@ -62,8 +62,7 @@ TEST_CASE("Read Datatype: String")
 
     // Parse test file
     test_data_8 data;
-    std::stringstream stream(FILE_CONTENT);
-    REQUIRE(gpds_test::test::deserialize(stream, data, "data"));
+    gpds_test::test::deserialize(FILE_CONTENT, data, "data");
 
     // Ensure that data is the same
     REQUIRE(data.data == knownGood);

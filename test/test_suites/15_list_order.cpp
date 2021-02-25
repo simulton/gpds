@@ -35,11 +35,11 @@ TEST_CASE("List order is consistent")
 
     // Serialize
     std::stringstream serialized;
-    REQUIRE(gpds_test::test::serialize(serialized, list1, "listorder"));
+    gpds_test::test::serialize(serialized, list1, "listorder");
 
     // Deserialize
     list_order list2;
-    REQUIRE(gpds_test::test::deserialize(serialized, list2, "listorder"));
+    gpds_test::test::deserialize(serialized, list2, "listorder");
 
     // Ensure that data is the same
     REQUIRE(list1.data == list2.data);

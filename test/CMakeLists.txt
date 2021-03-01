@@ -1,5 +1,3 @@
-include_directories(../lib/3rdparty/tinyxml2)
-
 set(TARGET gpds-tests)
 
 add_executable(${TARGET})

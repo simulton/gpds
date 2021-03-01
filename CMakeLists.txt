@@ -33,6 +33,18 @@ if (GPDS_BUILD_EXAMPLES)
 	add_subdirectory(examples/basic)
 endif()
 
+
+################################################################################
+# Print configuration
+################################################################################
+message("")
+message("------------------------")
+message("GPDS configuration:")
+message("  build examples : " ${GPDS_BUILD_EXAMPLES})
+message("  build tests    : " ${GPDS_BUILD_TESTS})
+message("------------------------")
+message("")
+
 ################################################################################
 # CPack                                                                        #
 ################################################################################

@@ -12,7 +12,6 @@ target_sources(
 		test.h
 		test.cpp
 		test_main.cpp
-		${TESTS}
 )
 
 target_include_directories(

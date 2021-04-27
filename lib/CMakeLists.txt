@@ -1,8 +1,9 @@
 # Set project information
 project(gpds
-	VERSION 0.1.0
+	VERSION 1.0.0
 	LANGUAGES CXX
-	HOMEPAGE_URL "https://gpds.simulton.com")
+	HOMEPAGE_URL "https://gpds.simulton.com"
+)
 
 # Some bacis cmake configuration
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

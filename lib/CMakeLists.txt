@@ -59,7 +59,7 @@ target_sources(
 )
 target_compile_definitions(
 	${TARGET-OBJS}
-	PUBLIC
+	PRIVATE
 		gpds_shared_EXPORTS		# We're building this library!
 )
 target_include_directories(
@@ -90,6 +90,13 @@ target_link_libraries(
 ################################################################################
 
 add_library(${TARGET-STATIC} STATIC)
+
+target_compile_definitions(
+	${TARGET-STATIC}
+	PUBLIC
+		GPDS_STATIC_DEFINE
+)
+
 target_link_libraries(
 	${TARGET-STATIC}
 	PUBLIC

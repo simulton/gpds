@@ -97,7 +97,7 @@ namespace gpds
         std::optional<T> get(const gString& key) const
         {
             const auto& it = map.find(key);
-            if (it not_eq map.cend())
+            if (it != map.cend())
                 return string_to_value<T>(it->second);
             return std::nullopt;
         }

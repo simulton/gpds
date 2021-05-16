@@ -61,7 +61,7 @@ bool archiver_xml::load(std::istream& stream, container& container, const std::s
 void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const container& container) const
 {
     // Annotate list if supposed to
-    if (settings.annotate_list_count and container.is_list()) {
+    if (settings.annotate_list_count && container.is_list()) {
         std::string attributeString = "count";
         if (settings.prefix_annotations) {
             attributeString = NAMESPACE_PREFIX + attributeString;
@@ -71,7 +71,7 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
     }
 
     // Add container comment (if any)
-    if (settings.print_comments and not container.comment.empty()) {
+    if (settings.print_comments && !container.comment.empty()) {
         auto parentNode = root.Parent();
         if (parentNode) {
             tinyxml2::XMLComment* comment = doc.NewComment(container.comment.c_str());
@@ -117,7 +117,7 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
         GPDS_ASSERT(child);
 
         // Annotate type if supposed to
-        if (settings.annotate_types and !container.is_list()) {
+        if (settings.annotate_types && !container.is_list()) {
             std::string attributeString = "type";
             if (settings.prefix_annotations) {
                 attributeString = NAMESPACE_PREFIX + attributeString;
@@ -126,7 +126,7 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
         }
 
         // Add value comment (if any)
-        if (settings.print_comments and not value.comment.c_str()) {
+        if (settings.print_comments && !value.comment.c_str()) {
             tinyxml2::XMLComment* comment = doc.NewComment(value.comment.c_str());
             root.InsertEndChild(comment);
         }
@@ -151,7 +151,7 @@ void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& contain
         }
 
         // It's a text element or an empty element
-        if (node->GetText() or node->NoChildren()) {
+        if (node->GetText() || node->NoChildren()) {
             // Get the text if it's a text element
             if (node->GetText()) {
                 value.from_string(std::string(node->GetText()));

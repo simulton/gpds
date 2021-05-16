@@ -41,10 +41,10 @@ namespace gpds
         {
             auto it = values.find(key);
 
-            if (it != values.end() and not it->second.is_empty()) {
+            if (it != values.end() && !it->second.is_empty()) {
                 const value& value = it->second;
 
-                if (not value.is_type<T>()) {
+                if (!value.is_type<T>()) {
                     return std::nullopt;
                 }
 
@@ -61,7 +61,7 @@ namespace gpds
             const auto& range = values.equal_range(key);
             std::vector<T> values;
             for (auto it = range.first; it != range.second; it++) {
-                if (it->second.is_empty() or not it->second.is_type<T>()) {
+                if (it->second.is_empty() || !it->second.is_type<T>()) {
                     continue;
                 }
                 values.push_back(it->second.get<T>());
@@ -91,7 +91,7 @@ namespace gpds
         {
             auto it = values.find(valueKey);
 
-            if (it != values.end() and not it->second.is_empty()) {
+            if (it != values.end() && !it->second.is_empty()) {
                 return it->second.get_attribute<T>(attributeKey);
             }
 

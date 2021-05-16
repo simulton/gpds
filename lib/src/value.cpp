@@ -25,7 +25,7 @@ value::value(value&& other) :
 value::~value() noexcept
 {
     // Ensure that we won't throw
-    GPDS_ASSERT(not m_value.valueless_by_exception());
+    GPDS_ASSERT(!m_value.valueless_by_exception());
 
     free_container_memory();
 }
@@ -50,16 +50,16 @@ void value::from_string(std::string&& string)
         bool isInteger = true;
         for (std::string::const_iterator it = string.cbegin(); it != string.cend(); ++it) {
             // Make sure that this is a digit
-            if (not std::isdigit(static_cast<int>( *it ))) {
+            if (!std::isdigit(static_cast<int>( *it ))) {
                 isInteger = false;
             }
 
             // Check for minus sign
-            if (it == string.cbegin() and !isInteger and *it == '-') {
+            if (it == string.cbegin() && !isInteger && *it == '-') {
                 isInteger = true;
             }
 
-            if (not isInteger) {
+            if (!isInteger) {
                 break;
             }
         }
@@ -83,9 +83,9 @@ void value::from_string(std::string&& string)
         bool foundPoint = false;
         for (std::string::const_iterator it = string.cbegin(); it != string.cend(); ++it) {
             // Make sure that this is a digit
-            if (not std::isdigit(static_cast<int>( *it ))) {
+            if (!std::isdigit(static_cast<int>( *it ))) {
                 // Check if its a decimal point
-                if (!foundPoint and *it == '.') {
+                if (!foundPoint && *it == '.') {
                     isDouble = true;
                     foundPoint = true;
                 } else {
@@ -94,11 +94,11 @@ void value::from_string(std::string&& string)
             }
 
             // Check for minus sign
-            if (it == string.cbegin() and !isDouble and *it == '-') {
+            if (it == string.cbegin() && !isDouble && *it == '-') {
                 isDouble = true;
             }
 
-            if (not isDouble) {
+            if (!isDouble) {
                 break;
             }
         }

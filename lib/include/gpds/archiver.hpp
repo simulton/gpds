@@ -24,7 +24,7 @@ namespace gpds
         {
             std::ofstream file;
             file.open(path, std::ios::out | std::ios::trunc);
-            if (not file.is_open()) {
+            if (!file.is_open()) {
                 return false;
             }
             bool ret = save(file, container, rootName);
@@ -56,7 +56,7 @@ namespace gpds
         {
             std::ifstream file;
             file.open(path, std::ios::in);
-            if (not file.is_open()) {
+            if (!file.is_open()) {
                 return false;
             }
             bool ret = load(file, container, rootName);
@@ -68,7 +68,7 @@ namespace gpds
         {
             gpds::container c;
             const bool success = load(path, c, root_name);
-            if (not success)
+            if (!success)
                 return false;
 
             object.from_container(c);

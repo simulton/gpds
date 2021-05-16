@@ -37,39 +37,60 @@ set(HEADERS_PUBLIC
 
 # Define targets
 set(NAME gpds)
-set(TARGET-OBJS   ${NAME}-objs)
 set(TARGET-STATIC ${NAME}-static)
 set(TARGET-SHARED ${NAME}-shared)
 
-################################################################################
-# Object library                                                               #
-################################################################################
+# This function sets stuff up common to all targets
+function(setup_target_common target)
+	target_compile_features(
+		${target}
+		PUBLIC
+			cxx_std_17
+	)
 
-add_library(${TARGET-OBJS} OBJECT)
-target_compile_features(
-	gpds-objs
-	PUBLIC
-		cxx_std_17
-)
-target_sources(
-	${TARGET-OBJS}
-	PRIVATE
-		${SOURCES_PRIVATE}
-		${HEADERS_PRIVATE}
-)
-target_compile_definitions(
-	${TARGET-OBJS}
-	PRIVATE
-		gpds_shared_EXPORTS		# We're building this library!
-)
-target_include_directories(
-	${TARGET-OBJS}
-	INTERFACE
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-	PRIVATE
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/gpds>
-)
+	target_sources(
+		${target}
+		PRIVATE
+			${SOURCES_PRIVATE}
+			${HEADERS_PRIVATE}
+	)
 
+	target_compile_definitions(
+		${target}
+		PRIVATE
+			gpds_shared_EXPORTS		# We're building this library!
+	)
+
+	target_include_directories(
+		${target}
+		INTERFACE
+			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+			PRIVATE
+			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/gpds>
+	)
+
+	set_target_properties(
+		${target}
+		PROPERTIES
+			OUTPUT_NAME "gpds"
+			ARCHIVE_OUTPUT_NAME "gpds"
+			VERSION ${PROJECT_VERSION}
+			POSITION_INDEPENDENT_CODE 1
+	)
+
+	include(GenerateExportHeader)
+	generate_export_header(
+		${target}
+		BASE_NAME gpds
+		EXPORT_FILE_NAME gpds_export.hpp
+		DEPRECATED_MACRO_NAME "GPDS_DEPRECATED"
+		NO_DEPRECATED_MACRO_NAME "GPDS_NO_DEPRECATED"
+		EXPORT_MACRO_NAME "GPDS_EXPORT"
+		NO_EXPORT_MACRO_NAME "GPDS_NO_EXPORT"
+		STATIC_DEFINE "GPDS_STATIC_DEFINE"
+		DEFINE_NO_DEPRECATED
+	)
+endfunction()
 
 
 ################################################################################
@@ -77,12 +98,7 @@ target_include_directories(
 ################################################################################
 
 add_library(${TARGET-SHARED} SHARED)
-target_link_libraries(
-	${TARGET-SHARED}
-	PUBLIC
-		gpds-objs
-)
-
+setup_target_common(${TARGET-SHARED})
 
 
 ################################################################################
@@ -90,50 +106,7 @@ target_link_libraries(
 ################################################################################
 
 add_library(${TARGET-STATIC} STATIC)
-
-target_compile_definitions(
-	${TARGET-STATIC}
-	PUBLIC
-		GPDS_STATIC_DEFINE
-)
-
-target_link_libraries(
-	${TARGET-STATIC}
-	PUBLIC
-		gpds-objs
-)
-
-# Common library properties
-set_target_properties(
-	${TARGET-OBJS}
-	${TARGET-STATIC}
-	${TARGET-SHARED}
-	PROPERTIES
-		OUTPUT_NAME "gpds"
-		ARCHIVE_OUTPUT_NAME "gpds"
-		VERSION ${PROJECT_VERSION}
-		POSITION_INDEPENDENT_CODE 1
-)
-
-
-
-################################################################################
-# Export header                                                                #
-################################################################################
-
-include(GenerateExportHeader)
-generate_export_header(
-	${TARGET-SHARED}
-	BASE_NAME gpds
-	EXPORT_FILE_NAME gpds_export.hpp
-	DEPRECATED_MACRO_NAME "GPDS_DEPRECATED"
-	NO_DEPRECATED_MACRO_NAME "GPDS_NO_DEPRECATED"
-	EXPORT_MACRO_NAME "GPDS_EXPORT"
-	NO_EXPORT_MACRO_NAME "GPDS_NO_EXPORT"
-	STATIC_DEFINE "GPDS_STATIC_DEFINE"
-	DEFINE_NO_DEPRECATED
-)
-
+setup_target_common(${TARGET-STATIC})
 
 
 ################################################################################

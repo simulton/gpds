@@ -44,7 +44,7 @@ namespace gpds
         virtual ~value() noexcept;
 
         template<class T,
-                typename std::enable_if<not std::is_class<T>::value, T>::type* = nullptr>
+                typename std::enable_if<!std::is_class<T>::value, T>::type* = nullptr>
         value(const T& value)
         {
             set<T>(value);

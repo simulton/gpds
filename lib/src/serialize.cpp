@@ -13,7 +13,7 @@ std::pair<bool, std::string> serialize::to_file(const std::filesystem::path& pat
 
 std::pair<bool, std::string> serialize::from_file(const std::filesystem::path& path, const std::string& root_name)
 {
-    if (not std::filesystem::exists(path))
+    if (!std::filesystem::exists(path))
         return { false, "File does not exist." };
 
     archiver_xml ar;

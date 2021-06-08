@@ -5,15 +5,14 @@
 using namespace gpds;
 
 value::value(const value& other) :
-        attributes(other.attributes),
-        m_value(other.m_value)
+    attributes(other.attributes),
+    m_value(other.m_value)
 {
-    if (std::holds_alternative<container*>(m_value)) {
+    if (std::holds_alternative<container*>(m_value))
         allocate_container_memory(*std::get<container*>(m_value));
-    }
 }
 
-value::value(value&& other) :
+value::value(value&& other) noexcept :
     attributes(std::move(other.attributes)),
     m_value(std::move(other.m_value))
 {

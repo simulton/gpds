@@ -37,7 +37,7 @@ namespace gpds
          * Move constructor.
          * @param other The other object to move from.
          */
-        attributes(attributes&& other) = default;
+        attributes(attributes&& other) noexcept = default;
 
         /**
          * Destructor.

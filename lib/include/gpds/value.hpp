@@ -39,21 +39,28 @@ namespace gpds
 
         value() = default;
         value(const value& other);
-        value(value&& other);
+        value(value&& other) noexcept;
         virtual ~value() noexcept;
 
-        template<class T,
-                typename std::enable_if<!std::is_class<T>::value, T>::type* = nullptr>
-        value(const T& value)
+        value& operator=(const value& rhs) = default;
+        value& operator=(value&& rhs) noexcept = default;
+
+        template<
+            class T,
+            typename std::enable_if<!std::is_class<T>::value, T>::type* = nullptr
+        >
+        explicit value(const T& value)
         {
             set<T>(value);
         }
 
-        template<class T,
-                typename std::enable_if<std::is_class<T>::value, T>::type* = nullptr>
-        value(T&& value)
+        template<
+            class T,
+            typename std::enable_if<std::is_class<T>::value, T>::type* = nullptr
+        >
+        explicit value(T&& value)
         {
-            set<T>(std::move(value));
+            set<T>(std::forward<T>(value));
         }
 
         template<typename T>

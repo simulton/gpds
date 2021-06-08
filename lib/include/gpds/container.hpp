@@ -17,7 +17,11 @@ namespace gpds
 
         container() = default;
         container(const container& other) = default;
-        container(container&& other) = default;
+        container(container&& other) noexcept = default;
+        virtual ~container() = default;
+
+        container& operator=(const container& rhs) = default;
+        container& operator=(container&& rhs) noexcept = default;
 
         container& operator+=(const container& rhs)
         {

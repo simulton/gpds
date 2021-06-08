@@ -461,9 +461,9 @@ int main( int argc, const char ** argv )
 		// Build:
 		//		<element>
 		//			<!--comment-->
+		//			<sub attrib="0" />
 		//			<sub attrib="1" />
-		//			<sub attrib="2" />
-		//			<sub attrib="3" >& Text!</sub>
+		//			<sub attrib="2" >& Text!</sub>
 		//		<element>
 
 		XMLDocument* doc = new XMLDocument();
@@ -632,6 +632,10 @@ int main( int argc, const char ** argv )
 		ele->SetAttribute( "int", 1 );
 		ele->SetAttribute( "double", -1.0 );
 
+		const char* answer = 0;
+		ele->QueryAttribute("str", &answer);
+		XMLTest("Query char attribute", "strValue", answer);
+
 		const char* cStr = ele->Attribute( "str" );
 		{
 			XMLError queryResult = ele->QueryIntAttribute( "int", &iVal );
@@ -643,11 +647,11 @@ int main( int argc, const char ** argv )
 		}
 
 		{
-			int queryResult = ele->QueryAttribute( "int", &iVal2 );
+			XMLError queryResult = ele->QueryAttribute( "int", &iVal2 );
 			XMLTest( "Query int attribute generic", (int)XML_SUCCESS, queryResult);
 		}
 		{
-			int queryResult = ele->QueryAttribute( "double", &dVal2 );
+			XMLError queryResult = ele->QueryAttribute( "double", &dVal2 );
 			XMLTest( "Query double attribute generic", (int)XML_SUCCESS, queryResult);
 		}
 
@@ -804,6 +808,7 @@ int main( int argc, const char ** argv )
 	// ---------- Attributes ---------
 	{
 		static const int64_t BIG = -123456789012345678;
+        static const uint64_t BIG_POS = 123456789012345678;
 		XMLDocument doc;
 		XMLElement* element = doc.NewElement("element");
 		doc.InsertFirstChild(element);
@@ -818,7 +823,7 @@ int main( int argc, const char ** argv )
 			}
 			{
 				int v = 0;
-				int queryResult = element->QueryAttribute("attrib", &v);
+				XMLError queryResult = element->QueryAttribute("attrib", &v);
 				XMLTest("Attribute: int", (int)XML_SUCCESS, queryResult, true);
 				XMLTest("Attribute: int", -100, v, true);
 			}
@@ -834,7 +839,7 @@ int main( int argc, const char ** argv )
 			}
 			{
 				unsigned v = 0;
-				int queryResult = element->QueryAttribute("attrib", &v);
+				XMLError queryResult = element->QueryAttribute("attrib", &v);
 				XMLTest("Attribute: unsigned", (int)XML_SUCCESS, queryResult, true);
 				XMLTest("Attribute: unsigned", unsigned(100), v, true);
 			}
@@ -858,13 +863,29 @@ int main( int argc, const char ** argv )
 			}
 			{
 				int64_t v = 0;
-				int queryResult = element->QueryAttribute("attrib", &v);
+				XMLError queryResult = element->QueryAttribute("attrib", &v);
 				XMLTest("Attribute: int64_t", (int)XML_SUCCESS, queryResult, true);
 				XMLTest("Attribute: int64_t", BIG, v, true);
 			}
 			XMLTest("Attribute: int64_t", BIG, element->Int64Attribute("attrib"), true);
 		}
-		{
+        {
+            element->SetAttribute("attrib", BIG_POS);
+            {
+                uint64_t v = 0;
+                XMLError queryResult = element->QueryUnsigned64Attribute("attrib", &v);
+                XMLTest("Attribute: uint64_t", XML_SUCCESS, queryResult, true);
+                XMLTest("Attribute: uint64_t", BIG_POS, v, true);
+            }
+            {
+                uint64_t v = 0;
+				XMLError queryResult = element->QueryAttribute("attrib", &v);
+                XMLTest("Attribute: uint64_t", (int)XML_SUCCESS, queryResult, true);
+                XMLTest("Attribute: uint64_t", BIG_POS, v, true);
+            }
+            XMLTest("Attribute: uint64_t", BIG_POS, element->Unsigned64Attribute("attrib"), true);
+        }
+        {
 			element->SetAttribute("attrib", true);
 			{
 				bool v = false;
@@ -874,7 +895,7 @@ int main( int argc, const char ** argv )
 			}
 			{
 				bool v = false;
-				int queryResult = element->QueryAttribute("attrib", &v);
+				XMLError queryResult = element->QueryAttribute("attrib", &v);
 				XMLTest("Attribute: bool", (int)XML_SUCCESS, queryResult, true);
 				XMLTest("Attribute: bool", true, v, true);
 			}
@@ -902,7 +923,7 @@ int main( int argc, const char ** argv )
 			}
 			{
 				double v = 0;
-				int queryResult = element->QueryAttribute("attrib", &v);
+				XMLError queryResult = element->QueryAttribute("attrib", &v);
 				XMLTest("Attribute: bool", (int)XML_SUCCESS, queryResult, true);
 				XMLTest("Attribute: double", 100.0, v, true);
 			}
@@ -918,7 +939,7 @@ int main( int argc, const char ** argv )
 			}
 			{
 				float v = 0;
-				int queryResult = element->QueryAttribute("attrib", &v);
+				XMLError queryResult = element->QueryAttribute("attrib", &v);
 				XMLTest("Attribute: float", (int)XML_SUCCESS, queryResult, true);
 				XMLTest("Attribute: float", 100.0f, v, true);
 			}
@@ -931,7 +952,14 @@ int main( int argc, const char ** argv )
 			XMLTest("Element: int64_t", XML_SUCCESS, queryResult, true);
 			XMLTest("Element: int64_t", BIG, v, true);
 		}
-	}
+        {
+            element->SetText(BIG_POS);
+            uint64_t v = 0;
+            XMLError queryResult = element->QueryUnsigned64Text(&v);
+            XMLTest("Element: uint64_t", XML_SUCCESS, queryResult, true);
+            XMLTest("Element: uint64_t", BIG_POS, v, true);
+        }
+    }
 
 	// ---------- XMLPrinter stream mode ------
 	{
@@ -944,6 +972,7 @@ int main( int argc, const char ** argv )
 			printer.PushAttribute("attrib-int", int(1));
 			printer.PushAttribute("attrib-unsigned", unsigned(2));
 			printer.PushAttribute("attrib-int64", int64_t(3));
+			printer.PushAttribute("attrib-uint64", uint64_t(37));
 			printer.PushAttribute("attrib-bool", true);
 			printer.PushAttribute("attrib-double", 4.0);
 			printer.CloseElement();
@@ -964,12 +993,111 @@ int main( int argc, const char ** argv )
 			XMLTest("attrib-unsigned", unsigned(2), attrib->UnsignedValue(), true);
 			attrib = cdoc.FirstChildElement("foo")->FindAttribute("attrib-int64");
 			XMLTest("attrib-int64", int64_t(3), attrib->Int64Value(), true);
+			attrib = cdoc.FirstChildElement("foo")->FindAttribute("attrib-uint64");
+			XMLTest("attrib-uint64", uint64_t(37), attrib->Unsigned64Value(), true);
 			attrib = cdoc.FirstChildElement("foo")->FindAttribute("attrib-bool");
 			XMLTest("attrib-bool", true, attrib->BoolValue(), true);
 			attrib = cdoc.FirstChildElement("foo")->FindAttribute("attrib-double");
 			XMLTest("attrib-double", 4.0, attrib->DoubleValue(), true);
 		}
+		// Add API_testcatse :PushDeclaration();PushText();PushComment()
+		{
+			FILE* fp1 = fopen("resources/out/printer_1.xml", "w");
+			XMLPrinter printer(fp1);
 
+			printer.PushDeclaration("version = '1.0' enconding = 'utf-8'");
+
+			printer.OpenElement("foo");
+			printer.PushAttribute("attrib-text", "text");
+
+			printer.OpenElement("text");
+			printer.PushText("Tinyxml2");
+			printer.CloseElement();
+
+			printer.OpenElement("int");
+			printer.PushText(int(11));
+			printer.CloseElement();
+
+			printer.OpenElement("unsigned");
+			printer.PushText(unsigned(12));
+			printer.CloseElement();
+
+			printer.OpenElement("int64_t");
+			printer.PushText(int64_t(13));
+			printer.CloseElement();
+
+			printer.OpenElement("uint64_t");
+			printer.PushText(uint64_t(14));
+			printer.CloseElement();
+
+			printer.OpenElement("bool");
+			printer.PushText(true);
+			printer.CloseElement();
+
+			printer.OpenElement("float");
+			printer.PushText("1.56");
+			printer.CloseElement();
+
+			printer.OpenElement("double");
+			printer.PushText("12.12");
+			printer.CloseElement();
+
+			printer.OpenElement("comment");
+			printer.PushComment("this is Tinyxml2");
+			printer.CloseElement();
+
+			printer.CloseElement();
+			fclose(fp1);
+		}
+		{
+			XMLDocument doc;
+			doc.LoadFile("resources/out/printer_1.xml");
+			XMLTest("XMLPrinter Stream mode: load", XML_SUCCESS, doc.ErrorID(), true);
+
+			const XMLDocument& cdoc = doc;
+
+			const  XMLElement* root = cdoc.FirstChildElement("foo");
+
+			const char* text_value;
+			text_value = root->FirstChildElement("text")->GetText();
+			XMLTest("PushText( const char* text, bool cdata=false ) test", "Tinyxml2", text_value);
+
+			int  int_value;
+			int_value = root->FirstChildElement("int")->IntText();
+			XMLTest("PushText( int value ) test", 11, int_value);
+
+			unsigned  unsigned_value;
+			unsigned_value = root->FirstChildElement("unsigned")->UnsignedText();
+			XMLTest("PushText( unsigned value ) test", (unsigned)12, unsigned_value);
+
+			int64_t  int64_t_value;
+			int64_t_value = root->FirstChildElement("int64_t")->Int64Text();
+			XMLTest("PushText( int64_t value ) test", (int64_t) 13, int64_t_value);
+
+			uint64_t uint64_t_value;
+			uint64_t_value = root->FirstChildElement("uint64_t")->Unsigned64Text();
+			XMLTest("PushText( uint64_t value ) test", (uint64_t) 14, uint64_t_value);
+
+			float  float_value;
+			float_value = root->FirstChildElement("float")->FloatText();
+			XMLTest("PushText( float value ) test", 1.56f, float_value);
+
+			double double_value;
+			double_value = root->FirstChildElement("double")->DoubleText();
+			XMLTest("PushText( double value ) test", 12.12, double_value);
+
+			bool bool_value;
+			bool_value = root->FirstChildElement("bool")->BoolText();
+			XMLTest("PushText( bool value ) test", true, bool_value);
+
+			const XMLComment* comment = root->FirstChildElement("comment")->FirstChild()->ToComment();
+			const char* comment_value = comment->Value();
+			XMLTest("PushComment() test", "this is Tinyxml2", comment_value);
+
+			const XMLDeclaration* declaration = cdoc.FirstChild()->ToDeclaration();
+			const char* declaration_value = declaration->Value();
+			XMLTest("PushDeclaration() test", "version = '1.0' enconding = 'utf-8'", declaration_value);
+		}
 	}
 
 
@@ -1263,7 +1391,7 @@ int main( int argc, const char ** argv )
 	}
 
 	{
-		// trying to repro ]1874301]. If it doesn't go into an infinite loop, all is well.
+		// trying to repro [1874301]. If it doesn't go into an infinite loop, all is well.
 		unsigned char buf[] = "<?xml version=\"1.0\" encoding=\"utf-8\"?><feed><![CDATA[Test XMLblablablalblbl";
 		buf[60] = 239;
 		buf[61] = 0;
@@ -1523,6 +1651,88 @@ int main( int argc, const char ** argv )
 		XMLTest( "Ill formed XML", true, doc.Error() );
 	}
 
+    {
+        //API:IntText(),UnsignedText(),Int64Text(),DoubleText(),BoolText() and FloatText() test
+        const char* xml = "<point> <IntText>-24</IntText> <UnsignedText>42</UnsignedText> \
+						   <Int64Text>38</Int64Text> <BoolText>true</BoolText> <DoubleText>2.35</DoubleText> </point>";
+        XMLDocument doc;
+        doc.Parse(xml);
+
+        const XMLElement* pointElement = doc.RootElement();
+        int test1 = pointElement->FirstChildElement("IntText")->IntText();
+        XMLTest("IntText() test", -24, test1);
+
+        unsigned test2 = pointElement->FirstChildElement("UnsignedText")->UnsignedText();
+        XMLTest("UnsignedText() test", static_cast<unsigned>(42), test2);
+
+        int64_t test3 = pointElement->FirstChildElement("Int64Text")->Int64Text();
+        XMLTest("Int64Text() test", static_cast<int64_t>(38), test3);
+
+        double test4 = pointElement->FirstChildElement("DoubleText")->DoubleText();
+        XMLTest("DoubleText() test", 2.35, test4);
+
+        float test5 = pointElement->FirstChildElement("DoubleText")->FloatText();
+        XMLTest("FloatText()) test", 2.35f, test5);
+
+        bool test6 = pointElement->FirstChildElement("BoolText")->BoolText();
+        XMLTest("FloatText()) test", true, test6);
+    }
+
+    {
+        // hex value test
+        const char* xml = "<point> <IntText>  0x2020</IntText> <UnsignedText>0X2020</UnsignedText> \
+						   <Int64Text> 0x1234</Int64Text></point>";
+        XMLDocument doc;
+        doc.Parse(xml);
+
+        const XMLElement* pointElement = doc.RootElement();
+        int test1 = pointElement->FirstChildElement("IntText")->IntText();
+        XMLTest("IntText() hex value test", 0x2020, test1);
+
+        unsigned test2 = pointElement->FirstChildElement("UnsignedText")->UnsignedText();
+        XMLTest("UnsignedText() hex value test", static_cast<unsigned>(0x2020), test2);
+
+        int64_t test3 = pointElement->FirstChildElement("Int64Text")->Int64Text();
+        XMLTest("Int64Text() hex value test", static_cast<int64_t>(0x1234), test3);
+    }
+
+	{
+		//API:ShallowEqual() test
+		const char* xml = "<playlist id = 'playlist'>"
+						    "<property name = 'track_name'>voice</property>"
+						  "</playlist>";
+		XMLDocument doc;
+		doc.Parse( xml );
+		const XMLNode* PlaylistNode = doc.RootElement();
+		const XMLNode* PropertyNode = PlaylistNode->FirstChildElement();
+		bool result;
+		result = PlaylistNode->ShallowEqual(PropertyNode);
+		XMLTest("ShallowEqual() test",false,result);
+		result = PlaylistNode->ShallowEqual(PlaylistNode);
+		XMLTest("ShallowEqual() test",true,result);
+	}
+
+	{
+		//API: previousSiblingElement() and NextSiblingElement() test
+		const char* xml = "<playlist id = 'playlist'>"
+						    "<property name = 'track_name'>voice</property>"
+						    "<entry out = '946' producer = '2_playlist1' in = '0'/>"
+							"<blank length = '1'/>"
+						  "</playlist>";
+		XMLDocument doc;
+		doc.Parse( xml );
+		XMLElement* ElementPlaylist = doc.FirstChildElement("playlist");
+		XMLTest("previousSiblingElement() test",true,ElementPlaylist != 0);
+		const XMLElement* pre = ElementPlaylist->PreviousSiblingElement();
+		XMLTest("previousSiblingElement() test",true,pre == 0);
+		const XMLElement* ElementBlank = ElementPlaylist->FirstChildElement("entry")->NextSiblingElement("blank");
+		XMLTest("NextSiblingElement() test",true,ElementBlank != 0);
+		const XMLElement* next = ElementBlank->NextSiblingElement();
+		XMLTest("NextSiblingElement() test",true,next == 0);
+		const XMLElement* ElementEntry = ElementBlank->PreviousSiblingElement("entry");
+		XMLTest("PreviousSiblingElement test",true,ElementEntry != 0);
+	}
+
 	// QueryXYZText
 	{
 		const char* xml = "<point> <x>1.2</x> <y>1</y> <z>38</z> <valid>true</valid> </point>";
@@ -1702,12 +1912,12 @@ int main( int argc, const char ** argv )
             doc.Print( &printer );
 
             XMLTest( "BOM preservation (compare)", xml_bom_preservation, printer.CStr(), false, true );
-			doc.SaveFile( "resources/bomtest.xml" );
+			doc.SaveFile( "resources/out/bomtest.xml" );
 			XMLTest( "Save bomtest.xml", false, doc.Error() );
         }
 		{
 			XMLDocument doc;
-			doc.LoadFile( "resources/bomtest.xml" );
+			doc.LoadFile( "resources/out/bomtest.xml" );
 			XMLTest( "Load bomtest.xml", false, doc.Error() );
 			XMLTest( "BOM preservation (load)", true, doc.HasBOM(), false );
 

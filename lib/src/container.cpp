@@ -2,20 +2,6 @@
 
 using namespace gpds;
 
-container& container::set_comment(const gString& comment)
-{
-    this->comment = comment;
-
-    return *this;
-}
-
-container& container::set_comment(gString&& comment)
-{
-    this->comment = std::move(comment);
-
-    return *this;
-}
-
 bool container::is_list() const
 {
     // We need at least two elements

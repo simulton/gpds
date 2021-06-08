@@ -36,7 +36,6 @@ namespace gpds
     {
     public:
         class attributes attributes;
-        gString comment;
 
         value() = default;
         value(const value& other);
@@ -141,9 +140,6 @@ namespace gpds
         {
             return attributes.get<T>(key);
         }
-
-        value& set_comment(const gString& comment);
-        value& set_comment(gString&& comment);
 
     private:
         std::variant<

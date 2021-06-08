@@ -43,7 +43,6 @@ namespace gpds_test
         {
             gpds::container c;
 
-            c.set_comment("a color object");
             c.add_attribute("format", "rgb");
             c.add_attribute("name", name);
 

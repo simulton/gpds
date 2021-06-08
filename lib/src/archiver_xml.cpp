@@ -7,7 +7,6 @@ using namespace gpds;
 
 archiver_xml::archiver_xml()
 {
-    settings.print_comments = true;
     settings.annotate_list_count = false;
     settings.annotate_types = false;
     settings.prefix_annotations = true;
@@ -70,15 +69,6 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
         root.SetAttribute(attributeString.c_str(), std::to_string(container.values.size()).data());
     }
 
-    // Add container comment (if any)
-    if (settings.print_comments && !container.comment.empty()) {
-        auto parentNode = root.Parent();
-        if (parentNode) {
-            tinyxml2::XMLComment* comment = doc.NewComment(container.comment.c_str());
-            doc.InsertAfterChild(parentNode, comment);
-        }
-    }
-
     // Add all container arguments
     for (const auto& attribute : container.attributes.map) {
         root.SetAttribute(attribute.first.c_str(), attribute.second.c_str());
@@ -125,18 +115,17 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
             child->SetAttribute(attributeString.c_str(), value.type_string());
         }
 
-        // Add value comment (if any)
-        if (settings.print_comments && !value.comment.c_str()) {
-            tinyxml2::XMLComment* comment = doc.NewComment(value.comment.c_str());
-            root.InsertEndChild(comment);
-        }
-
         root.InsertEndChild(child);
     }
 }
 
 void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& container)
 {
+    // Container attributes
+    for (const tinyxml2::XMLAttribute* attribute = rootNode.FirstAttribute(); attribute; attribute = attribute->Next()) {
+        container.add_attribute(std::string(attribute->Name()), std::string(attribute->Value()));
+    }
+
     // Handle all nodes children recursively
     for (tinyxml2::XMLElement* node = rootNode.FirstChildElement(); node; node = node->NextSiblingElement()) {
         // Extract the name & value
@@ -145,11 +134,6 @@ void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& contain
         // Create the Value
         value value;
 
-        // Container arguments
-        for (const tinyxml2::XMLAttribute* attribute = rootNode.FirstAttribute(); attribute; attribute = attribute->Next()) {
-            container.add_attribute(std::string(attribute->Name()), std::string(attribute->Value()));
-        }
-
         // It's a text element or an empty element
         if (node->GetText() || node->NoChildren()) {
             // Get the text if it's a text element
@@ -157,11 +141,12 @@ void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& contain
                 value.from_string(std::string(node->GetText()));
             }
 
-            // Value arguments
+            // Value attributes
             for (const tinyxml2::XMLAttribute* attribute = node->FirstAttribute(); attribute; attribute = attribute->Next()) {
                 value.add_attribute(std::string(attribute->Name()), std::string(attribute->Value()));
             }
         }
+
         // It's a another container
         else if (node->FirstChild()) {
             gpds::container childContainer;
@@ -171,7 +156,6 @@ void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& contain
         }
 
         container.add_value(keyString, value);
-
     }
 
 }

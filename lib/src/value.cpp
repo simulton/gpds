@@ -6,7 +6,6 @@ using namespace gpds;
 
 value::value(const value& other) :
         attributes(other.attributes),
-        comment(other.comment),
         m_value(other.m_value)
 {
     if (std::holds_alternative<container*>(m_value)) {
@@ -15,9 +14,8 @@ value::value(const value& other) :
 }
 
 value::value(value&& other) :
-        attributes(std::move(other.attributes)),
-        comment(std::move(other.comment)),
-        m_value(std::move(other.m_value))
+    attributes(std::move(other.attributes)),
+    m_value(std::move(other.m_value))
 {
     other.m_value = nullptr;
 }
@@ -141,20 +139,6 @@ std::string value::to_string() const
     }
 
     return {};
-}
-
-value& value::set_comment(const gString& comment)
-{
-    this->comment = comment;
-
-    return *this;
-}
-
-value& value::set_comment(gString&& comment)
-{
-    this->comment = std::move(comment);
-
-    return *this;
 }
 
 void value::free_container_memory()

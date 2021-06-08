@@ -14,7 +14,6 @@ namespace gpds
     public:
         std::multimap<gString, value> values;
         class attributes attributes;
-        gString comment;
 
         container() = default;
         container(const container& other) = default;
@@ -98,8 +97,6 @@ namespace gpds
             return std::nullopt;
         }
 
-        container& set_comment(const gString& comment);
-        container& set_comment(gString&& comment);
         [[nodiscard]] bool is_list() const;
     };
 

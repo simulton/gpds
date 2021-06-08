@@ -51,9 +51,4 @@ TEST_CASE("containers can be created")
             REQUIRE(container.get_attribute<double>("float") == doctest::Approx(2.5));
         }
     }
-
-    SUBCASE("adding a comment") {
-        container.set_comment("comment");
-        REQUIRE(container.comment == "comment");
-    }
 }

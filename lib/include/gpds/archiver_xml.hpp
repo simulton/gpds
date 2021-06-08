@@ -23,7 +23,6 @@ namespace gpds
 
         struct settings
         {
-            bool print_comments;
             bool annotate_list_count;
             bool annotate_types;
             bool prefix_annotations;

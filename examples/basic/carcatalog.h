@@ -13,9 +13,8 @@ public:
     {
         gpds::container c;
 
-        c.set_comment("All of our cars:");
         for (const auto& car : cars) {
-            c.add_value("car", car.to_container()).set_comment("One of our cars:");
+            c.add_value("car", car.to_container());
         }
 
         return c;

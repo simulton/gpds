@@ -5,13 +5,6 @@
 
 using namespace gpds;
 
-archiver_xml::archiver_xml()
-{
-    settings.annotate_list_count = false;
-    settings.annotate_types = false;
-    settings.prefix_annotations = true;
-}
-
 bool archiver_xml::save(std::ostream& stream, const container& container, const std::string& rootName) const
 {
     // Create the document

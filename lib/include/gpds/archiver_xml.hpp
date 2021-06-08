@@ -1,8 +1,9 @@
 #pragma once
 
 #include <ostream>
-#include <istream>
 #include "archiver.hpp"
+
+#include <istream>
 
 namespace tinyxml2
 {
@@ -12,7 +13,8 @@ namespace tinyxml2
 
 namespace gpds
 {
-    class GPDS_EXPORT archiver_xml : public archiver
+    class GPDS_EXPORT archiver_xml :
+        public archiver
     {
     public:
         // Deal with name hiding
@@ -23,20 +25,23 @@ namespace gpds
 
         struct settings
         {
-            bool annotate_list_count;
-            bool annotate_types;
-            bool prefix_annotations;
+            bool annotate_list_count = false;
+            bool annotate_types      = false;
+            bool prefix_annotations  = true;
         };
 
-        settings settings;
+        struct settings settings;
 
-        archiver_xml();
-        archiver_xml(const archiver_xml& other) = default;
-        archiver_xml(archiver_xml&& other) = default;
-        virtual ~archiver_xml() override = default;
+        archiver_xml() = default;
+        archiver_xml(const archiver_xml& other) = delete;
+        archiver_xml(archiver_xml&& other) noexcept = delete;
+        ~archiver_xml() override = default;
 
-        virtual bool save(std::ostream& stream, const container& container, const std::string& rootName) const override;
-        virtual bool load(std::istream& stream, container& container, const std::string& rootName) override;
+        archiver_xml& operator=(const archiver_xml& rhs) = delete;
+        archiver_xml& operator=(archiver_xml&& rhs) noexcept = delete;
+
+        bool save(std::ostream& stream, const container& container, const std::string& rootName) const override;
+        bool load(std::istream& stream, container& container, const std::string& rootName) override;
 
         void read_entry(tinyxml2::XMLElement& rootNode, container& container);
 

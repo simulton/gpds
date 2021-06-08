@@ -1,8 +1,10 @@
+#include <gpds/archiver_xml.hpp>
+
+#include "carcatalog.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "gpds/archiver_xml.hpp"
-#include "carcatalog.h"
 
 int main()
 {

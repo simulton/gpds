@@ -23,7 +23,7 @@ endif()
 
 # Examples
 if (GPDS_BUILD_EXAMPLES)
-	add_subdirectory(examples/basic)
+	add_subdirectory(examples)
 endif()
 
 

@@ -1,15 +1,18 @@
 #pragma once
 
-#include <forward_list>
-#include "gpds/serialize.hpp"
 #include "car.h"
 
-class car_catalog : public gpds::serialize
+#include <gpds/serialize.hpp>
+
+#include <forward_list>
+
+class car_catalog :
+    public gpds::serialize
 {
 public:
     std::forward_list<car> cars;
 
-    virtual gpds::container to_container() const override
+    gpds::container to_container() const override
     {
         gpds::container c;
 
@@ -20,7 +23,7 @@ public:
         return c;
     }
 
-    virtual void from_container(const gpds::container& c) override
+    void from_container(const gpds::container& c) override
     {
         for (const gpds::container* carContainer : c.get_values<gpds::container*>("car")) {
             car car;

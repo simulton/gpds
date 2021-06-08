@@ -1,16 +1,18 @@
-add_executable(gpds-example)
-target_sources(gpds-example
+set(TARGET gpds-example-basic)
+
+add_executable(${TARGET})
+
+target_sources(
+    ${TARGET}
     PRIVATE
         main.cpp
         car.h
         color.h
         carcatalog.h
 )
-target_include_directories(gpds-example
-    PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}../../lib/include/
-)
-target_link_libraries(gpds-example
+
+target_link_libraries(
+    ${TARGET}
     PRIVATE
         gpds-static
 )

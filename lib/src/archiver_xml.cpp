@@ -112,14 +112,14 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
     }
 }
 
-void archiver_xml::read_entry(tinyxml2::XMLElement& rootNode, container& container)
+void archiver_xml::read_entry(const tinyxml2::XMLElement& rootNode, container& container)
 {
     // Container attributes
     for (const tinyxml2::XMLAttribute* attribute = rootNode.FirstAttribute(); attribute; attribute = attribute->Next())
         container.add_attribute(std::string(attribute->Name()), std::string(attribute->Value()));
 
     // Handle all nodes children recursively
-    for (tinyxml2::XMLElement* node = rootNode.FirstChildElement(); node; node = node->NextSiblingElement()) {
+    for (const tinyxml2::XMLElement* node = rootNode.FirstChildElement(); node; node = node->NextSiblingElement()) {
         // Extract the name & value
         gString keyString(node->Name());
 

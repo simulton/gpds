@@ -9,6 +9,11 @@
 
 namespace gpds
 {
+    /**
+     * A (de)serializable container.
+     *
+     * A container holds zero or more values and zero or more attributes.
+     */
     class GPDS_EXPORT container
     {
     public:

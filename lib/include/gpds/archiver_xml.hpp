@@ -13,6 +13,9 @@ namespace tinyxml2
 
 namespace gpds
 {
+    /**
+     * An archiver to (de)serialize to/from XML.
+     */
     class GPDS_EXPORT archiver_xml :
         public archiver
     {

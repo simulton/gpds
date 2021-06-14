@@ -12,7 +12,7 @@ namespace gpds
 {
 
     /**
-     * A class representing XML attributes.
+     * A class representing attributes.
      */
     class GPDS_EXPORT attributes
     {

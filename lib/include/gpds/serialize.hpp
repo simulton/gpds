@@ -7,6 +7,9 @@
 namespace gpds
 {
 
+    /**
+     * An interface for (de)serializable objects.
+     */
     class GPDS_EXPORT serialize
     {
     public:

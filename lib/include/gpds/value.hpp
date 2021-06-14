@@ -47,6 +47,8 @@ namespace gpds
 
     /**
      * A (de)serializable value.
+     *
+     * A value can have zero or more attributes.
      */
     class GPDS_EXPORT value
     {

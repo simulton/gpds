@@ -2,6 +2,8 @@
 
 #include <filesystem>
 #include <fstream>
+#include <sstream>
+
 #include "gpds_export.hpp"
 #include "serialize.hpp"
 

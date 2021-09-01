@@ -15,8 +15,7 @@ TEST_CASE("Serialize and deserialize a container to and from a file")
 
     // Make sure the file doesn't exist
     if (std::filesystem::exists(path)) {
-        REQUIRE_MESSAGE(std::filesystem::remove(path),
-          "Could not remove file " + std::filesystem::absolute(path).string());
+        REQUIRE_MESSAGE(std::filesystem::remove(path), "could not remove file");
     }
 
     // Save
@@ -42,8 +41,7 @@ TEST_CASE("Deserializing from an inexistent file returns false") {
 
     // Make sure the file doesn't exist
     if (std::filesystem::exists(path)) {
-        REQUIRE_MESSAGE(std::filesystem::remove(path),
-          "Could not remove file " + std::filesystem::absolute(path).string());
+        REQUIRE_MESSAGE(std::filesystem::remove(path), "could not remove file");
     }
 
     // Load and check that it returns false

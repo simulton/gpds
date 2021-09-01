@@ -27,6 +27,18 @@ TEST_CASE("containers can be created")
             container.add_value("float", 2.5);
             REQUIRE(container.get_value<double>("float") == doctest::Approx(2.5));
         }
+
+        SUBCASE("adding a gpds value") {
+            gpds::value v;
+            v.add_attribute("a", "foo");
+            v.add_attribute("b", "bar");
+            v.set<std::string>("foobar");
+
+            container.add_value("v", v);
+
+            REQUIRE_EQ(container.get_value_attribute<std::string>("v", "a"), "foo");
+            REQUIRE_EQ(container.get_value_attribute<std::string>("v", "b"), "bar");
+        }
     }
 
     SUBCASE("adding attributes") {

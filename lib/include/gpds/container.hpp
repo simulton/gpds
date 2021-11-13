@@ -35,6 +35,50 @@ namespace gpds
             return *this;
         }
 
+        /**
+         * Checks whether the container is empty.
+         *
+         * A container is considered empty if it holds values and no attributes.
+         *
+         * @return Whether the container is empty.
+         *
+         * @sa has_values()
+         * @sa has_attributes()
+         */
+        [[nodiscard]]
+        bool empty() const noexcept
+        {
+            return !has_values() && !has_attributes();
+        }
+
+        /**
+         * Checks whether the container holds any values.
+         *
+         * @return Whether the container holds any values.
+         *
+         * @sa empty()
+         * @sa has_attributes()
+         */
+        [[nodiscard]]
+        bool has_values() const noexcept
+        {
+            return !values.empty();
+        }
+
+        /**
+         * Checks whether the container holds any attributes.
+         *
+         * @return Whether the container holds any attributes.
+         *
+         * @sa empty()
+         * @sa has_values()
+         */
+        [[nodiscard]]
+        bool has_attributes() const noexcept
+        {
+            return !attributes.empty();
+        }
+
         template<class T>
         value& add_value(const gString& key, T&& value)
         {

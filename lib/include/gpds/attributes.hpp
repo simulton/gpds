@@ -73,6 +73,17 @@ namespace gpds
         }
 
         /**
+         * Checks whether there are any attributes.
+         *
+         * @return Whether there are any attributes.
+         */
+        [[nodiscard]]
+        bool empty() const noexcept
+        {
+            return map.empty();
+        }
+
+        /**
          * Add an attribute.
          *
          * @tparam T The attribute value type.

@@ -35,6 +35,13 @@ set(HEADERS_PUBLIC
 	include/gpds/value.hpp
 )
 
+# spdlog sink
+if (GPDS_FEATURE_SPDLOG)
+	list(APPEND HEADERS_PUBLIC
+		include/gpds/spdlog_sink.hpp
+	)
+endif()
+
 # Define targets
 set(NAME gpds)
 set(TARGET-STATIC ${NAME}-static)

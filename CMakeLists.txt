@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
-# Project information
-project(gpds
-	LANGUAGES CXX
-)
-
 # Lets have some options! \o/
 option(GPDS_BUILD_TESTS    "Build the unit tests." on)
 option(GPDS_BUILD_EXAMPLES "Build the examples." on)
@@ -52,3 +47,4 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/license.txt")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/readme.md")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
 include(CPack)
+

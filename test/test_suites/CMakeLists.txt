@@ -3,8 +3,6 @@ target_sources(
     PRIVATE
         color.h
 
-        01_creating_values.cpp
-        02_creating_container.cpp
         03_list_container.cpp
         04_nesting_container.cpp
         05_deserialize_booleans.cpp
@@ -21,6 +19,9 @@ target_sources(
         16_addition_assignment.cpp
         17_deserializing_empty_container.cpp
         18_load_and_save_file.cpp
-        19_attributes.cpp
-        20_container.cpp
+
+        attributes.cpp
+        container.cpp
+        container_creation.cpp
+        values.cpp
 )

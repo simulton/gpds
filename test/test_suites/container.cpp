@@ -2,8 +2,9 @@
 
 TEST_SUITE("container")
 {
-    TEST_CASE("empty")
+    TEST_CASE("inspection")
     {
+
         gpds::container c;
         CHECK(c.empty());
         CHECK_FALSE(c.has_values());

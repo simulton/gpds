@@ -1,4 +1,4 @@
-#include "../test.h"
+#include "../test.hpp"
 #include "gpds/value.hpp"
 
 TEST_CASE("values can be converted to strings")

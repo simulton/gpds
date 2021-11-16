@@ -3,7 +3,6 @@ target_sources(
     PRIVATE
         color.h
 
-        03_list_container.cpp
         04_nesting_container.cpp
         05_deserialize_booleans.cpp
         06_deserialize_integer.cpp
@@ -15,7 +14,6 @@ target_sources(
         12_unexistant_value.cpp
         13_get_wrong_value_type.cpp
         14_value_string_conversion.cpp
-        15_list_order.cpp
         16_addition_assignment.cpp
         17_deserializing_empty_container.cpp
         18_load_and_save_file.cpp
@@ -23,5 +21,6 @@ target_sources(
         attributes.cpp
         container.cpp
         container_creation.cpp
+        lists.cpp
         values.cpp
 )

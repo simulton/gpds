@@ -1,8 +1,9 @@
-#include "test.h"
+#include "test.hpp"
 
-#include <sstream>
 #include "gpds/serialize.hpp"
 #include "gpds/archiver_xml.hpp"
+
+#include <sstream>
 
 void gpds_test::test::serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName)
 {

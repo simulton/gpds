@@ -1,4 +1,4 @@
-#include "../test.h"
+#include "../test.hpp"
 #include "gpds/container.hpp"
 
 TEST_CASE("retrieving wrong type from value throws an exception")

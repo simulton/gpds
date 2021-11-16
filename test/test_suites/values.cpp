@@ -1,5 +1,5 @@
 #include <cstring>
-#include "../test.h"
+#include "../test.hpp"
 
 TEST_SUITE("values")
 {

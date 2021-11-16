@@ -7,8 +7,8 @@ add_subdirectory(test_suites)
 target_sources(
 	${TARGET}
 	PRIVATE
-		test.h
 		test.cpp
+		test.hpp
 		test_main.cpp
 )
 

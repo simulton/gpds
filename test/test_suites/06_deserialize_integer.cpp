@@ -1,6 +1,6 @@
 #include <vector>
 #include <sstream>
-#include "../test.h"
+#include "../test.hpp"
 #include "gpds/serialize.hpp"
 
 static const std::string FILE_CONTENT =

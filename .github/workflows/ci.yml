@@ -51,4 +51,4 @@ jobs:
         run: cmake --build build
 
       - name: Run tests
-        run: ./build/bin/gpds-tests
+        run: ./build/test/gpds-tests

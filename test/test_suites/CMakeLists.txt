@@ -11,7 +11,6 @@ target_sources(
         09_deserialize_attributes.cpp
         10_deserialize_container_attributes.cpp
         11_serialize_and_deserialize_color.cpp
-        12_unexistant_value.cpp
         13_get_wrong_value_type.cpp
         14_value_string_conversion.cpp
         16_addition_assignment.cpp

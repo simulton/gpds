@@ -1,7 +1,7 @@
+#include "../test.hpp"
+
 #include <vector>
 #include <sstream>
-#include "../test.hpp"
-#include "gpds/serialize.hpp"
 
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"

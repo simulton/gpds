@@ -1,9 +1,7 @@
-#include <sstream>
 #include "../test.hpp"
-#include "gpds/serialize.hpp"
 #include "color.h"
 
-TEST_CASE("Color class")
+TEST_CASE("color class")
 {
     // Create a color
     gpds_test::color red1;
@@ -21,5 +19,5 @@ TEST_CASE("Color class")
     gpds_test::test::deserialize(serialized, red2, "color");
 
     // Ensure that data is the same
-    REQUIRE(red1 == red2);
+    CHECK_EQ(red1, red2);
 }

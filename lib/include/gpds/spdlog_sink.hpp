@@ -25,8 +25,9 @@ namespace gpds
             return m_container;
         }
 
-        void from_container(const gpds::container&) override
+        void from_container(const gpds::container& c) override
         {
+            m_container = c;
         }
 
     protected:

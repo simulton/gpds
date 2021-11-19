@@ -96,11 +96,15 @@ namespace gpds
             if (it != values.end() && !it->second.is_empty()) {
                 const value& value = it->second;
 
-                if (!value.is_type<T>()) {
-                    return std::nullopt;
-                }
+                // T == gpds::value ?
+                if constexpr (std::is_same_v<T, gpds::value>)
+                    return value;
 
-                return it->second.get<T>();
+                else {
+                    if (!value.is_type<T>())
+                        return std::nullopt;
+                    return value.get<T>();
+                }
             }
 
             return std::nullopt;
@@ -113,10 +117,17 @@ namespace gpds
             const auto& range = values.equal_range(key);
             std::vector<T> values;
             for (auto it = range.first; it != range.second; it++) {
-                if (it->second.is_empty() || !it->second.is_type<T>()) {
-                    continue;
+
+                // T == gpds::value ?
+                if constexpr (std::is_same_v<T, gpds::value>)
+                    values.push_back(it->second);
+
+                else {
+                    if (it->second.is_empty() || !it->second.is_type<T>())
+                        continue;
+
+                    values.push_back(it->second.get<T>());
                 }
-                values.push_back(it->second.get<T>());
             }
 
             return values;

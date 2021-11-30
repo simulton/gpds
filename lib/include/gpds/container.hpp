@@ -66,6 +66,18 @@ namespace gpds
         }
 
         /**
+         * Checks whether the container holds one or more values of a specific key.
+         *
+         * @param key The key.
+         * @return Whether at least one value matching the key is present.
+         */
+        [[nodiscard]]
+        bool has_value(const std::string& key) const
+        {
+            return values.find(key) != std::cend(values);
+        }
+
+        /**
          * Checks whether the container holds any attributes.
          *
          * @return Whether the container holds any attributes.
@@ -77,6 +89,18 @@ namespace gpds
         bool has_attributes() const noexcept
         {
             return !attributes.empty();
+        }
+
+        /**
+         * Checks whether the container holds an attribute of a specific key.
+         *
+         * @param key The key.
+         * @return Whether an attribute matching the key exists.
+         */
+        [[nodiscard]]
+        bool has_attribute(const std::string& key) const
+        {
+            return attributes.map.find(key) != std::cend(attributes.map);
         }
 
         template<class T>

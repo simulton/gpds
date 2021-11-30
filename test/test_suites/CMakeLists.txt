@@ -20,6 +20,7 @@ target_sources(
         attributes.cpp
         container.cpp
         container_creation.cpp
+        container_lookup.cpp
         lists.cpp
         values.cpp
 )

@@ -1,6 +1,6 @@
 # Set project information
 project(gpds
-	VERSION 1.1.0
+	VERSION 1.3.0
 	LANGUAGES CXX
 	HOMEPAGE_URL "https://gpds.simulton.com"
 )

@@ -5,7 +5,6 @@
 #include <optional>
 
 #include "gpds_export.hpp"
-#include "types.hpp"
 #include "utils.hpp"
 
 namespace gpds
@@ -20,7 +19,7 @@ namespace gpds
         /**
          * The map holding our key-value pairs.
          */
-        std::map<gString, gString> map;
+        std::map<std::string, std::string> map;
 
         /**
          * Default constructor.
@@ -91,7 +90,7 @@ namespace gpds
          * @param value The attribute value.
          */
         template<typename T>
-        void add(const gString& key, const T& value)
+        void add(const std::string& key, const T& value)
         {
             map.emplace(key, value_to_string(value));
         }
@@ -105,7 +104,7 @@ namespace gpds
          */
         template<typename T>
         [[nodiscard]]
-        std::optional<T> get(const gString& key) const
+        std::optional<T> get(const std::string& key) const
         {
             const auto& it = map.find(key);
             if (it != map.cend())

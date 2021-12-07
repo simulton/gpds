@@ -80,15 +80,17 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
             // Nested container
             if (value.is_type<gpds::container*>()) {
                 // Recursion
-                const auto childContainer = value.get<gpds::container*>();
-                child = doc.NewElement(key);
-                write_entry(doc, *child, *childContainer);
+                const auto childContainer = value.get<gpds::container*>().value_or(nullptr);
+                if (childContainer) {
+                    child = doc.NewElement(key);
+                    write_entry(doc, *child, *childContainer);
+                }
             }
 
             // Simple value
             else {
                 child = doc.NewElement(key);
-                child->SetText(value.to_string().data());
+                child->SetText(value.get<std::string>().value_or("").data());
             }
         }
 
@@ -98,15 +100,6 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
         }
 
         GPDS_ASSERT(child);
-
-        // Annotate type if supposed to
-        if (settings.annotate_types && !container.is_list()) {
-            std::string attributeString = "type";
-            if (settings.prefix_annotations) {
-                attributeString = NAMESPACE_PREFIX + attributeString;
-            }
-            child->SetAttribute(attributeString.c_str(), value.type_string());
-        }
 
         root.InsertEndChild(child);
     }
@@ -121,7 +114,7 @@ void archiver_xml::read_entry(const tinyxml2::XMLElement& rootNode, container& c
     // Handle all nodes children recursively
     for (const tinyxml2::XMLElement* node = rootNode.FirstChildElement(); node; node = node->NextSiblingElement()) {
         // Extract the name & value
-        gString keyString(node->Name());
+        std::string keyString(node->Name());
 
         // Create the Value
         value value;
@@ -134,7 +127,7 @@ void archiver_xml::read_entry(const tinyxml2::XMLElement& rootNode, container& c
         if (node->GetText() || node->NoChildren()) {
             // Get the text if it's a text element
             if (node->GetText()) {
-                value.from_string(std::string(node->GetText()));
+                value.set(std::string(node->GetText()));    // ToDo: construction of temporary std::string unnecessary.
             }
         }
 

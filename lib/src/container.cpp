@@ -10,7 +10,7 @@ bool container::is_list() const
     }
 
     // Ensure that all elements are the same
-    gString name;
+    std::string name;
     for (auto it = values.cbegin(); it != values.cend(); ++it) {
         // Store the name so we can compare them
         if (it == values.begin()) {

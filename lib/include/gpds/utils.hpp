@@ -23,54 +23,69 @@ namespace gpds
         > {};
 
     template<typename T>
+    [[nodiscard]]
     static
-    std::string value_to_string(const T& value)
+    std::string
+    value_to_string(const T& value) noexcept
     {
-        // Bool
-        if constexpr (std::is_same<T, bool>::value)
-            return value ? "true" : "false";
+        try {
+            // Bool
+            if constexpr (std::is_same<T, bool>::value)
+                return value ? "true" : "false";
 
-        // int
-        else if constexpr (std::is_same<T, int>::value)
-            return std::to_string(value);
+                // int
+            else if constexpr (std::is_same<T, int>::value)
+                return std::to_string(value);
 
-        // double
-        else if constexpr (std::is_same<T, double>::value) {
-            std::string str = std::to_string(value);
-            // Remove trailing zeros
-            str.erase(str.find_last_not_of('0') + 1, std::string::npos);
-            return str;
+                // double
+            else if constexpr (std::is_same<T, double>::value) {
+                std::string str = std::to_string(value);
+                // Remove trailing zeros
+                str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+                return str;
+            }
+
+                // std::string
+            else if constexpr (std::is_same<T, std::string>::value)
+                return value;
+
+                // C-string
+            else if constexpr (is_c_str<T>::value)
+                return std::string(value);
+        }
+        catch (...) {
+            return { };
         }
 
-        // std::string
-        else if constexpr (std::is_same<T, std::string>::value)
-            return value;
-
-        // C-string
-        else if constexpr (is_c_str<T>::value)
-            return std::string(value);
-
-        return {};
+        return { };
     }
 
     template<typename T>
-    static std::optional<T> string_to_value(const std::string& string)
+    [[nodiscard]]
+    static
+    std::optional<T>
+    string_to_value(const std::string& string) noexcept
     {
-        // bool
-        if constexpr (std::is_same<T, bool>::value)
-            return (string == "true");
+        try {
+            // bool
+            if constexpr (std::is_same<T, bool>::value)
+                return (string == "true");
 
-        // int
-        else if constexpr (std::is_same<T, int>::value)
-            return std::stoi(string);
+                // int
+            else if constexpr (std::is_same<T, int>::value)
+                return std::stoi(string);
 
-        // double
-        else if constexpr (std::is_same<T, double>::value)
-            return std::stod(string);
+                // double
+            else if constexpr (std::is_same<T, double>::value)
+                return std::stod(string);
 
-        // std::string
-        else if constexpr (std::is_same<T, std::string>::value)
-            return string;
+                // std::string
+            else if constexpr (std::is_same<T, std::string>::value)
+                return string;
+        }
+        catch (...) {
+            return std::nullopt;
+        }
 
         return std::nullopt;
     }

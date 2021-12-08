@@ -9,41 +9,10 @@
 #include "gpds_export.hpp"
 #include "attributes.hpp"
 #include "utils.hpp"
-#include "types.hpp"
 
 namespace gpds
 {
     class container;
-
-    template<class ...Ts> struct overload : Ts... { using Ts::operator()...; };
-    template<class ...Ts> overload(Ts...) -> overload<Ts...>;
-
-    /**
-     * Checks whether a type list contains a specified type.
-     *
-     * @tparam T The type to check.
-     * @tparam Ts The type list.
-     * @return Whether the type list contains the specified type.
-     */
-    template<typename T, typename ...Ts>
-    [[nodiscard]]
-    static constexpr bool contains()
-    {
-        return std::disjunction_v<std::is_same<T, Ts> ...>;
-    }
-
-    /**
-     * Checks whether a specified type is can be held to a value.
-     *
-     * @tparam T The type.
-     * @return Whether the type can be held by a value.
-     */
-    template<typename T>
-    [[nodiscard]]
-    static constexpr bool is_valid_type()
-    {
-        return contains<T, gBool, gInt, gReal, gString, gContainer>;
-    }
 
     /**
      * A (de)serializable value.
@@ -154,41 +123,6 @@ namespace gpds
         }
 
         /**
-         * Get the type as a string.
-         *
-         * @return The type string.
-         */
-        [[nodiscard]] constexpr const char* type_string() const
-        {
-            if (std::holds_alternative<container*>(m_value)) {
-                return "nested";
-            }
-
-            return std::visit(overload{
-                [](const gBool&)    { return "bool"; },
-                [](const gInt&)     { return "int"; },
-                [](const gReal&)    { return "double"; },
-                [](const gString&)  { return "string"; }
-            }, m_value);
-
-            return "n/a";
-        }
-
-        /**
-         * Load the value from a string.
-         *
-         * @param string The string.
-         */
-        void from_string(std::string&& string);
-
-        /**
-         * Represent the current value as a string.
-         *
-         * @return The string.
-         */
-        [[nodiscard]] std::string to_string() const;
-
-        /**
          * Set the value (copy).
          *
          * @tparam T The type of the value.
@@ -197,31 +131,15 @@ namespace gpds
         template<typename T>
         void set(const T& value)
         {
-            m_value = value;
-        }
+            // Container
+            if constexpr (std::is_same_v<gpds::container*, T>) {
+                free_container_memory();
+                allocate_container_memory(*value);
+            }
 
-        /**
-         * Set the value (move).
-         *
-         * @tparam T The type of the value.
-         * @param value The value.
-         */
-        template<typename T>
-        void set(T&& value)
-        {
-            m_value = std::forward<T>(value);
-        }
-
-        /**
-         * Set a C-style string.
-         *
-         * @tparam T The type.
-         * @param string The string.
-         */
-        template<typename T = std::string>
-        void set(const char* string)
-        {
-            m_value = std::string(string);
+            // Convert
+            else
+                m_value = value_to_string(value);
         }
 
         /**
@@ -260,9 +178,18 @@ namespace gpds
          */
         template<typename T>
         [[nodiscard]]
-        constexpr T get() const
+        constexpr
+        std::optional<T>
+        get() const
         {
-            return std::get<T>(m_value);
+            if constexpr (std::is_same_v<container*, T>)
+                if (std::holds_alternative<container*>(m_value))
+                    return std::get<container*>(m_value);
+                else
+                    return std::nullopt;
+
+            else
+                return string_to_value<T>(std::get<std::string>(m_value));
         }
 
         /**
@@ -275,7 +202,7 @@ namespace gpds
          * @return Reference to this.
          */
         template<typename T>
-        value& add_attribute(const gString& key, const T& value)
+        value& add_attribute(const std::string& key, const T& value)
         {
             attributes.add(key, value);
 
@@ -291,7 +218,7 @@ namespace gpds
          */
         template<typename T>
         [[nodiscard]]
-        std::optional<T> get_attribute(const gString& key) const
+        std::optional<T> get_attribute(const std::string& key) const
         {
             return attributes.get<T>(key);
         }
@@ -301,11 +228,8 @@ namespace gpds
          * Value variant.
          */
         std::variant<
-            gBool,
-            gInt,
-            gReal,
-            gString,
-            gContainer
+            std::string,
+            container*
         > m_value;
 
         void allocate_container_memory(const container& container);

@@ -29,7 +29,6 @@ namespace gpds
         struct settings
         {
             bool annotate_list_count = false;
-            bool annotate_types      = false;
             bool prefix_annotations  = true;
         };
 

@@ -21,10 +21,10 @@ static const std::string FILE_CONTENT =
     "</data>";
 
 using data = std::vector<std::variant<
-    gpds::gBool,
-    gpds::gInt,
-    gpds::gReal,
-    gpds::gString
+    bool,
+    int,
+    double,
+    std::string
 >>;
 
 // The "known good" data
@@ -63,26 +63,26 @@ public:
                 switch (index) {
                     case 0:
                     case 1:
-                        d.emplace_back(it->second.get_attribute<gpds::gBool>("attribute").value());
+                        d.emplace_back(it->second.get_attribute<bool>("attribute").value());
                         break;
 
                     case 2:
                     case 3:
                     case 4:
                     case 5:
-                        d.emplace_back(it->second.get_attribute<gpds::gInt>("attribute").value());
+                        d.emplace_back(it->second.get_attribute<int>("attribute").value());
                         break;
 
                     case 6:
                     case 7:
                     case 8:
                     case 9:
-                        d.emplace_back(it->second.get_attribute<gpds::gReal>("attribute").value());
+                        d.emplace_back(it->second.get_attribute<double>("attribute").value());
                         break;
 
                     case 10:
                     case 11:
-                        d.emplace_back(it->second.get_attribute<gpds::gString>("attribute").value());
+                        d.emplace_back(it->second.get_attribute<std::string>("attribute").value());
                         break;
                 }
             }

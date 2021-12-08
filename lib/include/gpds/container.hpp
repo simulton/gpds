@@ -1,11 +1,12 @@
 #pragma once
 
 #include <map>
+#include <optional>
+
 #include "gpds_export.hpp"
 #include "value.hpp"
 #include "attributes.hpp"
 #include "utils.hpp"
-#include "types.hpp"
 
 namespace gpds
 {
@@ -17,7 +18,7 @@ namespace gpds
     class GPDS_EXPORT container
     {
     public:
-        std::multimap<gString, value> values;
+        std::multimap<std::string, value> values;
         class attributes attributes;
 
         container() = default;
@@ -104,7 +105,7 @@ namespace gpds
         }
 
         template<class T>
-        value& add_value(const gString& key, T&& value)
+        value& add_value(const std::string& key, T&& value)
         {
             auto it = values.emplace(std::make_pair(key, std::forward<T>(value)));
 
@@ -113,7 +114,7 @@ namespace gpds
 
         template<class T>
         [[nodiscard]]
-        std::optional<T> get_value(const gString& key) const
+        std::optional<T> get_value(const std::string& key) const
         {
             auto it = values.find(key);
 
@@ -124,11 +125,8 @@ namespace gpds
                 if constexpr (std::is_same_v<T, gpds::value>)
                     return value;
 
-                else {
-                    if (!value.is_type<T>())
-                        return std::nullopt;
+                else
                     return value.get<T>();
-                }
             }
 
             return std::nullopt;
@@ -136,8 +134,9 @@ namespace gpds
 
         template<class T>
         [[nodiscard]]
-        std::vector<T> get_values(const gString& key) const
+        std::vector<T> get_values(const std::string& key) const
         {
+            // ToDo: pre-allocate values vector
             const auto& range = values.equal_range(key);
             std::vector<T> values;
             for (auto it = range.first; it != range.second; it++) {
@@ -147,10 +146,11 @@ namespace gpds
                     values.push_back(it->second);
 
                 else {
-                    if (it->second.is_empty() || !it->second.is_type<T>())
+                    if (it->second.is_empty())
                         continue;
 
-                    values.push_back(it->second.get<T>());
+                    if (const auto& v_opt = it->second.get<T>(); v_opt)
+                        values.push_back(it->second.get<T>().value());
                 }
             }
 
@@ -158,7 +158,7 @@ namespace gpds
         }
 
         template<typename T>
-        container& add_attribute(const gString& key, const T& value)
+        container& add_attribute(const std::string& key, const T& value)
         {
             attributes.add(key, value);
 
@@ -167,14 +167,14 @@ namespace gpds
 
         template<typename T>
         [[nodiscard]]
-        std::optional<T> get_attribute(gString&& key) const
+        std::optional<T> get_attribute(std::string&& key) const
         {
-            return attributes.get<T>(std::forward<gString>(key));
+            return attributes.get<T>(std::forward<std::string>(key));
         }
 
         template<typename T>
         [[nodiscard]]
-        std::optional<T> get_value_attribute(const gString& valueKey, const gString& attributeKey) const
+        std::optional<T> get_value_attribute(const std::string& valueKey, const std::string& attributeKey) const
         {
             auto it = values.find(valueKey);
 

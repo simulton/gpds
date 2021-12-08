@@ -183,7 +183,10 @@ namespace gpds
         get() const
         {
             if constexpr (std::is_same_v<container*, T>)
-                return std::get<T>(m_value);
+                if (std::holds_alternative<container*>(m_value))
+                    return std::get<container*>(m_value);
+                else
+                    return std::nullopt;
 
             else
                 return string_to_value<T>(std::get<std::string>(m_value));

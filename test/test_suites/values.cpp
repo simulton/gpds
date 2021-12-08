@@ -72,6 +72,16 @@ TEST_SUITE("values")
                 REQUIRE(ctnr->get_value<std::string>("name") == "John Doe");
             }
         }
+
+        SUBCASE("empty container") {
+            gpds::value value;
+            value.set(new gpds::container);
+
+            const auto& opt = value.get<gpds::container*>();
+            CHECK(opt.has_value());
+            CHECK(opt.value_or(nullptr));
+            CHECK(opt.value()->empty());
+        }
     }
 
     TEST_CASE("default value")

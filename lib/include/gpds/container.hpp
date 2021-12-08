@@ -1,6 +1,8 @@
 #pragma once
 
 #include <map>
+#include <optional>
+
 #include "gpds_export.hpp"
 #include "value.hpp"
 #include "attributes.hpp"

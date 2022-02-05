@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <optional>
 
 namespace gpds
@@ -52,6 +53,10 @@ namespace gpds
             // C-string
             else if constexpr (is_c_str<T>::value)
                 return std::string(value);
+
+            // std::filesystem::path
+            else if constexpr (std::is_same<T, std::filesystem::path>::value)
+                return value.string();
         }
         catch (...) {
             return { };
@@ -82,6 +87,10 @@ namespace gpds
             // std::string
             else if constexpr (std::is_same<T, std::string>::value)
                 return string;
+
+            // std::filesystem::path
+            else if constexpr (std::is_same<T, std::filesystem::path>::value)
+                return std::filesystem::path{ string };
         }
         catch (...) {
             return std::nullopt;

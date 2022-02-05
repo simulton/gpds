@@ -61,6 +61,15 @@ TEST_SUITE("values")
             }
         }
 
+        SUBCASE("filesystem path")
+        {
+            gpds::value v(std::filesystem::path{ "/usr/src" });
+
+            SUBCASE("retrieve string from value") {
+                REQUIRE(v.get<std::filesystem::path>() == "/usr/src");
+            }
+        }
+
         SUBCASE("container") {
             gpds::container* container = new gpds::container;
             container->add_value("name", std::string("John Doe"));

@@ -53,23 +53,61 @@ int main()
         catalog.cars.push_front(car);
     }
 
-    std::stringstream ss;
-    std::ofstream ofile;
-    ofile.open("data.xml");
-    gpds::archiver_xml ar;
-    ar.save(ofile, catalog.to_container(), "cars");
-    ar.save(ss, catalog.to_container(), "cars");
-    std::cout << ss.str() << std::endl;
-    ofile.flush();
-    ofile.close();
+    // To/from file
+    {
+        const std::filesystem::path filepath = "catalog.xml";
 
-    std::ifstream ifile;
-    ifile.open("data.xml");
-    std::string fileContent;
-    car_catalog loadedCatalog;
-    ar.load(ifile, loadedCatalog, "cars");
-    std::cout << fileContent << std::endl;
-    ifile.close();
+        // Serialize to file
+        {
+            const auto&[success, msg] = catalog.to_file(filepath, "car-catalog");
+            if (!success) {
+                std::cerr << "could not store 'catalog' in file: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully serialized 'catalog' to file: " << filepath << std::endl;
+        }
+
+        // Deserialize from file
+        {
+            car_catalog catalog1;
+            const auto&[success, msg] = catalog1.from_file(filepath, "car-catalog");
+            if (!success) {
+                std::cerr << "could not load `catalog` from file: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully deserialized 'catalog' from file: " << filepath << std::endl;
+        }
+    }
+
+    // To/from string
+    {
+        std::string str;
+
+        // Serialize to string
+        {
+            const auto& [success, msg] = catalog.to_string(str, "car-catalog");
+            if (!success) {
+                std::cerr << "could not store 'catalog' in string: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully serialized 'catalog' to string:\n" << str << std::endl;
+        }
+
+        // Deserialize form string
+        {
+            car_catalog catalog1;
+            const auto&[success, msg] = catalog1.from_string(str, "car-catalog");
+            if (!success) {
+                std::cerr << "could not load `catalog` from string: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully deserialized 'catalog' from string." << std::endl;
+        }
+    }
 
     return 0;
 }

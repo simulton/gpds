@@ -53,8 +53,11 @@ namespace gpds
 
         bool save(std::string& str, const container& c, const std::string& root_name) const
         {
-            std::ostringstream ss{ str };
-            return save(ss, c, root_name);
+            std::ostringstream ss;
+            const bool ret = save(ss, c, root_name);
+            str = ss.str();
+
+            return ret;
         }
 
         bool save(std::string& str, const serialize& obj, const std::string& root_name) const

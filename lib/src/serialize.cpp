@@ -4,7 +4,7 @@
 using namespace gpds;
 
 std::pair<bool, std::string>
-serialize::to_string(std::string& str, const std::string& root_name)
+serialize::to_string(std::string& str, const std::string& root_name) const
 {
     archiver_xml ar;
     const bool& ret = ar.save(str, *this, root_name);

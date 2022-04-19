@@ -20,7 +20,7 @@ namespace gpds
 
         // String
         std::pair<bool, std::string> to_string(std::string& str, const std::string& root_name) const;
-        std::pair<bool, std::string> from_string(const std::string_view& str, const std::string& root_name);
+        std::pair<bool, std::string> from_string(std::string_view str, const std::string& root_name);
 
         // File
         std::pair<bool, std::string> to_file(const std::filesystem::path& path, const std::string& root_name) const;

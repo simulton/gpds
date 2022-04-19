@@ -54,6 +54,12 @@ function(setup_target_common target)
 			${HEADERS_PRIVATE}
 	)
 
+	target_compile_definitions(
+		${target}
+		PRIVATE
+			gpds_shared_EXPORTS		# We're building this library!
+	)
+
 	target_include_directories(
 		${target}
 		INTERFACE

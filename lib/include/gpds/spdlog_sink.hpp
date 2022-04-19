@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gpds_export.hpp"
 #include "serialize.hpp"
 
 #include <spdlog/details/null_mutex.h>
@@ -11,7 +12,7 @@ namespace gpds
 {
 
     template<typename Mutex>
-    class spdlog_sink :
+    class GPDS_EXPORT spdlog_sink :
         public gpds::serialize,
         public spdlog::sinks::base_sink<Mutex>
     {

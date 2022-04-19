@@ -3,6 +3,7 @@
 #include <map>
 #include <optional>
 
+#include "gpds_export.hpp"
 #include "value.hpp"
 #include "attributes.hpp"
 #include "utils.hpp"
@@ -14,7 +15,7 @@ namespace gpds
      *
      * A container holds zero or more values and zero or more attributes.
      */
-    class container
+    class GPDS_EXPORT container
     {
     public:
         std::multimap<std::string, value> values;

@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 # Project information
 project(gpds
+	VERSION 1.3.0
 	LANGUAGES CXX
+	HOMEPAGE_URL "https://gpds.simulton.com"
 )
 
 # Lets have some options! \o/

@@ -125,7 +125,7 @@ install(
 
 # Install export header
 install(
-	FILES ${PROJECT_BINARY_DIR}/gpds_export.hpp
+	FILES ${CMAKE_CURRENT_BINARY_DIR}/gpds_export.hpp
 	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
 )
 

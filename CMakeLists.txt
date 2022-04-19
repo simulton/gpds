@@ -6,9 +6,9 @@ project(gpds
 )
 
 # Lets have some options! \o/
-option(GPDS_BUILD_TESTS    "Build the unit tests." on)
-option(GPDS_BUILD_EXAMPLES "Build the examples." on)
-option(GPDS_FEATURE_SPDLOG "Enable spdlog sink feature." on)
+option(GPDS_BUILD_TESTS    "Build the unit tests." ON)
+option(GPDS_BUILD_EXAMPLES "Build the examples." ON)
+option(GPDS_FEATURE_SPDLOG "Enable spdlog sink feature." ON)
 
 # User settings
 set(CMAKE_DEBUG_POSTFIX d)
@@ -31,14 +31,14 @@ endif()
 ################################################################################
 # Print configuration
 ################################################################################
-message("")
-message("------------------------")
-message("GPDS configuration:")
-message("  build examples : " ${GPDS_BUILD_EXAMPLES})
-message("  build tests    : " ${GPDS_BUILD_TESTS})
-message("  spdlog sink    : " ${GPDS_FEATURE_SPDLOG})
-message("------------------------")
-message("")
+message(STATUS "")
+message(STATUS "------------------------")
+message(STATUS "GPDS configuration:")
+message(STATUS "  build examples : " ${GPDS_BUILD_EXAMPLES})
+message(STATUS "  build tests    : " ${GPDS_BUILD_TESTS})
+message(STATUS "  spdlog sink    : " ${GPDS_FEATURE_SPDLOG})
+message(STATUS "------------------------")
+message(STATUS "")
 
 ################################################################################
 # CPack                                                                        #

@@ -71,7 +71,7 @@ function(setup_target_common target)
 		${target}
 		INTERFACE
 			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-			PRIVATE
+		PRIVATE
 			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/gpds>
 	)
 

@@ -6,7 +6,6 @@
 #include <vector>
 #include <map>
 #include <optional>
-#include "gpds_export.hpp"
 #include "attributes.hpp"
 #include "utils.hpp"
 
@@ -19,7 +18,7 @@ namespace gpds
      *
      * A value can have zero or more attributes.
      */
-    class GPDS_EXPORT value
+    class value
     {
     public:
         /**

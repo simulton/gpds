@@ -1,7 +1,6 @@
 #pragma once
 
 #include <filesystem>
-#include "gpds_export.hpp"
 #include "container.hpp"
 
 namespace gpds
@@ -10,7 +9,7 @@ namespace gpds
     /**
      * An interface for (de)serializable objects.
      */
-    class GPDS_EXPORT serialize
+    class serialize
     {
     public:
         virtual ~serialize() = default;

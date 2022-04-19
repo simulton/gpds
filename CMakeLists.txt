@@ -6,8 +6,8 @@ project(gpds
 )
 
 # Lets have some options! \o/
-option(GPDS_BUILD_TESTS    "Build the unit tests." ON)
-option(GPDS_BUILD_EXAMPLES "Build the examples." ON)
+option(GPDS_BUILD_TESTS    "Build the unit tests." OFF)
+option(GPDS_BUILD_EXAMPLES "Build the examples." OFF)
 option(GPDS_FEATURE_SPDLOG "Enable spdlog sink feature." ON)
 
 # User settings

@@ -30,7 +30,6 @@ set(HEADERS_PUBLIC
 	include/gpds/attributes.hpp
 	include/gpds/container.hpp
 	include/gpds/serialize.hpp
-	include/gpds/types.hpp
 	include/gpds/utils.hpp
 	include/gpds/value.hpp
 )

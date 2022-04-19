@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ostream>
+#include "gpds_export.hpp"
 #include "archiver.hpp"
 
 #include <istream>

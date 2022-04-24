@@ -43,12 +43,17 @@ TEST_SUITE("container")
                 c.add_value("foo", "bar");
                 c.add_value("foo", "bar");
                 c.add_value("foobar", "zbar");
+                c.add_value("some_number" , 4);
 
                 CHECK_FALSE(c.empty());
                 CHECK(c.has_values());
                 CHECK_FALSE(c.has_attributes());
 
                 CHECK(c.has_value("foo"));
+                CHECK_EQ(c.get_values<std::string>("foo").size(), 3);
+
+                CHECK(c.has_value("some_number"));
+                CHECK_EQ(c.get_values<int>("some_number").size(), 1);
             }
         }
 

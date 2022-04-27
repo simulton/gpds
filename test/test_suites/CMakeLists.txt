@@ -22,6 +22,7 @@ target_sources(
         container.cpp
         container_creation.cpp
         container_lookup.cpp
+        container_serialization.cpp
         lists.cpp
         values.cpp
 )

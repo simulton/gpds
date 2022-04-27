@@ -90,7 +90,7 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
             // Simple value
             else {
                 // Create text
-                auto text = doc.NewText(value.get<std::string>().value_or("").data());
+                auto text = doc.NewText(value.get<std::string>().value_or("").c_str());
                 if (!text)
                     continue;
                 text->SetCData(value.use_cdata());

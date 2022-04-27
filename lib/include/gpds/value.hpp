@@ -223,6 +223,25 @@ namespace gpds
             return attributes.get<T>(key);
         }
 
+        /**
+         * Controls whether to use CDATA for serialization.
+         *
+         * @param enabled Whether to use CDATA for serialization.
+         */
+        void
+        set_use_cdata(const bool enabled) noexcept
+        {
+            m_use_cdata = enabled;
+        }
+
+        [[nodiscard]]
+        constexpr
+        bool
+        use_cdata() const noexcept
+        {
+            return m_use_cdata;
+        }
+
     private:
         /**
          * Value variant.
@@ -231,6 +250,11 @@ namespace gpds
             std::string,
             container*
         > m_value;
+
+        /**
+         * Whether to use CDATA for serialization.
+         */
+        bool m_use_cdata = false;
 
         void allocate_container_memory(const container& container);
         void allocate_container_memory(container&& container);

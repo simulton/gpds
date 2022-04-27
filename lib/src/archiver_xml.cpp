@@ -89,8 +89,18 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
 
             // Simple value
             else {
+                // Create text
+                auto text = doc.NewText(value.get<std::string>().value_or("").data());
+                if (!text)
+                    continue;
+                if (value.use_cdata())
+                    text->SetCData(true);
+
+                // Create DOM element
                 child = doc.NewElement(key);
-                child->SetText(value.get<std::string>().value_or("").data());
+                if (!child)
+                    continue;
+                child->LinkEndChild(text);
             }
         }
 

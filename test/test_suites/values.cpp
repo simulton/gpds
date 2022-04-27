@@ -59,6 +59,17 @@ TEST_SUITE("values")
                     REQUIRE(value.get<std::string>() == "Hello, World!");
                 }
             }
+
+            SUBCASE("cdata")
+            {
+                // Note: The actual CDATA (de)serialization tests are not located in here.
+                //       This is a unit test for just the value itself.
+
+                gpds::value v{"Hello World!"};
+                CHECK_EQ(v.use_cdata(), false);
+                v.set_use_cdata(true);
+                CHECK_EQ(v.use_cdata(), true);
+            }
         }
 
         SUBCASE("filesystem path")

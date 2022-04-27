@@ -93,8 +93,7 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
                 auto text = doc.NewText(value.get<std::string>().value_or("").data());
                 if (!text)
                     continue;
-                if (value.use_cdata())
-                    text->SetCData(true);
+                text->SetCData(value.use_cdata());
 
                 // Create DOM element
                 child = doc.NewElement(key);

@@ -99,7 +99,7 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
                 child = doc.NewElement(key);
                 if (!child)
                     continue;
-                child->LinkEndChild(text);
+                child->InsertFirstChild(text);
             }
         }
 
@@ -135,9 +135,8 @@ void archiver_xml::read_entry(const tinyxml2::XMLElement& rootNode, container& c
         // It's a text element or an empty element
         if (node->GetText() || node->NoChildren()) {
             // Get the text if it's a text element
-            if (node->GetText()) {
-                value.set(std::string(node->GetText()));    // ToDo: construction of temporary std::string unnecessary.
-            }
+            if (node->GetText())
+                value.set(node->GetText());
         }
 
         // It's a another container

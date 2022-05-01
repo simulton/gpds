@@ -6,7 +6,8 @@ using namespace gpds;
 
 value::value(const value& other) :
     attributes(other.attributes),
-    m_value(other.m_value)
+    m_value(other.m_value),
+    m_use_cdata(other.m_use_cdata)
 {
     if (std::holds_alternative<container*>(m_value))
         allocate_container_memory(*std::get<container*>(m_value));
@@ -14,7 +15,8 @@ value::value(const value& other) :
 
 value::value(value&& other) noexcept :
     attributes(std::move(other.attributes)),
-    m_value(std::move(other.m_value))
+    m_value(std::move(other.m_value)),
+    m_use_cdata(other.m_use_cdata)
 {
     other.m_value = nullptr;
 }

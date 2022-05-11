@@ -5,7 +5,7 @@
 
 using namespace gpds;
 
-bool archiver_xml::save(std::ostream& stream, const container& container, const std::string& rootName) const
+bool archiver_xml::save(std::ostream& stream, const container& container, std::string_view rootName) const
 {
     // Create the document
     tinyxml2::XMLDocument doc;
@@ -31,7 +31,7 @@ bool archiver_xml::save(std::ostream& stream, const container& container, const 
     return true;
 }
 
-bool archiver_xml::load(std::istream& stream, container& container, const std::string& rootName)
+bool archiver_xml::load(std::istream& stream, container& container, std::string_view rootName)
 {
     // Create the document
     std::string string(std::istreambuf_iterator<char>(stream), {});

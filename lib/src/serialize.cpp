@@ -4,7 +4,7 @@
 using namespace gpds;
 
 std::pair<bool, std::string>
-serialize::to_string(std::string& str, const std::string& root_name) const
+serialize::to_string(std::string& str, const std::string_view root_name) const
 {
     archiver_xml ar;
     const bool& ret = ar.save(str, *this, root_name);
@@ -13,7 +13,7 @@ serialize::to_string(std::string& str, const std::string& root_name) const
 }
 
 std::pair<bool, std::string>
-serialize::from_string(std::string_view str, const std::string& root_name)
+serialize::from_string(std::string_view str, const std::string_view root_name)
 {
     archiver_xml ar;
     const bool& ret = ar.load(std::string{str}, *this, root_name);        // ToDo: Add std::string_view interface to archiver_xml
@@ -22,7 +22,7 @@ serialize::from_string(std::string_view str, const std::string& root_name)
 }
 
 std::pair<bool, std::string>
-serialize::to_file(const std::filesystem::path& path, const std::string& root_name) const
+serialize::to_file(const std::filesystem::path& path, const std::string_view root_name) const
 {
     archiver_xml ar;
     const bool& ret = ar.save(path, *this, root_name);
@@ -31,7 +31,7 @@ serialize::to_file(const std::filesystem::path& path, const std::string& root_na
 }
 
 std::pair<bool, std::string>
-serialize::from_file(const std::filesystem::path& path, const std::string& root_name)
+serialize::from_file(const std::filesystem::path& path, const std::string_view root_name)
 {
     if (!std::filesystem::exists(path))
         return { false, "File does not exist." };

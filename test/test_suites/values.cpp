@@ -69,6 +69,34 @@ TEST_SUITE("values")
                 CHECK_EQ(v.use_cdata(), false);
                 v.set_use_cdata(true);
                 CHECK_EQ(v.use_cdata(), true);
+
+                SUBCASE("copy ctor")
+                {
+                    gpds::value v2{ v };
+                    CHECK_EQ(v2.use_cdata(), true);
+                }
+
+                SUBCASE("move ctor")
+                {
+                    gpds::value v2{ std::move(v) };
+                    CHECK_EQ(v2.use_cdata(), true);
+                }
+
+                SUBCASE("copy assignment")
+                {
+                    gpds::value v2;
+                    CHECK_EQ(v2.use_cdata(), false);
+                    v2 = v;
+                    CHECK_EQ(v2.use_cdata(), true);
+                }
+
+                SUBCASE("move assignment")
+                {
+                    gpds::value v2;
+                    CHECK_EQ(v2.use_cdata(), false);
+                    v2 = std::move(v);
+                    CHECK_EQ(v2.use_cdata(), true);
+                }
             }
         }
 

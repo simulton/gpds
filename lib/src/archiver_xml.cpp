@@ -5,7 +5,8 @@
 
 using namespace gpds;
 
-bool archiver_xml::save(std::ostream& stream, const container& container, std::string_view rootName) const
+bool
+archiver_xml::save(std::ostream& stream, const container& container, std::string_view rootName) const
 {
     // Create the document
     tinyxml2::XMLDocument doc;
@@ -31,7 +32,8 @@ bool archiver_xml::save(std::ostream& stream, const container& container, std::s
     return true;
 }
 
-bool archiver_xml::load(std::istream& stream, container& container, std::string_view rootName)
+bool
+archiver_xml::load(std::istream& stream, container& container, std::string_view rootName)
 {
     // Create the document
     std::string string(std::istreambuf_iterator<char>(stream), {});
@@ -40,9 +42,8 @@ bool archiver_xml::load(std::istream& stream, container& container, std::string_
 
     // Retrieve the root node
     tinyxml2::XMLElement* rootNode = doc.FirstChildElement(rootName.data());
-    if (!rootNode) {
+    if (!rootNode)
         return false;
-    }
 
     // Handle all nodes children recursively
     read_entry(*rootNode, container);
@@ -50,22 +51,21 @@ bool archiver_xml::load(std::istream& stream, container& container, std::string_
     return true;
 }
 
-void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const container& container) const
+void
+archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const container& container) const
 {
     // Annotate list if supposed to
     if (settings.annotate_list_count && container.is_list()) {
         std::string attributeString = "count";
-        if (settings.prefix_annotations) {
+        if (settings.prefix_annotations)
             attributeString = NAMESPACE_PREFIX + attributeString;
-        }
 
         root.SetAttribute(attributeString.c_str(), std::to_string(container.values.size()).data());
     }
 
     // Add all container arguments
-    for (const auto& attribute : container.attributes.map) {
+    for (const auto& attribute : container.attributes.map)
         root.SetAttribute(attribute.first.c_str(), attribute.second.c_str());
-    }
 
     // Iterate through all values in this container
     for (const auto& keyValuePair: container.values) {
@@ -104,9 +104,8 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
         }
 
         // Add all value arguments
-        for (const auto& attribute : value.attributes.map) {
+        for (const auto& attribute : value.attributes.map)
             child->SetAttribute(attribute.first.c_str(), attribute.second.c_str());
-        }
 
         GPDS_ASSERT(child);
 
@@ -114,7 +113,8 @@ void archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement&
     }
 }
 
-void archiver_xml::read_entry(const tinyxml2::XMLElement& rootNode, container& container)
+void
+archiver_xml::read_entry(const tinyxml2::XMLElement& rootNode, container& container)
 {
     // Container attributes
     for (const tinyxml2::XMLAttribute* attribute = rootNode.FirstAttribute(); attribute; attribute = attribute->Next())

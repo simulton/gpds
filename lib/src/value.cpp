@@ -29,7 +29,8 @@ value::~value() noexcept
     free_container_memory();
 }
 
-void value::free_container_memory()
+void
+value::free_container_memory()
 {
     // Containers need to be cleaned up
     if (std::holds_alternative<container*>(m_value)) {
@@ -38,12 +39,14 @@ void value::free_container_memory()
     }
 }
 
-void value::allocate_container_memory(const container& container)
+void
+value::allocate_container_memory(const container& container)
 {
     m_value = new gpds::container(container);
 }
 
-void value::allocate_container_memory(container&& container)
+void
+value::allocate_container_memory(container&& container)
 {
     m_value = new gpds::container(std::move(container));
 }

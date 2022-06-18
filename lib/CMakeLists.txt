@@ -132,7 +132,6 @@ install(
 # Targets
 install(
 	TARGETS
-		${TARGET-OBJS}
 		${TARGET-STATIC}
 		${TARGET-SHARED}
 	EXPORT gpds-targets

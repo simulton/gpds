@@ -1,6 +1,5 @@
-# Some bacis cmake configuration
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
+# CMake settiongs
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # List of private source files
 set(SOURCES_PRIVATE
@@ -54,12 +53,6 @@ function(setup_target_common target)
 			${HEADERS_PRIVATE}
 	)
 
-	target_compile_definitions(
-		${target}
-		PRIVATE
-			gpds_shared_EXPORTS		# We're building this library!
-	)
-
 	target_include_directories(
 		${target}
 		INTERFACE
@@ -75,19 +68,6 @@ function(setup_target_common target)
 			ARCHIVE_OUTPUT_NAME "gpds"
 			VERSION ${PROJECT_VERSION}
 			POSITION_INDEPENDENT_CODE 1
-	)
-
-	include(GenerateExportHeader)
-	generate_export_header(
-		${target}
-		BASE_NAME gpds
-		EXPORT_FILE_NAME gpds_export.hpp
-		DEPRECATED_MACRO_NAME "GPDS_DEPRECATED"
-		NO_DEPRECATED_MACRO_NAME "GPDS_NO_DEPRECATED"
-		EXPORT_MACRO_NAME "GPDS_EXPORT"
-		NO_EXPORT_MACRO_NAME "GPDS_NO_EXPORT"
-		STATIC_DEFINE "GPDS_STATIC_DEFINE"
-		DEFINE_NO_DEPRECATED
 	)
 endfunction()
 
@@ -120,12 +100,6 @@ set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/gpds)
 # Copy GPDS headers
 install(
 	FILES ${HEADERS_PUBLIC}
-	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
-)
-
-# Install export header
-install(
-	FILES ${CMAKE_CURRENT_BINARY_DIR}/gpds_export.hpp
 	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
 )
 

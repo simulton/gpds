@@ -1,11 +1,10 @@
 #pragma once
 
+#include "utils.hpp"
+
 #include <map>
 #include <string>
 #include <optional>
-
-#include "gpds_export.hpp"
-#include "utils.hpp"
 
 namespace gpds
 {
@@ -13,7 +12,7 @@ namespace gpds
     /**
      * A class representing attributes.
      */
-    class GPDS_EXPORT attributes
+    class attributes
     {
     public:
         /**

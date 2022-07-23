@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 
-#include "gpds_export.hpp"
 #include "serialize.hpp"
 
 namespace gpds
@@ -16,7 +15,7 @@ namespace gpds
      * An archiver is responsible for (de)serialization.
      * This class can be derived to implement (de)serialization for various formats such as XML and JSON.
      */
-    class GPDS_EXPORT archiver
+    class archiver
     {
     public:
         archiver() = default;

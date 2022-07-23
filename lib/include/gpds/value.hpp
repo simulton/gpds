@@ -1,14 +1,14 @@
 #pragma once
 
+#include "attributes.hpp"
+#include "utils.hpp"
+
 #include <type_traits>
 #include <variant>
 #include <string>
 #include <vector>
 #include <map>
 #include <optional>
-#include "gpds_export.hpp"
-#include "attributes.hpp"
-#include "utils.hpp"
 
 namespace gpds
 {
@@ -19,7 +19,7 @@ namespace gpds
      *
      * A value can have zero or more attributes.
      */
-    class GPDS_EXPORT value
+    class value
     {
     public:
         /**

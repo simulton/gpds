@@ -1,12 +1,11 @@
 #pragma once
 
-#include <map>
-#include <optional>
-
-#include "gpds_export.hpp"
 #include "value.hpp"
 #include "attributes.hpp"
 #include "utils.hpp"
+
+#include <map>
+#include <optional>
 
 namespace gpds
 {
@@ -15,7 +14,7 @@ namespace gpds
      *
      * A container holds zero or more values and zero or more attributes.
      */
-    class GPDS_EXPORT container
+    class container
     {
     public:
         std::multimap<std::string, value> values;

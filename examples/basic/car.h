@@ -32,6 +32,8 @@ public:
         manufacturer = c.get_value<std::string>("manufacturer").value_or("");
         model = c.get_value<std::string>("model").value_or("");
         year_of_construction = c.get_value<int>("year_of_construction").value_or(0);
-        color.from_container(*c.get_value<gpds::container*>("color").value_or(new gpds::container));
+
+        if (const gpds::container* c_color = c.get_value<gpds::container*>("color").value_or(nullptr); c_color)
+            color.from_container(*c_color);
     }
 };

@@ -56,7 +56,8 @@ namespace gpds
             class T,
             typename std::enable_if<!std::is_class<T>::value, T>::type* = nullptr
         >
-        explicit value(const T& value)
+        explicit
+        value(const T& value)
         {
             set<T>(value);
         }
@@ -71,7 +72,8 @@ namespace gpds
             class T,
             typename std::enable_if<std::is_class<T>::value, T>::type* = nullptr
         >
-        explicit value(T&& value)
+        explicit
+        value(T&& value)
         {
             set<T>(std::forward<T>(value));
         }
@@ -79,7 +81,8 @@ namespace gpds
         /**
          * Destructor.
          */
-        virtual ~value() noexcept;
+        virtual
+        ~value() noexcept;
 
         /**
          * Copy assignment operator.
@@ -88,7 +91,8 @@ namespace gpds
          *
          * @return A reference to the lhs object.
          */
-        value& operator=(const value& rhs) = default;
+        value&
+        operator=(const value& rhs) = default;
 
         /**
          * Move assignment operator.
@@ -97,7 +101,8 @@ namespace gpds
          *
          * @return A reference to the lhs object.
          */
-        value& operator=(value&& rhs) noexcept = default;
+        value&
+        operator=(value&& rhs) noexcept = default;
 
         /**
          * Checks whether the value is of a specified type.
@@ -107,7 +112,9 @@ namespace gpds
          */
         template<typename T>
         [[nodiscard]]
-        constexpr bool is_type() const noexcept
+        constexpr
+        bool
+        is_type() const noexcept
         {
             return std::holds_alternative<T>(m_value);
         }
@@ -117,7 +124,10 @@ namespace gpds
          *
          * @return Whether the value is currently empty.
          */
-        [[nodiscard]] constexpr bool is_empty() const
+        [[nodiscard]]
+        constexpr
+        bool
+        is_empty() const
         {
             return m_value.valueless_by_exception();
         }
@@ -129,7 +139,8 @@ namespace gpds
          * @param value The value.
          */
         template<typename T>
-        void set(const T& value)
+        void
+        set(const T& value)
         {
             // Container
             if constexpr (std::is_same_v<gpds::container*, T>) {
@@ -149,7 +160,8 @@ namespace gpds
          * @param container The container.
          */
         template<typename T = container&>
-        void set(const container& container)
+        void
+        set(const container& container)
         {
             free_container_memory();
             allocate_container_memory(container);
@@ -162,7 +174,8 @@ namespace gpds
          * @param container The container.
          */
         template<typename T = container&&>
-        void set(container&& container)
+        void
+        set(container&& container)
         {
             free_container_memory();
             allocate_container_memory(std::move(container));
@@ -202,7 +215,8 @@ namespace gpds
          * @return Reference to this.
          */
         template<typename T>
-        value& add_attribute(const std::string& key, const T& value)
+        value&
+        add_attribute(const std::string& key, const T& value)
         {
             attributes.add(key, value);
 
@@ -218,7 +232,8 @@ namespace gpds
          */
         template<typename T>
         [[nodiscard]]
-        std::optional<T> get_attribute(const std::string& key) const
+        std::optional<T>
+        get_attribute(const std::string& key) const
         {
             return attributes.get<T>(key);
         }

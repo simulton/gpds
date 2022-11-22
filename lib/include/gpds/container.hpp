@@ -28,7 +28,8 @@ namespace gpds
         container& operator=(const container& rhs) = default;
         container& operator=(container&& rhs) noexcept = default;
 
-        container& operator+=(const container& rhs)
+        container&
+        operator+=(const container& rhs)
         {
             values.insert(rhs.values.cbegin(), rhs.values.cend());
             attributes += rhs.attributes;
@@ -46,7 +47,8 @@ namespace gpds
          * @sa has_attributes()
          */
         [[nodiscard]]
-        bool empty() const noexcept
+        bool
+        empty() const noexcept
         {
             return !has_values() && !has_attributes();
         }
@@ -60,7 +62,8 @@ namespace gpds
          * @sa has_attributes()
          */
         [[nodiscard]]
-        bool has_values() const noexcept
+        bool
+        has_values() const noexcept
         {
             return !values.empty();
         }
@@ -72,7 +75,8 @@ namespace gpds
          * @return Whether at least one value matching the key is present.
          */
         [[nodiscard]]
-        bool has_value(const std::string& key) const
+        bool
+        has_value(const std::string& key) const
         {
             return values.find(key) != std::cend(values);
         }
@@ -86,7 +90,8 @@ namespace gpds
          * @sa has_values()
          */
         [[nodiscard]]
-        bool has_attributes() const noexcept
+        bool
+        has_attributes() const noexcept
         {
             return !attributes.empty();
         }
@@ -98,13 +103,15 @@ namespace gpds
          * @return Whether an attribute matching the key exists.
          */
         [[nodiscard]]
-        bool has_attribute(const std::string& key) const
+        bool
+        has_attribute(const std::string& key) const
         {
             return attributes.map.find(key) != std::cend(attributes.map);
         }
 
         template<class T>
-        value& add_value(const std::string& key, T&& value)
+        value&
+        add_value(const std::string& key, T&& value)
         {
             auto it = values.emplace(std::make_pair(key, std::forward<T>(value)));
 
@@ -113,7 +120,8 @@ namespace gpds
 
         template<class T>
         [[nodiscard]]
-        std::optional<T> get_value(const std::string& key) const
+        std::optional<T>
+        get_value(const std::string& key) const
         {
             auto it = values.find(key);
 
@@ -133,7 +141,8 @@ namespace gpds
 
         template<class T>
         [[nodiscard]]
-        std::vector<T> get_values(const std::string& key) const
+        std::vector<T>
+        get_values(const std::string& key) const
         {
             // ToDo: pre-allocate values vector
             const auto& range = values.equal_range(key);
@@ -157,7 +166,8 @@ namespace gpds
         }
 
         template<typename T>
-        container& add_attribute(const std::string& key, const T& value)
+        container&
+        add_attribute(const std::string& key, const T& value)
         {
             attributes.add(key, value);
 
@@ -166,14 +176,16 @@ namespace gpds
 
         template<typename T>
         [[nodiscard]]
-        std::optional<T> get_attribute(std::string&& key) const
+        std::optional<T>
+        get_attribute(std::string&& key) const
         {
             return attributes.get<T>(std::forward<std::string>(key));
         }
 
         template<typename T>
         [[nodiscard]]
-        std::optional<T> get_value_attribute(const std::string& valueKey, const std::string& attributeKey) const
+        std::optional<T>
+        get_value_attribute(const std::string& valueKey, const std::string& attributeKey) const
         {
             auto it = values.find(valueKey);
 
@@ -184,7 +196,9 @@ namespace gpds
             return std::nullopt;
         }
 
-        [[nodiscard]] bool is_list() const;
+        [[nodiscard]]
+        bool
+        is_list() const;
     };
 
 }

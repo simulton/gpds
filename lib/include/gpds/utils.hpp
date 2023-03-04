@@ -50,6 +50,10 @@ namespace gpds
             else if constexpr (std::is_same<T, std::string>::value)
                 return value;
 
+            // std::string_view
+            else if constexpr (std::is_same<T, std::string_view>::value)
+                return std::string{value};
+
             // C-string
             else if constexpr (is_c_str<T>::value)
                 return std::string(value);

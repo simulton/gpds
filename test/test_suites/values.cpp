@@ -52,6 +52,14 @@ TEST_SUITE("values")
                 }
             }
 
+            SUBCASE("std::string_view") {
+                gpds::value value(std::string_view("Hello, World!"));
+
+                SUBCASE("retrieve string from value") {
+                    CHECK_EQ(value.get<std::string>(), "Hello, World!");
+                }
+            }
+
             SUBCASE("c-string") {
                 gpds::value value("Hello, World!");
 

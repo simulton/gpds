@@ -10,7 +10,7 @@ TEST_SUITE("values")
             gpds::value value(45);
 
             SUBCASE("retrieving integer from value") {
-                REQUIRE(value.get<int>() == 45);
+                CHECK_EQ(value.get<int>(), 45);
             }
         }
 
@@ -18,7 +18,7 @@ TEST_SUITE("values")
             gpds::value value(false);
 
             SUBCASE("retrieving boolean from value") {
-                REQUIRE(value.get<bool>() == false);
+                CHECK_EQ(value.get<bool>(), false);
             }
         }
 
@@ -38,7 +38,7 @@ TEST_SUITE("values")
                 gpds::value value(13.2);
 
                 SUBCASE("retrieving floating-point from value") {
-                    REQUIRE(value.get<double>().value_or(0.0) == doctest::Approx(13.2));
+                    CHECK_EQ(value.get<double>().value_or(0.0), doctest::Approx(13.2));
                 }
             }
         }
@@ -48,7 +48,7 @@ TEST_SUITE("values")
                 gpds::value value(std::string("Hello, World!"));
 
                 SUBCASE("retrieving string from value") {
-                    REQUIRE(value.get<std::string>() == "Hello, World!");
+                    CHECK_EQ(value.get<std::string>(), "Hello, World!");
                 }
             }
 
@@ -64,7 +64,7 @@ TEST_SUITE("values")
                 gpds::value value("Hello, World!");
 
                 SUBCASE("retrieving string from value") {
-                    REQUIRE(value.get<std::string>() == "Hello, World!");
+                    CHECK_EQ(value.get<std::string>(), "Hello, World!");
                 }
             }
 
@@ -113,7 +113,7 @@ TEST_SUITE("values")
             gpds::value v(std::filesystem::path{ "/usr/src" });
 
             SUBCASE("retrieve string from value") {
-                REQUIRE(v.get<std::filesystem::path>() == "/usr/src");
+                CHECK_EQ(v.get<std::filesystem::path>(), "/usr/src");
             }
         }
 
@@ -125,7 +125,7 @@ TEST_SUITE("values")
             SUBCASE("retrieving value from container") {
                 auto ctnr = value.get<gpds::container*>().value_or(nullptr);
                 REQUIRE(ctnr);
-                REQUIRE(ctnr->get_value<std::string>("name") == "John Doe");
+                CHECK_EQ(ctnr->get_value<std::string>("name"), "John Doe");
             }
         }
 

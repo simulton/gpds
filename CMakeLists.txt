@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 # Project information
 project(gpds
-	VERSION 1.5.0
+	VERSION 1.5.1
 	LANGUAGES CXX
 	HOMEPAGE_URL "https://gpds.simulton.com"
 )

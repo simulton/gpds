@@ -8,11 +8,13 @@ set(SOURCES_PRIVATE
 	src/value.cpp
 	src/serialize.cpp
 	3rdparty/tinyxml2/tinyxml2.cpp
+	3rdparty/miniyaml/yaml/yaml.cpp
 )
 
 # List of private header files
 set(HEADERS_PRIVATE
 	3rdparty/tinyxml2/tinyxml2.h
+	3rdparty/miniyaml/yaml/yaml.hpp
 )
 
 # List of public header files

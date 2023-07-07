@@ -81,7 +81,7 @@ int main()
         }
     }
 
-    // To/from string
+    // To/from string XML
     {
         std::string str;
 
@@ -100,6 +100,34 @@ int main()
         {
             car_catalog catalog1;
             const auto&[success, msg] = catalog1.from_string(str, "car-catalog");
+            if (!success) {
+                std::cerr << "could not load `catalog` from string: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully deserialized 'catalog' from string." << std::endl;
+        }
+    }
+
+    // To/from string YAML
+    {
+        std::string str;
+
+        // Serialize to string
+        {
+            const auto& [success, msg] = catalog.to_string(str, "car-catalog", gpds::serialize::mode::YAML);
+            if (!success) {
+                std::cerr << "could not store 'catalog' in string: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully serialized 'catalog' to string:\n" << str << std::endl;
+        }
+
+        // Deserialize form string
+        {
+            car_catalog catalog1;
+            const auto&[success, msg] = catalog1.from_string(str, "car-catalog", gpds::serialize::mode::YAML);
             if (!success) {
                 std::cerr << "could not load `catalog` from string: " << msg << std::endl;
                 return EXIT_FAILURE;

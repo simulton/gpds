@@ -19,6 +19,7 @@ target_sources(
         25_deserialize_booleans_yaml.cpp
         26_deserialize_integer_yaml.cpp
         27_deserialize_floats_yaml.cpp
+        28_deserialize_strings_yaml.cpp
 
         attributes.cpp
         cdata.cpp

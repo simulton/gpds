@@ -21,6 +21,7 @@ target_sources(
         27_deserialize_floats_yaml.cpp
         28_deserialize_strings_yaml.cpp
         29_deserialize_attributes_yaml.cpp
+        30_deserialize_container_attributes_yaml.cpp
 
         attributes.cpp
         cdata.cpp

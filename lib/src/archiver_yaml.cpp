@@ -146,6 +146,10 @@ archiver_yaml::write_entry(Yaml::Node& root, const container& container) const
 void
 archiver_yaml::read_entry(const Yaml::Node& root, container& container)
 {
+    // Exit if root size is 0
+    if (root.Size() == 0) {
+        return;
+    }
     // Iterate through all children
     for(auto it = root.Begin(); it != root.End(); it++) {
         const std::string& it_key = (*it).first;

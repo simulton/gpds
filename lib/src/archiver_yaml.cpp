@@ -64,8 +64,15 @@ archiver_yaml::write_entry(Yaml::Node& root, const container& container) const
     for (const auto& keyValuePair: container.values) {
 
         // Some aliases to make the code easier to read
-        const auto& key = keyValuePair.first.c_str();
+        std::string key = keyValuePair.first;
         const value& value = keyValuePair.second;
+
+        // Trim whitespace in key
+        std::string whitespace = " \n\r\t\f\v";
+        size_t start = key.find_first_not_of(whitespace);
+        size_t end = key.find_last_not_of(whitespace);
+        key = (start == std::string::npos) ? "" : key.substr(start);
+        key = (end == std::string::npos) ? "" : key.substr(0, end + 1);
 
         // Create a new node in the DOM
         Yaml::Node child;
@@ -118,29 +125,30 @@ archiver_yaml::write_entry(Yaml::Node& root, const container& container) const
         }
 
         // Is key existing?
-        bool key_exist = false;
-        switch (root[key].Type())
-        {
-        case Yaml::Node::eType::None:
-            key_exist = false;
-            break;
-        case Yaml::Node::eType::SequenceType:
-        case Yaml::Node::eType::MapType:
-        case Yaml::Node::eType::ScalarType:
-            key_exist = true;
-            break;
-        }
-
-        if (key_exist) {
-            // If repeated key, add to sequence
-            if (root[key].Type() == Yaml::Node::eType::MapType || Yaml::Node::eType::ScalarType) {
-                Yaml::Node first_node = root[key];
-                root[key].PushBack() = first_node;
+        if (!key.empty()) {
+            bool key_exist = false;
+            switch (root[key].Type()) {
+            case Yaml::Node::eType::None:
+                break;
+            case Yaml::Node::eType::SequenceType:
+            case Yaml::Node::eType::MapType:
+            case Yaml::Node::eType::ScalarType:
+                key_exist = true;
+                break;
             }
-            root[key].PushBack() = child;
-        } else {
-            // If new key, add to map
-            root[key] = child;
+
+            if (key_exist) {
+                // If repeated key, add to sequence
+                if (root[key].IsMap() || root[key].IsScalar()) {
+                    // Create new sequence and re add first node to sequence
+                    Yaml::Node first_node = root[key];
+                    root[key].PushBack() = first_node;
+                }
+                root[key].PushBack() = child;
+            } else {
+                // If new key, add to map
+                root[key] = child;
+            }
         }
     }
 }
@@ -149,12 +157,10 @@ void
 archiver_yaml::read_entry(const Yaml::Node& root, container& container)
 {
     // Iterate through all children
-    for(auto it = root.Begin(); it != root.End(); it++)
-    {
+    for(auto it = root.Begin(); it != root.End(); it++) {
         const std::string& it_key = (*it).first;
         const Yaml::Node& it_node = (*it).second;
-        switch (it_node.Type())
-        {
+        switch (it_node.Type()) {
         case Yaml::Node::eType::None:
             break;
         case Yaml::Node::eType::SequenceType:
@@ -164,7 +170,7 @@ archiver_yaml::read_entry(const Yaml::Node& root, container& container)
                 const Yaml::Node& seq_node = (*it).second;
                 gpds::container child_container;
                 // Check if this node is a text node
-                if (seq_node.Type() == Yaml::Node::eType::ScalarType) {
+                if (seq_node.IsScalar()) {
                     std::string seq_text = seq_node.As<std::string>();
                     // Set empty if text is null
                     if (seq_text == "null") {
@@ -191,7 +197,7 @@ archiver_yaml::read_entry(const Yaml::Node& root, container& container)
                 {
                     const std::string& map_key = (*it).first;
                     const Yaml::Node& map_node = (*it).second;
-                    if (map_node.Type() == Yaml::Node::eType::ScalarType) {
+                    if (map_node.IsScalar()) {
                         std::string map_text = map_node.As<std::string>();
                         // Set empty if text is null
                         if (map_text == "null") {

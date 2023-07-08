@@ -16,6 +16,7 @@ target_sources(
         16_addition_assignment.cpp
         17_deserializing_empty_container.cpp
         18_load_and_save_file.cpp
+        25_deserialize_booleans_yaml.cpp
 
         attributes.cpp
         cdata.cpp

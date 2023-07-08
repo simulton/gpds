@@ -124,20 +124,10 @@ archiver_yaml::write_entry(Yaml::Node& root, const container& container) const
             }
         }
 
-        // Is key existing?
+        // Is key empty?
         if (!key.empty()) {
-            bool key_exist = false;
-            switch (root[key].Type()) {
-            case Yaml::Node::eType::None:
-                break;
-            case Yaml::Node::eType::SequenceType:
-            case Yaml::Node::eType::MapType:
-            case Yaml::Node::eType::ScalarType:
-                key_exist = true;
-                break;
-            }
-
-            if (key_exist) {
+            // Is key existing?
+            if (key_exist(root, key)) {
                 // If repeated key, add to sequence
                 if (root[key].IsMap() || root[key].IsScalar()) {
                     // Create new sequence and re add first node to sequence
@@ -254,4 +244,30 @@ archiver_yaml::read_entry(const Yaml::Node& root, container& container)
             break;
         }
     }
+}
+
+bool
+archiver_yaml::key_exist(const Yaml::Node& root, const std::string& key) const
+{
+    bool result = false;
+    // Check if the key empty
+    if (key.empty()) {
+        // Key is empty, return false
+        return false;
+    }
+
+    // Copy root node to new node prevent modification
+    Yaml::Node node = root;
+    // If key exist, the node type will not be None
+    switch (node[key].Type()) {
+    case Yaml::Node::eType::None:
+        break;
+    case Yaml::Node::eType::SequenceType:
+    case Yaml::Node::eType::MapType:
+    case Yaml::Node::eType::ScalarType:
+        result = true;
+        break;
+    }
+
+    return result;
 }

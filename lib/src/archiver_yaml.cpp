@@ -133,7 +133,7 @@ archiver_yaml::write_entry(Yaml::Node& root, const container& container) const
 
         if (key_exist) {
             // If repeated key, add to sequence
-            if (root[key].Type() == Yaml::Node::eType::MapType) {
+            if (root[key].Type() == Yaml::Node::eType::MapType || Yaml::Node::eType::ScalarType) {
                 Yaml::Node first_node = root[key];
                 root[key].PushBack() = first_node;
             }
@@ -163,9 +163,21 @@ archiver_yaml::read_entry(const Yaml::Node& root, container& container)
             {
                 const Yaml::Node& seq_node = (*it).second;
                 gpds::container child_container;
-                read_entry(seq_node, child_container);
-                if (!it_key.empty()) {
-                    container.add_value(it_key, std::move(child_container));
+                // Check if this node is a text node
+                if (seq_node.Type() == Yaml::Node::eType::ScalarType) {
+                    std::string seq_text = seq_node.As<std::string>();
+                    // Set empty if text is null
+                    if (seq_text == "null") {
+                        seq_text = "";
+                    }
+                    // Set text value
+                    container.add_value(it_key, seq_text);
+                } else {
+                    // Recursion for child container
+                    read_entry(seq_node, child_container);
+                    if (!it_key.empty()) {
+                        container.add_value(it_key, std::move(child_container));
+                    }
                 }
             }
             break;

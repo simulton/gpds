@@ -160,13 +160,18 @@ archiver_yaml::read_entry(const Yaml::Node& root, container& container)
                 const Yaml::Node& seq_node = (*it).second;
                 gpds::container child_container;
                 // Check if this node is a text node
-                if (seq_node.IsScalar()) {
+                if (key_exist(seq_node, "#text") || key_exist(seq_node, "#cdata")) {
+                    gpds::value child_value;
+                    read_value(seq_node, child_value);
+                    // add value to container
+                    container.add_value(it_key, std::move(child_value));
+                } else if (seq_node.IsScalar()) {
                     std::string seq_text = seq_node.As<std::string>();
                     // Set empty if text is null
                     if (seq_text == "null") {
                         seq_text = "";
                     }
-                    // Set text value
+                    // Set text value directly
                     container.add_value(it_key, seq_text);
                 } else {
                     // Recursion for child container
@@ -180,42 +185,21 @@ archiver_yaml::read_entry(const Yaml::Node& root, container& container)
         case Yaml::Node::eType::MapType:
             // Handle all MapType children recursively
             {
-                gpds::value child_value;
                 bool is_text = false;
                 // Check if this node is a text node
-                for(auto it = it_node.Begin(); it != it_node.End(); it++)
-                {
-                    const std::string& map_key = (*it).first;
-                    const Yaml::Node& map_node = (*it).second;
-                    if (map_node.IsScalar()) {
-                        std::string map_text = map_node.As<std::string>();
-                        // Set empty if text is null
-                        if (map_text == "null") {
-                            map_text = "";
-                        }
-                        if (map_key == "#text") {
-                            // This node is a text node
-                            is_text = true;
-                            child_value.set(map_text);
-                        } else if (map_key == "#cdata") {
-                            child_value.set(map_text);
-                            child_value.set_use_cdata(true);
-                            //container.add_value(it_key, child_value);
-                        } else if (map_key[0] == '-') {
-                            // It's a value attribute
-                            std::string attribute_key = map_key;
-                            std::string attribute_value = map_text;
-                            child_value.add_attribute(attribute_key.erase(0, 1), attribute_value);
-                        } else {
-                            // It's a value
-                            child_value.set(map_text);
-                        }
-                    }
-                }
-                // Add node to container
-                if (is_text) {
-                    // Add text node to container
+                if (key_exist(it_node, "#text") || key_exist(it_node, "#cdata")) {
+                    gpds::value child_value;
+                    read_value(it_node, child_value);
+                    // Add text node value to container
                     container.add_value(it_key, std::move(child_value));
+                } else if (it_node.IsScalar()) {
+                    std::string map_text = it_node.As<std::string>();
+                    // Set empty if text is null
+                    if (map_text == "null") {
+                        map_text = "";
+                    }
+                    // Set text value directly
+                    container.add_value(it_key, map_text);
                 } else {
                     // Handle all MapType children recursively
                     gpds::container child_container;
@@ -270,4 +254,38 @@ archiver_yaml::key_exist(const Yaml::Node& root, const std::string& key) const
     }
 
     return result;
+}
+
+void
+archiver_yaml::read_value(const Yaml::Node& node, value& value) const
+{
+    // Check if this node is a text node
+    for(auto it = node.Begin(); it != node.End(); it++)
+    {
+        const std::string& map_key = (*it).first;
+        const Yaml::Node& map_node = (*it).second;
+        if (map_node.IsScalar()) {
+            std::string map_text = map_node.As<std::string>();
+            // Set empty if text is null
+            if (map_text == "null") {
+                map_text = "";
+            }
+            if (map_key == "#text") {
+                // It's text, set value text
+                value.set(map_text);
+            } else if (map_key == "#cdata") {
+                // It's cdata, set value cdata
+                value.set(map_text);
+                value.set_use_cdata(true);
+            } else if (map_key[0] == '-') {
+                // It's a value attribute, set attribute
+                std::string attribute_key = map_key;
+                std::string attribute_value = map_text;
+                value.add_attribute(attribute_key.erase(0, 1), attribute_value);
+            } else {
+                // It's a value, set directly
+                value.set(map_text);
+            }
+        }
+    }
 }

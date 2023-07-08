@@ -48,6 +48,7 @@ namespace gpds
         void write_entry(Yaml::Node& root, const container& container) const;
         void read_entry(const Yaml::Node& root, container& container);
         bool key_exist(const Yaml::Node& root, const std::string& key) const;
+        void read_value(const Yaml::Node& node, value& value) const;
     };
 
 }

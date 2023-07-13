@@ -4,21 +4,25 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 # List of private source files
 set(SOURCES_PRIVATE
 	src/archiver_xml.cpp
+	src/archiver_yaml.cpp
 	src/container.cpp
 	src/value.cpp
 	src/serialize.cpp
 	3rdparty/tinyxml2/tinyxml2.cpp
+	3rdparty/miniyaml/yaml/yaml.cpp
 )
 
 # List of private header files
 set(HEADERS_PRIVATE
 	3rdparty/tinyxml2/tinyxml2.h
+	3rdparty/miniyaml/yaml/yaml.hpp
 )
 
 # List of public header files
 set(HEADERS_PUBLIC
 	include/gpds/archiver.hpp
 	include/gpds/archiver_xml.hpp
+	include/gpds/archiver_yaml.hpp
 	include/gpds/attributes.hpp
 	include/gpds/container.hpp
 	include/gpds/serialize.hpp

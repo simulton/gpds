@@ -1,4 +1,5 @@
 #include <gpds/archiver_xml.hpp>
+#include <gpds/archiver_yaml.hpp>
 
 #include "carcatalog.h"
 
@@ -53,7 +54,7 @@ int main()
         catalog.cars.push_front(car);
     }
 
-    // To/from file
+    // To/from file XML
     {
         const std::filesystem::path filepath = "catalog.xml";
 
@@ -81,7 +82,35 @@ int main()
         }
     }
 
-    // To/from string
+    // To/from file YAML
+    {
+        const std::filesystem::path filepath = "catalog.yaml";
+
+        // Serialize to file
+        {
+            const auto&[success, msg] = catalog.to_file(filepath, "car-catalog", gpds::serialize::mode::YAML);
+            if (!success) {
+                std::cerr << "could not store 'catalog' in file: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully serialized 'catalog' to file: " << filepath << std::endl;
+        }
+
+        // Deserialize from file
+        {
+            car_catalog catalog1;
+            const auto&[success, msg] = catalog1.from_file(filepath, "car-catalog", gpds::serialize::mode::YAML);
+            if (!success) {
+                std::cerr << "could not load `catalog` from file: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully deserialized 'catalog' from file: " << filepath << std::endl;
+        }
+    }
+
+    // To/from string XML
     {
         std::string str;
 
@@ -100,6 +129,34 @@ int main()
         {
             car_catalog catalog1;
             const auto&[success, msg] = catalog1.from_string(str, "car-catalog");
+            if (!success) {
+                std::cerr << "could not load `catalog` from string: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully deserialized 'catalog' from string." << std::endl;
+        }
+    }
+
+    // To/from string YAML
+    {
+        std::string str;
+
+        // Serialize to string
+        {
+            const auto& [success, msg] = catalog.to_string(str, "car-catalog", gpds::serialize::mode::YAML);
+            if (!success) {
+                std::cerr << "could not store 'catalog' in string: " << msg << std::endl;
+                return EXIT_FAILURE;
+            }
+
+            std::cout << "successfully serialized 'catalog' to string:\n" << str << std::endl;
+        }
+
+        // Deserialize form string
+        {
+            car_catalog catalog1;
+            const auto&[success, msg] = catalog1.from_string(str, "car-catalog", gpds::serialize::mode::YAML);
             if (!success) {
                 std::cerr << "could not load `catalog` from string: " << msg << std::endl;
                 return EXIT_FAILURE;

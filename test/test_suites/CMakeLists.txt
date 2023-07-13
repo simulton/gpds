@@ -16,6 +16,14 @@ target_sources(
         16_addition_assignment.cpp
         17_deserializing_empty_container.cpp
         18_load_and_save_file.cpp
+        25_deserialize_booleans_yaml.cpp
+        26_deserialize_integer_yaml.cpp
+        27_deserialize_floats_yaml.cpp
+        28_deserialize_strings_yaml.cpp
+        29_deserialize_attributes_yaml.cpp
+        30_deserialize_container_attributes_yaml.cpp
+        37_deserializing_empty_container_yaml.cpp
+        38_load_and_save_file_yaml.cpp
 
         attributes.cpp
         cdata.cpp

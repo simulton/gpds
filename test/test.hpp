@@ -8,6 +8,7 @@
 
 #include "gpds/serialize.hpp"
 #include "gpds/archiver_xml.hpp"
+#include "gpds/archiver_yaml.hpp"
 
 namespace gpds
 {
@@ -19,8 +20,8 @@ namespace gpds_test
     class test
     {
     public:
-        static void serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName);
-        static void deserialize(std::istream& stream, gpds::serialize& object, const std::string& rootName);
-        static void deserialize(const std::string& xml_string, gpds::serialize& object, const std::string& rootName);
+        static void serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
+        static void deserialize(std::istream& stream, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
+        static void deserialize(const std::string& str, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
     };
 }

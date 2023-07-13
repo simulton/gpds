@@ -108,10 +108,10 @@ TEST_CASE("Read Attributes: Value Attributes")
 {
     // Parse test file
     test_data_29 testData;
-    gpds_test::deserialize(FILE_CONTENT, testData, "data", gpds::serialize::mode::YAML);
+    gpds_test::deserialize<gpds::archiver_yaml>(FILE_CONTENT, testData, "data");
 
     // Ensure that data is the same
-    REQUIRE(testData.d.size() == knownGood.size());
-    REQUIRE(testData.d == knownGood);
+    CHECK_EQ(testData.d.size(), knownGood.size());
+    CHECK_EQ(testData.d, knownGood);
 }
 

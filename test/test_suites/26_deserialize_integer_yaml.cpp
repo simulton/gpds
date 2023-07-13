@@ -53,9 +53,9 @@ TEST_CASE("Read Datatype: Integer")
 
     // Parse test file
     test_data_26 data;
-    gpds_test::deserialize(FILE_CONTENT, data, "data", gpds::serialize::mode::YAML);
+    gpds_test::deserialize<gpds::archiver_yaml>(FILE_CONTENT, data, "data");
 
     // Ensure that data is the same
-    REQUIRE(data.data == knownGood);
+    CHECK_EQ(data.data, knownGood);
 }
 

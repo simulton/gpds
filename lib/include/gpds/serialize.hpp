@@ -16,13 +16,15 @@ namespace gpds
         /**
          * The mode of the serialize.
          */
+        // ToDo: This is a bit whacky. We should ensure that all serializing interfaces accept the archiver as a template parameter instead.
         enum class mode
         {
             XML,
             YAML,
         };
 
-        virtual ~serialize() = default;
+        virtual
+        ~serialize() = default;
 
         // Container
         [[nodiscard]] virtual gpds::container to_container() const = 0;

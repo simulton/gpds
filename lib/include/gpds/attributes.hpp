@@ -40,7 +40,8 @@ namespace gpds
         /**
          * Destructor.
          */
-        virtual ~attributes() = default;
+        virtual
+        ~attributes() = default;
 
         /**
          * Copy assignment operator.
@@ -48,7 +49,8 @@ namespace gpds
          * @param rhs The right-hand-side object to copy-assign from.
          * @return A reference to this object.
          */
-        attributes& operator=(const attributes& rhs) = default;
+        attributes&
+        operator=(const attributes& rhs) = default;
 
         /**
          * Move assignment operator.
@@ -56,7 +58,8 @@ namespace gpds
          * @param rhs The right-hand-side object to move-assign from.
          * @return A reference to this object.
          */
-        attributes& operator=(attributes&& rhs) noexcept = default;
+        attributes&
+        operator=(attributes&& rhs) noexcept = default;
 
         /**
          * Merge two attribute sets together.
@@ -64,7 +67,8 @@ namespace gpds
          * @param other The right-hand-side object to merge into this one.
          * @return A reference to this object.
          */
-        attributes& operator+=(const attributes& other)
+        attributes&
+        operator+=(const attributes& other)
         {
             map.insert(other.map.cbegin(), other.map.cend());
             return *this;
@@ -76,7 +80,8 @@ namespace gpds
          * @return Whether there are any attributes.
          */
         [[nodiscard]]
-        bool empty() const noexcept
+        bool
+        empty() const noexcept
         {
             return map.empty();
         }
@@ -89,7 +94,8 @@ namespace gpds
          * @param value The attribute value.
          */
         template<typename T>
-        void add(const std::string& key, const T& value)
+        void
+        add(const std::string& key, const T& value)
         {
             map.emplace(key, value_to_string(value));
         }
@@ -103,7 +109,8 @@ namespace gpds
          */
         template<typename T>
         [[nodiscard]]
-        std::optional<T> get(const std::string& key) const
+        std::optional<T>
+        get(const std::string& key) const
         {
             const auto& it = map.find(key);
             if (it != map.cend())

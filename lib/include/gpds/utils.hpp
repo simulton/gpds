@@ -21,7 +21,9 @@ namespace gpds
             bool,
             std::is_same<char const*, typename std::decay<T>::type>::value ||
             std::is_same<char*, typename std::decay<T>::type>::value
-        > {};
+        >
+    {
+    };
 
     template<typename T>
     [[nodiscard]]

@@ -16,9 +16,10 @@ namespace gpds
         /**
          * The mode of the serialize.
          */
-        enum mode {
-            XML  = 0,
-            YAML = 1,
+        enum class mode
+        {
+            XML,
+            YAML,
         };
 
         virtual ~serialize() = default;

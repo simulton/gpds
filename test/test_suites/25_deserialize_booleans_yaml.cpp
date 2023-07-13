@@ -38,7 +38,7 @@ TEST_CASE("Read Datatype: Boolean")
 
     // Parse test file
     test_data_25 data;
-    gpds_test::test::deserialize(FILE_CONTENT, data, "data", gpds::serialize::mode::YAML);
+    gpds_test::deserialize(FILE_CONTENT, data, "data", gpds::serialize::mode::YAML);
 
     // Ensure that data is the same
     REQUIRE(data.data == knownGood);

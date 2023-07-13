@@ -61,7 +61,7 @@ TEST_CASE("Read Datatype: String")
 
     // Parse test file
     test_data_8 data;
-    gpds_test::test::deserialize(FILE_CONTENT, data, "data");
+    gpds_test::deserialize(FILE_CONTENT, data, "data");
 
     // Ensure that data is the same
     REQUIRE(data.data == knownGood);

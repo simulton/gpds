@@ -17,11 +17,14 @@ namespace gpds
 
 namespace gpds_test
 {
-    class test
-    {
-    public:
-        static void serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
-        static void deserialize(std::istream& stream, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
-        static void deserialize(const std::string& str, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
-    };
+
+    void
+    serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
+
+    void
+    deserialize(std::istream& stream, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
+
+    void
+    deserialize(const std::string& str, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode = gpds::serialize::mode::XML);
+
 }

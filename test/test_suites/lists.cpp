@@ -54,11 +54,11 @@ TEST_SUITE("lists")
 
         // Serialize
         std::stringstream serialized;
-        gpds_test::test::serialize(serialized, list1, "listorder");
+        gpds_test::serialize(serialized, list1, "listorder");
 
         // Deserialize
         list_order list2;
-        gpds_test::test::deserialize(serialized, list2, "listorder");
+        gpds_test::deserialize(serialized, list2, "listorder");
 
         // Ensure that data is the same
         CHECK_EQ(list1.data, list2.data);

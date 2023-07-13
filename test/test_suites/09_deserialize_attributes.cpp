@@ -94,7 +94,7 @@ TEST_CASE("Read Attributes: Value Attributes")
 {
     // Parse test file
     test_data_9 testData;
-    gpds_test::test::deserialize(FILE_CONTENT, testData, "data");
+    gpds_test::deserialize(FILE_CONTENT, testData, "data");
 
     // Ensure that data is the same
     REQUIRE(testData.d.size() == knownGood.size());

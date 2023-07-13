@@ -120,7 +120,7 @@ TEST_CASE("Read Attributes: Container Attributes")
 {
     // Parse test file
     test_data_10 testData;
-    gpds_test::test::deserialize(FILE_CONTENT, testData, "data");
+    gpds_test::deserialize(FILE_CONTENT, testData, "data");
 
     // Ensure that data is the same
     CHECK_EQ(testData.d.size(), knownGood.size());

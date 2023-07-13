@@ -6,7 +6,8 @@
 
 #include <sstream>
 
-void gpds_test::test::serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode)
+void
+gpds_test::serialize(std::ostream& stream, gpds::serialize& object, const std::string& rootName, enum gpds::serialize::mode mode)
 {
     bool ret = false;
     REQUIRE((mode == gpds::serialize::mode::XML || mode == gpds::serialize::mode::YAML));
@@ -20,7 +21,8 @@ void gpds_test::test::serialize(std::ostream& stream, gpds::serialize& object, c
     REQUIRE(ret);
 }
 
-void gpds_test::test::deserialize(std::istream& stream, gpds::serialize& object, const std::string& root_name, enum gpds::serialize::mode mode)
+void
+gpds_test::deserialize(std::istream& stream, gpds::serialize& object, const std::string& root_name, enum gpds::serialize::mode mode)
 {
     bool ret = false;
     REQUIRE((mode == gpds::serialize::mode::XML || mode == gpds::serialize::mode::YAML));
@@ -34,7 +36,8 @@ void gpds_test::test::deserialize(std::istream& stream, gpds::serialize& object,
     REQUIRE(ret);
 }
 
-void gpds_test::test::deserialize(const std::string& str, gpds::serialize& object, const std::string& root_name, enum gpds::serialize::mode mode)
+void
+gpds_test::deserialize(const std::string& str, gpds::serialize& object, const std::string& root_name, enum gpds::serialize::mode mode)
 {
     std::stringstream stream(str);
     return deserialize(stream, object, root_name, mode);

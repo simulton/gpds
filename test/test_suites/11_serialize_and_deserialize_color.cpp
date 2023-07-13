@@ -12,11 +12,11 @@ TEST_CASE("color class")
 
     // Serialize
     std::stringstream serialized;
-    gpds_test::test::serialize(serialized, red1, "color");
+    gpds_test::serialize(serialized, red1, "color");
 
     // Deserialize
     gpds_test::color red2;
-    gpds_test::test::deserialize(serialized, red2, "color");
+    gpds_test::deserialize(serialized, red2, "color");
 
     // Ensure that data is the same
     CHECK_EQ(red1, red2);

@@ -41,7 +41,7 @@ TEST_SUITE("attributes")
             };
 
             test dut;
-            gpds_test::test::deserialize(xml_str, dut, "data");
+            gpds_test::deserialize(xml_str, dut, "data");
         }
 
         SUBCASE("structural bindings for-loop")
@@ -68,7 +68,7 @@ TEST_SUITE("attributes")
             };
 
             test dut;
-            gpds_test::test::deserialize(xml_str, dut, "data");
+            gpds_test::deserialize(xml_str, dut, "data");
         }
 
     }

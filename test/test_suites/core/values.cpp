@@ -1,7 +1,7 @@
 #include <cstring>
-#include "../test.hpp"
+#include "../../test.hpp"
 
-TEST_SUITE("values")
+TEST_SUITE("core - values")
 {
 
     TEST_CASE("creation")

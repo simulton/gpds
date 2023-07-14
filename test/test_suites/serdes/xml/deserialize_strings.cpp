@@ -1,6 +1,6 @@
 #include <vector>
 #include <sstream>
-#include "../test.hpp"
+#include "../../test.hpp"
 
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -38,32 +38,36 @@ public:
     }
 };
 
-TEST_CASE("Read Datatype: String")
+TEST_SUITE("serdes - xml")
 {
-    // The "known good" data
-    const std::vector<std::string> knownGood = {
-        "Hello World!",
-        "2019-08-09",
-        "1234test",
-        "1.2test",
-        "test1234",
-        "test1.2",
-        "1 + x = 5",
-        "1970-01-01",
-        "04.02.2001",
-        "12/5/18",
-        "2018-1-13",
-        "a",
-        "_under_score_",
-        "+-={}[]/\\!@#$%^&*()_",
-        "\\n\\r\\b"
-    };
 
-    // Parse test file
-    test_data_8 data;
-    gpds_test::deserialize(FILE_CONTENT, data, "data");
+    TEST_CASE("Read Datatype: String")
+    {
+        // The "known good" data
+        const std::vector<std::string> knownGood = {
+            "Hello World!",
+            "2019-08-09",
+            "1234test",
+            "1.2test",
+            "test1234",
+            "test1.2",
+            "1 + x = 5",
+            "1970-01-01",
+            "04.02.2001",
+            "12/5/18",
+            "2018-1-13",
+            "a",
+            "_under_score_",
+            "+-={}[]/\\!@#$%^&*()_",
+            "\\n\\r\\b"
+        };
 
-    // Ensure that data is the same
-    REQUIRE(data.data == knownGood);
+        // Parse test file
+        test_data_8 data;
+        gpds_test::deserialize<gpds::archiver_xml>(FILE_CONTENT, data, "data");
+
+        // Ensure that data is the same
+        CHECK_EQ(data.data, knownGood);
+    }
+
 }
-

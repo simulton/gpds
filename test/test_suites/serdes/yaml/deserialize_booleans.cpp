@@ -1,4 +1,4 @@
-#include "../test.hpp"
+#include "../../test.hpp"
 
 #include <vector>
 #include <sstream>
@@ -28,18 +28,23 @@ public:
     }
 };
 
-TEST_CASE("Read Datatype: Boolean")
+TEST_SUITE("serdes - yaml")
 {
-    // The "known good" data
-    const std::vector<bool> knownGood = {
-        true,
-        false
-    };
 
-    // Parse test file
-    test_data_25 data;
-    gpds_test::deserialize<gpds::archiver_yaml>(FILE_CONTENT, data, "data");
+    TEST_CASE("Read Datatype: Boolean")
+    {
+        // The "known good" data
+        const std::vector<bool> knownGood = {
+            true,
+            false
+        };
 
-    // Ensure that data is the same
-    CHECK_EQ(data.data, knownGood);
+        // Parse test file
+        test_data_25 data;
+        gpds_test::deserialize<gpds::archiver_yaml>(FILE_CONTENT, data, "data");
+
+        // Ensure that data is the same
+        CHECK_EQ(data.data, knownGood);
+    }
+
 }

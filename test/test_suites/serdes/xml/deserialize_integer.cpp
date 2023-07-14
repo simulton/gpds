@@ -1,4 +1,4 @@
-#include "../test.hpp"
+#include "../../test.hpp"
 
 #include <vector>
 
@@ -33,27 +33,31 @@ public:
     }
 };
 
-TEST_CASE("Read Datatype: Integer")
+TEST_SUITE("serdes - xml")
 {
-    // The "known good" data
-    const std::vector<int> knownGood = {
-        -0,
-        0,
-        -1,
-        1,
-        -42,
-        42,
-        -1024,
-        1023,
-        -32768,
-        32767
-    };
 
-    // Parse test file
-    test_data_6 data;
-    gpds_test::deserialize(FILE_CONTENT, data, "data");
+    TEST_CASE("Read Datatype: Integer")
+    {
+        // The "known good" data
+        const std::vector<int> knownGood = {
+            -0,
+            0,
+            -1,
+            1,
+            -42,
+            42,
+            -1024,
+            1023,
+            -32768,
+            32767
+        };
 
-    // Ensure that data is the same
-    REQUIRE(data.data == knownGood);
+        // Parse test file
+        test_data_6 data;
+        gpds_test::deserialize<gpds::archiver_xml>(FILE_CONTENT, data, "data");
+
+        // Ensure that data is the same
+        CHECK_EQ(data.data, knownGood);
+    }
+
 }
-

@@ -1,6 +1,6 @@
-#include "../test.hpp"
+#include "../../test.hpp"
 
-TEST_SUITE("container")
+TEST_SUITE("core - container")
 {
     TEST_CASE("creation")
     {

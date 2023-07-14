@@ -1,4 +1,4 @@
-#include "../test.hpp"
+#include "../../test.hpp"
 
 #include <vector>
 #include <sstream>
@@ -104,14 +104,18 @@ public:
     }
 };
 
-TEST_CASE("Read Attributes: Value Attributes")
+TEST_SUITE("serdes - yaml")
 {
-    // Parse test file
-    test_data_29 testData;
-    gpds_test::deserialize<gpds::archiver_yaml>(FILE_CONTENT, testData, "data");
 
-    // Ensure that data is the same
-    CHECK_EQ(testData.d.size(), knownGood.size());
-    CHECK_EQ(testData.d, knownGood);
+    TEST_CASE("Read Attributes: Value Attributes")
+    {
+        // Parse test file
+        test_data_29 testData;
+        gpds_test::deserialize<gpds::archiver_yaml>(FILE_CONTENT, testData, "data");
+
+        // Ensure that data is the same
+        CHECK_EQ(testData.d.size(), knownGood.size());
+        CHECK_EQ(testData.d, knownGood);
+    }
+
 }
-

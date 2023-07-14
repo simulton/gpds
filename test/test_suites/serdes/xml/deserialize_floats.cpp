@@ -1,4 +1,4 @@
-#include "../test.hpp"
+#include "../../test.hpp"
 
 #include <vector>
 
@@ -27,20 +27,25 @@ public:
     }
 };
 
-TEST_CASE("Read Datatype: Real")
+TEST_SUITE("serdes - xml")
 {
-    // The "known good" data
-    const std::vector<double> knownGood = {
-        0,
-        0,
-        -1,
-        1
-    };
 
-    // Parse test file
-    test_data_7 data;
-    gpds_test::deserialize(FILE_CONTENT, data, "data");
+    TEST_CASE("Read Datatype: Real")
+    {
+        // The "known good" data
+        const std::vector<double> knownGood = {
+            0,
+            0,
+            -1,
+            1
+        };
 
-    // Ensure that data is the same
-    REQUIRE(data.data == knownGood);
+        // Parse test file
+        test_data_7 data;
+        gpds_test::deserialize<gpds::archiver_xml>(FILE_CONTENT, data, "data");
+
+        // Ensure that data is the same
+        CHECK_EQ(data.data, knownGood);
+    }
+
 }

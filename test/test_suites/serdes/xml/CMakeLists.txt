@@ -1,0 +1,13 @@
+target_sources(
+    ${TARGET}
+    PRIVATE
+        deserialize_attributes.cpp
+        deserialize_booleans.cpp
+        deserialize_container_attributes.cpp
+        deserialize_floats.cpp
+        deserialize_integer.cpp
+        deserialize_strings.cpp
+        deserializing_empty_container.cpp
+        load_and_save_file.cpp
+        serialize_and_deserialize_color.cpp
+)

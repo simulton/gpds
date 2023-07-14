@@ -1,25 +1,45 @@
 #include <vector>
 #include <sstream>
-#include "../test.hpp"
+#include "../../test.hpp"
 #include "gpds/serialize.hpp"
 
 static const std::string FILE_CONTENT =
-R"""(
----
-data: 
-  value: 
-    - "-attribute": true
-    - "-attribute": false
-    - "-attribute": 0
-    - "-attribute": 1
-    - "-attribute": 42
-    - "-attribute": "-17"
-    - "-attribute": "-0"
-    - "-attribute": 0
-    - "-attribute": "-1"
-    - "-attribute": 1
-    - "-attribute": "Hello GPDS!"
-)""";
+    "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+    "<data>"
+    "  <value attribute=\"true\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"false\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"0\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"1\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"42\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"-17\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"-0.00\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"0.00\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"-1.00\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"1.00\">"
+    "    <child/>"
+    "  </value>"
+    "  <value attribute=\"Hello GPDS!\">"
+    "    <child/>"
+    "  </value>"
+    "</data>";
 
 using data = std::vector<std::variant<
     bool,
@@ -43,7 +63,7 @@ static const data knownGood = {
     std::string("Hello GPDS!")
 };
 
-class test_data_20 : public gpds::serialize
+class test_data_10 : public gpds::serialize
 {
 public:
     data d;
@@ -96,14 +116,18 @@ public:
     }
 };
 
-TEST_CASE("Read Attributes: Container Attributes")
+TEST_SUITE("serdes - xml")
 {
-    // Parse test file
-    test_data_20 testData;
-    gpds_test::deserialize<gpds::archiver_yaml>(FILE_CONTENT, testData, "data");
 
-    // Ensure that data is the same
-    CHECK_EQ(testData.d.size(), knownGood.size());
-    CHECK_EQ(testData.d, knownGood);
+    TEST_CASE("Read Attributes: Container Attributes")
+    {
+        // Parse test file
+        test_data_10 testData;
+        gpds_test::deserialize<gpds::archiver_xml>(FILE_CONTENT, testData, "data");
+
+        // Ensure that data is the same
+        CHECK_EQ(testData.d.size(), knownGood.size());
+        CHECK_EQ(testData.d, knownGood);
+    }
+
 }
-

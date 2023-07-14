@@ -5,6 +5,8 @@ TEST_SUITE("container")
     struct dut :
         gpds::serialize
     {
+        static constexpr const char* gpds_name = "dut";
+
         struct nested :
             gpds::serialize
         {
@@ -67,7 +69,7 @@ TEST_SUITE("container")
 
         // Deserialize
         dut d;
-        const auto& [success, msg] = d.from_string(data, dut::xml_root_name);
+        const auto& [success, msg] = gpds::from_string<gpds::archiver_xml>(data, d);
         REQUIRE(success);
 
         // Check

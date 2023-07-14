@@ -6,7 +6,7 @@ TEST_SUITE("cdata")
     struct dut :
         gpds::serialize
     {
-        static constexpr const char* xml_root_name = "dut";
+        static constexpr const char* gpds_name = "dut";
 
         std::string one;
         std::string two;
@@ -46,7 +46,7 @@ TEST_SUITE("cdata")
 
             // Serialize
             std::string str;
-            const auto& [success, msg] = d.to_string(str, decltype(d)::xml_root_name);
+            const auto& [success, msg] = gpds::to_string<gpds::archiver_xml>(str, d);
             REQUIRE(success);
 
             // Crude checking of string contents
@@ -71,7 +71,7 @@ TEST_SUITE("cdata")
 
             // Deserialize
             dut<true> d;
-            const auto& [success, msg] = d.from_string(data, decltype(d)::xml_root_name);
+            const auto& [success, msg] = gpds::from_string<gpds::archiver_xml>(data, d);
             //REQUIRE_MESSAGE(success, msg.c_str());
             REQUIRE(success);
 
@@ -94,7 +94,7 @@ TEST_SUITE("cdata")
 
             // Serialize
             std::string str;
-            const auto& [success, msg] = d.to_string(str, decltype(d)::xml_root_name);
+            const auto& [success, msg] = gpds::to_string<gpds::archiver_xml>(str, d);
             REQUIRE(success);
 
             // Crude checking of string contents
@@ -119,7 +119,7 @@ TEST_SUITE("cdata")
 
             // Deserialize
             dut<false> d;
-            const auto& [success, msg] = d.from_string(data, decltype(d)::xml_root_name);
+            const auto& [success, msg] = gpds::from_string<gpds::archiver_xml>(data, d);
             //REQUIRE_MESSAGE(success, msg.c_str());
             REQUIRE(success);
 

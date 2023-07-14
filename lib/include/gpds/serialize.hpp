@@ -66,7 +66,7 @@ namespace gpds
     std::pair<bool, std::string>
     to_string(std::string& str, const Object& obj)
     {
-        return to_string<Archiver, Object>(str, obj, Object::root_name);
+        return to_string<Archiver, Object>(str, obj, Object::gpds_name);
     }
 
     template<typename Archiver, typename Object>
@@ -87,7 +87,7 @@ namespace gpds
     std::pair<bool, std::string>
     from_string(std::string_view str, Object& obj)
     {
-        return from_string<Archiver, Object>(str, obj, Object::root_name);
+        return from_string<Archiver, Object>(str, obj, Object::gpds_name);
     }
 
     template<typename Archiver, typename Object>
@@ -106,9 +106,9 @@ namespace gpds
     template<typename Archiver, typename Object>
     static
     std::pair<bool, std::string>
-    to_string(const std::filesystem::path& path, const Object& obj)
+    to_file(const std::filesystem::path& path, const Object& obj)
     {
-        return to_file<Archiver, Object>(path, obj, Object::root_name);
+        return to_file<Archiver, Object>(path, obj, Object::gpds_name);
     }
 
     template<typename Archiver, typename Object>
@@ -127,8 +127,8 @@ namespace gpds
     template<typename Archiver, typename Object>
     static
     std::pair<bool, std::string>
-    from_string(const std::filesystem::path& path, Object& obj)
+    from_file(const std::filesystem::path& path, Object& obj)
     {
-        return from_file<Archiver, Object>(path, obj, Object::root_name);
+        return from_file<Archiver, Object>(path, obj, Object::gpds_name);
     }
 }

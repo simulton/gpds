@@ -5,7 +5,6 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(SOURCES_PRIVATE
 	src/archiver_xml.cpp
 	src/archiver_yaml.cpp
-	src/container.cpp
 	src/value.cpp
 	src/serialize.cpp
 	3rdparty/tinyxml2/tinyxml2.cpp

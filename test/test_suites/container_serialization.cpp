@@ -33,7 +33,6 @@ TEST_SUITE("container")
             }
         };
 
-        static constexpr const char* xml_root_name = "dut";
         nested n;
 
         [[nodiscard]]

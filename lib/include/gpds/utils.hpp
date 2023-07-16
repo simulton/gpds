@@ -48,6 +48,10 @@ namespace gpds
                 return str;
             }
 
+            // std::size
+            else if constexpr (std::is_same<T, std::size_t>::value)
+                return std::to_string(value);
+
             // std::string
             else if constexpr (std::is_same<T, std::string>::value)
                 return value;
@@ -89,6 +93,9 @@ namespace gpds
             // double
             else if constexpr (std::is_same<T, double>::value)
                 return std::stod(string);
+
+            else if constexpr (std::is_same<T, std::size_t>::value)
+                return std::stoull(string);
 
             // std::string
             else if constexpr (std::is_same<T, std::string>::value)

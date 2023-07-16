@@ -43,6 +43,12 @@ TEST_SUITE("core - values")
             }
         }
 
+        SUBCASE("std::size_t") {
+            gpds::value value(1137);
+
+            CHECK_EQ(value.get<std::size_t>(), 1137);
+        }
+
         SUBCASE("string") {
             SUBCASE("std::string") {
                 gpds::value value(std::string("Hello, World!"));

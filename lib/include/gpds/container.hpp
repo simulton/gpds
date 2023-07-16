@@ -141,6 +141,14 @@ namespace gpds
 
         template<class T>
         [[nodiscard]]
+        T
+        get_value(const std::string& key, T&& default_value) const
+        {
+            return get_value<T>(key).value_or(std::move(default_value));
+        }
+
+        template<class T>
+        [[nodiscard]]
         std::vector<T>
         get_values(const std::string& key) const
         {
@@ -180,6 +188,14 @@ namespace gpds
         get_attribute(std::string&& key) const
         {
             return attributes.get<T>(std::forward<std::string>(key));
+        }
+
+        template<typename T>
+        [[nodiscard]]
+        T
+        get_attribute(std::string&& key, T&& default_value) const
+        {
+            return get_attribute<T>(std::move(key)).value_or(std::move(default_value));
         }
 
         template<typename T>

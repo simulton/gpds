@@ -6,7 +6,7 @@ that can be processed by other XML/YAML processing software
 (or just for the sake of readability).
 
 Consider the following C++ class:
-```
+```cpp
 class Color {
 public:
 	std::string name;
@@ -16,7 +16,7 @@ public:
 };
 ```
 Most serializers would produce the following output when serializing to XML:
-```
+```xml
 <valuelist>
     <value type="string">Black</value>
     <value type="int">0</value>
@@ -26,7 +26,7 @@ Most serializers would produce the following output when serializing to XML:
 ```
 This is not really practical when we want to process the same XML file with other
 software. GPDS on the other hand produces the following output:
-```
+```xml
 <color name="Black" format="rgb">
     <red depth="32">0</red>
     <green depth="32">0</green>

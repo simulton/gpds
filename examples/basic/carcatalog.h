@@ -10,6 +10,8 @@ class car_catalog :
     public gpds::serialize
 {
 public:
+    static constexpr const char* gpds_name = "car-catalog";
+
     std::forward_list<car> cars;
 
     gpds::container to_container() const override

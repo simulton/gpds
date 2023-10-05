@@ -16,12 +16,27 @@ namespace gpds
     class serialize
     {
     public:
+        /**
+         * Destructor.
+         */
         virtual
         ~serialize() = default;
 
-        // Container
-        [[nodiscard]] virtual gpds::container to_container() const = 0;
-        virtual void from_container(const gpds::container& container) = 0;
+        /**
+         * Serialize to container.
+         * @return The container.
+         */
+        [[nodiscard]]
+        virtual
+        gpds::container to_container() const = 0;
+
+        /**
+         * Deserialize from container.
+         * @param container The container.
+         */
+        virtual
+        void
+        from_container(const gpds::container& container) = 0;
     };
 
     template<typename Archiver, typename Object>

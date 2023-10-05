@@ -12,26 +12,40 @@ namespace gpds
      * Archiver base class.
      *
      * An archiver is responsible for (de)serialization.
-     * This class can be derived to implement (de)serialization for various formats such as XML and JSON.
+     * This class can be derived to implement (de)serialization for various formats such as XML, YAML and JSON.
      */
     class archiver
     {
     public:
-        archiver() = default;
-        archiver(const archiver& other) = delete;
-        archiver(archiver&& other) noexcept = delete;
-        virtual ~archiver() = default;
+        /**
+         * Destructor.
+         */
+        virtual
+        ~archiver() = default;
 
-        archiver& operator=(const archiver& rhs) = delete;
-        archiver& operator=(archiver&& rhs) noexcept = delete;
-
+        /**
+         * Serialize a container to a stream.
+         *
+         * @param stream The output stream.
+         * @param container The container to serialize.
+         * @param root_name The name of the root element.
+         * @return Success.
+         */
         virtual
         bool
-        save(std::ostream& stream, const container& container, std::string_view rootName) const = 0;
+        save(std::ostream& stream, const container& container, std::string_view root_name) const = 0;
 
+        /**
+         * Deserialize a container from a stream.
+         *
+         * @param stream The input stream.
+         * @param container The container to deserialize into.
+         * @param root_name The name of the root element.
+         * @return Success.
+         */
         virtual
         bool
-        load(std::istream& stream, container& container, std::string_view rootName) = 0;
+        load(std::istream& stream, container& container, std::string_view root_name) = 0;
     };
 
 }

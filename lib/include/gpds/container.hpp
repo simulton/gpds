@@ -224,7 +224,7 @@ namespace gpds
             std::string name;
             for (auto it = values.cbegin(); it != values.cend(); ++it) {
                 // Store the name so we can compare them
-                if (it == values.begin())
+                if (it == values.cbegin())
                     name = it->first;
 
                 // Must not be a container

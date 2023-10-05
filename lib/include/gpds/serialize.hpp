@@ -120,20 +120,19 @@ namespace gpds
         return from_stream<Archiver, Object>(s, obj, Object::gpds_name);
     }
 
-    // ToDo: No point in accepting std::string_view here!
     template<typename Archiver, typename Object>
     static
     std::pair<bool, std::string>
-    from_string(std::string_view str, Object& obj, const std::string_view root_name)
+    from_string(const std::string& str, Object& obj, const std::string_view root_name)
     {
-        std::istringstream ss{ std::string{str} };
+        std::istringstream ss{ str };
         return from_stream<Archiver, Object>(ss, obj, root_name);
     }
 
     template<typename Archiver, typename Object>
     static
     std::pair<bool, std::string>
-    from_string(std::string_view str, Object& obj)
+    from_string(const std::string& str, Object& obj)
     {
         return from_string<Archiver, Object>(str, obj, Object::gpds_name);
     }

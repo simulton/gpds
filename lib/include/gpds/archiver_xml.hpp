@@ -13,6 +13,9 @@ namespace tinyxml2
 
 namespace gpds
 {
+
+    class container;
+
     /**
      * An archiver to (de)serialize to/from XML.
      */

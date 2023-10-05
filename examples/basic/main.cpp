@@ -54,6 +54,7 @@ int main()
         catalog.cars.push_front(car);
     }
 
+#if 0
     // To/from file XML
     {
         const std::filesystem::path filepath = "catalog.xml";
@@ -109,7 +110,7 @@ int main()
             std::cout << "successfully deserialized 'catalog' from file: " << filepath << std::endl;
         }
     }
-
+#endif
     // To/from string XML
     {
         std::string str;

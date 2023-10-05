@@ -12,6 +12,10 @@ namespace Yaml
 
 namespace gpds
 {
+
+    class container;
+    class value;
+
     /**
      * An archiver to (de)serialize to/from YAML.
      */

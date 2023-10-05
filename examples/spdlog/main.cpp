@@ -15,14 +15,14 @@ int main()
     logger.info("Hello World: {}", 42);
     logger.warn("This is a warning");
     logger.error("Error during processing: {}", "something weird happened");
-    logger.critical("Oh no! We got an exception: {} - {}", 0x48, "generic exception");
+    logger.critical("Oh no! We got an exception: 0x{:x} - {}", 0x48, "generic exception");
 
     // Serialize
     std::stringstream ss;
     {
-        gpds::archiver_xml ar;
-        if (!ar.save(ss, *sink, "log")) {
-            std::cerr << "serializing log failed." << std::endl;
+        const auto& [success, message] = gpds::to_stream<gpds::archiver_xml>(ss, *sink, "log");
+        if (!success) {
+            std::cerr << "serializing log failed: " << message << std::endl;
             return EXIT_FAILURE;
         }
     }
@@ -32,13 +32,11 @@ int main()
     {
         gpds::spdlog_sink_mt loaded_sink;
 
-        gpds::archiver_xml ar;
-        if (!ar.load(ss, loaded_sink, "log")) {
-            std::cerr << "deserializing log failed." << std::endl;
+        auto [success, message] = gpds::from_stream<gpds::archiver_xml>(ss, loaded_sink, "log");
+        if (!success) {
+            std::cerr << "deserializing log failed: " << message << std::endl;
             return EXIT_FAILURE;
         }
-
-        ar.save(std::cout, loaded_sink, "log_deserialized");
     }
 
     return EXIT_SUCCESS;

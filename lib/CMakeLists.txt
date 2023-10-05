@@ -6,7 +6,6 @@ set(SOURCES_PRIVATE
 	src/archiver_xml.cpp
 	src/archiver_yaml.cpp
 	src/value.cpp
-	src/serialize.cpp
 	3rdparty/tinyxml2/tinyxml2.cpp
 	3rdparty/miniyaml/yaml/yaml.cpp
 )
@@ -46,7 +45,7 @@ function(setup_target_common target)
 	target_compile_features(
 		${target}
 		PUBLIC
-			cxx_std_17
+			cxx_std_20
 	)
 
 	target_sources(

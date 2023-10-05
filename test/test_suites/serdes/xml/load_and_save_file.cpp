@@ -16,16 +16,17 @@ TEST_SUITE("serdes - xml")
         std::filesystem::path path("test_18.xml");
 
         // Make sure the file doesn't exist
-        if (std::filesystem::exists(path)) {
+        if (std::filesystem::exists(path))
             REQUIRE_MESSAGE(std::filesystem::remove(path), "could not remove file");
-        }
 
         // Save
-        REQUIRE(ar.save(path, container, "data"));
+        auto ret = gpds::to_file<gpds::archiver_xml>(path, container, "data");
+        REQUIRE_MESSAGE(ret.first, ret.second);
 
         // Load
         gpds::container newContainer;
-        REQUIRE(ar.load(path, newContainer, "data"));
+        ret = gpds::from_file<gpds::archiver_xml>(path, newContainer, "data");
+        REQUIRE_MESSAGE(ret.first, ret.second);
 
         // Check that the value is correct
         auto brandOpt = newContainer.get_value<std::string>("brand");
@@ -48,7 +49,8 @@ TEST_SUITE("serdes - xml")
 
         // Load and check that it returns false
         gpds::container container;
-        CHECK_FALSE(ar.load(path, container, "data"));
+        const auto ret = gpds::from_file<gpds::archiver_xml>(path, container, "data");
+        CHECK_FALSE_MESSAGE(ret.first, ret.second);
     }
 
     TEST_CASE("Serializing to an invalid file path")
@@ -60,7 +62,8 @@ TEST_SUITE("serdes - xml")
         // Load and make sure it returns false
         gpds::container container;
         container.add_attribute("height", "123px");
-        CHECK_FALSE(ar.save(path, container, "div"));
+        const auto ret = gpds::to_file<gpds::archiver_xml>(path, container, "div");
+        CHECK_FALSE_MESSAGE(ret.first, ret.second);
     }
 
 }

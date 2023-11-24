@@ -16,6 +16,12 @@ TEST_SUITE("core - values")
             REQUIRE(str == "10");
         }
 
+        SUBCASE("converting a float to a string") {
+            float value = 1.25f;
+            std::string str = gpds::value_to_string(value);
+            REQUIRE(str == "1.25");
+        }
+
         SUBCASE("converting a double to a string") {
             double value = 1.25;
             std::string str = gpds::value_to_string(value);
@@ -62,6 +68,20 @@ TEST_SUITE("core - values")
             auto value = gpds::string_to_value<int>(str);
             REQUIRE(value.has_value());
             REQUIRE(value.value() == -1234);
+        }
+
+        SUBCASE("converting a string to a float") {
+            std::string str = "7.9433355";
+            auto value = gpds::string_to_value<float>(str);
+            REQUIRE(value.has_value());
+            REQUIRE(value.value() == doctest::Approx(7.9433355));
+        }
+
+        SUBCASE("converting a string containing a negative decimal to a float") {
+            std::string str = "-82.7777779";
+            auto value = gpds::string_to_value<float>(str);
+            REQUIRE(value.has_value());
+            REQUIRE(value.value() == doctest::Approx(-82.7777779f));
         }
 
         SUBCASE("converting a string to a double") {

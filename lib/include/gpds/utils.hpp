@@ -41,6 +41,14 @@ namespace gpds
             else if constexpr (std::is_same<T, int>::value)
                 return std::to_string(value);
 
+            // float
+            else if constexpr (std::is_same<T, float>::value) {
+                std::string str = std::to_string(value);
+                // Remove trailing zeros
+                str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+                return str;
+            }
+
             // double
             else if constexpr (std::is_same<T, double>::value) {
                 std::string str = std::to_string(value);
@@ -49,7 +57,7 @@ namespace gpds
                 return str;
             }
 
-            // std::size
+            // std::size_t
             else if constexpr (std::is_same<T, std::size_t>::value)
                 return std::to_string(value);
 
@@ -91,10 +99,15 @@ namespace gpds
             else if constexpr (std::is_same<T, int>::value)
                 return std::stoi(string);
 
+            // float
+            else if constexpr (std::is_same<T, float>::value)
+                return std::stof(string);
+
             // double
             else if constexpr (std::is_same<T, double>::value)
                 return std::stod(string);
 
+            // std::size_t
             else if constexpr (std::is_same<T, std::size_t>::value)
                 return std::stoull(string);
 

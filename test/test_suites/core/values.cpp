@@ -22,24 +22,19 @@ TEST_SUITE("core - values")
             }
         }
 
-        SUBCASE("floating point") {
-            // ToDo
-            /*
-            SUBCASE ("float") {
-                gpds::value value(13.2f);
+        SUBCASE ("float") {
+            gpds::value value(13.2f);
 
-                SUBCASE("retrieving floating-point from value") {
-                    REQUIRE(value.get<float>().value_or(0.0f) == doctest::Approx(13.2f));
-                }
+            SUBCASE("retrieving floating-point from value") {
+                REQUIRE(value.get<float>().value_or(0.0f) == doctest::Approx(13.2f));
             }
-            */
+        }
 
-            SUBCASE("double") {
-                gpds::value value(13.2);
+        SUBCASE("double") {
+            gpds::value value(13.2);
 
-                SUBCASE("retrieving floating-point from value") {
-                    CHECK_EQ(value.get<double>().value_or(0.0), doctest::Approx(13.2));
-                }
+            SUBCASE("retrieving floating-point from value") {
+                CHECK_EQ(value.get<double>().value_or(0.0), doctest::Approx(13.2));
             }
         }
 

@@ -2,107 +2,122 @@
 
 TEST_SUITE("core - values")
 {
-    TEST_CASE("values can be converted to strings")
+    TEST_CASE("to string")
     {
-        SUBCASE("converting a boolean to a string") {
+        SUBCASE("boolean")
+        {
             bool value = true;
             std::string str = gpds::value_to_string(value);
-            REQUIRE(str == "true");
+            CHECK_EQ(str, "true");
         }
 
-        SUBCASE("converting an integer to a string") {
+        SUBCASE("int")
+        {
             int value = 10;
             std::string str = gpds::value_to_string(value);
-            REQUIRE(str == "10");
+            CHECK_EQ(str, "10");
         }
 
-        SUBCASE("converting a float to a string") {
+        SUBCASE("float")
+        {
             float value = 1.25f;
             std::string str = gpds::value_to_string(value);
-            REQUIRE(str == "1.25");
+            CHECK_EQ(str, "1.25");
         }
 
-        SUBCASE("converting a double to a string") {
+        SUBCASE("double")
+        {
             double value = 1.25;
             std::string str = gpds::value_to_string(value);
-            REQUIRE(str == "1.25");
+            CHECK_EQ(str, "1.25");
         }
 
-        SUBCASE("converting a string to a string") {
+        SUBCASE("string")
+        {
             std::string value = "F82GA3B";
             std::string str = gpds::value_to_string(value);
-            REQUIRE(str == "F82GA3B");
+            CHECK_EQ(str, "F82GA3B");
         }
 
-        SUBCASE("converting a c-string to a string") {
+        SUBCASE("c-string")
+        {
             const char* value = "E2FEB55";
             std::string str = gpds::value_to_string(value);
-            REQUIRE(str == "E2FEB55");
+            CHECK_EQ(str, "E2FEB55");
         }
 
-        SUBCASE("converting an invalid type to a string") {
+        SUBCASE("invalid")
+        {
             std::vector<std::string> vec;
             std::string str = gpds::value_to_string(vec);
-            REQUIRE(str.empty());
+            CHECK(str.empty());
         }
     }
 
-    TEST_CASE("strings can be converted back into values")
+    TEST_CASE("from string")
     {
-        SUBCASE("converting a string to a boolean") {
+        SUBCASE("boolean")
+        {
             std::string str = "false";
             auto value = gpds::string_to_value<bool>(str);
             REQUIRE(value.has_value());
-            REQUIRE(value.value() == false);
+            CHECK_EQ(value.value(), false);
         }
 
-        SUBCASE("converting a string to a integer") {
+        SUBCASE("integer (positive)")
+        {
             std::string str = "12345";
             auto value = gpds::string_to_value<int>(str);
             REQUIRE(value.has_value());
-            REQUIRE(value.value() == 12345);
+            CHECK_EQ(value.value(), 12345);
         }
 
-        SUBCASE("converting a string containing a negative number to an integer") {
+        SUBCASE("integer (negative)")
+        {
             std::string str = "-1234";
             auto value = gpds::string_to_value<int>(str);
             REQUIRE(value.has_value());
-            REQUIRE(value.value() == -1234);
+            CHECK_EQ(value.value(), -1234);
         }
 
-        SUBCASE("converting a string to a float") {
+        SUBCASE("float (positive)")
+        {
             std::string str = "7.9433355";
             auto value = gpds::string_to_value<float>(str);
             REQUIRE(value.has_value());
-            REQUIRE(value.value() == doctest::Approx(7.9433355));
+            CHECK_EQ(value.value(), doctest::Approx(7.9433355));
         }
 
-        SUBCASE("converting a string containing a negative decimal to a float") {
+        SUBCASE("float (negative)")
+        {
             std::string str = "-82.7777779";
             auto value = gpds::string_to_value<float>(str);
             REQUIRE(value.has_value());
-            REQUIRE(value.value() == doctest::Approx(-82.7777779f));
+            CHECK_EQ(value.value(), doctest::Approx(-82.7777779f));
         }
 
-        SUBCASE("converting a string to a double") {
+        SUBCASE("double (positive)")
+        {
             std::string str = "1.33333333";
             auto value = gpds::string_to_value<double>(str);
             REQUIRE(value.has_value());
-            REQUIRE(value.value() == doctest::Approx(1.33333333));
+            CHECK_EQ(value.value(), doctest::Approx(1.33333333));
         }
 
-        SUBCASE("converting a string containing a negative decimal to a double") {
+        SUBCASE("double (negative)")
+        {
             std::string str = "-1.33333333";
             auto value = gpds::string_to_value<double>(str);
             REQUIRE(value.has_value());
-            REQUIRE(value.value() == doctest::Approx(-1.33333333));
+            CHECK_EQ(value.value(), doctest::Approx(-1.33333333));
         }
 
-        SUBCASE("converting a string to a string") {
+        SUBCASE("string")
+        {
             std::string str = "R8BB45C";
             auto value = gpds::string_to_value<std::string>(str);
             REQUIRE(value.has_value());
-            REQUIRE(value.value() == str);
+            CHECK_EQ(value.value(), str);
         }
     }
 }

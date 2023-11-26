@@ -195,7 +195,7 @@ namespace gpds
         std::optional<T>
         get() const
         {
-            if constexpr (std::is_same_v<container*, T>)
+            if constexpr (std::is_same_v<container*, T> || std::is_same_v<const container*, T>)
                 if (std::holds_alternative<container*>(m_value))
                     return std::get<container*>(m_value);
                 else

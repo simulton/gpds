@@ -32,17 +32,19 @@ namespace gpds
     std::string
     value_to_string(const T& value) noexcept
     {
+        using Td = std::decay_t<T>;
+
         try {
             // Bool
-            if constexpr (std::is_same<T, bool>::value)
+            if constexpr (std::is_same<Td, bool>::value)
                 return value ? "true" : "false";
 
             // int
-            else if constexpr (std::is_same<T, int>::value)
+            else if constexpr (std::is_same<Td, int>::value)
                 return std::to_string(value);
 
             // float
-            else if constexpr (std::is_same<T, float>::value) {
+            else if constexpr (std::is_same<Td, float>::value) {
                 std::string str = std::to_string(value);
                 // Remove trailing zeros
                 str.erase(str.find_last_not_of('0') + 1, std::string::npos);
@@ -50,7 +52,7 @@ namespace gpds
             }
 
             // double
-            else if constexpr (std::is_same<T, double>::value) {
+            else if constexpr (std::is_same<Td, double>::value) {
                 std::string str = std::to_string(value);
                 // Remove trailing zeros
                 str.erase(str.find_last_not_of('0') + 1, std::string::npos);
@@ -58,23 +60,23 @@ namespace gpds
             }
 
             // std::size_t
-            else if constexpr (std::is_same<T, std::size_t>::value)
+            else if constexpr (std::is_same<Td, std::size_t>::value)
                 return std::to_string(value);
 
             // std::string
-            else if constexpr (std::is_same<T, std::string>::value)
+            else if constexpr (std::is_same<Td, std::string>::value)
                 return value;
 
             // std::string_view
-            else if constexpr (std::is_same<T, std::string_view>::value)
+            else if constexpr (std::is_same<Td, std::string_view>::value)
                 return std::string{value};
 
             // C-string
-            else if constexpr (is_c_str<T>::value)
+            else if constexpr (is_c_str<Td>::value)
                 return std::string(value);
 
             // std::filesystem::path
-            else if constexpr (std::is_same<T, std::filesystem::path>::value)
+            else if constexpr (std::is_same<Td, std::filesystem::path>::value)
                 return value.string();
         }
         catch (...) {
@@ -90,33 +92,35 @@ namespace gpds
     std::optional<T>
     string_to_value(const std::string& string) noexcept
     {
+        using Td = std::decay_t<T>;
+
         try {
             // bool
-            if constexpr (std::is_same<T, bool>::value)
+            if constexpr (std::is_same<Td, bool>::value)
                 return (string == "true");
 
             // int
-            else if constexpr (std::is_same<T, int>::value)
+            else if constexpr (std::is_same<Td, int>::value)
                 return std::stoi(string);
 
             // float
-            else if constexpr (std::is_same<T, float>::value)
+            else if constexpr (std::is_same<Td, float>::value)
                 return std::stof(string);
 
             // double
-            else if constexpr (std::is_same<T, double>::value)
+            else if constexpr (std::is_same<Td, double>::value)
                 return std::stod(string);
 
             // std::size_t
-            else if constexpr (std::is_same<T, std::size_t>::value)
+            else if constexpr (std::is_same<Td, std::size_t>::value)
                 return std::stoull(string);
 
             // std::string
-            else if constexpr (std::is_same<T, std::string>::value)
+            else if constexpr (std::is_same<Td, std::string>::value)
                 return string;
 
             // std::filesystem::path
-            else if constexpr (std::is_same<T, std::filesystem::path>::value)
+            else if constexpr (std::is_same<Td, std::filesystem::path>::value)
                 return std::filesystem::path{ string };
         }
         catch (...) {

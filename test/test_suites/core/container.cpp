@@ -74,4 +74,38 @@ TEST_SUITE("core - container")
         CHECK_EQ(values.at(1).get_attribute<std::string>("type").value_or(""), "long");
         CHECK_EQ(values.at(1).get<std::string>(), desc_long);
     }
+
+    TEST_CASE("type decay")
+    {
+        // Prepare dut
+        gpds::container c;
+        {
+            c.add_value<int>("a", 42);
+            c.add_value<double>("b", 4.2);
+
+            gpds::container nc;
+            nc.add_value<std::string>("c", "Hello GPDS!");
+            c.add_value("nested", std::move(nc));
+        }
+
+        SUBCASE("normal")
+        {
+            CHECK_EQ(c.get_value<int>("a", 0), 42);
+            CHECK_EQ(c.get_value<double>("b", 0.0), 4.2);
+
+            const gpds::container* nc = c.get_value<gpds::container*>("nested", nullptr);
+            REQUIRE(nc);
+            CHECK_EQ(nc->get_value<std::string>("c", ""), "Hello GPDS!");
+        }
+
+        SUBCASE("const")
+        {
+            CHECK_EQ(c.get_value<const int>("a", 0), 42);
+            CHECK_EQ(c.get_value<const double>("b", 0.0), 4.2);
+
+            const gpds::container* nc = c.get_value<const gpds::container*>("nested", nullptr);
+            REQUIRE(nc);
+            CHECK_EQ(nc->get_value<const std::string>("c", ""), "Hello GPDS!");
+        }
+    }
 }

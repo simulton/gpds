@@ -148,4 +148,29 @@ TEST_SUITE("core - values")
         CHECK_EQ(str, "default");
     }
 
+    TEST_CASE("type decay")
+    {
+        gpds::value v1;
+        v1.set<int>(42);
+
+        gpds::value v2;
+        {
+            gpds::container c;
+            c.add_value<bool>("test", true);
+            v2.set(c);
+        }
+
+        SUBCASE("normal")
+        {
+            CHECK_EQ(v1.get<int>(), 42);
+            CHECK(v2.get<gpds::container*>());
+        }
+
+        SUBCASE("const")
+        {
+            CHECK_EQ(v1.get<const int>(), 42);
+            CHECK(v2.get<const gpds::container*>());
+        }
+    }
+
 }

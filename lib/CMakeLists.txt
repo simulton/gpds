@@ -37,8 +37,8 @@ endif()
 
 # Define targets
 set(NAME gpds)
-set(TARGET-STATIC ${NAME}-static)
-set(TARGET-SHARED ${NAME}-shared)
+set(TARGET_STATIC ${NAME}-static)
+set(TARGET_SHARED ${NAME}-shared)
 
 # This function sets stuff up common to all targets
 function(setup_target_common target)
@@ -78,16 +78,16 @@ endfunction()
 # Shared library                                                               #
 ################################################################################
 
-add_library(${TARGET-SHARED} SHARED)
-setup_target_common(${TARGET-SHARED})
+add_library(${TARGET_SHARED} SHARED)
+setup_target_common(${TARGET_SHARED})
 
 
 ################################################################################
 # Static library                                                               #
 ################################################################################
 
-add_library(${TARGET-STATIC} STATIC)
-setup_target_common(${TARGET-STATIC})
+add_library(${TARGET_STATIC} STATIC)
+setup_target_common(${TARGET_STATIC})
 
 
 ################################################################################
@@ -108,8 +108,8 @@ install(
 # Targets
 install(
 	TARGETS
-		${TARGET-STATIC}
-		${TARGET-SHARED}
+		${TARGET_STATIC}
+		${TARGET_SHARED}
 	EXPORT gpds-targets
 	LIBRARY
 		DESTINATION ${CMAKE_INSTALL_LIBDIR}

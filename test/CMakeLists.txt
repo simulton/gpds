@@ -20,7 +20,7 @@ target_include_directories(
 target_link_libraries(
 	${TARGET}
 	PRIVATE
-		gpds-static
+		${GPDS_TARGET_INTERNAL}
 )
 
 ###

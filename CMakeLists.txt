@@ -8,8 +8,12 @@ project(gpds
 )
 
 # Lets have some options! \o/
+set(OPTION_BUILD_SHARED_DEFAULT ON)
+if (MSVC)
+	set(OPTION_BUILD_SHARED_DEFAULT OFF)
+endif()
 option(GPDS_BUILD_STATIC   "Build static library." ON)
-option(GPDS_BUILD_SHARED   "Build shared library." ON)
+option(GPDS_BUILD_SHARED   "Build shared library." ${OPTION_BUILD_SHARED_DEFAULT})
 option(GPDS_BUILD_TESTS    "Build the unit tests." OFF)
 option(GPDS_BUILD_EXAMPLES "Build the examples." OFF)
 option(GPDS_FEATURE_SPDLOG "Enable spdlog sink feature." ON)
@@ -17,10 +21,10 @@ option(GPDS_FEATURE_SPDLOG "Enable spdlog sink feature." ON)
 # User settings
 set(CMAKE_DEBUG_POSTFIX d)
 
-# On Windows, only allow enabling either static or shared libs but not both
-if (WIN32)
+# When using MSVC, only allow enabling either static or shared libs but not both
+if (MSVC)
 	if (GPDS_BUILD_STATIC AND GPDS_BUILD_SHARED)
-		message(FATAL "GPDS: Can only build either the static or the shared library but not both at the same time.")
+		message(FATAL_ERROR "GPDS: Can only build either the static or the shared library but not both at the same time when using MSVC.")
 	endif()
 endif()
 

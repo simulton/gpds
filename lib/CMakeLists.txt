@@ -77,16 +77,20 @@ endfunction()
 # Shared library                                                               #
 ################################################################################
 
-add_library(${TARGET_SHARED} SHARED)
-setup_target_common(${TARGET_SHARED})
+if (GPDS_BUILD_SHARED)
+	add_library(${TARGET_SHARED} SHARED)
+	setup_target_common(${TARGET_SHARED})
+endif()
 
 
 ################################################################################
 # Static library                                                               #
 ################################################################################
 
-add_library(${TARGET_STATIC} STATIC)
-setup_target_common(${TARGET_STATIC})
+if (GPDS_BUILD_STATIC)
+	add_library(${TARGET_STATIC} STATIC)
+	setup_target_common(${TARGET_STATIC})
+endif()
 
 
 ################################################################################
@@ -105,10 +109,15 @@ install(
 )
 
 # Targets
+if (GPDS_BUILD_STATIC)
+	list(APPEND INSTALL_TARGETS_LIST ${TARGET_STATIC})
+endif()
+if (GPDS_BUILD_SHARED)
+	list(APPEND INSTALL_TARGETS_LIST ${TARGET_SHARED})
+endif()
 install(
 	TARGETS
-		${TARGET_STATIC}
-		${TARGET_SHARED}
+		${INSTALL_TARGETS_LIST}
 	EXPORT gpds-targets
 	LIBRARY
 		DESTINATION ${CMAKE_INSTALL_LIBDIR}

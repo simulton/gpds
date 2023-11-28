@@ -8,12 +8,27 @@ project(gpds
 )
 
 # Lets have some options! \o/
+option(GPDS_BUILD_STATIC   "Build static library." ON)
+option(GPDS_BUILD_SHARED   "Build shared library." ON)
 option(GPDS_BUILD_TESTS    "Build the unit tests." OFF)
 option(GPDS_BUILD_EXAMPLES "Build the examples." OFF)
 option(GPDS_FEATURE_SPDLOG "Enable spdlog sink feature." ON)
 
 # User settings
 set(CMAKE_DEBUG_POSTFIX d)
+
+# On Windows, only allow enabling either static or shared libs but not both
+if (WIN32)
+	if (GPDS_BUILD_STATIC AND GPDS_BUILD_SHARED)
+		message(FATAL "GPDS: Can only build either the static or the shared library but not both at the same time.")
+	endif()
+endif()
+
+# Library target for internal usage
+set(GPDS_TARGET_INTERNAL gpds-static)
+if (NOT GPDS_BUILD_STATIC)
+	set(GPDS_TARGET_INTERNAL gpds-shared)
+endif()
 
 # Build the actual library
 add_subdirectory(lib)
@@ -39,6 +54,8 @@ message(STATUS "GPDS configuration:")
 message(STATUS "  version       : " ${PROJECT_VERSION})
 message(STATUS "")
 message(STATUS "  build:")
+message(STATUS "    static      : " ${GPDS_BUILD_STATIC})
+message(STATUS "    shared      : " ${GPDS_BUILD_SHARED})
 message(STATUS "    examples    : " ${GPDS_BUILD_EXAMPLES})
 message(STATUS "    tests       : " ${GPDS_BUILD_TESTS})
 message(STATUS "")

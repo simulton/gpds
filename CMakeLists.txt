@@ -16,7 +16,7 @@ option(GPDS_BUILD_STATIC   "Build static library." ON)
 option(GPDS_BUILD_SHARED   "Build shared library." ${OPTION_BUILD_SHARED_DEFAULT})
 option(GPDS_BUILD_TESTS    "Build the unit tests." OFF)
 option(GPDS_BUILD_EXAMPLES "Build the examples." OFF)
-option(GPDS_FEATURE_SPDLOG "Enable spdlog sink feature." ON)
+option(GPDS_FEATURE_SPDLOG "Enable spdlog sink feature." OFF)
 
 # User settings
 set(CMAKE_DEBUG_POSTFIX d)

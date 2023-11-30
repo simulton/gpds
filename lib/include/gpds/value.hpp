@@ -184,8 +184,6 @@ namespace gpds
         /**
          * Get the value.
          *
-         * @note This will throw if the contained value does not match T.
-         *
          * @tparam T The type.
          * @return The value.
          */
@@ -195,14 +193,17 @@ namespace gpds
         std::optional<T>
         get() const
         {
-            if constexpr (std::is_same_v<container*, T> || std::is_same_v<const container*, T>)
+            if constexpr (std::is_same_v<container*, T> || std::is_same_v<const container*, T>) {
                 if (std::holds_alternative<container*>(m_value))
                     return std::get<container*>(m_value);
-                else
-                    return std::nullopt;
+            }
 
-            else
-                return string_to_value<T>(std::get<std::string>(m_value));
+            else {
+                if (std::holds_alternative<std::string>(m_value))
+                    return string_to_value<T>(std::get<std::string>(m_value));
+            }
+
+            return std::nullopt;
         }
 
         /**

@@ -69,6 +69,7 @@ function(setup_target_common target)
 			OUTPUT_NAME "gpds"
 			ARCHIVE_OUTPUT_NAME "gpds"
 			VERSION ${PROJECT_VERSION}
+			POSITION_INDEPENDENT_CODE 1
 	)
 endfunction()
 

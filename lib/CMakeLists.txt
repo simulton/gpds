@@ -6,13 +6,11 @@ set(SOURCES_PRIVATE
 	src/archiver_xml.cpp
 	src/archiver_yaml.cpp
 	src/value.cpp
-	3rdparty/tinyxml2/tinyxml2.cpp
 	3rdparty/miniyaml/yaml/yaml.cpp
 )
 
 # List of private header files
 set(HEADERS_PRIVATE
-	3rdparty/tinyxml2/tinyxml2.h
 	3rdparty/miniyaml/yaml/yaml.hpp
 )
 
@@ -28,7 +26,22 @@ set(HEADERS_PUBLIC
 	include/gpds/value.hpp
 )
 
-# spdlog sink
+# Dependency (tinyxml2)
+if (GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE)
+	find_package(
+		tinyxml2
+		REQUIRED
+	)
+else()
+	list(APPEND HEADERS_PRIVATE
+		3rdparty/tinyxml2/tinyxml2.h
+	)
+	list(APPEND SOURCES_PRIVATE
+		3rdparty/tinyxml2/tinyxml2.cpp
+	)
+endif()
+
+# Feature (spdlog sink)
 if (GPDS_FEATURE_SPDLOG)
 	list(APPEND HEADERS_PUBLIC
 		include/gpds/spdlog_sink.hpp
@@ -61,6 +74,12 @@ function(setup_target_common target)
 			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
 		PRIVATE
 			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/gpds>
+	)
+
+	target_link_libraries(
+		${target}
+		PRIVATE
+			$<$<BOOL:${GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE}>:tinyxml2::tinyxml2>
 	)
 
 	set_target_properties(

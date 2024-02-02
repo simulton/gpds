@@ -27,11 +27,15 @@ set(HEADERS_PUBLIC
 )
 
 # Dependency (tinyxml2)
-if (GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE)
-	find_package(
-		tinyxml2
-		REQUIRED
-	)
+if (GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE OR GPDS_DEPENDENCY_TINYXML2_PKGCONFIG)
+	if(GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE)
+		find_package(tinyxml2 REQUIRED)
+		set(TINYXML2_TARGET tinyxml2::tinyxml2)
+	else()
+		find_package(PkgConfig REQUIRED)
+		pkg_check_modules(tinyxml2 REQUIRED IMPORTED_TARGET tinyxml2)
+		set(TINYXML2_TARGET PkgConfig::tinyxml2)
+	endif()
 else()
 	list(APPEND HEADERS_PRIVATE
 		3rdparty/tinyxml2/tinyxml2.h
@@ -79,7 +83,7 @@ function(setup_target_common target)
 	target_link_libraries(
 		${target}
 		PRIVATE
-			$<$<BOOL:${GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE}>:tinyxml2::tinyxml2>
+			$<$<OR:$<BOOL:${GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE}>,$<BOOL:${GPDS_DEPENDENCY_TINYXML2_PKGCONFIG}>>:${TINYXML2_TARGET}>
 	)
 
 	set_target_properties(
@@ -160,15 +164,15 @@ write_basic_package_version_file(
 )
 install(
 	FILES
-		gpds-config.cmake
+		"${CMAKE_CURRENT_BINARY_DIR}/gpds/gpds-config.cmake"
 		"${CMAKE_CURRENT_BINARY_DIR}/gpds/gpds-config-version.cmake"
-		DESTINATION ${ConfigPackageLocation}
+	DESTINATION ${ConfigPackageLocation}
 )
 
 # Package configuration
-configure_file(gpds-config.cmake
+configure_file(gpds-config.cmake.in
 	"${CMAKE_CURRENT_BINARY_DIR}/gpds/gpds-config.cmake"
-	COPYONLY
+	@ONLY
 )
 
 # Package export targets

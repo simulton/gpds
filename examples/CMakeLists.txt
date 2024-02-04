@@ -1,5 +1,10 @@
+find_package(
+    spdlog
+    QUIET
+)
+
 add_subdirectory(basic)
 
-if (GPDS_FEATURE_SPDLOG)
+if (spdlog_FOUND)
     add_subdirectory(spdlog)
 endif()

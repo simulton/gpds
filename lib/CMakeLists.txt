@@ -22,6 +22,7 @@ set(HEADERS_PUBLIC
 	include/gpds/attributes.hpp
 	include/gpds/container.hpp
 	include/gpds/serialize.hpp
+	include/gpds/spdlog_sink.hpp
 	include/gpds/utils.hpp
 	include/gpds/value.hpp
 )
@@ -42,13 +43,6 @@ else()
 	)
 	list(APPEND SOURCES_PRIVATE
 		3rdparty/tinyxml2/tinyxml2.cpp
-	)
-endif()
-
-# Feature (spdlog sink)
-if (GPDS_FEATURE_SPDLOG)
-	list(APPEND HEADERS_PUBLIC
-		include/gpds/spdlog_sink.hpp
 	)
 endif()
 

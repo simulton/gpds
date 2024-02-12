@@ -53,6 +53,9 @@ set(TARGET_SHARED ${NAME}-shared)
 
 # This function sets stuff up common to all targets
 function(setup_target_common target)
+	# Add alias to support CMake superbuild pattern
+	add_library(gpds::${target} ALIAS ${target})
+
 	target_compile_features(
 		${target}
 		PUBLIC

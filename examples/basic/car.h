@@ -15,7 +15,8 @@ public:
     int year_of_construction;
     class color color;
 
-    gpds::container to_container() const override
+    gpds::container
+    to_container() const override
     {
         gpds::container c;
 
@@ -27,7 +28,8 @@ public:
         return c;
     }
 
-    void from_container(const gpds::container& c) override
+    void
+    from_container(const gpds::container& c) override
     {
         manufacturer = c.get_value<std::string>("manufacturer").value_or("");
         model = c.get_value<std::string>("model").value_or("");

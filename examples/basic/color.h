@@ -13,7 +13,8 @@ public:
     int green;
     int blue;
 
-    gpds::container to_container() const override
+    gpds::container
+    to_container() const override
     {
         gpds::container c;
 
@@ -27,7 +28,8 @@ public:
         return c;
     }
 
-    void from_container(const gpds::container& c) override
+    void
+    from_container(const gpds::container& c) override
     {
         // Retrieve format
         const std::string& formatString = c.get_attribute<std::string>("format").value_or("n/a");

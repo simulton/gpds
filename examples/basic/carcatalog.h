@@ -14,7 +14,8 @@ public:
 
     std::forward_list<car> cars;
 
-    gpds::container to_container() const override
+    gpds::container
+    to_container() const override
     {
         gpds::container c;
 
@@ -25,7 +26,8 @@ public:
         return c;
     }
 
-    void from_container(const gpds::container& c) override
+    void
+    from_container(const gpds::container& c) override
     {
         for (const gpds::container* carContainer : c.get_values<gpds::container*>("car")) {
             car car;

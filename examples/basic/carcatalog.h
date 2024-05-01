@@ -27,11 +27,7 @@ public:
     void
     from_container(const gpds::container& c) override
     {
-        for (const gpds::container* carContainer : c.get_values<gpds::container*>("car")) {
-            car car;
-            car.from_container(*carContainer);
-            cars.push_back(car);
-        }
+        cars = c.get_values<car>();
     }
 };
 

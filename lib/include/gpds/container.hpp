@@ -204,6 +204,28 @@ namespace gpds
             return values;
         }
 
+        template<Deserializable Object>
+        [[nodiscard]]
+        std::vector<Object>
+        get_values() const
+        {
+            const auto& values = get_values<gpds::container*>(Object::gpds_name);
+            std::vector<Object> ret;
+            ret.reserve(std::size(values));
+
+            for (const gpds::container* c : values) {
+                if (!c)
+                    continue;
+
+                Object obj;
+                obj.from_container(*c);
+
+                ret.push_back(std::move(obj));
+            }
+
+            return ret;
+        }
+
         template<typename T>
         container&
         add_attribute(const std::string& key, const T& value)

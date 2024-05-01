@@ -17,6 +17,15 @@ namespace test
         int b = 0;
 
         color() = default;
+
+        color(std::string&& _name, int _r, int _g, int _b) :
+            name{ std::move( _name ) },
+            r{ _r },
+            g{ _g },
+            b { _b }
+        {
+        }
+
         color(const color& other) = default;
         color(color&& other) = default;
 

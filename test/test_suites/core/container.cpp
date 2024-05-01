@@ -132,4 +132,29 @@ TEST_SUITE("core - container")
             CHECK_EQ(c1, *c2);
         }
     }
+
+    TEST_CASE("add_values() / get_values(): Serializable Object")
+    {
+        SUBCASE("#1")
+        {
+            std::vector<test::color> c1;
+            c1.emplace_back("red", 255, 0, 0);
+            c1.emplace_back("green", 0, 255, 0);
+            c1.emplace_back("blue", 0, 0, 255);
+
+            // Add
+            gpds::container c;
+            c.add_values(c1);
+
+            // Get
+            auto c2 = c.get_values<test::color>();
+
+            // CHECK
+            CHECK_EQ(std::size(c1), std::size(c2));
+            REQUIRE_EQ(std::size(c2), 3);
+            CHECK_EQ(c2[0], test::color("red", 255, 0, 0));
+            CHECK_EQ(c2[1], test::color("green", 0, 255, 0));
+            CHECK_EQ(c2[2], test::color("blue", 0, 0, 255));
+        }
+    }
 }

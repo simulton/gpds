@@ -23,7 +23,7 @@ int main()
         color.green = 0;
         color.blue = 0;
         car.color = color;
-        catalog.cars.push_front(car);
+        catalog.cars.push_back(car);
     }
 
     // Create an Audi
@@ -37,7 +37,7 @@ int main()
         color.green = 50;
         color.blue = 50;
         car.color = color;
-        catalog.cars.push_front(car);
+        catalog.cars.push_back(car);
     }
 
     // Create a partially empty car
@@ -51,7 +51,7 @@ int main()
         color.green = 155;
         color.blue = 4;
         car.color = color;
-        catalog.cars.push_front(car);
+        catalog.cars.push_back(car);
     }
 
 #if 0

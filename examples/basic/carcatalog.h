@@ -4,7 +4,7 @@
 
 #include <gpds/serialize.hpp>
 
-#include <forward_list>
+#include <vector>
 
 class car_catalog :
     public gpds::serialize
@@ -12,7 +12,7 @@ class car_catalog :
 public:
     static constexpr const char* gpds_name = "car-catalog";
 
-    std::forward_list<car> cars;
+    std::vector<car> cars;
 
     gpds::container
     to_container() const override

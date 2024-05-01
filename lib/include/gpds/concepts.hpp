@@ -22,4 +22,7 @@ namespace gpds
         { t.from_container(c) } -> std::same_as<void>;
     };
 
+    template<typename T>
+    concept SerializableRange = std::ranges::forward_range<T> && Serializable<std::ranges::range_value_t<T>>;
+
 }

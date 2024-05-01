@@ -126,6 +126,14 @@ namespace gpds
             return add_value(Object::gpds_name, obj.to_container());
         }
 
+        template<SerializableRange Objects>
+        void
+        add_values(const Objects& objs)
+        {
+            for (const auto& obj: objs)
+                add_value(obj);
+        }
+
         template<class T>
         [[nodiscard]]
         std::optional<T>

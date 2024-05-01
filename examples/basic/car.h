@@ -10,6 +10,8 @@ class car :
     public gpds::serialize
 {
 public:
+    constexpr static const char* gpds_name = "car";
+
     std::string manufacturer;
     std::string model;
     int year_of_construction;

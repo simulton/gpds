@@ -19,9 +19,7 @@ public:
     {
         gpds::container c;
 
-        for (const auto& car : cars) {
-            c.add_value("car", car.to_container());
-        }
+        c.add_values(cars);
 
         return c;
     }
@@ -32,7 +30,7 @@ public:
         for (const gpds::container* carContainer : c.get_values<gpds::container*>("car")) {
             car car;
             car.from_container(*carContainer);
-            cars.push_front(car);
+            cars.push_back(car);
         }
     }
 };

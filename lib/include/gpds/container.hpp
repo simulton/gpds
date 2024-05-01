@@ -144,7 +144,7 @@ namespace gpds
         T
         get_value(const std::string& key, T&& default_value) const
         {
-            return get_value<T>(key).value_or(std::move(default_value));
+            return get_value<T>(key).value_or(std::forward<T>(default_value));
         }
 
         template<class T>

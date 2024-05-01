@@ -20,18 +20,21 @@ namespace gpds
         ~spdlog_sink() override = default;
 
         [[nodiscard]]
-        gpds::container to_container() const override
+        gpds::container
+        to_container() const override
         {
             return m_container;
         }
 
-        void from_container(const gpds::container& c) override
+        void
+        from_container(const gpds::container& c) override
         {
             m_container = c;
         }
 
     protected:
-        void sink_it_(const spdlog::details::log_msg& msg) override
+        void
+        sink_it_(const spdlog::details::log_msg& msg) override
         {
             std::string level_name{spdlog::level::to_string_view(msg.level).data(), spdlog::level::to_string_view(msg.level).size()};
 
@@ -45,7 +48,8 @@ namespace gpds
             m_container.add_value("message", c);
         }
 
-        void flush_() override
+        void
+        flush_() override
         {
             // Nothing to do here
         }

@@ -2,12 +2,11 @@
 
 #include "color.h"
 
-#include <gpds/serialize.hpp>
+#include <gpds/container.hpp>
 
 #include <string>
 
-class car :
-    public gpds::serialize
+class car
 {
 public:
     constexpr static const char* gpds_name = "car";
@@ -18,7 +17,7 @@ public:
     class color color;
 
     gpds::container
-    to_container() const override
+    to_container() const
     {
         gpds::container c;
 
@@ -31,7 +30,7 @@ public:
     }
 
     void
-    from_container(const gpds::container& c) override
+    from_container(const gpds::container& c)
     {
         manufacturer = c.get_value<std::string>("manufacturer").value_or("");
         model = c.get_value<std::string>("model").value_or("");

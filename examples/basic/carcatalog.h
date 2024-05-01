@@ -2,12 +2,11 @@
 
 #include "car.h"
 
-#include <gpds/serialize.hpp>
+#include <gpds/container.hpp>
 
 #include <vector>
 
-class car_catalog :
-    public gpds::serialize
+class car_catalog
 {
 public:
     static constexpr const char* gpds_name = "car-catalog";
@@ -15,7 +14,7 @@ public:
     std::vector<car> cars;
 
     gpds::container
-    to_container() const override
+    to_container() const
     {
         gpds::container c;
 
@@ -25,7 +24,7 @@ public:
     }
 
     void
-    from_container(const gpds::container& c) override
+    from_container(const gpds::container& c)
     {
         cars = c.get_values<car>();
     }

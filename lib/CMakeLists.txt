@@ -20,6 +20,7 @@ set(HEADERS_PUBLIC
 	include/gpds/archiver_xml.hpp
 	include/gpds/archiver_yaml.hpp
 	include/gpds/attributes.hpp
+	include/gpds/concepts.hpp
 	include/gpds/container.hpp
 	include/gpds/serialize.hpp
 	include/gpds/spdlog_sink.hpp

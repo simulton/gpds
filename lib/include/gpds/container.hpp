@@ -155,6 +155,21 @@ namespace gpds
             return get_value<T>(key).value_or(std::forward<T>(default_value));
         }
 
+        template<Deserializable Object>
+        [[nodiscard]]
+        std::optional<Object>
+        get_value() const
+        {
+            const gpds::container* c = get_value<gpds::container*>(Object::gpds_name).value_or(nullptr);
+            if (!c)
+                return std::nullopt;
+
+            Object obj;
+            obj.from_container(*c);
+
+            return obj;
+        }
+
         template<class T>
         [[nodiscard]]
         std::vector<T>

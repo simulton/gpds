@@ -7,6 +7,7 @@ add_subdirectory(test_suites)
 target_sources(
 	${TARGET}
 	PRIVATE
+		mocks.hpp
 		test.hpp
 		test_main.cpp
 )

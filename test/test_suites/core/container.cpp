@@ -1,4 +1,5 @@
 #include "../../test.hpp"
+#include "../../mocks.hpp"
 
 TEST_SUITE("core - container")
 {
@@ -106,6 +107,29 @@ TEST_SUITE("core - container")
             const gpds::container* nc = c.get_value<const gpds::container*>("nested", nullptr);
             REQUIRE(nc);
             CHECK_EQ(nc->get_value<const std::string>("c", ""), "Hello GPDS!");
+        }
+    }
+
+    TEST_CASE("add_value() / get_value(): Serializable Object")
+    {
+        SUBCASE("#1")
+        {
+            test::color c1;
+            c1.name = "random";
+            c1.r = 42;
+            c1.g = 13;
+            c1.b = 37;
+
+            // Add
+            gpds::container c;
+            c.add_value(c1);
+
+            // Get
+            auto c2 = c.get_value<test::color>();
+            REQUIRE(c2);
+
+            // Check
+            CHECK_EQ(c1, *c2);
         }
     }
 }

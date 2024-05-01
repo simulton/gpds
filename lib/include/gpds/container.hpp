@@ -1,5 +1,6 @@
 #pragma once
 
+#include "concepts.hpp"
 #include "value.hpp"
 #include "attributes.hpp"
 #include "utils.hpp"
@@ -116,6 +117,13 @@ namespace gpds
             auto it = values.emplace(std::make_pair(key, std::forward<T>(value)));
 
             return it->second;
+        }
+
+        template<Serializable Object>
+        value&
+        add_value(const Object& obj)
+        {
+            return add_value(Object::gpds_name, obj.to_container());
         }
 
         template<class T>

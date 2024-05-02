@@ -39,7 +39,9 @@ namespace gpds_test
             return true;
         }
 
-        virtual gpds::container to_container() const override
+        [[nodiscard]]
+        gpds::container
+        to_container() const override
         {
             gpds::container c;
 
@@ -53,7 +55,8 @@ namespace gpds_test
             return c;
         }
 
-        virtual void from_container(const gpds::container& c) override
+        void
+        from_container(const gpds::container& c) override
         {
             // Retrieve format
             const std::string& formatString = c.get_attribute<std::string>("format").value_or("n/a");

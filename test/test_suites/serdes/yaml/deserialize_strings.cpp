@@ -29,12 +29,15 @@ class test_data_28 : public gpds::serialize
 public:
     std::vector<std::string> data;
 
-    virtual gpds::container to_container() const override
+    [[nodiscard]]
+    gpds::container
+    to_container() const override
     {
         return {};
     }
 
-    virtual void from_container(const gpds::container& object) override
+    void
+    from_container(const gpds::container& object) override
     {
         data = object.get_values<std::string>("string");
     }

@@ -16,12 +16,15 @@ class test_data_7 : public gpds::serialize
 public:
     std::vector<double> data;
 
-    virtual gpds::container to_container() const override
+    [[nodiscard]]
+    gpds::container
+    to_container() const override
     {
         return {};
     }
 
-    virtual void from_container(const gpds::container& object) override
+    void
+    from_container(const gpds::container& object) override
     {
         data = object.get_values<double>("real");
     }

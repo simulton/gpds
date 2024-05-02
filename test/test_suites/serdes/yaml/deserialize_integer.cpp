@@ -24,12 +24,15 @@ class test_data_26 : public gpds::serialize
 public:
     std::vector<int> data;
 
-    virtual gpds::container to_container() const override
+    [[nodiscard]]
+    gpds::container
+    to_container() const override
     {
         return {};
     }
 
-    virtual void from_container(const gpds::container& object) override
+    void
+    from_container(const gpds::container& object) override
     {
         data = object.get_values<int>("int");
     }

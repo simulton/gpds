@@ -48,12 +48,15 @@ class test_data_20 : public gpds::serialize
 public:
     data d;
 
-    virtual gpds::container to_container() const override
+    [[nodiscard]]
+    gpds::container
+    to_container() const override
     {
         return {};
     }
 
-    virtual void from_container(const gpds::container& object) override
+    void
+    from_container(const gpds::container& object) override
     {
         const auto& valueContainers = object.get_values<gpds::container*>("value");
         for (std::size_t i = 0; i < valueContainers.size(); i++) {

@@ -6,7 +6,8 @@ class list_order :
 public:
     std::vector<int> data;
 
-    virtual gpds::container to_container() const override
+    [[nodiscard]]
+    gpds::container to_container() const override
     {
         gpds::container root;
         for (int i: data)
@@ -14,7 +15,8 @@ public:
         return root;
     }
 
-    virtual void from_container(const gpds::container& object) override
+    void
+    from_container(const gpds::container& object) override
     {
         std::vector<int> tmp;
         for (auto& value: object.get_values<int>("value"))

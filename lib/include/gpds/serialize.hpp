@@ -28,7 +28,8 @@ namespace gpds
          */
         [[nodiscard]]
         virtual
-        gpds::container to_container() const = 0;
+        gpds::container
+        to_container() const = 0;
 
         /**
          * Deserialize from container.

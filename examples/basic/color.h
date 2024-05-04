@@ -1,11 +1,10 @@
 #pragma once
 
-#include <gpds/serialize.hpp>
+#include <gpds/container.hpp>
 
 #include <string>
 
-class color :
-    public gpds::serialize
+class color
 {
 public:
     std::string name;
@@ -13,8 +12,9 @@ public:
     int green;
     int blue;
 
+    [[nodiscard]]
     gpds::container
-    to_container() const override
+    to_container() const
     {
         gpds::container c;
 
@@ -29,7 +29,7 @@ public:
     }
 
     void
-    from_container(const gpds::container& c) override
+    from_container(const gpds::container& c)
     {
         // Retrieve format
         const std::string& formatString = c.get_attribute<std::string>("format").value_or("n/a");

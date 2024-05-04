@@ -16,6 +16,7 @@ public:
     int year_of_construction;
     class color color;
 
+    [[nodiscard]]
     gpds::container
     to_container() const
     {

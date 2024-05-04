@@ -1,5 +1,6 @@
 #include <gpds/archiver_xml.hpp>
 #include <gpds/archiver_yaml.hpp>
+#include <gpds/serialize.hpp>
 
 #include "carcatalog.h"
 

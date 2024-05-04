@@ -13,6 +13,7 @@ public:
 
     std::vector<car> cars;
 
+    [[nodiscard]]
     gpds::container
     to_container() const
     {

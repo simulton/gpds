@@ -7,7 +7,7 @@ namespace gpds
     class container;
 
     template<typename T>
-    concept Serializable = requires(T t, gpds::container c)
+    concept Serializable = requires(T t)
     {
         { T::gpds_name } -> std::convertible_to<std::string_view>;
 

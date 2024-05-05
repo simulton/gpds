@@ -52,10 +52,8 @@ namespace gpds
          * @tparam T The value type.
          * @param value The value to copy.
          */
-        template<
-            class T,
-            typename std::enable_if<!std::is_class<T>::value, T>::type* = nullptr
-        >
+        template<typename T>
+        requires (!std::is_class_v<T>)
         explicit
         value(const T& value)
         {
@@ -68,10 +66,8 @@ namespace gpds
          * @tparam T The value type.
          * @param value The value to move.
          */
-        template<
-            class T,
-            typename std::enable_if<std::is_class<T>::value, T>::type* = nullptr
-        >
+        template<typename T>
+        requires (std::is_class_v<T>)
         explicit
         value(T&& value)
         {

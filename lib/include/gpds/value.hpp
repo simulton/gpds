@@ -123,7 +123,7 @@ namespace gpds
         [[nodiscard]]
         constexpr
         bool
-        is_empty() const
+        is_empty() const noexcept
         {
             return m_value.valueless_by_exception();
         }

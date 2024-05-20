@@ -248,7 +248,7 @@ namespace gpds
         T
         get_attribute(std::string&& key, T&& default_value) const
         {
-            return get_attribute<T>(std::move(key)).value_or(std::move(default_value));
+            return get_attribute<T>(std::move(key)).value_or(std::forward<T>(default_value));
         }
 
         template<typename T>

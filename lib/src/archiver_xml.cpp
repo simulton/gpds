@@ -104,6 +104,8 @@ archiver_xml::write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root
                 child->InsertFirstChild(text);
             }
         }
+        if (!child)
+            continue;
 
         // Add all value arguments
         for (const auto& attribute : value.attributes.map)

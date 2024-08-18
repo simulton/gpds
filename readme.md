@@ -49,4 +49,3 @@ GPDS not only supports XML, but also supports YAML:
         "-depth": 32
 ```
 
-For more information, see https://gpds.simulton.com

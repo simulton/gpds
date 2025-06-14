@@ -8,6 +8,10 @@
 #include <map>
 #include <optional>
 
+
+
+#include <iostream>
+
 namespace gpds
 {
     /**
@@ -183,9 +187,11 @@ namespace gpds
         std::vector<T>
         get_values(const std::string& key) const
         {
-            // ToDo: pre-allocate values vector
             const auto& range = values.equal_range(key);
+
             std::vector<T> values;
+            values.reserve(std::distance(range.first, range.second));
+
             for (auto it = range.first; it != range.second; it++) {
 
                 // T == gpds::value ?

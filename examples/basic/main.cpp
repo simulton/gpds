@@ -59,63 +59,6 @@ int main()
         catalog.cars.push_back(car);
     }
 
-#if 0
-    // To/from file XML
-    {
-        const std::filesystem::path filepath = "catalog.xml";
-
-        // Serialize to file
-        {
-            const auto& [success, msg] = gpds::to_file<gpds::archiver_xml>(filepath, catalog);
-            if (!success) {
-                std::cerr << "could not store 'catalog' in file: " << msg << std::endl;
-                return EXIT_FAILURE;
-            }
-
-            std::cout << "successfully serialized 'catalog' to file: " << filepath << std::endl;
-        }
-
-        // Deserialize from file
-        {
-            car_catalog catalog1;
-            const auto& [success, msg] = gpds::from_file<gpds::archiver_xml>(filepath, catalog1);
-            if (!success) {
-                std::cerr << "could not load `catalog` from file: " << msg << std::endl;
-                return EXIT_FAILURE;
-            }
-
-            std::cout << "successfully deserialized 'catalog' from file: " << filepath << std::endl;
-        }
-    }
-
-    // To/from file YAML
-    {
-        const std::filesystem::path filepath = "catalog.yaml";
-
-        // Serialize to file
-        {
-            const auto& [success, msg] = gpds::to_file<gpds::archiver_yaml>(filepath, catalog);
-            if (!success) {
-                std::cerr << "could not store 'catalog' in file: " << msg << std::endl;
-                return EXIT_FAILURE;
-            }
-
-            std::cout << "successfully serialized 'catalog' to file: " << filepath << std::endl;
-        }
-
-        // Deserialize from file
-        {
-            car_catalog catalog1;
-            const auto& [success, msg] = gpds::from_file<gpds::archiver_yaml>(filepath, catalog1);
-            if (!success) {
-                std::cerr << "could not load `catalog` from file: " << msg << std::endl;
-                return EXIT_FAILURE;
-            }
-
-            std::cout << "successfully deserialized 'catalog' from file: " << filepath << std::endl;
-        }
-    }
-#endif
     // To/from string XML
     #if GPDS_ENABLE_XML
     {

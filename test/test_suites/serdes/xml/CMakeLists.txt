@@ -1,6 +1,8 @@
 target_sources(
     ${TARGET}
     PRIVATE
+        attributes.cpp
+        cdata.cpp
         deserialize_attributes.cpp
         deserialize_booleans.cpp
         deserialize_container_attributes.cpp
@@ -8,6 +10,7 @@ target_sources(
         deserialize_integer.cpp
         deserialize_strings.cpp
         deserializing_empty_container.cpp
+        lists.cpp
         load_and_save_file.cpp
         serialize_and_deserialize_color.cpp
 )

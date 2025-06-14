@@ -1,5 +1,7 @@
 #include "../../test.hpp"
 
+#include <gpds/archiver_yaml.hpp>
+
 #include <vector>
 
 static const std::string FILE_CONTENT =

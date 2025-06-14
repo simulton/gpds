@@ -1,5 +1,7 @@
 #include "../../test.hpp"
 
+#include <gpds/archiver_xml.hpp>
+
 #include <vector>
 #include <sstream>
 

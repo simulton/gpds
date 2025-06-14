@@ -1,6 +1,8 @@
 #include "../../test.hpp"
 #include "../../color.h"
 
+#include <gpds/archiver_xml.hpp>
+
 TEST_SUITE("serdes - xml")
 {
 

@@ -1,6 +1,10 @@
-#include <gpds/archiver_xml.hpp>
-#include <gpds/archiver_yaml.hpp>
 #include <gpds/serialize.hpp>
+#if GPDS_ENABLE_XML
+    #include <gpds/archiver_xml.hpp>
+#endif
+#if GPDS_ENABLE_YAML
+    #include <gpds/archiver_yaml.hpp>
+#endif
 
 #include "carcatalog.h"
 
@@ -113,6 +117,7 @@ int main()
     }
 #endif
     // To/from string XML
+    #if GPDS_ENABLE_XML
     {
         std::string str;
 
@@ -139,8 +144,10 @@ int main()
             std::cout << "successfully deserialized 'catalog' from string." << std::endl;
         }
     }
+    #endif
 
     // To/from string YAML
+    #if GPDS_ENABLE_YAML
     {
         std::string str;
 
@@ -167,6 +174,7 @@ int main()
             std::cout << "successfully deserialized 'catalog' from string." << std::endl;
         }
     }
+    #endif
 
     return 0;
 }

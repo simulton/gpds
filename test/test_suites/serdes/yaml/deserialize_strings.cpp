@@ -1,6 +1,9 @@
+#include "../../test.hpp"
+
+#include <gpds/archiver_yaml.hpp>
+
 #include <vector>
 #include <sstream>
-#include "../../test.hpp"
 
 static const std::string FILE_CONTENT =
 R"""(

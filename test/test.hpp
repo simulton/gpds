@@ -7,8 +7,6 @@
 
 #include "doctest.hpp"
 
-#include "gpds/archiver_xml.hpp"        // ToDo: No need to include that here
-#include "gpds/archiver_yaml.hpp"       // ToDo: No need to include that here
 #include "gpds/serialize.hpp"
 
 namespace gpds

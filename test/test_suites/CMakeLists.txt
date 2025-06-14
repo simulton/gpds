@@ -5,9 +5,4 @@ target_sources(
     ${TARGET}
     PRIVATE
         color.h
-
-        attributes.cpp
-        cdata.cpp
-        container_serialization.cpp
-        lists.cpp
 )

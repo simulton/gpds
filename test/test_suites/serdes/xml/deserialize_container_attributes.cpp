@@ -3,6 +3,8 @@
 #include "../../test.hpp"
 #include "gpds/serialize.hpp"
 
+#include <gpds/archiver_xml.hpp>
+
 static const std::string FILE_CONTENT =
     "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
     "<data>"

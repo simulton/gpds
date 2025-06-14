@@ -1,4 +1,6 @@
-#include "../test.hpp"
+#include "test/test.hpp"
+
+#include <gpds/archiver_xml.hpp>
 
 TEST_SUITE("cdata")
 {

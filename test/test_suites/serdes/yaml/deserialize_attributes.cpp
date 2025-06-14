@@ -1,5 +1,7 @@
 #include "../../test.hpp"
 
+#include <gpds/archiver_yaml.hpp>
+
 #include <vector>
 #include <sstream>
 

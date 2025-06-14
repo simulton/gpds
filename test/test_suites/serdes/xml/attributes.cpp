@@ -1,5 +1,7 @@
 #include "test/test.hpp"
 
+#include <gpds/archiver_xml.hpp>
+
 TEST_SUITE("attributes")
 {
     TEST_CASE("empty")

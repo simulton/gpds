@@ -1,5 +1,7 @@
 #include "../../test.hpp"
 
+#include <gpds/archiver_xml.hpp>
+
 static constexpr const char* brand = "Ferrari";
 
 TEST_SUITE("serdes - xml")

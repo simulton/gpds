@@ -35,8 +35,8 @@ if (NOT GPDS_BUILD_STATIC)
     set(GPDS_TARGET_INTERNAL gpds-shared)
 endif()
 
-# Build the actual library
-add_subdirectory(lib)
+# Include the actual library
+add_subdirectory(gpds)
 
 # Testing
 if (GPDS_BUILD_TESTS)

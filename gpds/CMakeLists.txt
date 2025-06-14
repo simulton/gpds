@@ -1,32 +1,8 @@
 # CMake settiongs
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-# List of private source files
-set(SOURCES_PRIVATE
-	src/archiver_xml.cpp
-	src/archiver_yaml.cpp
-	src/value.cpp
-	3rdparty/miniyaml/yaml/yaml.cpp
-)
-
-# List of private header files
-set(HEADERS_PRIVATE
-	3rdparty/miniyaml/yaml/yaml.hpp
-)
-
-# List of public header files
-set(HEADERS_PUBLIC
-	include/gpds/archiver.hpp
-	include/gpds/archiver_xml.hpp
-	include/gpds/archiver_yaml.hpp
-	include/gpds/attributes.hpp
-	include/gpds/concepts.hpp
-	include/gpds/container.hpp
-	include/gpds/serialize.hpp
-	include/gpds/spdlog_sink.hpp
-	include/gpds/utils.hpp
-	include/gpds/value.hpp
-)
+# Define directory base path for FILE_SET
+set(GPDS_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Dependency (tinyxml2)
 if (GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE OR GPDS_DEPENDENCY_TINYXML2_PKGCONFIG)
@@ -39,12 +15,7 @@ if (GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE OR GPDS_DEPENDENCY_TINYXML2_PKGCONFIG)
 		set(TINYXML2_TARGET PkgConfig::tinyxml2)
 	endif()
 else()
-	list(APPEND HEADERS_PRIVATE
-		3rdparty/tinyxml2/tinyxml2.h
-	)
-	list(APPEND SOURCES_PRIVATE
-		3rdparty/tinyxml2/tinyxml2.cpp
-	)
+	set(GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD ON)
 endif()
 
 # Define targets
@@ -63,19 +34,11 @@ function(setup_target_common target)
 			cxx_std_20
 	)
 
-	target_sources(
-		${target}
-		PRIVATE
-			${SOURCES_PRIVATE}
-			${HEADERS_PRIVATE}
-	)
-
 	target_include_directories(
 		${target}
-		INTERFACE
-			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-		PRIVATE
-			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/gpds>
+		PUBLIC
+			$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/..>
+			$<INSTALL_INTERFACE:..>
 	)
 
 	target_link_libraries(
@@ -91,6 +54,34 @@ function(setup_target_common target)
 			ARCHIVE_OUTPUT_NAME "gpds"
 			VERSION ${PROJECT_VERSION}
 			POSITION_INDEPENDENT_CODE ON
+	)
+
+	target_sources(
+		${target}
+		PUBLIC
+			FILE_SET
+				HEADERS
+				BASE_DIRS ${GPDS_BASE_DIR}
+				FILES
+					archiver.hpp
+					archiver_xml.hpp
+					archiver_yaml.hpp
+					attributes.hpp
+					concepts.hpp
+					container.hpp
+					serialize.hpp
+					spdlog_sink.hpp
+					utils.hpp
+					value.hpp
+
+		PRIVATE
+			archiver_xml.cpp
+			archiver_yaml.cpp
+			value.cpp
+			3rdparty/miniyaml/yaml/yaml.cpp		# ToDo: Introduce option
+			3rdparty/miniyaml/yaml/yaml.hpp		# ToDo: Introduce option
+			$<$<BOOL:${GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD}>:3rdparty/tinyxml2/tinyxml2.cpp>
+			$<$<BOOL:${GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD}>:3rdparty/tinyxml2/tinyxml2.h>
 	)
 endfunction()
 
@@ -124,12 +115,6 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/gpds)
 
-# Copy GPDS headers
-install(
-	FILES ${HEADERS_PUBLIC}
-	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
-)
-
 # Targets
 if (GPDS_BUILD_STATIC)
 	list(APPEND INSTALL_TARGETS_LIST ${TARGET_STATIC})
@@ -141,6 +126,9 @@ install(
 	TARGETS
 		${INSTALL_TARGETS_LIST}
 	EXPORT gpds-targets
+	FILE_SET
+		HEADERS
+		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gpds
 	LIBRARY
 		DESTINATION ${CMAKE_INSTALL_LIBDIR}
 		COMPONENT lib
@@ -150,8 +138,6 @@ install(
 	RUNTIME
 		DESTINATION ${CMAKE_INSTALL_BINDIR}
 		COMPONENT bin
-	INCLUDES
-		DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
 # Package version

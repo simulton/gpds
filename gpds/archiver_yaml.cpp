@@ -1,7 +1,7 @@
 #include "archiver_yaml.hpp"
 #include "container.hpp"
 #include "utils.hpp"
-#include "../3rdparty/miniyaml/yaml/yaml.hpp"
+#include "3rdparty/miniyaml/yaml/yaml.hpp"
 
 #include <algorithm>
 

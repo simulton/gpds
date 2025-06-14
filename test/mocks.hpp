@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../lib/include/gpds/container.hpp"
+#include <gpds/container.hpp>
 
 #include <string>
 

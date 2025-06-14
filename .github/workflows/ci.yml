@@ -14,6 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        enable_xml: [ON, OFF]
+        enable_yaml: [ON, OFF]
         toolchain:
           [
             {
@@ -31,7 +33,7 @@ jobs:
       CC: ${{ matrix.toolchain.cc }}
       CXX: ${{ matrix.toolchain.cxx }}
 
-    name: "${{ matrix.toolchain.name }}"
+    name: "${{ matrix.toolchain.name }} (XML: ${{ matrix.enable_xml }}) (YAML: ${{ matrix.enable_yaml }})"
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +46,7 @@ jobs:
         run: sudo apt install ${{ matrix.toolchain.packages }} -y
 
       - name: Configure
-        run: cmake -Bbuild -GNinja -DGPDS_BUILD_EXAMPLES=ON -DGPDS_BUILD_TESTS=ON
+        run: cmake -Bbuild -GNinja -DGPDS_BUILD_EXAMPLES=ON -DGPDS_BUILD_TESTS=ON -DGPDS_ENABLE_XML=${{ matrix.enable_xml }} -DGPDS_ENABLE_YAML=${{ matrix.enable_yaml }}
 
       - name: Build
         run: cmake --build build

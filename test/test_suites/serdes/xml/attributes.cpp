@@ -1,4 +1,4 @@
-#include "../test.hpp"
+#include "test/test.hpp"
 
 TEST_SUITE("attributes")
 {

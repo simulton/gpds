@@ -5,17 +5,19 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(GPDS_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Dependency (tinyxml2)
-if (GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE OR GPDS_DEPENDENCY_TINYXML2_PKGCONFIG)
-	if(GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE)
-		find_package(tinyxml2 REQUIRED)
-		set(TINYXML2_TARGET tinyxml2::tinyxml2)
+if (GPDS_ENABLE_XML)
+	if (GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE OR GPDS_DEPENDENCY_TINYXML2_PKGCONFIG)
+		if(GPDS_DEPENDENCY_TINYXML2_FINDPACKAGE)
+			find_package(tinyxml2 REQUIRED)
+			set(TINYXML2_TARGET tinyxml2::tinyxml2)
+		else()
+			find_package(PkgConfig REQUIRED)
+			pkg_check_modules(tinyxml2 REQUIRED IMPORTED_TARGET tinyxml2)
+			set(TINYXML2_TARGET PkgConfig::tinyxml2)
+		endif()
 	else()
-		find_package(PkgConfig REQUIRED)
-		pkg_check_modules(tinyxml2 REQUIRED IMPORTED_TARGET tinyxml2)
-		set(TINYXML2_TARGET PkgConfig::tinyxml2)
+		set(GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD ON)
 	endif()
-else()
-	set(GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD ON)
 endif()
 
 # Define targets
@@ -37,6 +39,7 @@ function(setup_target_common target)
 	target_compile_definitions(
 		${target}
 		PUBLIC
+			$<$<BOOL:${GPDS_ENABLE_XML}>:GPDS_ENABLE_XML>
 			$<$<BOOL:${GPDS_ENABLE_YAML}>:GPDS_ENABLE_YAML>
 	)
 
@@ -70,7 +73,7 @@ function(setup_target_common target)
 				BASE_DIRS ${GPDS_BASE_DIR}
 				FILES
 					archiver.hpp
-					archiver_xml.hpp
+					$<$<BOOL:${GPDS_ENABLE_XML}>:archiver_xml.hpp>
 					$<$<BOOL:${GPDS_ENABLE_YAML}>:archiver_yaml.hpp>
 					attributes.hpp
 					concepts.hpp
@@ -81,13 +84,13 @@ function(setup_target_common target)
 					value.hpp
 
 		PRIVATE
-			archiver_xml.cpp
+			$<$<BOOL:${GPDS_ENABLE_XML}>:archiver_xml.cpp>
 			$<$<BOOL:${GPDS_ENABLE_YAML}>:archiver_yaml.cpp>
 			value.cpp
-			$<$<BOOL:${GPDS_ENABLE_YAML}>:3rdparty/miniyaml/yaml/yaml.cpp>
-			$<$<BOOL:${GPDS_ENABLE_YAML}>:3rdparty/miniyaml/yaml/yaml.hpp>
 			$<$<BOOL:${GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD}>:3rdparty/tinyxml2/tinyxml2.cpp>
 			$<$<BOOL:${GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD}>:3rdparty/tinyxml2/tinyxml2.h>
+			$<$<BOOL:${GPDS_ENABLE_YAML}>:3rdparty/miniyaml/yaml/yaml.cpp>
+			$<$<BOOL:${GPDS_ENABLE_YAML}>:3rdparty/miniyaml/yaml/yaml.hpp>
 	)
 endfunction()
 

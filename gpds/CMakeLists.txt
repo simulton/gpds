@@ -34,6 +34,12 @@ function(setup_target_common target)
 			cxx_std_20
 	)
 
+	target_compile_definitions(
+		${target}
+		PUBLIC
+			$<$<BOOL:${GPDS_ENABLE_YAML}>:GPDS_ENABLE_YAML>
+	)
+
 	target_include_directories(
 		${target}
 		PUBLIC
@@ -65,7 +71,7 @@ function(setup_target_common target)
 				FILES
 					archiver.hpp
 					archiver_xml.hpp
-					archiver_yaml.hpp
+					$<$<BOOL:${GPDS_ENABLE_YAML}>:archiver_yaml.hpp>
 					attributes.hpp
 					concepts.hpp
 					container.hpp
@@ -76,10 +82,10 @@ function(setup_target_common target)
 
 		PRIVATE
 			archiver_xml.cpp
-			archiver_yaml.cpp
+			$<$<BOOL:${GPDS_ENABLE_YAML}>:archiver_yaml.cpp>
 			value.cpp
-			3rdparty/miniyaml/yaml/yaml.cpp		# ToDo: Introduce option
-			3rdparty/miniyaml/yaml/yaml.hpp		# ToDo: Introduce option
+			$<$<BOOL:${GPDS_ENABLE_YAML}>:3rdparty/miniyaml/yaml/yaml.cpp>
+			$<$<BOOL:${GPDS_ENABLE_YAML}>:3rdparty/miniyaml/yaml/yaml.hpp>
 			$<$<BOOL:${GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD}>:3rdparty/tinyxml2/tinyxml2.cpp>
 			$<$<BOOL:${GPDS_DEPENDENCY_TINYXML2_SOURCE_BUILD}>:3rdparty/tinyxml2/tinyxml2.h>
 	)

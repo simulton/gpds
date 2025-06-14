@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(tinyxml2 VERSION 9.0.0)
+project(tinyxml2 VERSION 11.0.0)
 
 include(CTest)
 option(tinyxml2_BUILD_TESTING "Build tests for tinyxml2" "${BUILD_TESTING}")
@@ -31,6 +31,7 @@ target_compile_definitions(
     PUBLIC $<$<CONFIG:Debug>:TINYXML2_DEBUG>
     INTERFACE $<$<BOOL:${BUILD_SHARED_LIBS}>:TINYXML2_IMPORT>
     PRIVATE $<$<CXX_COMPILER_ID:MSVC>:_CRT_SECURE_NO_WARNINGS>
+    PUBLIC _FILE_OFFSET_BITS=64
 )
 
 set_target_properties(
@@ -62,7 +63,9 @@ endif ()
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-## Custom locations
+## Custom settings
+option(tinyxml2_INSTALL_PKGCONFIG "Create and install pkgconfig files" ON)
+
 set(tinyxml2_INSTALL_PKGCONFIGDIR "${CMAKE_INSTALL_LIBDIR}/pkgconfig"
     CACHE PATH "Directory for pkgconfig files")
 
@@ -120,10 +123,12 @@ install(
 
 ## pkg-config
 
-configure_file(cmake/tinyxml2.pc.in tinyxml2.pc.gen @ONLY)
-file(GENERATE OUTPUT tinyxml2.pc INPUT "${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc.gen")
-install(
-    FILES "${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc"
-    DESTINATION "${tinyxml2_INSTALL_PKGCONFIGDIR}"
-    COMPONENT tinyxml2_development
-)
+if (tinyxml2_INSTALL_PKGCONFIG)
+    configure_file(cmake/tinyxml2.pc.in tinyxml2.pc.gen @ONLY)
+    file(GENERATE OUTPUT tinyxml2.pc INPUT "${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc.gen")
+    install(
+        FILES "${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc"
+        DESTINATION "${tinyxml2_INSTALL_PKGCONFIGDIR}"
+        COMPONENT tinyxml2_development
+    )
+endif ()

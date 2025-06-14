@@ -1,12 +1,12 @@
 name: Test
-on: [ push, pull_request ]
+on: [ push, pull_request, workflow_dispatch ]
 jobs:
   test:
     name: ${{ matrix.os }}, ${{ matrix.cmake_name }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ windows-2019, macos-10.15, ubuntu-20.04 ]
+        os: [ windows-2019, macos-latest, ubuntu-20.04 ]
         cmake: [ 3.15, 3.x ]
         include:
           - os: windows-2019
@@ -17,7 +17,7 @@ jobs:
           - os: ubuntu-20.04
             tree: tree
 
-          - os: macos-10.15
+          - os: macos-latest
             tree: find
 
           - cmake: 3.15
@@ -31,10 +31,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       # System set-up
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
       - uses: seanmiddleditch/gha-setup-ninja@master
-      - uses: jwlawson/actions-setup-cmake@v1.8
+      - uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: ${{ matrix.cmake }}
 

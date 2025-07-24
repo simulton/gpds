@@ -33,7 +33,7 @@ function(setup_target_common target)
 	target_compile_features(
 		${target}
 		PUBLIC
-			cxx_std_20
+			cxx_std_23
 	)
 
 	target_compile_definitions(

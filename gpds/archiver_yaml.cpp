@@ -7,7 +7,7 @@
 
 using namespace gpds;
 
-bool
+std::expected<void, error>
 archiver_yaml::save(std::ostream& stream, const container& container, std::string_view root_name) const
 {
     // Create the YAML document node
@@ -23,10 +23,10 @@ archiver_yaml::save(std::ostream& stream, const container& container, std::strin
     // Write the document to the stream
     stream << data;
 
-    return true;
+    return { };
 }
 
-bool
+std::expected<void, error>
 archiver_yaml::load(std::istream& stream, container& container, std::string_view root_name)
 {
     // Create the YAML document node
@@ -39,7 +39,7 @@ archiver_yaml::load(std::istream& stream, container& container, std::string_view
     // Retrieve the data to container
     read_entry(root[root_name.data()], container);
 
-    return true;
+    return { };
 }
 
 void

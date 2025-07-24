@@ -45,8 +45,11 @@ namespace gpds
         archiver_yaml& operator=(const archiver_yaml& rhs) = delete;
         archiver_yaml& operator=(archiver_yaml&& rhs) noexcept = delete;
 
-        bool save(std::ostream& stream, const container& container, std::string_view root_name) const override;
-        bool load(std::istream& stream, container& container, std::string_view root_name) override;
+        std::expected<void, error>
+        save(std::ostream& stream, const container& container, std::string_view root_name) const override;
+
+        std::expected<void, error>
+        load(std::istream& stream, container& container, std::string_view root_name) override;
 
     private:
         void write_entry(Yaml::Node& root, const container& container) const;

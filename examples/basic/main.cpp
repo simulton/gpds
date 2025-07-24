@@ -8,8 +8,8 @@
 
 #include "carcatalog.h"
 
-#include <iostream>
 #include <fstream>
+#include <print>
 #include <sstream>
 
 int main()
@@ -66,25 +66,25 @@ int main()
 
         // Serialize to string
         {
-            const auto& [success, msg] = gpds::to_string<gpds::archiver_xml>(str, catalog);
+            const auto& success = gpds::to_string<gpds::archiver_xml>(str, catalog);
             if (!success) {
-                std::cerr << "could not store 'catalog' in string: " << msg << std::endl;
+                std::println("could not store 'catalog' in string: {}", success.error().message());
                 return EXIT_FAILURE;
             }
 
-            std::cout << "successfully serialized 'catalog' to string:\n" << str << std::endl;
+            std::println("successfully serialized 'catalog' to string:\n{}", str);
         }
 
         // Deserialize form string
         {
             car_catalog catalog1;
-            const auto& [success, msg] = gpds::from_string<gpds::archiver_xml>(str, catalog1);
+            const auto& success = gpds::from_string<gpds::archiver_xml>(str, catalog1);
             if (!success) {
-                std::cerr << "could not load `catalog` from string: " << msg << std::endl;
+                std::println("could not load `catalog` from string: {}", success.error().message());
                 return EXIT_FAILURE;
             }
 
-            std::cout << "successfully deserialized 'catalog' from string." << std::endl;
+            std::println("successfully deserialized 'catalog' from string.");
         }
     }
     #endif
@@ -96,25 +96,25 @@ int main()
 
         // Serialize to string
         {
-            const auto& [success, msg] = gpds::to_string<gpds::archiver_yaml>(str, catalog);
+            const auto& success = gpds::to_string<gpds::archiver_yaml>(str, catalog);
             if (!success) {
-                std::cerr << "could not store 'catalog' in string: " << msg << std::endl;
+                std::println("could not store 'catalog' in string: {}", success.error().message());
                 return EXIT_FAILURE;
             }
 
-            std::cout << "successfully serialized 'catalog' to string:\n" << str << std::endl;
+            std::println("successfully serialized 'catalog' to string:\n{}", str);
         }
 
         // Deserialize form string
         {
             car_catalog catalog1;
-            const auto&[success, msg] = gpds::from_string<gpds::archiver_yaml>(str, catalog1);
+            const auto& success = gpds::from_string<gpds::archiver_yaml>(str, catalog1);
             if (!success) {
-                std::cerr << "could not load `catalog` from string: " << msg << std::endl;
+                std::println("could not load `catalog` from string: {}", success.error().message());
                 return EXIT_FAILURE;
             }
 
-            std::cout << "successfully deserialized 'catalog' from string." << std::endl;
+            std::println("successfully deserialized 'catalog' from string.");
         }
     }
     #endif

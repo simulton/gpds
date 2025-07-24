@@ -2,7 +2,7 @@
 #include <gpds/archiver_xml.hpp>
 #include <spdlog/spdlog.h>
 
-#include <iostream>
+#include <println>
 #include <sstream>
 
 int main()
@@ -20,21 +20,21 @@ int main()
     // Serialize
     std::stringstream ss;
     {
-        const auto& [success, message] = gpds::to_stream<gpds::archiver_xml>(ss, *sink, "log");
+        const auto success  = gpds::to_stream<gpds::archiver_xml>(ss, *sink, "log");
         if (!success) {
-            std::cerr << "serializing log failed: " << message << std::endl;
+            std::println("serializing log failed: {}", success.error().message());
             return EXIT_FAILURE;
         }
     }
-    std::cout << ss.str() << std::endl;
+    std::println("{}", ss.str());
 
     // Deserialize
     {
         gpds::spdlog_sink_mt loaded_sink;
 
-        auto [success, message] = gpds::from_stream<gpds::archiver_xml>(ss, loaded_sink, "log");
+        const auto success = gpds::from_stream<gpds::archiver_xml>(ss, loaded_sink, "log");
         if (!success) {
-            std::cerr << "deserializing log failed: " << message << std::endl;
+            std::println("deserializing log failed: {}", success.error().message());
             return EXIT_FAILURE;
         }
     }

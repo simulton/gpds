@@ -1,5 +1,8 @@
 #pragma once
 
+#include "error.hpp"
+
+#include <expected>
 #include <istream>
 #include <ostream>
 
@@ -32,7 +35,7 @@ namespace gpds
          * @return Success.
          */
         virtual
-        bool
+        std::expected<void, error>
         save(std::ostream& stream, const container& container, std::string_view root_name) const = 0;
 
         /**
@@ -44,7 +47,7 @@ namespace gpds
          * @return Success.
          */
         virtual
-        bool
+        std::expected<void, error>
         load(std::istream& stream, container& container, std::string_view root_name) = 0;
     };
 

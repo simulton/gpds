@@ -48,8 +48,8 @@ TEST_SUITE("cdata")
 
             // Serialize
             std::string str;
-            const auto& [success, msg] = gpds::to_string<gpds::archiver_xml>(str, d);
-            REQUIRE(success);
+            const auto success = gpds::to_string<gpds::archiver_xml>(str, d);
+            REQUIRE_MESSAGE(success, success.error().message());
 
             // Crude checking of string contents
             auto pos = str.find("<![CDATA[foo]]");
@@ -73,9 +73,8 @@ TEST_SUITE("cdata")
 
             // Deserialize
             dut<true> d;
-            const auto& [success, msg] = gpds::from_string<gpds::archiver_xml>(data, d);
-            //REQUIRE_MESSAGE(success, msg.c_str());
-            REQUIRE(success);
+            const auto success = gpds::from_string<gpds::archiver_xml>(data, d);
+            REQUIRE_MESSAGE(success, success.error().message());
 
             // Check
             CHECK_EQ(d.one,   "some random string!");
@@ -96,8 +95,8 @@ TEST_SUITE("cdata")
 
             // Serialize
             std::string str;
-            const auto& [success, msg] = gpds::to_string<gpds::archiver_xml>(str, d);
-            REQUIRE(success);
+            const auto success = gpds::to_string<gpds::archiver_xml>(str, d);
+            REQUIRE_MESSAGE(success, success.error().message());
 
             // Crude checking of string contents
             auto pos = str.find("<![CDATA[foo]]");
@@ -121,9 +120,8 @@ TEST_SUITE("cdata")
 
             // Deserialize
             dut<false> d;
-            const auto& [success, msg] = gpds::from_string<gpds::archiver_xml>(data, d);
-            //REQUIRE_MESSAGE(success, msg.c_str());
-            REQUIRE(success);
+            const auto success = gpds::from_string<gpds::archiver_xml>(data, d);
+            REQUIRE_MESSAGE(success, success.error().message());
 
             // Check
             CHECK_EQ(d.one,   "some random string!");

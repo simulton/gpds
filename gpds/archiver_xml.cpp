@@ -7,7 +7,7 @@
 
 using namespace gpds;
 
-bool
+std::expected<void, error>
 archiver_xml::save(std::ostream& stream, const container& container, std::string_view rootName) const
 {
     // Create the document
@@ -31,10 +31,10 @@ archiver_xml::save(std::ostream& stream, const container& container, std::string
     // Free up memory
     doc.Clear();
 
-    return true;
+    return { };
 }
 
-bool
+std::expected<void, error>
 archiver_xml::load(std::istream& stream, container& container, std::string_view rootName)
 {
     // Create the document
@@ -45,12 +45,12 @@ archiver_xml::load(std::istream& stream, container& container, std::string_view 
     // Retrieve the root node
     tinyxml2::XMLElement* rootNode = doc.FirstChildElement(rootName.data());
     if (!rootNode)
-        return false;
+        return std::unexpected(error("could not find root element"));
 
     // Handle all nodes children recursively
     read_entry(*rootNode, container);
 
-    return true;
+    return { };
 }
 
 void

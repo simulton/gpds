@@ -78,6 +78,7 @@ function(setup_target_common target)
 					attributes.hpp
 					concepts.hpp
 					container.hpp
+					error.hpp
 					serialize.hpp
 					spdlog_sink.hpp
 					utils.hpp

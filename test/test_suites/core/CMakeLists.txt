@@ -5,6 +5,7 @@ target_sources(
         container.cpp
         container_creation.cpp
         container_lookup.cpp
+        error.cpp
         get_wrong_value_type.cpp
         nesting_container.cpp
         value_string_conversion.cpp

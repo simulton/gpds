@@ -23,7 +23,7 @@ namespace gpds_test
     serialize(std::ostream& stream, gpds::serialize& object, const std::string& root_name)
     {
         const auto ret = gpds::to_stream<Archiver>(stream, object, root_name);      // ToDo: Wrap this in REQUIRE_NOTHROW()
-        REQUIRE_MESSAGE(ret.first, ret.second);
+        REQUIRE_MESSAGE(ret, ret.error().message());
     }
 
     template<typename Archiver>
@@ -32,7 +32,7 @@ namespace gpds_test
     deserialize(std::istream& stream, gpds::serialize& object, const std::string& root_name)
     {
         const auto ret = gpds::from_stream<Archiver>(stream, object, root_name);      // ToDo: Wrap in REQUIRE_NOTHROW()
-        REQUIRE_MESSAGE(ret.first, ret.second);
+        REQUIRE_MESSAGE(ret, ret.error().message());
     }
 
     template<typename Archiver>

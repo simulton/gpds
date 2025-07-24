@@ -22,13 +22,13 @@ TEST_SUITE("serdes - yaml")
             REQUIRE_MESSAGE(std::filesystem::remove(path), "could not remove file");
 
         // Save
-        auto ret = gpds::to_file<gpds::archiver_yaml>(path, container, "data");
-        REQUIRE_MESSAGE(ret.first, ret.second);
+        const auto ret1 = gpds::to_file<gpds::archiver_yaml>(path, container, "data");
+        REQUIRE_MESSAGE(ret1, ret1.error().message());
 
         // Load
         gpds::container newContainer;
-        ret = gpds::from_file<gpds::archiver_yaml>(path, newContainer, "data");
-        REQUIRE_MESSAGE(ret.first, ret.second);
+        const auto ret2 = gpds::from_file<gpds::archiver_yaml>(path, newContainer, "data");
+        REQUIRE_MESSAGE(ret2, ret2.error().message());
 
         // Check that the value is correct
         auto brandOpt = newContainer.get_value<std::string>("brand");
@@ -52,7 +52,7 @@ TEST_SUITE("serdes - yaml")
         // Load and check that it returns false
         gpds::container container;
         const auto ret = gpds::from_file<gpds::archiver_yaml>(path, container, "data");
-        REQUIRE_FALSE_MESSAGE(ret.first, ret.second);
+        REQUIRE_FALSE_MESSAGE(ret, ret.error().message());
     }
 
     TEST_CASE("Serializing to an invalid file path")
@@ -65,7 +65,7 @@ TEST_SUITE("serdes - yaml")
         gpds::container container;
         container.add_attribute("height", "123px");
         const auto ret = gpds::to_file<gpds::archiver_yaml>(path, container, "div");
-        REQUIRE_FALSE_MESSAGE(ret.first, ret.second);
+        REQUIRE_FALSE_MESSAGE(ret, ret.error().message());
     }
 
 }

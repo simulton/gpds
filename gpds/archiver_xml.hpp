@@ -45,8 +45,11 @@ namespace gpds
         archiver_xml& operator=(const archiver_xml& rhs) = delete;
         archiver_xml& operator=(archiver_xml&& rhs) noexcept = delete;
 
-        bool save(std::ostream& stream, const container& container, std::string_view rootName) const override;
-        bool load(std::istream& stream, container& container, std::string_view rootName) override;
+        std::expected<void, error>
+        save(std::ostream& stream, const container& container, std::string_view rootName) const override;
+
+        std::expected<void, error>
+        load(std::istream& stream, container& container, std::string_view rootName) override;
 
     private:
         void write_entry(tinyxml2::XMLDocument& doc, tinyxml2::XMLElement& root, const container& container) const;

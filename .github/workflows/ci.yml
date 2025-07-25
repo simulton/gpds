@@ -20,9 +20,9 @@ jobs:
           [
             {
               name: "Ubuntu GCC",
-              cxx: "g++-11",
-              cc: "gcc-11",
-              packages: "gcc-11 g++-11",
+              cxx: "g++-14",
+              cc: "gcc-14",
+              packages: "gcc-14 g++-14",
               os: ubuntu-latest,
             }
           ]

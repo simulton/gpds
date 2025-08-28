@@ -20,7 +20,7 @@ int main()
     // Serialize
     std::stringstream ss;
     {
-        const auto success  = gpds::to_stream<gpds::archiver_xml>(ss, *sink, "log");
+        const auto success = gpds::to_stream<gpds::archiver_xml>(ss, *sink, "log");
         if (!success) {
             std::println("serializing log failed: {}", success.error().message());
             return EXIT_FAILURE;

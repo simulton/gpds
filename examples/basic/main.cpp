@@ -66,7 +66,7 @@ int main()
 
         // Serialize to string
         {
-            const auto& success = gpds::to_string<gpds::archiver_xml>(str, catalog);
+            const auto success = gpds::to_string<gpds::archiver_xml>(str, catalog);
             if (!success) {
                 std::println("could not store 'catalog' in string: {}", success.error().message());
                 return EXIT_FAILURE;
@@ -78,7 +78,7 @@ int main()
         // Deserialize form string
         {
             car_catalog catalog1;
-            const auto& success = gpds::from_string<gpds::archiver_xml>(str, catalog1);
+            const auto success = gpds::from_string<gpds::archiver_xml>(str, catalog1);
             if (!success) {
                 std::println("could not load `catalog` from string: {}", success.error().message());
                 return EXIT_FAILURE;
@@ -96,7 +96,7 @@ int main()
 
         // Serialize to string
         {
-            const auto& success = gpds::to_string<gpds::archiver_yaml>(str, catalog);
+            const auto success = gpds::to_string<gpds::archiver_yaml>(str, catalog);
             if (!success) {
                 std::println("could not store 'catalog' in string: {}", success.error().message());
                 return EXIT_FAILURE;
@@ -108,7 +108,7 @@ int main()
         // Deserialize form string
         {
             car_catalog catalog1;
-            const auto& success = gpds::from_string<gpds::archiver_yaml>(str, catalog1);
+            const auto success = gpds::from_string<gpds::archiver_yaml>(str, catalog1);
             if (!success) {
                 std::println("could not load `catalog` from string: {}", success.error().message());
                 return EXIT_FAILURE;
